@@ -6,13 +6,13 @@ import store from './Redux/store';
 import App from './App/App';
 import './index.css';
 import { ThemeProvider } from '@material-ui/core';
-import Theme from './Theme';
+import { theme } from './Theme';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <ThemeProvider theme={Theme}>
+      <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
     </BrowserRouter>
