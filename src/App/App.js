@@ -13,8 +13,10 @@ import SignInContainer from '../Routes/SignIn/SignInContainer';
 import SignUpContainer from '../Routes/SignUp/SignUpContainer';
 import useStyles from './Style';
 
-function App() {
+const App = props => {
+  const { isAuthenticated } = props;
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -23,12 +25,15 @@ function App() {
           <IconButton>
             <Menu />
           </IconButton>
-          <div>
-            <Button>Sign In</Button>
-            <Button>Sign Up</Button>
-          </div>
+          {isAuthenticated ? null : (
+            <div>
+              <Button>Sign In</Button>
+              <Button>Sign Up</Button>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
+
       <div className={classes.offset} />
       <div className={classes.layout}>
         <div>header</div>
@@ -42,6 +47,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
