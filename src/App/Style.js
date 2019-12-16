@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     height: '100%'
   },
   contentRoot: {
-    height: '100%'
+    height: '100%',
+    width: '100%'
   },
   offset: theme.mixins.toolbar
 }));
