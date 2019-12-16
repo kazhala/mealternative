@@ -8,10 +8,9 @@ import {
   Button
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
-import HomeContainer from '../Routes/Home/HomeContainer';
-import SignInContainer from '../Routes/SignIn/SignInContainer';
-import SignUpContainer from '../Routes/SignUp/SignUpContainer';
 import useStyles from './Style';
+//Routes
+import * as Routes from '../Routes/Routes';
 
 const App = props => {
   const { isAuthenticated } = props;
@@ -38,9 +37,13 @@ const App = props => {
       <div className={classes.layout}>
         <div className={classes.contentRoot}>
           <Switch>
-            <Route exact path='/' component={HomeContainer} />
-            <Route path='/signin' component={SignInContainer} />
-            <Route path='/signup' component={SignUpContainer} />
+            <Route exact path='/' component={Routes.Home} />
+            <Route path='/signin' component={Routes.SignIn} />
+            <Route path='/signup' component={Routes.SignUp} />
+            <Route path='/search' component={Routes.Results} />
+            <Route path='/recipes' component={Routes.Recipes} />
+            <Route path='/meals' component={Routes.Meals} />
+            <Route path='/map' component={Routes.Map} />
           </Switch>
         </div>
       </div>
