@@ -5,9 +5,9 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route exact path='/search' component={Search} />
-        <Route exact path='/signup' component={Signup} />
         <Route exact path='/' component={Home} />
+        <Route path='/search' component={Search} />
+        <Route path='/signup' component={Signup} />
       </Switch>
     </div>
   );
