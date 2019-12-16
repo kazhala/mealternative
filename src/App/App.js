@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
 import HomeContainer from '../Routes/Home/HomeContainer';
 import SignInContainer from '../Routes/SignIn/SignInContainer';
 import SignUpContainer from '../Routes/SignUp/SignUpContainer';
@@ -11,11 +12,24 @@ function App() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Switch>
-        <Route exact path='/' component={HomeContainer} />
-        <Route path='/signin' component={SignInContainer} />
-        <Route path='/signup' component={SignUpContainer} />
-      </Switch>
+      <AppBar position='fixed'>
+        <Toolbar disableGutters>
+          <IconButton>
+            <Menu />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <div className={classes.offset} />
+      <div className={classes.layout}>
+        <div>header</div>
+        <div className={classes.contentRoot}>
+          <Switch>
+            <Route exact path='/' component={HomeContainer} />
+            <Route path='/signin' component={SignInContainer} />
+            <Route path='/signup' component={SignUpContainer} />
+          </Switch>
+        </div>
+      </div>
     </div>
   );
 }
