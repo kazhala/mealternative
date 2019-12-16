@@ -11,8 +11,6 @@ const useStyles = makeStyles(theme => ({
     margin: '0 1rem'
   },
   layout: {
-    display: 'grid',
-    gridTemplateRows: '3rem auto',
     height: '100%'
   },
   contentRoot: {

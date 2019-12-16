@@ -36,7 +36,6 @@ const App = props => {
 
       <div className={classes.offset} />
       <div className={classes.layout}>
-        <div>header</div>
         <div className={classes.contentRoot}>
           <Switch>
             <Route exact path='/' component={HomeContainer} />

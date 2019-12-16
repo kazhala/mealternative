@@ -1,7 +1,9 @@
 import React from 'react';
+import useStyles from './Style';
 
 const HomeContainer = props => {
-  return <div>HomeContainer</div>;
+  const classes = useStyles();
+  return <div className={classes.root}>HomeContainer</div>;
 };
 
 export default HomeContainer;
