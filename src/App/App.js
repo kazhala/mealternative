@@ -1,6 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { CssBaseline, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import {
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button
+} from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import HomeContainer from '../Routes/Home/HomeContainer';
 import SignInContainer from '../Routes/SignIn/SignInContainer';
@@ -13,10 +19,14 @@ function App() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position='fixed'>
-        <Toolbar disableGutters>
+        <Toolbar disableGutters className={classes.menuBarLayout}>
           <IconButton>
             <Menu />
           </IconButton>
+          <div>
+            <Button>Sign In</Button>
+            <Button>Sign Up</Button>
+          </div>
         </Toolbar>
       </AppBar>
       <div className={classes.offset} />

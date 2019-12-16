@@ -2,9 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundImage: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
     height: '100vh',
     width: '100%'
+  },
+  menuBarLayout: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '0 1rem'
   },
   layout: {
     display: 'grid',

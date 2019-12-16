@@ -1,10 +1,14 @@
 import { createMuiTheme } from '@material-ui/core';
-import { purple } from '@material-ui/core/colors';
 
 export const theme = createMuiTheme({
   palette: {
-    primary: { main: purple[500] },
-    secondary: { main: '#11cb5f' }
+    primary: { main: '#5e81ac' },
+    secondary: { main: '#ebcb8b' },
+    error: { main: '#bf616a' },
+    background: { default: '#eceff4' }
   },
-  spacing: 16
+  spacing: 16,
+  typography: {
+    fontSize: 16
+  }
 });
