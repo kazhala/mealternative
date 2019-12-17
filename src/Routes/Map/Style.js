@@ -9,7 +9,8 @@ const useStyles = makeStyles(theme => ({
   googleMap: {
     width: '100%',
     height: '70vh',
-    padding: theme.spacing(0.5)
+    display: 'flex',
+    justifyContent: 'center'
   }
 }));
 

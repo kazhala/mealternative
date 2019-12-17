@@ -2,17 +2,29 @@ import React from 'react';
 import useStyles from './Style';
 import GoogleMapReact from 'google-map-react';
 import { GoogleMapAPIKey } from '../../config';
+import PageSpinner from '../../Common/Spinner/PageSpinner';
 
 const Map = props => {
-  const { lat, lng } = props;
+  const {
+    lat,
+    lng,
+    placesServices,
+    setPlacesServices,
+    autoCompleteService,
+    setAutoCompleteService,
+    directionService,
+    setDirectionService,
+    geoCoderService,
+    setGeoCoderService
+  } = props;
   const classes = useStyles();
 
   const handleApiLoaded = (map, maps) => {
-    console.log('map', map);
-    console.log('maps', maps);
+    setAutoCompleteService(new maps.places.AutocompleteService());
+    setPlacesServices(new maps.places.PlacesService(map));
+    setDirectionService(new maps.DirectionsService());
+    setGeoCoderService(new maps.Geocoder());
   };
-
-  console.log(GoogleMapAPIKey);
 
   return (
     <div className={classes.mapRoot}>
@@ -20,19 +32,26 @@ const Map = props => {
         {lat && lng ? (
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: GoogleMapAPIKey
+              key: GoogleMapAPIKey,
+              libraries: ['places', 'directions']
             }}
             center={{ lat, lng }}
-            defaultZoom={11}
+            defaultZoom={14}
             yesIWantToUseGoogleMapApiInternals={true}
             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-          ></GoogleMapReact>
+          >
+            <TestDrop lat={lat} lng={lng} />
+          </GoogleMapReact>
         ) : (
-          <div>loading</div>
+          <PageSpinner />
         )}
       </div>
     </div>
   );
 };
+
+const TestDrop = () => (
+  <div style={{ background: 'black', width: '5px', height: '5px' }}></div>
+);
 
 export default Map;
