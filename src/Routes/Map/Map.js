@@ -3,9 +3,8 @@ import useStyles from './Style';
 import GoogleMapReact from 'google-map-react';
 
 const Map = props => {
+  const { lat, lng } = props;
   const classes = useStyles();
-
-  const { currentPosition, setCurrentPosition } = props;
 
   const handleApiLoaded = (map, maps) => {
     console.log('map', map);
@@ -15,15 +14,19 @@ const Map = props => {
   return (
     <div className={classes.mapRoot}>
       <div className={classes.googleMap}>
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: 'AIzaSyAwuCk6LpnRxN0mmfi8ZIoaEBylPshsUHo'
-          }}
-          center={currentPosition}
-          defaultZoom={11}
-          yesIWantToUseGoogleMapApiInternals={true}
-          onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-        ></GoogleMapReact>
+        {lat && lng ? (
+          <GoogleMapReact
+            bootstrapURLKeys={{
+              key: 'AIzaSyAwuCk6LpnRxN0mmfi8ZIoaEBylPshsUHo'
+            }}
+            center={{ lat, lng }}
+            defaultZoom={11}
+            yesIWantToUseGoogleMapApiInternals={true}
+            onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+          ></GoogleMapReact>
+        ) : (
+          <div>loading</div>
+        )}
       </div>
     </div>
   );
