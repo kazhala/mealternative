@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, CircularProgress } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
 const LocationInput = props => {
   const [value, setValue] = useState('');
-
   const [autoSrc, setAutoSrc] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const handleChange = e => {
     setValue(e.target.value);
@@ -25,7 +25,6 @@ const LocationInput = props => {
   };
 
   const handleSelect = e => {
-    console.log(e.target.textContent);
     setValue(e.target.textContent);
   };
 
@@ -34,10 +33,18 @@ const LocationInput = props => {
     console.log(value);
   };
 
+  const determineLoading = () => {
+    return open && !autoSrc.length > 0;
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <Autocomplete
         options={autoSrc}
+        loading={determineLoading()}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
+        open={open}
         disableOpenOnFocus
         onChange={handleSelect}
         renderInput={params => (
@@ -46,10 +53,20 @@ const LocationInput = props => {
             label='Location center'
             variant='outlined'
             fullWidth
+            placeholder='Enter an alternate address'
             value={value}
             onChange={handleChange}
             InputLabelProps={{
               shrink: true
+            }}
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {determineLoading() && <CircularProgress />}
+                  {params.InputProps.endAdornment}
+                </>
+              )
             }}
           />
         )}
