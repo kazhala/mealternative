@@ -20,7 +20,9 @@ const Map = props => {
     currentPositionLatLng,
     setCurrentPositionLatLng,
     mapLoaded,
-    setMapLoaded
+    setMapLoaded,
+    centerMarker,
+    setCenterMarker
   } = props;
   const classes = useStyles();
 
@@ -36,18 +38,18 @@ const Map = props => {
   return (
     <div className={classes.mapRoot}>
       <div className={classes.googleMap}>
-        {lat && lng ? (
+        {centerMarker.lat && centerMarker.lng ? (
           <GoogleMapReact
             bootstrapURLKeys={{
               key: GoogleMapAPIKey,
               libraries: ['places', 'directions']
             }}
-            center={{ lat, lng }}
+            center={{ lat: centerMarker.lat, lng: centerMarker.lng }}
             defaultZoom={14}
             yesIWantToUseGoogleMapApiInternals={true}
             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
           >
-            <TestDrop lat={lat} lng={lng} />
+            <TestDrop lat={centerMarker.lat} lng={centerMarker.lng} />
           </GoogleMapReact>
         ) : (
           <PageSpinner />
@@ -57,6 +59,10 @@ const Map = props => {
         <LocationInput
           autoCompleteService={autoCompleteService}
           currentPositionLatLng={currentPositionLatLng}
+          geoCoderService={geoCoderService}
+          setCenterMarker={setCenterMarker}
+          lat={lat}
+          lng={lng}
         />
       )}
     </div>
