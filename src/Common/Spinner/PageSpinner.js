@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Spinner = props => {
+const PageSpinner = props => {
   return <div>Spinner</div>;
 };
 
-export default Spinner;
+export default PageSpinner;
