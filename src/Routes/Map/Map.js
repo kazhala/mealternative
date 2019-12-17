@@ -3,6 +3,7 @@ import useStyles from './Style';
 import GoogleMapReact from 'google-map-react';
 import { GoogleMapAPIKey } from '../../config';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
+import LocationInput from './_components/LocationInput';
 
 const Map = props => {
   const {
@@ -15,7 +16,11 @@ const Map = props => {
     directionService,
     setDirectionService,
     geoCoderService,
-    setGeoCoderService
+    setGeoCoderService,
+    currentPositionLatLng,
+    setCurrentPositionLatLng,
+    mapLoaded,
+    setMapLoaded
   } = props;
   const classes = useStyles();
 
@@ -24,6 +29,8 @@ const Map = props => {
     setPlacesServices(new maps.places.PlacesService(map));
     setDirectionService(new maps.DirectionsService());
     setGeoCoderService(new maps.Geocoder());
+    setCurrentPositionLatLng(new maps.LatLng(lat, lng));
+    setMapLoaded(true);
   };
 
   return (
@@ -46,6 +53,12 @@ const Map = props => {
           <PageSpinner />
         )}
       </div>
+      {mapLoaded && (
+        <LocationInput
+          autoCompleteService={autoCompleteService}
+          currentPositionLatLng={currentPositionLatLng}
+        />
+      )}
     </div>
   );
 };

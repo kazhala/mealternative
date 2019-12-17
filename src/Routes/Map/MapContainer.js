@@ -7,6 +7,8 @@ const MapContainer = props => {
   const [placesServices, setPlacesServices] = useState(null);
   const [directionService, setDirectionService] = useState(null);
   const [geoCoderService, setGeoCoderService] = useState(null);
+  const [currentPositionLatLng, setCurrentPositionLatLng] = useState(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   return (
     <Map
@@ -19,6 +21,10 @@ const MapContainer = props => {
       setDirectionService={setDirectionService}
       geoCoderService={geoCoderService}
       setGeoCoderService={setGeoCoderService}
+      currentPositionLatLng={currentPositionLatLng}
+      setCurrentPositionLatLng={setCurrentPositionLatLng}
+      mapLoaded={mapLoaded}
+      setMapLoaded={setMapLoaded}
     />
   );
 };
