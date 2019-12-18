@@ -1,3 +1,6 @@
+/*
+  Global theme for Material Ui
+*/
 import { createMuiTheme } from '@material-ui/core';
 
 export const theme = createMuiTheme({

@@ -1,5 +1,14 @@
+/*
+  The app component of the app, wraps everything in router
+  Provide layout
+*/
+
+// React
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
+
+// Style
 import {
   CssBaseline,
   AppBar,
@@ -9,15 +18,18 @@ import {
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import useStyles from './Style';
+
 //Routes
 import * as Routes from '../Routes/Routes';
 
 const App = props => {
+  // used to determine what to display in app bar
   const { isAuthenticated } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      {/* get global css settings (enhancement) */}
       <CssBaseline />
       <AppBar position='fixed'>
         <Toolbar disableGutters className={classes.menuBarLayout}>
@@ -32,8 +44,10 @@ const App = props => {
           )}
         </Toolbar>
       </AppBar>
-
+      {/* offset the height of app bar */}
       <div className={classes.offset} />
+
+      {/* provide layout for the main contents */}
       <div className={classes.layout}>
         <div className={classes.contentRoot}>
           <Switch>
@@ -49,6 +63,10 @@ const App = props => {
       </div>
     </div>
   );
+};
+
+App.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default App;

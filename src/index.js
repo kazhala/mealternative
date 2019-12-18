@@ -1,11 +1,22 @@
+/*
+  The index page of the app, hoc components to provide global data
+*/
+
+// React import
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Redux
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
-import AppContainer from './App/AppContainer';
+
+// Material Ui
 import { ThemeProvider } from '@material-ui/core';
 import { theme } from './Theme';
+
+// App
+import AppContainer from './App/AppContainer';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
