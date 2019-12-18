@@ -1,9 +1,19 @@
+/*
+  Map component, display google map and markers
+*/
+
+// React
 import React from 'react';
-import useStyles from './Style';
+import PropTypes from 'prop-types';
+
+// Compoennts
 import GoogleMapReact from 'google-map-react';
-import { GoogleMapAPIKey } from '../../config';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
-import LocationInput from './_components/LocationInput';
+import LocationInputForm from './_components/LocationInputForm';
+
+// Misc
+import { GoogleMapAPIKey } from '../../config';
+import useStyles from './Style';
 
 const Map = props => {
   const {
@@ -26,6 +36,7 @@ const Map = props => {
   } = props;
   const classes = useStyles();
 
+  // Initiate google map services after map is loaded
   const handleApiLoaded = (map, maps) => {
     setAutoCompleteService(new maps.places.AutocompleteService());
     setPlacesServices(new maps.places.PlacesService(map));
@@ -38,6 +49,7 @@ const Map = props => {
   return (
     <div className={classes.mapRoot}>
       <div className={classes.googleMap}>
+        {/* render google map after lat and lng for center position is set */}
         {centerMarker.lat && centerMarker.lng ? (
           <GoogleMapReact
             bootstrapURLKeys={{
@@ -56,7 +68,7 @@ const Map = props => {
         )}
       </div>
       {mapLoaded && (
-        <LocationInput
+        <LocationInputForm
           autoCompleteService={autoCompleteService}
           currentPositionLatLng={currentPositionLatLng}
           geoCoderService={geoCoderService}
@@ -69,8 +81,28 @@ const Map = props => {
   );
 };
 
+// temp place holder component
 const TestDrop = () => (
   <div style={{ background: 'black', width: '5px', height: '5px' }}></div>
 );
+
+Map.propTypes = {
+  lat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  lng: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  placesServices: PropTypes.any,
+  setPlacesServices: PropTypes.func.isRequired,
+  autoCompleteService: PropTypes.any,
+  setAutoCompleteService: PropTypes.func.isRequired,
+  directionService: PropTypes.any,
+  setDirectionService: PropTypes.func.isRequired,
+  geoCoderService: PropTypes.any,
+  setGeoCoderService: PropTypes.func.isRequired,
+  currentPositionLatLng: PropTypes.any,
+  setCurrentPositionLatLng: PropTypes.func.isRequired,
+  mapLoaded: PropTypes.bool.isRequired,
+  setMapLoaded: PropTypes.func.isRequired,
+  centerMarker: PropTypes.object.isRequired,
+  setCenterMarker: PropTypes.func.isRequired
+};
 
 export default Map;
