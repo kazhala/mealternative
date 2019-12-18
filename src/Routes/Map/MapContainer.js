@@ -34,21 +34,26 @@ const MapContainer = props => {
     setCenterMarker({ lat, lng });
   }, [lat, lng]);
 
+  // Initiate google map services after map is loaded
+  const handleMapApiLoaded = (map, maps) => {
+    setAutoCompleteService(new maps.places.AutocompleteService());
+    setPlacesServices(new maps.places.PlacesService(map));
+    setDirectionService(new maps.DirectionsService());
+    setGeoCoderService(new maps.Geocoder());
+    setCurrentPositionLatLng(new maps.LatLng(lat, lng));
+    setMapLoaded(true);
+  };
+
   return (
     <Map
       {...props}
+      handleMapApiLoaded={handleMapApiLoaded}
       autoCompleteService={autoCompleteService}
-      setAutoCompleteService={setAutoCompleteService}
       placesServices={placesServices}
-      setPlacesServices={setPlacesServices}
       directionService={directionService}
-      setDirectionService={setDirectionService}
       geoCoderService={geoCoderService}
-      setGeoCoderService={setGeoCoderService}
       currentPositionLatLng={currentPositionLatLng}
-      setCurrentPositionLatLng={setCurrentPositionLatLng}
       mapLoaded={mapLoaded}
-      setMapLoaded={setMapLoaded}
       centerMarker={centerMarker}
       setCenterMarker={setCenterMarker}
     />

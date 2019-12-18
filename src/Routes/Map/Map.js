@@ -19,32 +19,17 @@ const Map = props => {
   const {
     lat,
     lng,
-    placesServices,
-    setPlacesServices,
+    handleMapApiLoaded,
+    // placesServices,
     autoCompleteService,
-    setAutoCompleteService,
-    directionService,
-    setDirectionService,
+    // directionService,
     geoCoderService,
-    setGeoCoderService,
     currentPositionLatLng,
-    setCurrentPositionLatLng,
     mapLoaded,
-    setMapLoaded,
     centerMarker,
     setCenterMarker
   } = props;
   const classes = useStyles();
-
-  // Initiate google map services after map is loaded
-  const handleApiLoaded = (map, maps) => {
-    setAutoCompleteService(new maps.places.AutocompleteService());
-    setPlacesServices(new maps.places.PlacesService(map));
-    setDirectionService(new maps.DirectionsService());
-    setGeoCoderService(new maps.Geocoder());
-    setCurrentPositionLatLng(new maps.LatLng(lat, lng));
-    setMapLoaded(true);
-  };
 
   return (
     <div className={classes.mapRoot}>
@@ -59,7 +44,7 @@ const Map = props => {
             center={{ lat: centerMarker.lat, lng: centerMarker.lng }}
             defaultZoom={14}
             yesIWantToUseGoogleMapApiInternals={true}
-            onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+            onGoogleApiLoaded={({ map, maps }) => handleMapApiLoaded(map, maps)}
           >
             <TestDrop lat={centerMarker.lat} lng={centerMarker.lng} />
           </GoogleMapReact>
@@ -90,17 +75,11 @@ Map.propTypes = {
   lat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   lng: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   placesServices: PropTypes.any,
-  setPlacesServices: PropTypes.func.isRequired,
   autoCompleteService: PropTypes.any,
-  setAutoCompleteService: PropTypes.func.isRequired,
   directionService: PropTypes.any,
-  setDirectionService: PropTypes.func.isRequired,
   geoCoderService: PropTypes.any,
-  setGeoCoderService: PropTypes.func.isRequired,
   currentPositionLatLng: PropTypes.any,
-  setCurrentPositionLatLng: PropTypes.func.isRequired,
   mapLoaded: PropTypes.bool.isRequired,
-  setMapLoaded: PropTypes.func.isRequired,
   centerMarker: PropTypes.object.isRequired,
   setCenterMarker: PropTypes.func.isRequired
 };
