@@ -23,7 +23,6 @@ const MapContainer = props => {
   const [placesServices, setPlacesServices] = useState(null);
   const [directionService, setDirectionService] = useState(null);
   const [geoCoderService, setGeoCoderService] = useState(null);
-  const [currentPositionLatLng, setCurrentPositionLatLng] = useState(null);
 
   // determine if map is loaded
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -42,7 +41,6 @@ const MapContainer = props => {
     setPlacesServices(new maps.places.PlacesService(map));
     setDirectionService(new maps.DirectionsService());
     setGeoCoderService(new maps.Geocoder());
-    setCurrentPositionLatLng(new maps.LatLng(lat, lng));
     setMapLoaded(true);
   };
 
@@ -64,12 +62,12 @@ const MapContainer = props => {
   return (
     <Map
       {...props}
+      mapsApi={mapsApi}
       handleMapApiLoaded={handleMapApiLoaded}
       autoCompleteService={autoCompleteService}
       placesServices={placesServices}
       directionService={directionService}
       geoCoderService={geoCoderService}
-      currentPositionLatLng={currentPositionLatLng}
       mapLoaded={mapLoaded}
       centerMarker={centerMarker}
       setCenterMarker={setCenterMarker}

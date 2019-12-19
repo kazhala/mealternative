@@ -19,12 +19,12 @@ const Map = props => {
   const {
     lat,
     lng,
+    mapsApi,
     handleMapApiLoaded,
     // placesServices,
     autoCompleteService,
     // directionService,
     geoCoderService,
-    currentPositionLatLng,
     mapLoaded,
     centerMarker,
     setCenterMarker,
@@ -37,13 +37,13 @@ const Map = props => {
       {mapLoaded && (
         <LocationInputForm
           autoCompleteService={autoCompleteService}
-          currentPositionLatLng={currentPositionLatLng}
           geoCoderService={geoCoderService}
           centerMarker={centerMarker}
           setCenterMarker={setCenterMarker}
           lat={lat}
           lng={lng}
           classes={classes}
+          mapsApi={mapsApi}
         />
       )}
       <button onClick={handleRestaurantSearch}>hello</button>
@@ -78,11 +78,11 @@ const TestDrop = () => (
 Map.propTypes = {
   lat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   lng: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  mapsApi: PropTypes.any,
   placesServices: PropTypes.any,
   autoCompleteService: PropTypes.any,
   directionService: PropTypes.any,
   geoCoderService: PropTypes.any,
-  currentPositionLatLng: PropTypes.any,
   mapLoaded: PropTypes.bool.isRequired,
   centerMarker: PropTypes.object.isRequired,
   setCenterMarker: PropTypes.func.isRequired,

@@ -22,12 +22,12 @@ const LocationInputForm = props => {
     setCenterMarker,
     autoCompleteService,
     geoCoderService,
-    currentPositionLatLng,
     lat,
     lng,
-    classes
+    classes,
+    mapsApi
   } = props;
-  // value of the textfiled
+  // value of the textField
   const [value, setValue] = useState('');
   // src for autoCompletion
   const [autoSrc, setAutoSrc] = useState([]);
@@ -40,8 +40,8 @@ const LocationInputForm = props => {
     // prepare query for google autoCompleteService
     const searchQuery = {
       input: e.target.value,
-      location: currentPositionLatLng,
-      radius: 30000 // in Meters. 30km
+      location: new mapsApi.LatLng(lat, lng),
+      radius: 100000 // in Meters. 100km
     };
     // if there is input, perform google autoCompleteService request
     searchQuery.input &&
@@ -82,7 +82,7 @@ const LocationInputForm = props => {
     }
   };
 
-  // check if the loading state should be displayed
+  // check if the loading state of the autoComplete should be displayed
   const determineLoading = () => {
     return open && !autoSrc.length > 0;
   };
@@ -149,11 +149,11 @@ const LocationInputForm = props => {
 };
 
 LocationInputForm.propTypes = {
+  mapsApi: PropTypes.object.isRequired,
   centerMarker: PropTypes.object.isRequired,
   setCenterMarker: PropTypes.func.isRequired,
   autoCompleteService: PropTypes.object.isRequired,
   geoCoderService: PropTypes.object.isRequired,
-  currentPositionLatLng: PropTypes.object.isRequired,
   lat: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   classes: PropTypes.object.isRequired
