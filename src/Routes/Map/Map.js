@@ -33,6 +33,18 @@ const Map = props => {
 
   return (
     <div className={classes.mapRoot}>
+      {mapLoaded && (
+        <LocationInputForm
+          autoCompleteService={autoCompleteService}
+          currentPositionLatLng={currentPositionLatLng}
+          geoCoderService={geoCoderService}
+          centerMarker={centerMarker}
+          setCenterMarker={setCenterMarker}
+          lat={lat}
+          lng={lng}
+          classes={classes}
+        />
+      )}
       <div className={classes.googleMap}>
         {/* render google map after lat and lng for center position is set */}
         {centerMarker.lat && centerMarker.lng ? (
@@ -52,16 +64,6 @@ const Map = props => {
           <PageSpinner />
         )}
       </div>
-      {mapLoaded && (
-        <LocationInputForm
-          autoCompleteService={autoCompleteService}
-          currentPositionLatLng={currentPositionLatLng}
-          geoCoderService={geoCoderService}
-          setCenterMarker={setCenterMarker}
-          lat={lat}
-          lng={lng}
-        />
-      )}
     </div>
   );
 };

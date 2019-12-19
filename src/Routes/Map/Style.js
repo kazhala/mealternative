@@ -11,6 +11,22 @@ const useStyles = makeStyles(theme => ({
     height: '70vh',
     display: 'flex',
     justifyContent: 'center'
+  },
+  locationSelection: {
+    display: 'grid',
+    width: '100%',
+    gridTemplateColumns: '35% 65%',
+    alignItems: 'center',
+    marginBottom: theme.spacing(1)
+  },
+  locationBtnGroup: {
+    //
+  },
+  defaultLocationBtn: {
+    // width:
+  },
+  selectLocationBtn: {
+    //
   }
 }));
 

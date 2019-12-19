@@ -8,17 +8,24 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import { TextField, CircularProgress } from '@material-ui/core';
+import {
+  TextField,
+  CircularProgress,
+  Button,
+  Typography
+} from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
 const LocationInputForm = props => {
   const {
+    centerMarker,
     setCenterMarker,
     autoCompleteService,
     geoCoderService,
     currentPositionLatLng,
     lat,
-    lng
+    lng,
+    classes
   } = props;
   // value of the textfiled
   const [value, setValue] = useState('');
@@ -56,18 +63,22 @@ const LocationInputForm = props => {
   };
 
   // relocate the center of the map based on user input
-  const handleSubmit = e => {
+  const handleSubmit = (e, type) => {
     e.preventDefault();
-    // decode the address to latlng
-    geoCoderService.geocode({ address: value }, response => {
-      if (!response[0]) {
-        // if empty, than change to user location stored in redux
-        setCenterMarker({ lat, lng });
-        return;
-      }
-      const { location } = response[0].geometry;
-      setCenterMarker({ lat: location.lat(), lng: location.lng() });
-    });
+    if (type === 0) {
+      setCenterMarker({ lat, lng });
+    } else {
+      // decode the address to latlng
+      geoCoderService.geocode({ address: value }, response => {
+        if (!response[0]) {
+          // if empty, than change to user location stored in redux
+          setCenterMarker({ lat, lng });
+          return;
+        }
+        const { location } = response[0].geometry;
+        setCenterMarker({ lat: location.lat(), lng: location.lng() });
+      });
+    }
   };
 
   // check if the loading state should be displayed
@@ -75,8 +86,31 @@ const LocationInputForm = props => {
     return open && !autoSrc.length > 0;
   };
 
+  // check if the button should have outline to indicate active
+  const checkOutline = () => {
+    return centerMarker.lat === lat && centerMarker.lng === lng;
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <div className={classes.locationSelection}>
+      <div className={classes.locationBtnGroup}>
+        <Button
+          onClick={e => handleSubmit(e, 0)}
+          color='primary'
+          className={classes.defaultLocationBtn}
+          variant={checkOutline() ? 'contained' : 'outlined'}
+        >
+          <Typography variant='subtitle2'>Current</Typography>
+        </Button>
+        <Button
+          onClick={e => handleSubmit(e, 1)}
+          color='primary'
+          className={classes.selectLocationBtn}
+          variant={!checkOutline() ? 'contained' : 'outlined'}
+        >
+          <Typography variant='subtitle2'>New</Typography>
+        </Button>
+      </div>
       <Autocomplete
         options={autoSrc}
         loading={determineLoading()}
@@ -109,17 +143,19 @@ const LocationInputForm = props => {
           />
         )}
       />
-    </form>
+    </div>
   );
 };
 
 LocationInputForm.propTypes = {
+  centerMarker: PropTypes.object.isRequired,
   setCenterMarker: PropTypes.func.isRequired,
   autoCompleteService: PropTypes.object.isRequired,
   geoCoderService: PropTypes.object.isRequired,
   currentPositionLatLng: PropTypes.object.isRequired,
   lat: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  classes: PropTypes.object.isRequired
 };
 
 export default LocationInputForm;
