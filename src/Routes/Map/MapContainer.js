@@ -18,6 +18,7 @@ const MapContainer = props => {
   const { lat, lng } = props;
 
   // google map services
+  const [mapsApi, setMapsApi] = useState(null);
   const [autoCompleteService, setAutoCompleteService] = useState(null);
   const [placesServices, setPlacesServices] = useState(null);
   const [directionService, setDirectionService] = useState(null);
@@ -36,12 +37,28 @@ const MapContainer = props => {
 
   // Initiate google map services after map is loaded
   const handleMapApiLoaded = (map, maps) => {
+    setMapsApi(maps);
     setAutoCompleteService(new maps.places.AutocompleteService());
     setPlacesServices(new maps.places.PlacesService(map));
     setDirectionService(new maps.DirectionsService());
     setGeoCoderService(new maps.Geocoder());
     setCurrentPositionLatLng(new maps.LatLng(lat, lng));
     setMapLoaded(true);
+  };
+
+  const handleRestaurantSearch = () => {
+    // 1. Create places request
+    const placesRequest = {
+      location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+      type: ['restaurant', 'cafe'],
+      query: 'ice cream',
+      rankBy: mapsApi.places.RankBy.DISTANCE
+      // radius: 30000,
+    };
+
+    placesServices.textSearch(placesRequest, (h1, h2, h3, h4) =>
+      console.log(h1, h2, h3, h4)
+    );
   };
 
   return (
@@ -56,6 +73,7 @@ const MapContainer = props => {
       mapLoaded={mapLoaded}
       centerMarker={centerMarker}
       setCenterMarker={setCenterMarker}
+      handleRestaurantSearch={handleRestaurantSearch}
     />
   );
 };

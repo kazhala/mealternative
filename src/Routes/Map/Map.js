@@ -27,7 +27,8 @@ const Map = props => {
     currentPositionLatLng,
     mapLoaded,
     centerMarker,
-    setCenterMarker
+    setCenterMarker,
+    handleRestaurantSearch
   } = props;
   const classes = useStyles();
 
@@ -45,6 +46,7 @@ const Map = props => {
           classes={classes}
         />
       )}
+      <button onClick={handleRestaurantSearch}>hello</button>
       <div className={classes.googleMap}>
         {/* render google map after lat and lng for center position is set */}
         {centerMarker.lat && centerMarker.lng ? (
@@ -83,7 +85,8 @@ Map.propTypes = {
   currentPositionLatLng: PropTypes.any,
   mapLoaded: PropTypes.bool.isRequired,
   centerMarker: PropTypes.object.isRequired,
-  setCenterMarker: PropTypes.func.isRequired
+  setCenterMarker: PropTypes.func.isRequired,
+  handleRestaurantSearch: PropTypes.func.isRequired
 };
 
 export default Map;

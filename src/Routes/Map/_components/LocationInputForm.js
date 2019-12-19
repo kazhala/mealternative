@@ -63,6 +63,7 @@ const LocationInputForm = props => {
   };
 
   // relocate the center of the map based on user input
+  // 0 means default location, 1 is user input location
   const handleSubmit = (e, type) => {
     e.preventDefault();
     if (type === 0) {
