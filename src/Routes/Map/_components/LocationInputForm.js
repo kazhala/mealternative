@@ -98,7 +98,7 @@ const LocationInputForm = props => {
           onClick={e => handleSubmit(e, 0)}
           color='primary'
           className={classes.defaultLocationBtn}
-          variant={checkOutline() ? 'contained' : 'outlined'}
+          variant={checkOutline() ? 'contained' : 'text'}
         >
           <Typography variant='subtitle2'>Current</Typography>
         </Button>
@@ -106,9 +106,9 @@ const LocationInputForm = props => {
           onClick={e => handleSubmit(e, 1)}
           color='primary'
           className={classes.selectLocationBtn}
-          variant={!checkOutline() ? 'contained' : 'outlined'}
+          variant={!checkOutline() ? 'contained' : 'text'}
         >
-          <Typography variant='subtitle2'>New</Typography>
+          <Typography variant='subtitle2'>Select</Typography>
         </Button>
       </div>
       <Autocomplete

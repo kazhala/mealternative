@@ -20,13 +20,17 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1)
   },
   locationBtnGroup: {
-    //
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingRight: theme.spacing(0.5)
   },
   defaultLocationBtn: {
-    // width:
+    width: '100%'
   },
   selectLocationBtn: {
-    //
+    marginTop: theme.spacing(0.5),
+    width: '100%'
   }
 }));
 
