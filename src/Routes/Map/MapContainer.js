@@ -44,7 +44,7 @@ const MapContainer = props => {
     setMapLoaded(true);
   };
 
-  const handleRestaurantSearch = (queryType, distanceType) => {
+  const handleRestaurantSearch = (queryType, distanceType, distanceLength) => {
     // 1. Create places request
     const placesRequest = {
       location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
@@ -83,7 +83,8 @@ const MapContainer = props => {
           if (status !== 'OK') return;
           const travellingRoute = routeResult.routes[0].legs[0];
           const travellingTimeInMinutes = travellingRoute.duration.value / 60;
-          console.log(routeResult);
+          console.log(travellingTimeInMinutes);
+          console.log(distanceLength);
         });
       }
     );

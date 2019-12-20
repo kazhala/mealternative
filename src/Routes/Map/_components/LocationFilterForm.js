@@ -117,7 +117,9 @@ const LocationFilterForm = props => {
         <Button
           color='primary'
           variant='outlined'
-          onClick={() => handleRestaurantSearch(queryValue, distanceType)}
+          onClick={() =>
+            handleRestaurantSearch(queryValue, distanceType, distanceLength)
+          }
         >
           <Typography variant='subtitle2'>Search</Typography>
         </Button>
