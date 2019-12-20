@@ -44,12 +44,12 @@ const MapContainer = props => {
     setMapLoaded(true);
   };
 
-  const handleRestaurantSearch = () => {
+  const handleRestaurantSearch = queryType => {
     // 1. Create places request
     const placesRequest = {
       location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
       type: ['restaurant', 'cafe'],
-      query: 'chinese',
+      query: queryType ? queryType : 'restaurant',
       rankBy: mapsApi.places.RankBy.DISTANCE
       // radius: '5000'
     };

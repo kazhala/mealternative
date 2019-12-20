@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
-const searchOptions = ['chiness', 'thai', 'italian', 'pizza', 'ice cream'];
+const searchOptions = ['chinese', 'thai', 'italian', 'pizza', 'ice cream'];
 
 const LocationFilterForm = props => {
   const { classes, handleRestaurantSearch } = props;
@@ -33,6 +33,7 @@ const LocationFilterForm = props => {
             fullWidth
             placeholder='Search restaurant based on types'
             value={queryValue}
+            size='small'
             onChange={handleChange}
             InputLabelProps={{
               shrink: true
@@ -40,7 +41,7 @@ const LocationFilterForm = props => {
           />
         )}
       />
-      <Button>Search</Button>
+      <Button onClick={() => handleRestaurantSearch(queryValue)}>Search</Button>
     </div>
   );
 };

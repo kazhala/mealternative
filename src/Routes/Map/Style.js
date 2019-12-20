@@ -8,30 +8,28 @@ const useStyles = makeStyles(theme => ({
   },
   googleMap: {
     width: '100%',
-    height: '70vh',
+    height: '50%',
     display: 'flex',
     justifyContent: 'center'
   },
   locationSelection: {
     display: 'grid',
     width: '100%',
-    gridTemplateColumns: '35% 65%',
+    gridTemplateColumns: '30% 70%',
     alignItems: 'center',
     marginBottom: theme.spacing(1)
   },
   locationBtnGroup: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    justifyContent: 'center',
     paddingRight: theme.spacing(0.5)
-  },
-  defaultLocationBtn: {
-    width: '100%'
-  },
-  selectLocationBtn: {
-    marginTop: theme.spacing(0.5),
-    width: '100%'
   }
+  // defaultLocationBtn: {
+  //   width: '100%'
+  // },
+  // selectLocationBtn: {
+  //   width: '100%'
+  // }
 }));
 
 export default useStyles;

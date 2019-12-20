@@ -8,12 +8,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
+import { TextField, CircularProgress, IconButton } from '@material-ui/core';
 import {
-  TextField,
-  CircularProgress,
-  Button,
-  Typography
-} from '@material-ui/core';
+  AddLocationOutlined,
+  LocationOn,
+  Home,
+  HomeOutlined
+} from '@material-ui/icons';
 import { Autocomplete } from '@material-ui/lab';
 
 const LocationInputForm = props => {
@@ -95,22 +96,20 @@ const LocationInputForm = props => {
   return (
     <div className={classes.locationSelection}>
       <div className={classes.locationBtnGroup}>
-        <Button
+        <IconButton
           onClick={e => handleSubmit(e, 0)}
           color='primary'
           className={classes.defaultLocationBtn}
-          variant={checkOutline() ? 'contained' : 'text'}
         >
-          <Typography variant='subtitle2'>Current</Typography>
-        </Button>
-        <Button
+          {checkOutline() ? <Home /> : <HomeOutlined />}
+        </IconButton>
+        <IconButton
           onClick={e => handleSubmit(e, 1)}
           color='primary'
           className={classes.selectLocationBtn}
-          variant={!checkOutline() ? 'contained' : 'text'}
         >
-          <Typography variant='subtitle2'>Select</Typography>
-        </Button>
+          {!checkOutline() ? <LocationOn /> : <AddLocationOutlined />}
+        </IconButton>
       </div>
       <Autocomplete
         options={autoSrc}
@@ -126,9 +125,10 @@ const LocationInputForm = props => {
             label='Location center'
             variant='outlined'
             fullWidth
-            placeholder='Enter an alternate address'
+            placeholder='Add address'
             value={value}
             onChange={handleChange}
+            size='small'
             InputLabelProps={{
               shrink: true
             }}
