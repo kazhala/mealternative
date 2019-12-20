@@ -44,24 +44,34 @@ const MapContainer = props => {
     setMapLoaded(true);
   };
 
+  // fetch restaurants data
   const handleRestaurantSearch = (queryType, distanceType, distanceLength) => {
-    // 1. Create places request
+    // 1. Create places request (if no queryType, than default restaurant)
+    // will update the no queryType request later using nearbySearch api
     const placesRequest = {
       location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
       type: ['restaurant', 'cafe'],
       query: queryType ? queryType : 'restaurant',
+      // rankBy cannot be used with radius at the same time
       rankBy: mapsApi.places.RankBy.DISTANCE
       // radius: '5000'
     };
 
+    // perform textsearch based on query passed in ('chinese', 'thai', etc)
     placesServices.textSearch(
       placesRequest,
       (locationResults, status, extraInfo) => {
+        // array of results
         console.log(locationResults);
+        // status code 'OK'
         console.log(status);
+        // pagination information and method
         console.log(extraInfo);
         // extraInfo.nextPage((h1, h2, h3) => console.log(h1, h2, h3));
+
+        // temp place holder for now
         const testPlace = locationResults[0];
+        // distanceType is number, convert to google api format
         let travelMode;
         switch (distanceType) {
           case 0:
@@ -79,6 +89,8 @@ const MapContainer = props => {
           destination: testPlace.formatted_address, // To
           travelMode
         };
+        // fetch directionService data
+        // for filtering the distance
         directionService.route(directionRequest, (routeResult, status) => {
           if (status !== 'OK') return;
           const travellingRoute = routeResult.routes[0].legs[0];
