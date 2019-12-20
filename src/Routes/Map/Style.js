@@ -23,13 +23,30 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     paddingRight: theme.spacing(0.5)
+  },
+  locationFilterAutoComplete: {
+    marginBottom: theme.spacing(0.5)
+  },
+  distanceSlider: {
+    paddingLeft: theme.spacing(0.25),
+    paddingRight: theme.spacing(0.25)
+  },
+  sliderSearchOptions: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(1)
+  },
+  sliderBtnGroup: {
+    display: 'flex'
+  },
+  distanceType: {
+    paddingRight: theme.spacing(0.5),
+    verticalAlign: 'center',
+    color: '#ccc',
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
-  // defaultLocationBtn: {
-  //   width: '100%'
-  // },
-  // selectLocationBtn: {
-  //   width: '100%'
-  // }
 }));
 
 export default useStyles;

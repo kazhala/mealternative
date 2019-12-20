@@ -96,18 +96,10 @@ const LocationInputForm = props => {
   return (
     <div className={classes.locationSelection}>
       <div className={classes.locationBtnGroup}>
-        <IconButton
-          onClick={e => handleSubmit(e, 0)}
-          color='primary'
-          className={classes.defaultLocationBtn}
-        >
+        <IconButton onClick={e => handleSubmit(e, 0)} color='primary'>
           {checkOutline() ? <Home /> : <HomeOutlined />}
         </IconButton>
-        <IconButton
-          onClick={e => handleSubmit(e, 1)}
-          color='primary'
-          className={classes.selectLocationBtn}
-        >
+        <IconButton onClick={e => handleSubmit(e, 1)} color='primary'>
           {!checkOutline() ? <LocationOn /> : <AddLocationOutlined />}
         </IconButton>
       </div>
