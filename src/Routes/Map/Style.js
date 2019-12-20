@@ -31,6 +31,12 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(0.25),
     paddingRight: theme.spacing(0.25)
   },
+  sliderTitle: {
+    display: 'flex'
+  },
+  sliderTitleCaption: {
+    paddingLeft: theme.spacing(0.5)
+  },
   sliderSearchOptions: {
     display: 'flex',
     justifyContent: 'space-between',

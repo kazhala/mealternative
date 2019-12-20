@@ -40,6 +40,13 @@ const LocationFilterForm = props => {
     setDistanceLength(newValue);
   };
 
+  const displayDistanceLength = () => {
+    if (distanceLength === 0) {
+      return 'No restriction';
+    }
+    return `${distanceLength}mins`;
+  };
+
   return (
     <div>
       <Autocomplete
@@ -64,7 +71,12 @@ const LocationFilterForm = props => {
         )}
       />
       <div>
-        <Typography variant='subtitle2'>Distance</Typography>
+        <div className={classes.sliderTitle}>
+          <Typography variant='subtitle2'>Distance</Typography>
+          <Typography className={classes.sliderTitleCaption} variant='caption'>
+            {displayDistanceLength()}
+          </Typography>
+        </div>
         <div className={classes.distanceSlider}>
           <Slider
             defaultValue={0}
@@ -74,7 +86,7 @@ const LocationFilterForm = props => {
             min={0}
             valueLabelDisplay='auto'
             value={distanceLength}
-            onChangeCommitted={handleDistanceLengthChange}
+            onChange={handleDistanceLengthChange}
           />
         </div>
       </div>
