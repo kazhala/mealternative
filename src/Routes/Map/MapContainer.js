@@ -44,7 +44,7 @@ const MapContainer = props => {
     setMapLoaded(true);
   };
 
-  const handleRestaurantSearch = queryType => {
+  const handleRestaurantSearch = (queryType, distanceType) => {
     // 1. Create places request
     const placesRequest = {
       location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
@@ -62,10 +62,22 @@ const MapContainer = props => {
         console.log(extraInfo);
         // extraInfo.nextPage((h1, h2, h3) => console.log(h1, h2, h3));
         const testPlace = locationResults[0];
+        let travelMode;
+        switch (distanceType) {
+          case 0:
+            travelMode = 'WALKING';
+            break;
+          case 1:
+            travelMode = 'BICYCLING';
+            break;
+          default:
+            travelMode = 'DRIVING';
+            break;
+        }
         const directionRequest = {
           origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
           destination: testPlace.formatted_address, // To
-          travelMode: 'DRIVING'
+          travelMode
         };
         directionService.route(directionRequest, (routeResult, status) => {
           if (status !== 'OK') return;

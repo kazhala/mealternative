@@ -17,6 +17,8 @@ const LocationFilterForm = props => {
   const [queryValue, setQueryValue] = useState('');
   // ['walk', 'bike', 'car']
   const [distanceType, setDistanceType] = useState(0);
+  // in minutes
+  const [distanceLength, setDistanceLength] = useState(0);
 
   const handleChange = e => {
     setQueryValue(e.target.value);
@@ -32,6 +34,10 @@ const LocationFilterForm = props => {
 
   const handleDistanceTypeSelect = type => {
     setDistanceType(type);
+  };
+
+  const handleDistanceLengthChange = (e, newValue) => {
+    setDistanceLength(newValue);
   };
 
   return (
@@ -60,7 +66,16 @@ const LocationFilterForm = props => {
       <div>
         <Typography variant='subtitle2'>Distance</Typography>
         <div className={classes.distanceSlider}>
-          <Slider />
+          <Slider
+            defaultValue={0}
+            step={10}
+            marks
+            max={60}
+            min={0}
+            valueLabelDisplay='auto'
+            value={distanceLength}
+            onChangeCommitted={handleDistanceLengthChange}
+          />
         </div>
       </div>
       <div className={classes.sliderSearchOptions}>
@@ -87,7 +102,11 @@ const LocationFilterForm = props => {
             <DirectionsCar />
           </div>
         </div>
-        <Button onClick={() => handleRestaurantSearch(queryValue)}>
+        <Button
+          color='primary'
+          variant='outlined'
+          onClick={() => handleRestaurantSearch(queryValue, distanceType)}
+        >
           <Typography variant='subtitle2'>Search</Typography>
         </Button>
       </div>
