@@ -1,5 +1,11 @@
+/*
+  Filter option form for searching restaurant
+*/
+
+// React
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 // Components
 import { TextField, Button, Typography, Slider } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
@@ -9,37 +15,46 @@ import {
   DirectionsBike
 } from '@material-ui/icons';
 
+// search auto complete, will refactor to separate file
 const searchOptions = ['chinese', 'thai', 'italian', 'pizza', 'ice cream'];
 
 const LocationFilterForm = props => {
   const { classes, handleRestaurantSearch } = props;
 
+  // value of auto completion
   const [queryValue, setQueryValue] = useState('');
-  // ['walk', 'bike', 'car']
+  // ['walk', 'bike', 'car'] store number since faster
   const [distanceType, setDistanceType] = useState(0);
-  // in minutes
+  // distance in minutes, 0 = no restriction
   const [distanceLength, setDistanceLength] = useState(0);
 
+  // handle auto completion change
   const handleChange = e => {
     setQueryValue(e.target.value);
   };
 
+  // handle autocompletion select
+  // textContent contains the new value
   const handleSelect = e => {
     setQueryValue(e.target.textContent);
   };
 
+  // check active and display color accordingly
   const checkActiveType = type => {
     return distanceType === type ? { color: '#5e81ac' } : {};
   };
 
+  // set new distance type
   const handleDistanceTypeSelect = type => {
     setDistanceType(type);
   };
 
+  // update length when slider changes
   const handleDistanceLengthChange = (e, newValue) => {
     setDistanceLength(newValue);
   };
 
+  // display slider value to readable form in slider title
   const displayDistanceLength = () => {
     if (distanceLength === 0) {
       return 'No restriction';
