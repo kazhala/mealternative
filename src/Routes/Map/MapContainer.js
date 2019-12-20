@@ -51,11 +51,29 @@ const MapContainer = props => {
       type: ['restaurant', 'cafe'],
       query: 'ice cream',
       rankBy: mapsApi.places.RankBy.DISTANCE
-      // radius: 30000,
+      // radius: 500
     };
 
-    placesServices.textSearch(placesRequest, (h1, h2, h3, h4) =>
-      console.log(h1, h2, h3, h4)
+    placesServices.textSearch(
+      placesRequest,
+      (locationResults, status, extraInfo) => {
+        console.log(locationResults);
+        console.log(status);
+        console.log(extraInfo);
+        // extraInfo.nextPage((h1, h2, h3) => console.log(h1, h2, h3));
+        const testPlace = locationResults[0];
+        const directionRequest = {
+          origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+          destination: testPlace.formatted_address, // To
+          travelMode: 'DRIVING'
+        };
+        directionService.route(directionRequest, (routeResult, status) => {
+          if (status !== 'OK') return;
+          const travellingRoute = routeResult.routes[0].legs[0];
+          const travellingTimeInMinutes = travellingRoute.duration.value / 60;
+          console.log(routeResult);
+        });
+      }
     );
   };
 
