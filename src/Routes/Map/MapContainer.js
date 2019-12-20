@@ -49,9 +49,9 @@ const MapContainer = props => {
     const placesRequest = {
       location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
       type: ['restaurant', 'cafe'],
-      query: 'ice cream',
+      query: 'chinese',
       rankBy: mapsApi.places.RankBy.DISTANCE
-      // radius: 500
+      // radius: '5000'
     };
 
     placesServices.textSearch(

@@ -1,10 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+// Components
+import { TextField, Button, Typography } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
+
+const searchOptions = ['chiness', 'thai', 'italian', 'pizza', 'ice cream'];
 
 const LocationFilterForm = props => {
   const { classes, handleRestaurantSearch } = props;
 
-  return <button onClick={handleRestaurantSearch}>Hello</button>;
+  const [queryValue, setQueryValue] = useState('');
+
+  const handleChange = e => {
+    setQueryValue(e.target.value);
+  };
+
+  const handleSelect = e => {
+    setQueryValue(e.target.textContent);
+  };
+
+  return (
+    <div>
+      <Autocomplete
+        options={searchOptions}
+        disableOpenOnFocus
+        onChange={handleSelect}
+        renderInput={params => (
+          <TextField
+            {...params}
+            label='Resturant Type'
+            variant='outlined'
+            fullWidth
+            placeholder='Search restaurant based on types'
+            value={queryValue}
+            onChange={handleChange}
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+        )}
+      />
+      <Button>Search</Button>
+    </div>
+  );
 };
 
 LocationFilterForm.propTypes = {
