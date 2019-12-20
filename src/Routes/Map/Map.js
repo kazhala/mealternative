@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
 import LocationInputForm from './_components/LocationInputForm';
+import LocationFilterForm from './_components/LocationFilterForm';
 
 // Misc
 import { GoogleMapAPIKey } from '../../config';
@@ -33,18 +34,23 @@ const Map = props => {
   return (
     <div className={classes.mapRoot}>
       {mapLoaded && (
-        <LocationInputForm
-          autoCompleteService={autoCompleteService}
-          geoCoderService={geoCoderService}
-          centerMarker={centerMarker}
-          setCenterMarker={setCenterMarker}
-          lat={lat}
-          lng={lng}
-          classes={classes}
-          mapsApi={mapsApi}
-        />
+        <React.Fragment>
+          <LocationInputForm
+            autoCompleteService={autoCompleteService}
+            geoCoderService={geoCoderService}
+            centerMarker={centerMarker}
+            setCenterMarker={setCenterMarker}
+            lat={lat}
+            lng={lng}
+            classes={classes}
+            mapsApi={mapsApi}
+          />
+          <LocationFilterForm
+            handleRestaurantSearch={handleRestaurantSearch}
+            classes={classes}
+          />
+        </React.Fragment>
       )}
-      <button onClick={handleRestaurantSearch}>hello</button>
       <div className={classes.googleMap}>
         {/* render google map after lat and lng for center position is set */}
         {centerMarker.lat && centerMarker.lng ? (
