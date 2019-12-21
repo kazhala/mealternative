@@ -32,7 +32,6 @@ const MapContainer = props => {
   const [resLoading, setResLoading] = useState(false);
   // stores the searched restaurant into array
   const [resultRestaurantList, setResultRestaurantList] = useState([]);
-  const [filteredResults, setFilteredResults] = useState([]);
   const [nextPage, setNextPage] = useState(null);
 
   // get the center marker after lat and lng is set in redux
@@ -90,23 +89,9 @@ const MapContainer = props => {
   };
 
   // fetch restaurants data
-  const handleRestaurantSearch = (queryType, distanceType, distanceLength) => {
+  const handleRestaurantSearch = queryType => {
     setResLoading(true);
     setResultRestaurantList([]);
-    setFilteredResults([]);
-    let travelMode;
-    // distanceType is number, convert to google api format
-    switch (distanceType) {
-      case 0:
-        travelMode = 'WALKING';
-        break;
-      case 1:
-        travelMode = 'BICYCLING';
-        break;
-      default:
-        travelMode = 'DRIVING';
-        break;
-    }
     // 1. Create places request (if no queryType, than default restaurant)
     // will update the no queryType request later using nearbySearch api
     const placesRequest = {
@@ -128,45 +113,9 @@ const MapContainer = props => {
         }
         setNextPage(paginationInfo);
         setResultRestaurantList(locationResults);
-        filterLocationResults(travelMode, distanceLength, locationResults);
         setResLoading(false);
       }
     );
-  };
-
-  const filterLocationResults = (
-    travelMode,
-    distanceLength,
-    restaurantList = resultRestaurantList
-  ) => {
-    for (let i = 0; i < 10; i++) {
-      const restaurantPlace = restaurantList[i];
-      const directionRequest = {
-        origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
-        destination: restaurantPlace.formatted_address, // To
-        travelMode
-      };
-      directionService.route(directionRequest, (routeResults, routeStatus) => {
-        if (routeStatus !== 'OK') {
-          console.error('Route service error', routeStatus);
-        }
-        const travellingRoute = routeResults.routes[0].legs[0];
-        const travellingTimeInMinutes = travellingRoute.duration.value / 60;
-        if (distanceLength === 0) {
-          setFilteredResults(prevRes => {
-            const newRes = [...prevRes];
-            newRes.push(restaurantPlace);
-            return newRes;
-          });
-        } else if (travellingTimeInMinutes <= distanceLength) {
-          setFilteredResults(prevRes => {
-            const newRes = [...prevRes];
-            newRes.push(restaurantPlace);
-            return newRes;
-          });
-        }
-      });
-    }
   };
 
   return (
@@ -179,7 +128,7 @@ const MapContainer = props => {
       handleAutoCompleteUpdate={handleAutoCompleteUpdate}
       updateCenterMarker={updateCenterMarker}
       resLoading={resLoading}
-      filteredResults={filteredResults}
+      resultRestaurantList={resultRestaurantList}
       nextPage={nextPage}
     />
   );
