@@ -28,6 +28,10 @@ const MapContainer = props => {
   const [mapLoaded, setMapLoaded] = useState(false);
   // center lat lng position
   const [centerMarker, setCenterMarker] = useState({});
+  // determine if request data loading
+  const [resLoading, setResLoading] = useState(false);
+  // stores the searched restaurant into array
+  const [filteredRes, setFilteredRes] = useState([]);
 
   // get the center marker after lat and lng is set in redux
   useEffect(() => {
@@ -72,6 +76,7 @@ const MapContainer = props => {
       // decode the address to latlng
       geoCoderService.geocode({ address }, response => {
         if (!response[0]) {
+          console.error("Can't find the address");
           // if empty, than change to user location stored in redux
           setCenterMarker({ lat, lng });
           return;
@@ -84,6 +89,9 @@ const MapContainer = props => {
 
   // fetch restaurants data
   const handleRestaurantSearch = (queryType, distanceType, distanceLength) => {
+    setResLoading(true);
+    setFilteredRes([]);
+    const fetchedResults = [];
     // 1. Create places request (if no queryType, than default restaurant)
     // will update the no queryType request later using nearbySearch api
     const placesRequest = {
@@ -94,21 +102,17 @@ const MapContainer = props => {
       rankBy: mapsApi.places.RankBy.DISTANCE
       // radius: '5000'
     };
-
     // perform textsearch based on query passed in ('chinese', 'thai', etc)
     placesServices.textSearch(
       placesRequest,
-      (locationResults, status, extraInfo) => {
+      (locationResults, status, paginationInfo) => {
+        if (status !== 'OK') {
+          console.error('No results found');
+          return;
+        }
         // array of results
         console.log(locationResults);
-        // status code 'OK'
-        console.log(status);
-        // pagination information and method
-        console.log(extraInfo);
-        // extraInfo.nextPage((h1, h2, h3) => console.log(h1, h2, h3));
 
-        // temp place holder for now
-        const testPlace = locationResults[0];
         // distanceType is number, convert to google api format
         let travelMode;
         switch (distanceType) {
@@ -122,20 +126,33 @@ const MapContainer = props => {
             travelMode = 'DRIVING';
             break;
         }
-        const directionRequest = {
-          origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
-          destination: testPlace.formatted_address, // To
-          travelMode
-        };
-        // fetch directionService data
-        // for filtering the distance
-        directionService.route(directionRequest, (routeResult, status) => {
-          if (status !== 'OK') return;
-          const travellingRoute = routeResult.routes[0].legs[0];
-          const travellingTimeInMinutes = travellingRoute.duration.value / 60;
-          console.log(travellingTimeInMinutes);
-          console.log(distanceLength);
-        });
+        for (let i = 0; i < 10; i++) {
+          const restaurantPlace = locationResults[i];
+          const { rating, name } = restaurantPlace;
+          const address = restaurantPlace.formatted_address; // e.g 80 mandai lake...
+          const directionRequest = {
+            origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+            destination: restaurantPlace.formatted_address, // To
+            travelMode
+          };
+          directionService.route(
+            directionRequest,
+            (routeResults, routeStatus) => {
+              if (routeStatus !== 'OK') {
+                console.error('Route service error', routeStatus);
+              }
+              const travellingRoute = routeResults.routes[0].legs[0];
+              const travellingTimeInMinutes =
+                travellingRoute.duration.value / 60;
+              if (distanceLength === 0) {
+                fetchedResults.push(restaurantPlace);
+              } else if (travellingTimeInMinutes <= distanceLength) {
+                fetchedResults.push(restaurantPlace);
+              }
+            }
+          );
+        }
+        console.log(fetchedResults);
       }
     );
   };
