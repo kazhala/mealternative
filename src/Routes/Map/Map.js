@@ -20,14 +20,12 @@ const Map = props => {
   const {
     lat,
     lng,
-    mapsApi,
     handleMapApiLoaded,
-    autoCompleteService,
-    geoCoderService,
     mapLoaded,
     centerMarker,
-    setCenterMarker,
-    handleRestaurantSearch
+    handleRestaurantSearch,
+    handleAutoCompleteUpdate,
+    updateCenterMarker
   } = props;
   const classes = useStyles();
 
@@ -36,14 +34,12 @@ const Map = props => {
       {mapLoaded && (
         <React.Fragment>
           <LocationInputForm
-            autoCompleteService={autoCompleteService}
-            geoCoderService={geoCoderService}
             centerMarker={centerMarker}
-            setCenterMarker={setCenterMarker}
             lat={lat}
             lng={lng}
             classes={classes}
-            mapsApi={mapsApi}
+            handleAutoCompleteUpdate={handleAutoCompleteUpdate}
+            updateCenterMarker={updateCenterMarker}
           />
           <LocationFilterForm
             handleRestaurantSearch={handleRestaurantSearch}
@@ -82,13 +78,11 @@ const TestDrop = () => (
 Map.propTypes = {
   lat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   lng: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  mapsApi: PropTypes.any,
-  autoCompleteService: PropTypes.any,
-  geoCoderService: PropTypes.any,
   mapLoaded: PropTypes.bool.isRequired,
   centerMarker: PropTypes.object.isRequired,
-  setCenterMarker: PropTypes.func.isRequired,
-  handleRestaurantSearch: PropTypes.func.isRequired
+  handleRestaurantSearch: PropTypes.func.isRequired,
+  handleAutoCompleteUpdate: PropTypes.func.isRequired,
+  updateCenterMarker: PropTypes.func.isRequired
 };
 
 export default Map;

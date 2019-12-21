@@ -44,6 +44,44 @@ const MapContainer = props => {
     setMapLoaded(true);
   };
 
+  const handleAutoCompleteUpdate = (searchValue, callBack) => {
+    // prepare query for google autoCompleteService
+    const searchQuery = {
+      input: searchValue,
+      location: new mapsApi.LatLng(lat, lng),
+      radius: 100000 // in Meters. 100km
+    };
+    // if there is input, perform google autoCompleteService request
+    searchQuery.input &&
+      autoCompleteService.getQueryPredictions(searchQuery, response => {
+        // The name of each GoogleMaps place suggestion is in the "description" field
+        if (response) {
+          const dataSource = response.map(resp => resp.description);
+          // set the autoCompletion's options
+          callBack(dataSource);
+        }
+      });
+  };
+
+  // relocate the center of the map based on user input
+  // 0 means default location, 1 is user input location
+  const updateCenterMarker = (type, address) => {
+    if (type === 0) {
+      setCenterMarker({ lat, lng });
+    } else {
+      // decode the address to latlng
+      geoCoderService.geocode({ address }, response => {
+        if (!response[0]) {
+          // if empty, than change to user location stored in redux
+          setCenterMarker({ lat, lng });
+          return;
+        }
+        const { location } = response[0].geometry;
+        setCenterMarker({ lat: location.lat(), lng: location.lng() });
+      });
+    }
+  };
+
   // fetch restaurants data
   const handleRestaurantSearch = (queryType, distanceType, distanceLength) => {
     // 1. Create places request (if no queryType, than default restaurant)
@@ -115,6 +153,8 @@ const MapContainer = props => {
       centerMarker={centerMarker}
       setCenterMarker={setCenterMarker}
       handleRestaurantSearch={handleRestaurantSearch}
+      handleAutoCompleteUpdate={handleAutoCompleteUpdate}
+      updateCenterMarker={updateCenterMarker}
     />
   );
 };
