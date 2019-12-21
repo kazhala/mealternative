@@ -3,23 +3,36 @@
 */
 
 // React
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import { TextField, Button, Typography, Slider } from '@material-ui/core';
+import {
+  IconButton,
+  TextField,
+  Button,
+  Typography,
+  Slider
+} from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import {
   DirectionsWalk,
   DirectionsCar,
-  DirectionsBike
+  DirectionsBike,
+  Cached,
+  UnfoldMore
 } from '@material-ui/icons';
 
 // search auto complete, will refactor to separate file
 const searchOptions = ['chinese', 'thai', 'italian', 'pizza', 'ice cream'];
 
 const LocationFilterForm = props => {
-  const { classes, handleRestaurantSearch } = props;
+  const {
+    classes,
+    handleRestaurantSearch,
+    filteredResults,
+    resLoading
+  } = props;
 
   // value of auto completion
   const [queryValue, setQueryValue] = useState('');
@@ -27,6 +40,28 @@ const LocationFilterForm = props => {
   const [distanceType, setDistanceType] = useState(0);
   // distance in minutes, 0 = no restriction
   const [distanceLength, setDistanceLength] = useState(0);
+
+  const [loadMoreDisabled, setLoadMoreDisabled] = useState(true);
+
+  const [searchDisabled, setSearchDisabled] = useState(false);
+
+  useEffect(() => {
+    if (filteredResults.length > 0 && !resLoading) {
+      const timer = setTimeout(() => {
+        setLoadMoreDisabled(false);
+      }, 5000);
+      return () => clearInterval(timer);
+    }
+  }, [filteredResults, resLoading]);
+
+  useEffect(() => {
+    if (searchDisabled) {
+      const timer = setTimeout(() => {
+        setSearchDisabled(false);
+      }, 7000);
+      return () => clearInterval(timer);
+    }
+  }, [searchDisabled]);
 
   // handle auto completion change
   const handleChange = e => {
@@ -129,12 +164,23 @@ const LocationFilterForm = props => {
             <DirectionsCar />
           </div>
         </div>
+
+        <div>
+          <IconButton disabled={loadMoreDisabled} size='small'>
+            <Cached />
+          </IconButton>
+          <IconButton size='small'>
+            <UnfoldMore />
+          </IconButton>
+        </div>
         <Button
           color='primary'
           variant='outlined'
-          onClick={() =>
-            handleRestaurantSearch(queryValue, distanceType, distanceLength)
-          }
+          disabled={searchDisabled}
+          onClick={() => {
+            setSearchDisabled(true);
+            handleRestaurantSearch(queryValue, distanceType, distanceLength);
+          }}
         >
           <Typography variant='subtitle2'>Search</Typography>
         </Button>
@@ -145,7 +191,9 @@ const LocationFilterForm = props => {
 
 LocationFilterForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleRestaurantSearch: PropTypes.func.isRequired
+  handleRestaurantSearch: PropTypes.func.isRequired,
+  filteredResults: PropTypes.array.isRequired,
+  resLoading: PropTypes.bool.isRequired
 };
 
 export default LocationFilterForm;

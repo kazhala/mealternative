@@ -12,6 +12,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center'
   },
+
+  // location auto complete
   locationSelection: {
     display: 'grid',
     width: '100%',
@@ -27,6 +29,8 @@ const useStyles = makeStyles(theme => ({
   locationFilterAutoComplete: {
     marginBottom: theme.spacing(0.5)
   },
+
+  // location filter section
   distanceSlider: {
     paddingLeft: theme.spacing(0.25),
     paddingRight: theme.spacing(0.25)
@@ -40,7 +44,8 @@ const useStyles = makeStyles(theme => ({
   sliderSearchOptions: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
+    alignItems: 'center'
   },
   sliderBtnGroup: {
     display: 'flex'

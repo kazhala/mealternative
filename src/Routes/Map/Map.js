@@ -32,6 +32,8 @@ const Map = props => {
   } = props;
   const classes = useStyles();
 
+  console.log(filteredResults);
+
   return (
     <div className={classes.mapRoot}>
       <React.Fragment>
@@ -46,6 +48,8 @@ const Map = props => {
         <LocationFilterForm
           handleRestaurantSearch={handleRestaurantSearch}
           classes={classes}
+          filteredResults={filteredResults}
+          resLoading={resLoading}
         />
       </React.Fragment>
       {(!mapLoaded || resLoading) && <PageSpinner />}
