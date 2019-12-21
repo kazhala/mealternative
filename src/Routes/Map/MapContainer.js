@@ -139,7 +139,7 @@ const MapContainer = props => {
     distanceLength,
     restaurantList = resultRestaurantList
   ) => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       const restaurantPlace = restaurantList[i];
       const directionRequest = {
         origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),

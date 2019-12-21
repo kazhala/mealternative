@@ -25,31 +25,33 @@ const Map = props => {
     centerMarker,
     handleRestaurantSearch,
     handleAutoCompleteUpdate,
-    updateCenterMarker
+    updateCenterMarker,
+    // nextPage,
+    filteredResults,
+    resLoading
   } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.mapRoot}>
-      {mapLoaded && (
-        <React.Fragment>
-          <LocationInputForm
-            centerMarker={centerMarker}
-            lat={lat}
-            lng={lng}
-            classes={classes}
-            handleAutoCompleteUpdate={handleAutoCompleteUpdate}
-            updateCenterMarker={updateCenterMarker}
-          />
-          <LocationFilterForm
-            handleRestaurantSearch={handleRestaurantSearch}
-            classes={classes}
-          />
-        </React.Fragment>
-      )}
+      <React.Fragment>
+        <LocationInputForm
+          centerMarker={centerMarker}
+          lat={lat}
+          lng={lng}
+          classes={classes}
+          handleAutoCompleteUpdate={handleAutoCompleteUpdate}
+          updateCenterMarker={updateCenterMarker}
+        />
+        <LocationFilterForm
+          handleRestaurantSearch={handleRestaurantSearch}
+          classes={classes}
+        />
+      </React.Fragment>
+      {(!mapLoaded || resLoading) && <PageSpinner />}
       <div className={classes.googleMap}>
         {/* render google map after lat and lng for center position is set */}
-        {centerMarker.lat && centerMarker.lng ? (
+        {centerMarker.lat && centerMarker.lng && (
           <GoogleMapReact
             bootstrapURLKeys={{
               key: GoogleMapAPIKey,
@@ -62,8 +64,6 @@ const Map = props => {
           >
             <TestDrop lat={centerMarker.lat} lng={centerMarker.lng} />
           </GoogleMapReact>
-        ) : (
-          <PageSpinner />
         )}
       </div>
     </div>
@@ -82,7 +82,10 @@ Map.propTypes = {
   centerMarker: PropTypes.object.isRequired,
   handleRestaurantSearch: PropTypes.func.isRequired,
   handleAutoCompleteUpdate: PropTypes.func.isRequired,
-  updateCenterMarker: PropTypes.func.isRequired
+  updateCenterMarker: PropTypes.func.isRequired,
+  nextPage: PropTypes.any,
+  filteredResults: PropTypes.arrayOf(PropTypes.object).isRequired,
+  resLoading: PropTypes.bool.isRequired
 };
 
 export default Map;
