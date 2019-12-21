@@ -31,7 +31,11 @@ const MapContainer = props => {
   // determine if request data loading
   const [resLoading, setResLoading] = useState(false);
   // stores the searched restaurant into array
-  const [filteredRes, setFilteredRes] = useState([]);
+  const [resultRestaurantList, setResultRestaurantList] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [distanceType, setDistanceType] = useState('DRIVING');
+  const [distanceLength, setDistanceLength] = useState(0);
+  const [nextPage, setNextPage] = useState(null);
 
   // get the center marker after lat and lng is set in redux
   useEffect(() => {
@@ -90,8 +94,21 @@ const MapContainer = props => {
   // fetch restaurants data
   const handleRestaurantSearch = (queryType, distanceType, distanceLength) => {
     setResLoading(true);
-    setFilteredRes([]);
-    const fetchedResults = [];
+    setResultRestaurantList([]);
+    setFilteredResults([]);
+    // distanceType is number, convert to google api format
+    switch (distanceType) {
+      case 0:
+        setDistanceType('WALKING');
+        break;
+      case 1:
+        setDistanceType('BICYCLING');
+        break;
+      default:
+        setDistanceType('DRIVING');
+        break;
+    }
+    setDistanceLength(distanceLength);
     // 1. Create places request (if no queryType, than default restaurant)
     // will update the no queryType request later using nearbySearch api
     const placesRequest = {
@@ -107,55 +124,62 @@ const MapContainer = props => {
       placesRequest,
       (locationResults, status, paginationInfo) => {
         if (status !== 'OK') {
-          console.error('No results found');
+          setResLoading(false);
+          console.error('No results found', status);
           return;
         }
-        // array of results
-        console.log(locationResults);
-
-        // distanceType is number, convert to google api format
-        let travelMode;
-        switch (distanceType) {
-          case 0:
-            travelMode = 'WALKING';
-            break;
-          case 1:
-            travelMode = 'BICYCLING';
-            break;
-          default:
-            travelMode = 'DRIVING';
-            break;
-        }
-        for (let i = 0; i < 10; i++) {
-          const restaurantPlace = locationResults[i];
-          const { rating, name } = restaurantPlace;
-          const address = restaurantPlace.formatted_address; // e.g 80 mandai lake...
-          const directionRequest = {
-            origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
-            destination: restaurantPlace.formatted_address, // To
-            travelMode
-          };
-          directionService.route(
-            directionRequest,
-            (routeResults, routeStatus) => {
-              if (routeStatus !== 'OK') {
-                console.error('Route service error', routeStatus);
-              }
-              const travellingRoute = routeResults.routes[0].legs[0];
-              const travellingTimeInMinutes =
-                travellingRoute.duration.value / 60;
-              if (distanceLength === 0) {
-                fetchedResults.push(restaurantPlace);
-              } else if (travellingTimeInMinutes <= distanceLength) {
-                fetchedResults.push(restaurantPlace);
-              }
-            }
-          );
-        }
-        console.log(fetchedResults);
+        setNextPage(paginationInfo);
+        setResultRestaurantList(locationResults);
       }
     );
   };
+
+  useEffect(() => {
+    if (mapLoaded && resLoading && resultRestaurantList.length > 0) {
+      for (let i = 0; i < 5; i++) {
+        const restaurantPlace = resultRestaurantList[i];
+        const directionRequest = {
+          origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+          destination: restaurantPlace.formatted_address, // To
+          travelMode: distanceType
+        };
+        directionService.route(
+          directionRequest,
+          (routeResults, routeStatus) => {
+            if (routeStatus !== 'OK') {
+              console.error('Route service error', routeStatus);
+            }
+            const travellingRoute = routeResults.routes[0].legs[0];
+            const travellingTimeInMinutes = travellingRoute.duration.value / 60;
+            if (distanceLength === 0) {
+              setFilteredResults(prevRes => {
+                const newRes = [...prevRes];
+                newRes.push(restaurantPlace);
+                return newRes;
+              });
+            } else if (travellingTimeInMinutes <= distanceLength) {
+              setFilteredResults(prevRes => {
+                const newRes = [...prevRes];
+                newRes.push(restaurantPlace);
+                return newRes;
+              });
+            }
+          }
+        );
+      }
+      setResLoading(false);
+    }
+  }, [
+    resultRestaurantList,
+    mapLoaded,
+    distanceType,
+    distanceLength,
+    mapsApi,
+    directionService,
+    filteredResults,
+    centerMarker,
+    resLoading
+  ]);
 
   return (
     <Map
