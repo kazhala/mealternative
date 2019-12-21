@@ -26,13 +26,12 @@ const Map = props => {
     handleRestaurantSearch,
     handleAutoCompleteUpdate,
     updateCenterMarker,
-    // nextPage,
+    nextPage,
     resultRestaurantList,
+    setResultRestaurantList,
     resLoading
   } = props;
   const classes = useStyles();
-
-  console.log(resultRestaurantList);
 
   return (
     <div className={classes.mapRoot}>
@@ -48,6 +47,9 @@ const Map = props => {
         <LocationFilterForm
           handleRestaurantSearch={handleRestaurantSearch}
           classes={classes}
+          nextPage={nextPage}
+          setResultRestaurantList={setResultRestaurantList}
+          resultRestaurantList={resultRestaurantList}
         />
       </React.Fragment>
       {(!mapLoaded || resLoading) && <PageSpinner />}
@@ -86,6 +88,7 @@ Map.propTypes = {
   handleAutoCompleteUpdate: PropTypes.func.isRequired,
   updateCenterMarker: PropTypes.func.isRequired,
   nextPage: PropTypes.any,
+  setResultRestaurantList: PropTypes.func.isRequired,
   resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired,
   resLoading: PropTypes.bool.isRequired
 };

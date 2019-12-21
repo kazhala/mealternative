@@ -15,12 +15,16 @@ import { Cached, UnfoldMore } from '@material-ui/icons';
 const searchOptions = ['chinese', 'thai', 'italian', 'pizza', 'ice cream'];
 
 const LocationFilterForm = props => {
-  const { classes, handleRestaurantSearch } = props;
+  const {
+    classes,
+    handleRestaurantSearch,
+    nextPage,
+    setResultRestaurantList,
+    resultRestaurantList
+  } = props;
 
   // value of auto completion
   const [queryValue, setQueryValue] = useState('');
-
-  const [loadMoreDisabled, setLoadMoreDisabled] = useState(true);
 
   // handle auto completion change
   const handleChange = e => {
@@ -31,6 +35,18 @@ const LocationFilterForm = props => {
   // textContent contains the new value
   const handleSelect = e => {
     setQueryValue(e.target.textContent);
+  };
+
+  const checkDisable = type => {
+    if (type === 0) {
+      if (nextPage) {
+        return !nextPage.hasNextPage;
+      } else {
+        return true;
+      }
+    } else {
+      return !(resultRestaurantList.length > 0);
+    }
   };
 
   return (
@@ -59,10 +75,14 @@ const LocationFilterForm = props => {
       <div>
         <div className={classes.sliderSearchOptions}>
           <div>
-            <IconButton disabled={loadMoreDisabled} size='small'>
+            <IconButton
+              disabled={checkDisable(0)}
+              size='small'
+              onClick={() => nextPage.nextPage()}
+            >
               <Cached />
             </IconButton>
-            <IconButton size='small'>
+            <IconButton disabled={checkDisable(1)} size='small'>
               <UnfoldMore />
             </IconButton>
           </div>
@@ -70,6 +90,7 @@ const LocationFilterForm = props => {
             color='primary'
             variant='outlined'
             onClick={() => {
+              setResultRestaurantList([]);
               handleRestaurantSearch(queryValue);
             }}
           >
@@ -83,7 +104,10 @@ const LocationFilterForm = props => {
 
 LocationFilterForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleRestaurantSearch: PropTypes.func.isRequired
+  handleRestaurantSearch: PropTypes.func.isRequired,
+  nextPage: PropTypes.any,
+  setResultRestaurantList: PropTypes.func.isRequired,
+  resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default LocationFilterForm;

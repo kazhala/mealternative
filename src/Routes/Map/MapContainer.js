@@ -91,7 +91,6 @@ const MapContainer = props => {
   // fetch restaurants data
   const handleRestaurantSearch = queryType => {
     setResLoading(true);
-    setResultRestaurantList([]);
     // 1. Create places request (if no queryType, than default restaurant)
     // will update the no queryType request later using nearbySearch api
     const placesRequest = {
@@ -112,7 +111,10 @@ const MapContainer = props => {
           return;
         }
         setNextPage(paginationInfo);
-        setResultRestaurantList(locationResults);
+        setResultRestaurantList(prevList => {
+          const newList = [...prevList, ...locationResults];
+          return newList;
+        });
         setResLoading(false);
       }
     );
@@ -128,6 +130,7 @@ const MapContainer = props => {
       handleAutoCompleteUpdate={handleAutoCompleteUpdate}
       updateCenterMarker={updateCenterMarker}
       resLoading={resLoading}
+      setResultRestaurantList={setResultRestaurantList}
       resultRestaurantList={resultRestaurantList}
       nextPage={nextPage}
     />
