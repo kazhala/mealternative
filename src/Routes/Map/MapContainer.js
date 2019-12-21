@@ -33,8 +33,6 @@ const MapContainer = props => {
   // stores the searched restaurant into array
   const [resultRestaurantList, setResultRestaurantList] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
-  const [distanceType, setDistanceType] = useState('DRIVING');
-  const [distanceLength, setDistanceLength] = useState(0);
   const [nextPage, setNextPage] = useState(null);
 
   // get the center marker after lat and lng is set in redux
@@ -96,19 +94,19 @@ const MapContainer = props => {
     setResLoading(true);
     setResultRestaurantList([]);
     setFilteredResults([]);
+    let travelMode;
     // distanceType is number, convert to google api format
     switch (distanceType) {
       case 0:
-        setDistanceType('WALKING');
+        travelMode = 'WALKING';
         break;
       case 1:
-        setDistanceType('BICYCLING');
+        travelMode = 'BICYCLING';
         break;
       default:
-        setDistanceType('DRIVING');
+        travelMode = 'DRIVING';
         break;
     }
-    setDistanceLength(distanceLength);
     // 1. Create places request (if no queryType, than default restaurant)
     // will update the no queryType request later using nearbySearch api
     const placesRequest = {
@@ -130,72 +128,59 @@ const MapContainer = props => {
         }
         setNextPage(paginationInfo);
         setResultRestaurantList(locationResults);
+        filterLocationResults(travelMode, distanceLength, locationResults);
+        setResLoading(false);
       }
     );
   };
 
-  useEffect(() => {
-    if (mapLoaded && resLoading && resultRestaurantList.length > 0) {
-      for (let i = 0; i < 5; i++) {
-        const restaurantPlace = resultRestaurantList[i];
-        const directionRequest = {
-          origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
-          destination: restaurantPlace.formatted_address, // To
-          travelMode: distanceType
-        };
-        directionService.route(
-          directionRequest,
-          (routeResults, routeStatus) => {
-            if (routeStatus !== 'OK') {
-              console.error('Route service error', routeStatus);
-            }
-            const travellingRoute = routeResults.routes[0].legs[0];
-            const travellingTimeInMinutes = travellingRoute.duration.value / 60;
-            if (distanceLength === 0) {
-              setFilteredResults(prevRes => {
-                const newRes = [...prevRes];
-                newRes.push(restaurantPlace);
-                return newRes;
-              });
-            } else if (travellingTimeInMinutes <= distanceLength) {
-              setFilteredResults(prevRes => {
-                const newRes = [...prevRes];
-                newRes.push(restaurantPlace);
-                return newRes;
-              });
-            }
-          }
-        );
-      }
-      setResLoading(false);
-    }
-  }, [
-    resultRestaurantList,
-    mapLoaded,
-    distanceType,
+  const filterLocationResults = (
+    travelMode,
     distanceLength,
-    mapsApi,
-    directionService,
-    filteredResults,
-    centerMarker,
-    resLoading
-  ]);
+    restaurantList = resultRestaurantList
+  ) => {
+    for (let i = 0; i < 5; i++) {
+      const restaurantPlace = restaurantList[i];
+      const directionRequest = {
+        origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+        destination: restaurantPlace.formatted_address, // To
+        travelMode
+      };
+      directionService.route(directionRequest, (routeResults, routeStatus) => {
+        if (routeStatus !== 'OK') {
+          console.error('Route service error', routeStatus);
+        }
+        const travellingRoute = routeResults.routes[0].legs[0];
+        const travellingTimeInMinutes = travellingRoute.duration.value / 60;
+        if (distanceLength === 0) {
+          setFilteredResults(prevRes => {
+            const newRes = [...prevRes];
+            newRes.push(restaurantPlace);
+            return newRes;
+          });
+        } else if (travellingTimeInMinutes <= distanceLength) {
+          setFilteredResults(prevRes => {
+            const newRes = [...prevRes];
+            newRes.push(restaurantPlace);
+            return newRes;
+          });
+        }
+      });
+    }
+  };
 
   return (
     <Map
       {...props}
-      mapsApi={mapsApi}
       handleMapApiLoaded={handleMapApiLoaded}
-      autoCompleteService={autoCompleteService}
-      placesServices={placesServices}
-      directionService={directionService}
-      geoCoderService={geoCoderService}
       mapLoaded={mapLoaded}
       centerMarker={centerMarker}
-      setCenterMarker={setCenterMarker}
       handleRestaurantSearch={handleRestaurantSearch}
       handleAutoCompleteUpdate={handleAutoCompleteUpdate}
       updateCenterMarker={updateCenterMarker}
+      resLoading={resLoading}
+      filteredResults={filteredResults}
+      nextPage={nextPage}
     />
   );
 };
