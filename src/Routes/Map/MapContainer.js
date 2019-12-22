@@ -18,16 +18,15 @@ const MapContainer = props => {
   const { lat, lng } = props;
 
   // google map services
-  const [mapsApi, setMapsApi] = useState(null);
-  const [autoCompleteService, setAutoCompleteService] = useState(null);
-  const [placesServices, setPlacesServices] = useState(null);
-  // use it later
-  // eslint-disable-next-line
-  const [directionService, setDirectionService] = useState(null);
-  const [geoCoderService, setGeoCoderService] = useState(null);
+  const [googleMap, setGoogleMap] = useState({
+    mapsApi: null,
+    autoCompleteService: null,
+    placesServices: null,
+    directionService: null,
+    geoCoderService: null,
+    mapLoaded: false
+  });
 
-  // determine if map is loaded
-  const [mapLoaded, setMapLoaded] = useState(false);
   // center lat lng position
   const [centerMarker, setCenterMarker] = useState({});
   // determine if request data loading
@@ -36,6 +35,15 @@ const MapContainer = props => {
   const [resultRestaurantList, setResultRestaurantList] = useState([]);
   const [nextPage, setNextPage] = useState(null);
 
+  const {
+    mapsApi,
+    autoCompleteService,
+    placesServices,
+    directionService,
+    geoCoderService,
+    mapLoaded
+  } = googleMap;
+
   // get the center marker after lat and lng is set in redux
   useEffect(() => {
     setCenterMarker({ lat, lng });
@@ -43,12 +51,15 @@ const MapContainer = props => {
 
   // Initiate google map services after map is loaded
   const handleMapApiLoaded = (map, maps) => {
-    setMapsApi(maps);
-    setAutoCompleteService(new maps.places.AutocompleteService());
-    setPlacesServices(new maps.places.PlacesService(map));
-    setDirectionService(new maps.DirectionsService());
-    setGeoCoderService(new maps.Geocoder());
-    setMapLoaded(true);
+    setGoogleMap({
+      ...googleMap,
+      mapsApi: maps,
+      autoCompleteService: new maps.places.AutocompleteService(),
+      placesServices: new maps.places.PlacesService(map),
+      directionService: new maps.DirectionsService(),
+      geoCoderService: new maps.Geocoder(),
+      mapLoaded: true
+    });
   };
 
   const handleAutoCompleteUpdate = (searchValue, callBack) => {
