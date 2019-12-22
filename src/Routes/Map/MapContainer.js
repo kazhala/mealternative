@@ -95,27 +95,28 @@ const MapContainer = props => {
     // will update the no queryType request later using nearbySearch api
     const placesRequest = {
       location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+      radius: '2000',
       type: ['restaurant', 'cafe'],
-      query: queryType ? queryType : 'restaurant',
+      query: queryType ? queryType : 'restaurant'
       // rankBy cannot be used with radius at the same time
-      rankBy: mapsApi.places.RankBy.DISTANCE
-      // radius: '5000'
+      // rankBy: mapsApi.places.RankBy.DISTANCE
     };
     // perform textsearch based on query passed in ('chinese', 'thai', etc)
     placesServices.textSearch(
       placesRequest,
       (locationResults, status, paginationInfo) => {
+        console.log(locationResults);
         if (status !== 'OK') {
           setResLoading(false);
           console.error('No results found', status);
-          return;
+        } else {
+          setNextPage(paginationInfo);
+          setResultRestaurantList(prevList => {
+            const newList = [...prevList, ...locationResults];
+            return newList;
+          });
+          setResLoading(false);
         }
-        setNextPage(paginationInfo);
-        setResultRestaurantList(prevList => {
-          const newList = [...prevList, ...locationResults];
-          return newList;
-        });
-        setResLoading(false);
       }
     );
   };
