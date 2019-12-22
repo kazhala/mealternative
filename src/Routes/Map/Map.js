@@ -12,6 +12,7 @@ import PageSpinner from '../../Common/Spinner/PageSpinner';
 import LocationInputForm from './_components/LocationInputForm';
 import LocationFilterForm from './_components/LocationFilterForm';
 import CenterMarker from './_components/CenterMarker';
+import RestaurantMarker from './_components/RestaurantMarker';
 
 // Misc
 import { GoogleMapAPIKey } from '../../config';
@@ -53,6 +54,7 @@ const Map = props => {
           resultRestaurantList={resultRestaurantList}
         />
       </React.Fragment>
+
       {(!mapLoaded || resLoading) && <PageSpinner />}
       <div className={classes.googleMap}>
         {/* render google map after lat and lng for center position is set */}
@@ -72,6 +74,14 @@ const Map = props => {
               lat={centerMarker.lat}
               lng={centerMarker.lng}
             />
+            {resultRestaurantList.map((restaurant, index) => (
+              <RestaurantMarker
+                key={index}
+                classes={classes}
+                lat={restaurant.geometry.location.lat()}
+                lng={restaurant.geometry.location.lng()}
+              />
+            ))}
           </GoogleMapReact>
         )}
       </div>

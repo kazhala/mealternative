@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PersonPin } from '@material-ui/icons';
+import { PinDrop } from '@material-ui/icons';
 
-const CenterMarker = props => {
+const RestaurantMarker = props => {
   const { classes, $hover } = props;
 
   return (
     <div className={classes.centerMarker}>
-      <PersonPin color='primary' fontSize='large' />
+      <PinDrop color='primary' fontSize='large' />
     </div>
   );
 };
 
-CenterMarker.propTypes = {
+RestaurantMarker.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default CenterMarker;
+export default RestaurantMarker;
