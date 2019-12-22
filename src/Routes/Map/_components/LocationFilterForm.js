@@ -31,7 +31,7 @@ const LocationFilterForm = props => {
 
   // value of auto completion
   const [queryValue, setQueryValue] = useState('');
-  const [queryRadius, setQueryRadius] = useState(0.5);
+  const [queryRadius, setQueryRadius] = useState(2);
 
   // handle auto completion change
   const handleChange = e => {
@@ -99,7 +99,6 @@ const LocationFilterForm = props => {
         </div>
         <div className={classes.distanceSlider}>
           <Slider
-            defaultValue={0.5}
             step={0.5}
             marks
             max={10}
