@@ -7,6 +7,7 @@ import { PinDrop } from '@material-ui/icons';
 
 const RestaurantMarker = props => {
   // $hover props determine if the marker is hovered
+  // eslint-disable-next-line
   const { classes, $hover } = props;
 
   return (

@@ -7,6 +7,7 @@ import { PersonPin } from '@material-ui/icons';
 
 const CenterMarker = props => {
   // $hover will dertermine if the component is hovered
+  // eslint-disable-next-line
   const { classes, $hover } = props;
 
   return (
