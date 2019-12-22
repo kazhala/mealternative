@@ -7,7 +7,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import { IconButton, TextField, Button, Typography } from '@material-ui/core';
+import {
+  IconButton,
+  TextField,
+  Button,
+  Typography,
+  Slider
+} from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { Cached, UnfoldMore } from '@material-ui/icons';
 
@@ -25,6 +31,7 @@ const LocationFilterForm = props => {
 
   // value of auto completion
   const [queryValue, setQueryValue] = useState('');
+  const [queryRadius, setQueryRadius] = useState(0.5);
 
   // handle auto completion change
   const handleChange = e => {
@@ -47,6 +54,16 @@ const LocationFilterForm = props => {
     } else {
       return !(resultRestaurantList.length > 0);
     }
+  };
+
+  // update length when slider changes
+  const handleDistanceLengthChange = (e, newValue) => {
+    setQueryRadius(newValue);
+  };
+
+  // display slider value to readable form in slider title
+  const displayDistanceLength = () => {
+    return `${queryRadius}km`;
   };
 
   return (
@@ -72,7 +89,26 @@ const LocationFilterForm = props => {
           />
         )}
       />
+
       <div>
+        <div className={classes.sliderTitle}>
+          <Typography variant='subtitle2'>Radius</Typography>
+          <Typography className={classes.sliderTitleCaption} variant='caption'>
+            {displayDistanceLength()}
+          </Typography>
+        </div>
+        <div className={classes.distanceSlider}>
+          <Slider
+            defaultValue={0.5}
+            step={0.5}
+            marks
+            max={10}
+            min={0.5}
+            valueLabelDisplay='auto'
+            value={queryRadius}
+            onChange={handleDistanceLengthChange}
+          />
+        </div>
         <div className={classes.sliderSearchOptions}>
           <div>
             <IconButton
@@ -91,7 +127,7 @@ const LocationFilterForm = props => {
             variant='outlined'
             onClick={() => {
               setResultRestaurantList([]);
-              handleRestaurantSearch(queryValue);
+              handleRestaurantSearch(queryValue, queryRadius);
             }}
           >
             <Typography variant='subtitle2'>Search</Typography>

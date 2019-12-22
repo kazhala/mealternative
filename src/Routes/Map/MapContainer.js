@@ -89,13 +89,13 @@ const MapContainer = props => {
   };
 
   // fetch restaurants data
-  const handleRestaurantSearch = queryType => {
+  const handleRestaurantSearch = (queryType, queryRadius) => {
     setResLoading(true);
     // 1. Create places request (if no queryType, than default restaurant)
     // will update the no queryType request later using nearbySearch api
     const placesRequest = {
       location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
-      radius: '2000',
+      radius: (queryRadius * 1000).toString(),
       type: ['restaurant', 'cafe'],
       query: queryType ? queryType : 'restaurant'
       // rankBy cannot be used with radius at the same time
