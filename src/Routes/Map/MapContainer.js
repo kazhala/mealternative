@@ -33,7 +33,10 @@ const MapContainer = props => {
   const [resLoading, setResLoading] = useState(false);
   // stores the searched restaurant into array
   const [resultRestaurantList, setResultRestaurantList] = useState([]);
+  // stores the information and method to call next page from google map
   const [nextPage, setNextPage] = useState(null);
+  // determine if the detailed information modal should be opened
+  const [detailOpen, setDetailOpen] = useState(false);
 
   const {
     mapsApi,
@@ -165,6 +168,8 @@ const MapContainer = props => {
       setResultRestaurantList={setResultRestaurantList}
       resultRestaurantList={resultRestaurantList}
       nextPage={nextPage}
+      detailOpen={detailOpen}
+      setDetailOpen={setDetailOpen}
     />
   );
 };

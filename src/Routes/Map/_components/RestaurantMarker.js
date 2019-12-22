@@ -39,7 +39,9 @@ const RestaurantMarker = props => {
           {restaurant.price_level && (
             <Box>Price-level: {checkPriceLevel(restaurant.price_level)}</Box>
           )}
-          <Box>Open: {restaurant.opening_hours.isOpen() ? 'Yes' : 'No'}</Box>
+          {restaurant.opening_hours && (
+            <Box>Open: {restaurant.opening_hours.isOpen() ? 'Yes' : 'No'}</Box>
+          )}
         </Typography>
       )}
     </div>

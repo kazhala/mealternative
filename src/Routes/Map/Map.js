@@ -13,6 +13,7 @@ import LocationInputForm from './_components/LocationInputForm';
 import LocationFilterForm from './_components/LocationFilterForm';
 import CenterMarker from './_components/CenterMarker';
 import RestaurantMarker from './_components/RestaurantMarker';
+import DetailModal from './_components/DetailModal';
 
 // Misc
 import { GoogleMapAPIKey } from '../../config';
@@ -31,7 +32,9 @@ const Map = props => {
     nextPage,
     resultRestaurantList,
     setResultRestaurantList,
-    resLoading
+    resLoading,
+    detailOpen,
+    setDetailOpen
   } = props;
   const classes = useStyles();
 
@@ -52,8 +55,16 @@ const Map = props => {
           nextPage={nextPage}
           setResultRestaurantList={setResultRestaurantList}
           resultRestaurantList={resultRestaurantList}
+          setDetailOpen={setDetailOpen}
         />
       </React.Fragment>
+
+      <DetailModal
+        detailOpen={detailOpen}
+        setDetailOpen={setDetailOpen}
+        resultRestaurantList={resultRestaurantList}
+        classes={classes}
+      />
 
       {(!mapLoaded || resLoading) && <PageSpinner />}
       <div className={classes.googleMap}>
@@ -102,7 +113,9 @@ Map.propTypes = {
   nextPage: PropTypes.any,
   setResultRestaurantList: PropTypes.func.isRequired,
   resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  resLoading: PropTypes.bool.isRequired
+  resLoading: PropTypes.bool.isRequired,
+  detailOpen: PropTypes.bool.isRequired,
+  setDetailOpen: PropTypes.func.isRequired
 };
 
 export default Map;

@@ -26,7 +26,8 @@ const LocationFilterForm = props => {
     handleRestaurantSearch,
     nextPage,
     setResultRestaurantList,
-    resultRestaurantList
+    resultRestaurantList,
+    setDetailOpen
   } = props;
 
   // value of auto completion
@@ -123,7 +124,11 @@ const LocationFilterForm = props => {
             >
               <Cached />
             </IconButton>
-            <IconButton disabled={checkDisable(1)} size='small'>
+            <IconButton
+              onClick={() => setDetailOpen(true)}
+              disabled={checkDisable(1)}
+              size='small'
+            >
               <UnfoldMore />
             </IconButton>
           </div>
@@ -148,7 +153,8 @@ LocationFilterForm.propTypes = {
   handleRestaurantSearch: PropTypes.func.isRequired,
   nextPage: PropTypes.any,
   setResultRestaurantList: PropTypes.func.isRequired,
-  resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired
+  resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setDetailOpen: PropTypes.func.isRequired
 };
 
 export default LocationFilterForm;

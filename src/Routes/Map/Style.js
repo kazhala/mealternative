@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   },
   googleMap: {
     width: '100%',
-    height: '50%',
+    height: '55%',
     display: 'flex',
     justifyContent: 'center'
   },
@@ -62,6 +62,19 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '3px',
     width: 'max-content',
     fontSize: '0.5rem'
+  },
+
+  // detail modal
+  detailModalBackDrop: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 1,
+    background: 'black',
+    opacity: '0.5',
+    transition: 'opacity 1s'
   }
 }));
 
