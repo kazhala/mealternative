@@ -132,8 +132,6 @@ const MapContainer = props => {
     );
   };
 
-  console.log(resultRestaurantList);
-
   return (
     <Map
       {...props}

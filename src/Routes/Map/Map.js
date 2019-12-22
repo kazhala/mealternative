@@ -11,6 +11,7 @@ import GoogleMapReact from 'google-map-react';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
 import LocationInputForm from './_components/LocationInputForm';
 import LocationFilterForm from './_components/LocationFilterForm';
+import CenterMarker from './_components/CenterMarker';
 
 // Misc
 import { GoogleMapAPIKey } from '../../config';
@@ -66,18 +67,17 @@ const Map = props => {
             yesIWantToUseGoogleMapApiInternals={true}
             onGoogleApiLoaded={({ map, maps }) => handleMapApiLoaded(map, maps)}
           >
-            <TestDrop lat={centerMarker.lat} lng={centerMarker.lng} />
+            <CenterMarker
+              classes={classes}
+              lat={centerMarker.lat}
+              lng={centerMarker.lng}
+            />
           </GoogleMapReact>
         )}
       </div>
     </div>
   );
 };
-
-// temp place holder component
-const TestDrop = () => (
-  <div style={{ background: 'black', width: '5px', height: '5px' }}></div>
-);
 
 Map.propTypes = {
   lat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,

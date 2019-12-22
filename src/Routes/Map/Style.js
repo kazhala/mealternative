@@ -47,16 +47,11 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1),
     alignItems: 'center'
   },
-  sliderBtnGroup: {
-    display: 'flex'
-  },
-  distanceType: {
-    paddingRight: theme.spacing(0.5),
-    verticalAlign: 'center',
-    color: '#ccc',
-    '&:hover': {
-      cursor: 'pointer'
-    }
+
+  // map markers
+  centerMarker: {
+    position: 'absolute',
+    transform: 'translate(-50%, -50%)'
   }
 }));
 
