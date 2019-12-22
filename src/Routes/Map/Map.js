@@ -80,6 +80,7 @@ const Map = props => {
                 classes={classes}
                 lat={restaurant.geometry.location.lat()}
                 lng={restaurant.geometry.location.lng()}
+                restaurant={restaurant}
               />
             ))}
           </GoogleMapReact>

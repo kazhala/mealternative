@@ -52,6 +52,16 @@ const useStyles = makeStyles(theme => ({
   centerMarker: {
     position: 'absolute',
     transform: 'translate(-50%, -50%)'
+  },
+  markerDetail: {
+    position: 'absolute',
+    transform: 'translate(-50%, 20%)',
+    background: theme.palette.background.default,
+    border: '1px solid #ccc',
+    boxShadow: '0 0 1px 1px #ccc',
+    borderRadius: '3px',
+    width: 'max-content',
+    fontSize: '0.5rem'
   }
 }));
 
