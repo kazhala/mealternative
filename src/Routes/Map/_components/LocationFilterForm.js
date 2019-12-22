@@ -31,6 +31,7 @@ const LocationFilterForm = props => {
 
   // value of auto completion
   const [queryValue, setQueryValue] = useState('');
+  // radius filter for the search
   const [queryRadius, setQueryRadius] = useState(2);
 
   // handle auto completion change
@@ -44,7 +45,9 @@ const LocationFilterForm = props => {
     setQueryValue(e.target.textContent);
   };
 
+  // check if the btn should be disabled
   const checkDisable = type => {
+    // type 0 is for load more button
     if (type === 0) {
       if (nextPage) {
         return !nextPage.hasNextPage;
@@ -52,11 +55,12 @@ const LocationFilterForm = props => {
         return true;
       }
     } else {
+      // type 1 is for detail button
       return !(resultRestaurantList.length > 0);
     }
   };
 
-  // update length when slider changes
+  // update distance length when slider changes
   const handleDistanceLengthChange = (e, newValue) => {
     setQueryRadius(newValue);
   };
@@ -91,6 +95,7 @@ const LocationFilterForm = props => {
       />
 
       <div>
+        {/* slider */}
         <div className={classes.sliderTitle}>
           <Typography variant='subtitle2'>Radius</Typography>
           <Typography className={classes.sliderTitleCaption} variant='caption'>
@@ -108,6 +113,7 @@ const LocationFilterForm = props => {
             onChange={handleDistanceLengthChange}
           />
         </div>
+        {/* loadmore, detail and search button */}
         <div className={classes.sliderSearchOptions}>
           <div>
             <IconButton

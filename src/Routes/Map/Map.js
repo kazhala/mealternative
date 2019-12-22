@@ -93,6 +93,7 @@ Map.propTypes = {
   lat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   lng: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   mapLoaded: PropTypes.bool.isRequired,
+  handleMapApiLoaded: PropTypes.func.isRequired,
   centerMarker: PropTypes.object.isRequired,
   handleRestaurantSearch: PropTypes.func.isRequired,
   handleAutoCompleteUpdate: PropTypes.func.isRequired,

@@ -21,6 +21,8 @@ const MapContainer = props => {
   const [mapsApi, setMapsApi] = useState(null);
   const [autoCompleteService, setAutoCompleteService] = useState(null);
   const [placesServices, setPlacesServices] = useState(null);
+  // use it later
+  // eslint-disable-next-line
   const [directionService, setDirectionService] = useState(null);
   const [geoCoderService, setGeoCoderService] = useState(null);
 
@@ -98,10 +100,11 @@ const MapContainer = props => {
       type: ['restaurant', 'cafe'],
       query: queryType ? queryType : 'restaurant'
       // rankBy cannot be used with radius at the same time
+      // rankBy doesn't seem to work with textSearch, keep it for future reference
       // radius: '500',
       // rankBy: mapsApi.places.RankBy.DISTANCE
     };
-    // perform textsearch based on query passed in ('chinese', 'thai', etc)
+    // perform textSearch based on query passed in ('chinese', 'thai', etc)
     placesServices.textSearch(
       placesRequest,
       (locationResults, status, paginationInfo) => {
@@ -109,23 +112,29 @@ const MapContainer = props => {
           setResLoading(false);
           console.error('No results found', status);
         } else {
+          // temp list to keep current result, only update state once
           let tempResultList = [];
           for (let i = 0; i < locationResults.length; i++) {
             if (
+              // distance check, see if it's in range
               mapsApi.geometry.spherical.computeDistanceBetween(
                 locationResults[i].geometry.location,
                 placesRequest.location
               ) <
               queryRadius * 1000
             ) {
+              // if in range, push it in temp list
               tempResultList.push(locationResults[i]);
             }
           }
+          // store nextPage information to state
           setNextPage(paginationInfo);
+          // update state results
           setResultRestaurantList(prevList => {
             const newList = [...prevList, ...tempResultList];
             return newList;
           });
+          //cancel loading
           setResLoading(false);
         }
       }
