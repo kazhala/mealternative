@@ -74,7 +74,19 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1,
     background: 'black',
     opacity: '0.5',
-    transition: 'opacity 1s'
+    transition: 'opacity 0.3s'
+  },
+  detailModalRoot: {
+    position: 'fixed',
+    top: '20%',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 2,
+    background: theme.palette.background.default,
+    borderRadius: '5px',
+    border: '1px solid black',
+    transition: 'transform 0.5s'
   }
 }));
 

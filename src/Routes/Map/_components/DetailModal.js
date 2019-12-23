@@ -16,7 +16,12 @@ const DetailModal = props => {
         className={classes.detailModalBackDrop}
         onClick={() => setDetailOpen(false)}
       />
-      <div className={classes.detailModalRoot}>
+      <div
+        style={{
+          transform: detailOpen ? 'translateY(0)' : 'translateY(100vh)'
+        }}
+        className={classes.detailModalRoot}
+      >
         <div className={classes.detailModalList}>hello world</div>
       </div>
     </>
