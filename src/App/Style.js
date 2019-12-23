@@ -11,11 +11,14 @@ const useStyles = makeStyles(theme => ({
     margin: '0 1rem'
   },
   layout: {
-    height: '100%'
+    position: 'fixed',
+    height: '100%',
+    width: '100%'
   },
   contentRoot: {
     height: '100%',
-    width: '100%'
+    width: '100%',
+    overflowY: 'scroll'
   },
   offset: theme.mixins.toolbar
 }));

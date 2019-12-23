@@ -86,7 +86,19 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.default,
     borderRadius: '5px',
     border: '1px solid black',
-    transition: 'transform 0.5s'
+    transition: 'transform 0.5s',
+    overflowY: 'scroll'
+  },
+  detailModalCloseBtn: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '&:hover': {
+      background: '#ccc',
+      cursor: 'pointer',
+      borderRadius: '5px 5px 0 0'
+    }
   }
 }));
 

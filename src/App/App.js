@@ -44,6 +44,7 @@ const App = props => {
           )}
         </Toolbar>
       </AppBar>
+
       {/* offset the height of app bar */}
       <div className={classes.offset} />
 
