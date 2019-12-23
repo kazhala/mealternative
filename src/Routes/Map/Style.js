@@ -90,6 +90,7 @@ const useStyles = makeStyles(theme => ({
     overflowY: 'scroll'
   },
   detailModalCloseBtn: {
+    position: 'sticky',
     top: 0,
     left: 0,
     width: '100%',
@@ -101,6 +102,21 @@ const useStyles = makeStyles(theme => ({
       cursor: 'pointer',
       borderRadius: '5px 5px 0 0'
     }
+  },
+  detailModalCard: {
+    display: 'Grid',
+    gridTemplateColumns: '35% 65%'
+  },
+  cardImage: {
+    width: '100%',
+    height: '100%',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+  },
+  cardDescriptions: {
+    width: '100%',
+    padding: theme.spacing(0.5),
+    borderBottom: '1px solid #ccc'
   }
 }));
 

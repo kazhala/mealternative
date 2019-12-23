@@ -48,7 +48,6 @@ const DetailModal = props => {
         >
           <KeyboardArrowDown fontSize='large' />
         </div>
-        <Divider />
         {resultRestaurantList.map((restaurant, index) => {
           const {
             name,
@@ -56,26 +55,40 @@ const DetailModal = props => {
             rating,
             price_level,
             address,
-            oepn,
+            open,
             totalRatings,
             googleMapLink
           } = getRestaurantDetails(restaurant);
           return (
-            <div key={index}>
+            <div className={classes.detailModalCard} key={index}>
               <div
+                className={classes.cardImage}
                 style={{
-                  width: '1rem',
-                  height: '1rem',
-                  background: `url(${photoUrl})`
+                  backgroundImage: `url(${photoUrl})`
                 }}
               />
-              <Typography variant='subtitle1'>{name}</Typography>
-              <Typography variant='subtitle1'>Rating: {rating}</Typography>
-              <Typography variant='subtitle1'>
-                price-level: {price_level}
-              </Typography>
-              {googleMapLink}
-              <Divider />
+              <div className={classes.cardDescriptions}>
+                <Typography variant='body2'>Name: {name}</Typography>
+                <Typography variant='body2'>Rating: {rating}</Typography>
+                <Typography variant='body2'>
+                  price-level: {price_level}
+                </Typography>
+                <Typography variant='body2'>Open: {open}</Typography>
+                <Typography variant='body2'>
+                  Total ratings: {totalRatings}
+                </Typography>
+                <Typography variant='body2'>Address: {address}</Typography>
+                <Typography variant='body2'>
+                  More Info:{' '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href={googleMapLink}
+                  >
+                    Google Map
+                  </a>
+                </Typography>
+              </div>
             </div>
           );
         })}
