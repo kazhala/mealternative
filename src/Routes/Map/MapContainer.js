@@ -104,6 +104,20 @@ const MapContainer = props => {
     }
   };
 
+  // format the price level
+  const checkPriceLevel = price => {
+    switch (price) {
+      case 1:
+        return '$';
+      case 2:
+        return '$$';
+      case 3:
+        return '$$$';
+      default:
+        return '$';
+    }
+  };
+
   // fetch restaurants data
   const handleRestaurantSearch = (queryType, queryRadius) => {
     setResLoading(true);
@@ -118,6 +132,7 @@ const MapContainer = props => {
       // radius: '500',
       // rankBy: mapsApi.places.RankBy.DISTANCE
     };
+
     // perform textSearch based on query passed in ('chinese', 'thai', etc)
     placesServices.textSearch(
       placesRequest,
@@ -137,6 +152,10 @@ const MapContainer = props => {
               ) <
               queryRadius * 1000
             ) {
+              // format price level
+              locationResults[i].price_level = checkPriceLevel(
+                locationResults[i].price_level
+              );
               // if in range, push it in temp list
               tempResultList.push(locationResults[i]);
             }

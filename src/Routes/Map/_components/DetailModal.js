@@ -11,6 +11,17 @@ const DetailModal = props => {
     zIndex: '-1'
   };
 
+  console.log(resultRestaurantList);
+
+  const getRestaurantDetails = restaurant => {
+    let resDetail = {};
+    resDetail.photoUrl = restaurant.photos[0].getUrl();
+    resDetail.name = restaurant.name;
+    resDetail.rating = restaurant.rating ? restaurant.rating : 'N/A';
+    resDetail.price_level = restaurant.price_level;
+    return resDetail;
+  };
+
   return (
     <>
       <div
@@ -31,15 +42,28 @@ const DetailModal = props => {
           <KeyboardArrowDown fontSize='large' />
         </div>
         <Divider />
-        {resultRestaurantList.map((restaurant, index) => (
-          <div key={index}>
-            {restaurant.name}
-            <div
-              style={{ background: 'black', width: '5px', height: '50px' }}
-            ></div>
-            <Divider />
-          </div>
-        ))}
+        {resultRestaurantList.map((restaurant, index) => {
+          const { name, photoUrl, rating, price_level } = getRestaurantDetails(
+            restaurant
+          );
+          return (
+            <div key={index}>
+              <div
+                style={{
+                  width: '1rem',
+                  height: '1rem',
+                  background: `url(${photoUrl})`
+                }}
+              />
+              <Typography variant='subtitle1'>{name}</Typography>
+              <Typography variant='subtitle1'>Rating: {rating}</Typography>
+              <Typography variant='subtitle1'>
+                price-level: {price_level}
+              </Typography>
+              <Divider />
+            </div>
+          );
+        })}
       </div>
     </>
   );

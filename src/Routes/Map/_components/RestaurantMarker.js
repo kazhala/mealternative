@@ -10,19 +10,6 @@ const RestaurantMarker = props => {
   // $hover props determine if the marker is hovered
   const { classes, $hover, restaurant } = props;
 
-  const checkPriceLevel = price => {
-    switch (price) {
-      case 1:
-        return '$';
-      case 2:
-        return '$$';
-      case 3:
-        return '$$$';
-      default:
-        return '$';
-    }
-  };
-
   return (
     <div>
       <div className={classes.centerMarker}>
@@ -37,7 +24,7 @@ const RestaurantMarker = props => {
           <Box>{restaurant.name}</Box>
           <Box>Rating: {restaurant.rating}</Box>
           {restaurant.price_level && (
-            <Box>Price-level: {checkPriceLevel(restaurant.price_level)}</Box>
+            <Box>Price-level: {restaurant.price_level}</Box>
           )}
           {restaurant.opening_hours && (
             <Box>Open: {restaurant.opening_hours.isOpen() ? 'Yes' : 'No'}</Box>
