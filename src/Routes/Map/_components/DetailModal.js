@@ -1,6 +1,9 @@
+/*
+  The modal component to display detailed infomation on all restaurant
+*/
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography, Box, Divider } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { KeyboardArrowDown } from '@material-ui/icons';
 
 const DetailModal = props => {
@@ -11,21 +14,21 @@ const DetailModal = props => {
     zIndex: '-1'
   };
 
-  console.log(resultRestaurantList);
-
+  // get and format all details needed to display
   const getRestaurantDetails = restaurant => {
     let resDetail = {};
-    resDetail.photoUrl = restaurant.photos[0].getUrl();
+    resDetail.photoUrl = restaurant.photos
+      ? restaurant.photos[0].getUrl()
+      : 'https://nucomltd.com/wp-content/themes/gecko/assets/images/placeholder.png';
     resDetail.name = restaurant.name;
     resDetail.rating = restaurant.rating ? restaurant.rating : 'N/A';
     resDetail.price_level = restaurant.price_level;
     resDetail.address = restaurant.formatted_address;
     resDetail.open = restaurant.opening_hours.isOpen() ? 'Yes' : 'No';
     resDetail.totalRatings = restaurant.user_ratings_total;
-    const extractRegex = /href="(.*?)"/g;
-    resDetail.googleMapLink = extractRegex.exec(
-      restaurant.photos[0].html_attributions[0]
-    )[1];
+    resDetail.googleMapLink = `https://www.google.com/maps/search/?api=1&query=${restaurant.geometry.location.lat()},${restaurant.geometry.location.lng()}&query_place_id=${
+      restaurant.place_id
+    }`;
     return resDetail;
   };
 
