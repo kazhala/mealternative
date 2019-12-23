@@ -19,6 +19,13 @@ const DetailModal = props => {
     resDetail.name = restaurant.name;
     resDetail.rating = restaurant.rating ? restaurant.rating : 'N/A';
     resDetail.price_level = restaurant.price_level;
+    resDetail.address = restaurant.formatted_address;
+    resDetail.open = restaurant.opening_hours.isOpen() ? 'Yes' : 'No';
+    resDetail.totalRatings = restaurant.user_ratings_total;
+    const extractRegex = /href="(.*?)"/g;
+    resDetail.googleMapLink = extractRegex.exec(
+      restaurant.photos[0].html_attributions[0]
+    )[1];
     return resDetail;
   };
 
@@ -43,9 +50,16 @@ const DetailModal = props => {
         </div>
         <Divider />
         {resultRestaurantList.map((restaurant, index) => {
-          const { name, photoUrl, rating, price_level } = getRestaurantDetails(
-            restaurant
-          );
+          const {
+            name,
+            photoUrl,
+            rating,
+            price_level,
+            address,
+            oepn,
+            totalRatings,
+            googleMapLink
+          } = getRestaurantDetails(restaurant);
           return (
             <div key={index}>
               <div
@@ -60,6 +74,7 @@ const DetailModal = props => {
               <Typography variant='subtitle1'>
                 price-level: {price_level}
               </Typography>
+              {googleMapLink}
               <Divider />
             </div>
           );
