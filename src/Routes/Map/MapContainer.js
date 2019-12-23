@@ -42,7 +42,6 @@ const MapContainer = props => {
     mapsApi,
     autoCompleteService,
     placesServices,
-    directionService,
     geoCoderService,
     mapLoaded
   } = googleMap;
