@@ -45,11 +45,10 @@ const App = props => {
         </Toolbar>
       </AppBar>
 
-      {/* offset the height of app bar */}
-      <div className={classes.offset} />
-
       {/* provide layout for the main contents */}
       <div className={classes.layout}>
+        {/* offset the height of app bar */}
+        <div className={classes.offset} />
         <div className={classes.contentRoot}>
           <Switch>
             <Route exact path='/' component={Routes.Home} />
