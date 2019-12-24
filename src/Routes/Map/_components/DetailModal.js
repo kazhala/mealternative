@@ -1,7 +1,7 @@
 /*
   The modal component to display detailed infomation on all restaurant
 */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import {
@@ -23,17 +23,29 @@ const actions = [
   { icon: <AttachMoney />, name: 'Price', typeNum: 3 }
 ];
 
+const backDropStyle = {
+  opacity: '0',
+  zIndex: '-1'
+};
+
 const DetailModal = props => {
   const { classes, resultRestaurantList, detailOpen, setDetailOpen } = props;
 
   // ['no sort', 'distance', 'rating', 'price']
-  const [sortOption, setSortOption] = useState(0);
-  const [optionOpen, setOptionOpen] = useState(false);
+  const [sortOption, setSortOption] = useState({
+    optionNum: 0,
+    optionOpen: false
+  });
+  const [sortedResultList, setSortedResultList] = useState([]);
+  const [height, setHeight] = useState(0);
 
-  const backDropStyle = {
-    opacity: '0',
-    zIndex: '-1'
-  };
+  const { optionNum, optionOpen } = sortOption;
+
+  const measuredRef = React.useCallback(node => {
+    if (node !== null) {
+      setHeight(node.getBoundingClientRect().height);
+    }
+  }, []);
 
   // get and format all details needed to display
   const getRestaurantDetails = restaurant => {
@@ -55,9 +67,16 @@ const DetailModal = props => {
   };
 
   const handleClick = (e, typeNum) => {
-    console.log(typeNum);
-    setOptionOpen(false);
+    typeNum === -1
+      ? setSortOption({ ...sortOption, optionOpen: false })
+      : setSortOption({ ...sortOption, optionNum: typeNum, optionOpen: false });
   };
+
+  useEffect(() => {
+    if (resultRestaurantList.length > 0) {
+      setSortedResultList(resultRestaurantList);
+    }
+  }, [resultRestaurantList, sortOption]);
 
   return (
     <>
@@ -78,7 +97,7 @@ const DetailModal = props => {
         >
           <KeyboardArrowDown fontSize='large' />
         </div>
-        {resultRestaurantList.map((restaurant, index) => {
+        {sortedResultList.map((restaurant, index) => {
           const {
             name,
             photoUrl,
@@ -126,13 +145,15 @@ const DetailModal = props => {
             </div>
           );
         })}
+        <div style={{ marginBottom: -height }} />
         <SpeedDial
           ariaLabel='Sort Dial Button'
           icon={<Sort />}
           className={classes.detailModalDial}
           open={optionOpen}
-          onOpen={() => setOptionOpen(true)}
-          onClose={() => setOptionOpen(false)}
+          onOpen={() => setSortOption({ ...sortOption, optionOpen: true })}
+          onClose={() => setSortOption({ ...sortOption, optionOpen: false })}
+          ref={measuredRef}
         >
           {actions.map(action => (
             <SpeedDialAction
