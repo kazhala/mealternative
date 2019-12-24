@@ -64,7 +64,6 @@ const Map = props => {
         setDetailOpen={setDetailOpen}
         resultRestaurantList={resultRestaurantList}
         classes={classes}
-        nextPage={nextPage}
       />
 
       {(!mapLoaded || resLoading) && <PageSpinner />}
