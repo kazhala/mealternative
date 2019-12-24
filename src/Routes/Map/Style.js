@@ -103,15 +103,10 @@ const useStyles = makeStyles(theme => ({
       borderRadius: '5px 5px 0 0'
     }
   },
-  detailModalLoadMoreBtn: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    '&:hover': {
-      background: '#ccc',
-      cursor: 'pointer'
-    }
+  detailModalDial: {
+    position: 'sticky',
+    bottom: theme.spacing(1),
+    marginLeft: '75%'
   },
   detailModalCard: {
     display: 'Grid',

@@ -1,13 +1,34 @@
 /*
   The modal component to display detailed infomation on all restaurant
 */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
-import { KeyboardArrowDown } from '@material-ui/icons';
+import {
+  KeyboardArrowDown,
+  Sort,
+  TimeToLeave,
+  RateReview,
+  AttachMoney,
+  Clear,
+  ClearAll
+} from '@material-ui/icons';
+import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
+
+const actions = [
+  { icon: <Clear />, name: 'Close', typeNum: -1 },
+  { icon: <ClearAll />, name: 'Default', typeNum: 0 },
+  { icon: <TimeToLeave />, name: 'Distance', typeNum: 1 },
+  { icon: <RateReview />, name: 'Rating', typeNum: 2 },
+  { icon: <AttachMoney />, name: 'Price', typeNum: 3 }
+];
 
 const DetailModal = props => {
   const { classes, resultRestaurantList, detailOpen, setDetailOpen } = props;
+
+  // ['no sort', 'distance', 'rating', 'price']
+  const [sortOption, setSortOption] = useState(0);
+  const [optionOpen, setOptionOpen] = useState(false);
 
   const backDropStyle = {
     opacity: '0',
@@ -31,6 +52,11 @@ const DetailModal = props => {
       restaurant.place_id
     }`;
     return resDetail;
+  };
+
+  const handleClick = (e, typeNum) => {
+    console.log(typeNum);
+    setOptionOpen(false);
   };
 
   return (
@@ -100,6 +126,23 @@ const DetailModal = props => {
             </div>
           );
         })}
+        <SpeedDial
+          ariaLabel='Sort Dial Button'
+          icon={<Sort />}
+          className={classes.detailModalDial}
+          open={optionOpen}
+          onOpen={() => setOptionOpen(true)}
+          onClose={() => setOptionOpen(false)}
+        >
+          {actions.map(action => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={e => handleClick(e, action.typeNum)}
+            />
+          ))}
+        </SpeedDial>
       </div>
     </>
   );
