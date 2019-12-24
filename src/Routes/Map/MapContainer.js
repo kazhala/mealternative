@@ -117,6 +117,14 @@ const MapContainer = props => {
     }
   };
 
+  // format the distance
+  const calculateDistance = (restaurantLocation, centerLocation) => {
+    return mapsApi.geometry.spherical.computeDistanceBetween(
+      restaurantLocation,
+      centerLocation
+    );
+  };
+
   // fetch restaurants data
   const handleRestaurantSearch = (queryType, queryRadius) => {
     setResLoading(true);
@@ -145,7 +153,7 @@ const MapContainer = props => {
           for (let i = 0; i < locationResults.length; i++) {
             if (
               // distance check, see if it's in range
-              mapsApi.geometry.spherical.computeDistanceBetween(
+              calculateDistance(
                 locationResults[i].geometry.location,
                 placesRequest.location
               ) <
@@ -154,6 +162,10 @@ const MapContainer = props => {
               // format price level
               locationResults[i].price_level = checkPriceLevel(
                 locationResults[i].price_level
+              );
+              locationResults[i].distance = calculateDistance(
+                locationResults[i].geometry.location,
+                placesRequest.location
               );
               // if in range, push it in temp list
               tempResultList.push(locationResults[i]);
