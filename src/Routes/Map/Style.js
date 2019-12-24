@@ -103,6 +103,16 @@ const useStyles = makeStyles(theme => ({
       borderRadius: '5px 5px 0 0'
     }
   },
+  detailModalLoadMoreBtn: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '&:hover': {
+      background: '#ccc',
+      cursor: 'pointer'
+    }
+  },
   detailModalCard: {
     display: 'Grid',
     gridTemplateColumns: '35% 65%'

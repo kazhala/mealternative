@@ -3,11 +3,17 @@
 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import { KeyboardArrowDown } from '@material-ui/icons';
 
 const DetailModal = props => {
-  const { classes, resultRestaurantList, detailOpen, setDetailOpen } = props;
+  const {
+    classes,
+    resultRestaurantList,
+    detailOpen,
+    setDetailOpen,
+    nextPage
+  } = props;
 
   const backDropStyle = {
     opacity: '0',
@@ -95,6 +101,14 @@ const DetailModal = props => {
             </div>
           );
         })}
+        {nextPage && nextPage.hasNextPage && (
+          <Button
+            onClick={() => nextPage.nextPage()}
+            className={classes.detailModalLoadMoreBtn}
+          >
+            Load More
+          </Button>
+        )}
       </div>
     </>
   );
@@ -104,7 +118,8 @@ DetailModal.propTypes = {
   classes: PropTypes.object.isRequired,
   resultRestaurantList: PropTypes.array.isRequired,
   detailOpen: PropTypes.bool.isRequired,
-  setDetailOpen: PropTypes.func.isRequired
+  setDetailOpen: PropTypes.func.isRequired,
+  nextPage: PropTypes.any
 };
 
 export default DetailModal;
