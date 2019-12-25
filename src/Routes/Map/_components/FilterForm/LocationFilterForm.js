@@ -3,7 +3,7 @@
 */
 
 // React
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -17,59 +17,22 @@ import {
 import { Autocomplete } from '@material-ui/lab';
 import { Cached, UnfoldMore } from '@material-ui/icons';
 
-// search auto complete, will refactor to separate file
-const searchOptions = ['chinese', 'thai', 'italian', 'pizza', 'ice cream'];
-
 const LocationFilterForm = props => {
   const {
     classes,
     handleRestaurantSearch,
     nextPage,
     setResultRestaurantList,
-    resultRestaurantList,
-    setDetailOpen
+    setDetailOpen,
+    handleSelect,
+    queryValue,
+    handleChange,
+    displayDistanceLength,
+    queryRadius,
+    handleDistanceLengthChange,
+    checkDisable,
+    searchOptions
   } = props;
-
-  // value of auto completion
-  const [queryValue, setQueryValue] = useState('');
-  // radius filter for the search
-  const [queryRadius, setQueryRadius] = useState(2);
-
-  // handle auto completion change
-  const handleChange = e => {
-    setQueryValue(e.target.value);
-  };
-
-  // handle autocompletion select
-  // textContent contains the new value
-  const handleSelect = e => {
-    setQueryValue(e.target.textContent);
-  };
-
-  // check if the btn should be disabled
-  const checkDisable = type => {
-    // type 0 is for load more button
-    if (type === 0) {
-      if (nextPage) {
-        return !nextPage.hasNextPage;
-      } else {
-        return true;
-      }
-    } else {
-      // type 1 is for detail button
-      return !(resultRestaurantList.length > 0);
-    }
-  };
-
-  // update distance length when slider changes
-  const handleDistanceLengthChange = (e, newValue) => {
-    setQueryRadius(newValue);
-  };
-
-  // display slider value to readable form in slider title
-  const displayDistanceLength = () => {
-    return `${queryRadius}km`;
-  };
 
   return (
     <div>
@@ -153,8 +116,15 @@ LocationFilterForm.propTypes = {
   handleRestaurantSearch: PropTypes.func.isRequired,
   nextPage: PropTypes.any,
   setResultRestaurantList: PropTypes.func.isRequired,
-  resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setDetailOpen: PropTypes.func.isRequired
+  setDetailOpen: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
+  queryValue: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  displayDistanceLength: PropTypes.func.isRequired,
+  queryRadius: PropTypes.number.isRequired,
+  handleDistanceLengthChange: PropTypes.func.isRequired,
+  checkDisable: PropTypes.func.isRequired,
+  searchOptions: PropTypes.array.isRequired
 };
 
 export default LocationFilterForm;
