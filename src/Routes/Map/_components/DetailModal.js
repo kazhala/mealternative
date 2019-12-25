@@ -76,7 +76,7 @@ const DetailModal = props => {
     resDetail.rating = restaurant.rating ? restaurant.rating : 0;
     resDetail.price_level = restaurant.price_level;
     resDetail.address = restaurant.formatted_address;
-    resDetail.open = restaurant.opening_hours.isOpen() ? 'Yes' : 'No';
+    resDetail.open = 'Yes';
     resDetail.distance = restaurant.distance;
     resDetail.totalRatings = restaurant.user_ratings_total;
     // google map link for more details or route direaction
@@ -216,7 +216,6 @@ const DetailModal = props => {
             rating,
             price_level,
             address,
-            open,
             totalRatings,
             googleMapLink,
             distance
@@ -235,7 +234,6 @@ const DetailModal = props => {
                 <Typography variant='body2'>
                   price-level: {price_level}
                 </Typography>
-                <Typography variant='body2'>Open: {open}</Typography>
                 <Typography variant='body2'>
                   Total ratings: {totalRatings}
                 </Typography>
@@ -259,25 +257,31 @@ const DetailModal = props => {
         })}
 
         {/* speedDial component */}
-        <div style={{ marginBottom: -height }} />
-        <SpeedDial
-          ariaLabel='Sort Dial Button'
-          icon={<Sort />}
-          className={classes.detailModalDial}
-          open={optionOpen}
-          onOpen={() => setSortOption({ ...sortOption, optionOpen: true })}
-          onClose={() => setSortOption({ ...sortOption, optionOpen: false })}
-          ref={measuredRef}
-        >
-          {actions.map(action => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              onClick={e => handleClick(e, action.typeNum)}
-            />
-          ))}
-        </SpeedDial>
+        {sortedResultList.length > 2 && (
+          <React.Fragment>
+            <div style={{ marginBottom: -height }} />
+            <SpeedDial
+              ariaLabel='Sort Dial Button'
+              icon={<Sort />}
+              className={classes.detailModalDial}
+              open={optionOpen}
+              onOpen={() => setSortOption({ ...sortOption, optionOpen: true })}
+              onClose={() =>
+                setSortOption({ ...sortOption, optionOpen: false })
+              }
+              ref={measuredRef}
+            >
+              {actions.map(action => (
+                <SpeedDialAction
+                  key={action.name}
+                  icon={action.icon}
+                  tooltipTitle={action.name}
+                  onClick={e => handleClick(e, action.typeNum)}
+                />
+              ))}
+            </SpeedDial>
+          </React.Fragment>
+        )}
       </div>
     </>
   );
