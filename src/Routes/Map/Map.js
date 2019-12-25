@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 // Compoennts
 import GoogleMapReact from 'google-map-react';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
-import LocationInputForm from './_components/LocationInput/LocationInputContainer';
+import LocationInputForm from './_components/LocationInputForm';
 import LocationFilterForm from './_components/FilterForm/FilterFormContainer';
 import CenterMarker from './_components/Markers/CenterMarker';
 import RestaurantMarker from './_components/Markers/RestaurantMarker';
