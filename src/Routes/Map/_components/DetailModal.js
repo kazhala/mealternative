@@ -34,12 +34,17 @@ const DetailModal = props => {
   // ['no sort', 'distance', 'rating', 'price']
   const [sortOption, setSortOption] = useState({
     optionNum: 0,
-    optionOpen: false
+    optionOpen: false,
+    reversed: {
+      distance: false,
+      rating: false,
+      price: false
+    }
   });
   const [sortedResultList, setSortedResultList] = useState([]);
   const [height, setHeight] = useState(0);
 
-  const { optionNum, optionOpen } = sortOption;
+  const { optionNum, optionOpen, reversed } = sortOption;
 
   const measuredRef = React.useCallback(node => {
     if (node !== null) {
@@ -66,10 +71,59 @@ const DetailModal = props => {
     return resDetail;
   };
 
+  const getReversedOption = (reversed, typeNum) => {
+    switch (typeNum) {
+      case 1:
+        return {
+          ...reversed,
+          distance: !reversed.distance,
+          rating: false,
+          price: false
+        };
+      case 2:
+        return {
+          ...reversed,
+          rating: !reversed.rating,
+          distance: false,
+          price: false
+        };
+      case 3:
+        return {
+          ...reversed,
+          price: !reversed.price,
+          distance: false,
+          rating: false
+        };
+      default:
+        return { ...reversed, distance: false, price: false, rating: false };
+    }
+  };
+
   const handleClick = (e, typeNum) => {
     typeNum === -1
       ? setSortOption({ ...sortOption, optionOpen: false })
-      : setSortOption({ ...sortOption, optionNum: typeNum, optionOpen: false });
+      : setSortOption(prevState => {
+          if (typeNum !== 0 && prevState.optionNum === typeNum) {
+            const reversedOptions = getReversedOption(
+              prevState.reversed,
+              typeNum
+            );
+            return {
+              ...prevState,
+              optionNum: typeNum,
+              optionOpen: false,
+              reversed: { ...prevState.reversed, ...reversedOptions }
+            };
+          } else {
+            const reversedOptions = getReversedOption(prevState.reversed, 0);
+            return {
+              ...prevState,
+              optionNum: typeNum,
+              optionOpen: false,
+              reversed: { ...prevState.reversed, ...reversedOptions }
+            };
+          }
+        });
   };
 
   useEffect(() => {
@@ -80,14 +134,30 @@ const DetailModal = props => {
           setSortedResultList(resultRestaurantList);
           break;
         case 1:
-          setSortedResultList(newList.sort((a, b) => a.distance - b.distance));
+          setSortedResultList(
+            newList.sort((a, b) => {
+              return !reversed.distance
+                ? a.distance - b.distance
+                : b.distance - a.distance;
+            })
+          );
           break;
         case 2:
-          setSortedResultList(newList.sort((a, b) => b.rating - a.rating));
+          setSortedResultList(
+            newList.sort((a, b) => {
+              return !reversed.rating
+                ? b.rating - a.rating
+                : a.rating - b.rating;
+            })
+          );
           break;
         case 3:
           setSortedResultList(
-            newList.sort((a, b) => a.raw_price - b.raw_price)
+            newList.sort((a, b) => {
+              return !reversed.price
+                ? a.raw_price - b.raw_price
+                : b.raw_price - a.raw_price;
+            })
           );
           break;
         default:
@@ -95,7 +165,7 @@ const DetailModal = props => {
           break;
       }
     }
-  }, [resultRestaurantList, optionNum]);
+  }, [resultRestaurantList, optionNum, reversed]);
 
   return (
     <>
