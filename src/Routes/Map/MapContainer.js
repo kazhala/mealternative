@@ -159,6 +159,9 @@ const MapContainer = props => {
               ) <
               queryRadius * 1000
             ) {
+              locationResults[i].raw_price = locationResults[i].price_level
+                ? locationResults[i].price_level
+                : 1;
               // format price level
               locationResults[i].price_level = checkPriceLevel(
                 locationResults[i].price_level

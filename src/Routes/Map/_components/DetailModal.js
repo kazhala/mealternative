@@ -54,7 +54,7 @@ const DetailModal = props => {
       ? restaurant.photos[0].getUrl()
       : 'https://nucomltd.com/wp-content/themes/gecko/assets/images/placeholder.png';
     resDetail.name = restaurant.name;
-    resDetail.rating = restaurant.rating ? restaurant.rating : 'N/A';
+    resDetail.rating = restaurant.rating ? restaurant.rating : 0;
     resDetail.price_level = restaurant.price_level;
     resDetail.address = restaurant.formatted_address;
     resDetail.open = restaurant.opening_hours.isOpen() ? 'Yes' : 'No';
@@ -74,9 +74,28 @@ const DetailModal = props => {
 
   useEffect(() => {
     if (resultRestaurantList.length > 0) {
-      setSortedResultList(resultRestaurantList);
+      let newList = [...resultRestaurantList];
+      switch (optionNum) {
+        case 0:
+          setSortedResultList(resultRestaurantList);
+          break;
+        case 1:
+          setSortedResultList(newList.sort((a, b) => a.distance - b.distance));
+          break;
+        case 2:
+          setSortedResultList(newList.sort((a, b) => b.rating - a.rating));
+          break;
+        case 3:
+          setSortedResultList(
+            newList.sort((a, b) => a.raw_price - b.raw_price)
+          );
+          break;
+        default:
+          setSortedResultList(resultRestaurantList);
+          break;
+      }
     }
-  }, [resultRestaurantList, sortOption]);
+  }, [resultRestaurantList, optionNum]);
 
   return (
     <>
