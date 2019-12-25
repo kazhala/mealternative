@@ -117,7 +117,7 @@ const MapContainer = props => {
     }
   };
 
-  // format the distance
+  // format the distance for sorting later
   const calculateDistance = (restaurantLocation, centerLocation) => {
     return mapsApi.geometry.spherical.computeDistanceBetween(
       restaurantLocation,

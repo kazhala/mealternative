@@ -1,8 +1,12 @@
 /*
   The modal component to display detailed infomation on all restaurant
 */
+
+// React
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+// Components
 import { Typography } from '@material-ui/core';
 import {
   KeyboardArrowDown,
@@ -15,6 +19,8 @@ import {
 } from '@material-ui/icons';
 import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
 
+// speedDial action items
+// typeNum for soring usage
 const actions = [
   { icon: <Clear />, name: 'Close', typeNum: -1 },
   { icon: <ClearAll />, name: 'Default', typeNum: 0 },
@@ -23,15 +29,19 @@ const actions = [
   { icon: <AttachMoney />, name: 'Price', typeNum: 3 }
 ];
 
+// the modal style
+// TODO: refactor to common component DarkModal
 const backDropStyle = {
   opacity: '0',
   zIndex: '-1'
 };
 
+// Main component
 const DetailModal = props => {
   const { classes, resultRestaurantList, detailOpen, setDetailOpen } = props;
 
   // ['no sort', 'distance', 'rating', 'price']
+  // reversed to check if it needs reverse sorting
   const [sortOption, setSortOption] = useState({
     optionNum: 0,
     optionOpen: false,
@@ -41,11 +51,14 @@ const DetailModal = props => {
       price: false
     }
   });
+  // sorted list, don't alter original list used in map for performance
   const [sortedResultList, setSortedResultList] = useState([]);
+  // offset the height of sticky dial
   const [height, setHeight] = useState(0);
 
   const { optionNum, optionOpen, reversed } = sortOption;
 
+  // calculate the speedDial component height
   const measuredRef = React.useCallback(node => {
     if (node !== null) {
       setHeight(node.getBoundingClientRect().height);
@@ -55,6 +68,7 @@ const DetailModal = props => {
   // get and format all details needed to display
   const getRestaurantDetails = restaurant => {
     let resDetail = {};
+    // display no photo image if no photo
     resDetail.photoUrl = restaurant.photos
       ? restaurant.photos[0].getUrl()
       : 'https://nucomltd.com/wp-content/themes/gecko/assets/images/placeholder.png';
@@ -65,12 +79,14 @@ const DetailModal = props => {
     resDetail.open = restaurant.opening_hours.isOpen() ? 'Yes' : 'No';
     resDetail.distance = restaurant.distance;
     resDetail.totalRatings = restaurant.user_ratings_total;
+    // google map link for more details or route direaction
     resDetail.googleMapLink = `https://www.google.com/maps/search/?api=1&query=${restaurant.geometry.location.lat()},${restaurant.geometry.location.lng()}&query_place_id=${
       restaurant.place_id
     }`;
     return resDetail;
   };
 
+  // return the reversed object for updating sorting state
   const getReversedOption = (reversed, typeNum) => {
     switch (typeNum) {
       case 1:
@@ -99,10 +115,13 @@ const DetailModal = props => {
     }
   };
 
+  // handle the action when user click the action item
   const handleClick = (e, typeNum) => {
+    // if -1, means close the speedDial
     typeNum === -1
       ? setSortOption({ ...sortOption, optionOpen: false })
       : setSortOption(prevState => {
+          // if the item is 'double' clicked, turn reversed option to true
           if (typeNum !== 0 && prevState.optionNum === typeNum) {
             const reversedOptions = getReversedOption(
               prevState.reversed,
@@ -115,6 +134,7 @@ const DetailModal = props => {
               reversed: { ...prevState.reversed, ...reversedOptions }
             };
           } else {
+            // turn all reversed options to false
             const reversedOptions = getReversedOption(prevState.reversed, 0);
             return {
               ...prevState,
@@ -126,6 +146,7 @@ const DetailModal = props => {
         });
   };
 
+  // sort the result list when resultRestaurantList or sorting option changed
   useEffect(() => {
     if (resultRestaurantList.length > 0) {
       let newList = [...resultRestaurantList];
@@ -186,6 +207,8 @@ const DetailModal = props => {
         >
           <KeyboardArrowDown fontSize='large' />
         </div>
+
+        {/* display the list of restaurant */}
         {sortedResultList.map((restaurant, index) => {
           const {
             name,
@@ -234,6 +257,8 @@ const DetailModal = props => {
             </div>
           );
         })}
+
+        {/* speedDial component */}
         <div style={{ marginBottom: -height }} />
         <SpeedDial
           ariaLabel='Sort Dial Button'
