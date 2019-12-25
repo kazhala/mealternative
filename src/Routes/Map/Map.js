@@ -13,7 +13,7 @@ import LocationInputForm from './_components/LocationInputForm';
 import LocationFilterForm from './_components/LocationFilterForm';
 import CenterMarker from './_components/Markers/CenterMarker';
 import RestaurantMarker from './_components/Markers/RestaurantMarker';
-import DetailModal from './_components/DetailModal';
+import DetailModal from './_components/DetailModal/DetailModalContainer';
 
 // Misc
 import { GoogleMapAPIKey } from '../../config';
