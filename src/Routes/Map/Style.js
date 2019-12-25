@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     border: '1px solid #ccc',
     boxShadow: '0 0 1px 1px #ccc',
     borderRadius: '3px',
-    width: '7rem',
+    width: '8rem',
     fontSize: '0.5rem',
     '&:after': {
       content: '""',
@@ -72,6 +72,21 @@ const useStyles = makeStyles(theme => ({
       borderRight: '6px solid transparent',
       borderTop: '6px solid white'
     }
+  },
+  markerName: {
+    fontSize: '1.3em',
+    textAlign: 'center'
+  },
+  markerRatingRoot: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  markerRatingStar: {
+    fontSize: '1rem'
+  },
+  markerPrice: {
+    textAlign: 'center'
   },
 
   // detail modal

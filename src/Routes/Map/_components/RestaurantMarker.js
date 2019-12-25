@@ -5,10 +5,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PinDrop } from '@material-ui/icons';
 import { Typography, Box } from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
 
 const RestaurantMarker = props => {
   // $hover props determine if the marker is hovered
   const { classes, $hover, restaurant, getBasicResDetails } = props;
+
+  const {
+    name,
+    rating,
+    price_level,
+    distance,
+    totalRatings
+  } = getBasicResDetails(restaurant);
 
   return (
     <div>
@@ -20,12 +29,24 @@ const RestaurantMarker = props => {
           className={classes.markerDetail}
           component='div'
           variant='caption'
+          onClick={() => console.log('hello')}
         >
-          <Box>{restaurant.name}</Box>
-          <Box>Rating: {restaurant.rating}</Box>
-          {restaurant.price_level && (
-            <Box>Price-level: {restaurant.price_level}</Box>
-          )}
+          <Box className={classes.markerName} fontSize='1.3em'>
+            {name}
+          </Box>
+          <Box className={classes.markerRatingRoot}>
+            ({rating})
+            <Rating
+              className={classes.markerRatingStar}
+              name='restaurant rating'
+              value={rating}
+              precision={0.1}
+            />
+            ({price_level})
+          </Box>
+          <Box className={classes.markerPrice}>
+            {totalRatings} ratings {(distance / 1000).toFixed(2)}km away
+          </Box>
         </Typography>
       )}
     </div>
