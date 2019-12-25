@@ -34,7 +34,8 @@ const Map = props => {
     setResultRestaurantList,
     resLoading,
     detailOpen,
-    setDetailOpen
+    setDetailOpen,
+    getBasicResDetails
   } = props;
   const classes = useStyles();
 
@@ -64,6 +65,7 @@ const Map = props => {
         setDetailOpen={setDetailOpen}
         resultRestaurantList={resultRestaurantList}
         classes={classes}
+        getBasicResDetails={getBasicResDetails}
       />
 
       {(!mapLoaded || resLoading) && <PageSpinner />}
@@ -92,6 +94,7 @@ const Map = props => {
                 lat={restaurant.geometry.location.lat()}
                 lng={restaurant.geometry.location.lng()}
                 restaurant={restaurant}
+                getBasicResDetails={getBasicResDetails}
               />
             ))}
           </GoogleMapReact>
@@ -115,7 +118,8 @@ Map.propTypes = {
   resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired,
   resLoading: PropTypes.bool.isRequired,
   detailOpen: PropTypes.bool.isRequired,
-  setDetailOpen: PropTypes.func.isRequired
+  setDetailOpen: PropTypes.func.isRequired,
+  getBasicResDetails: PropTypes.func.isRequired
 };
 
 export default Map;

@@ -38,7 +38,13 @@ const backDropStyle = {
 
 // Main component
 const DetailModal = props => {
-  const { classes, resultRestaurantList, detailOpen, setDetailOpen } = props;
+  const {
+    classes,
+    resultRestaurantList,
+    detailOpen,
+    setDetailOpen,
+    getBasicResDetails
+  } = props;
 
   // ['no sort', 'distance', 'rating', 'price']
   // reversed to check if it needs reverse sorting
@@ -64,27 +70,6 @@ const DetailModal = props => {
       setHeight(node.getBoundingClientRect().height);
     }
   }, []);
-
-  // get and format all details needed to display
-  const getRestaurantDetails = restaurant => {
-    let resDetail = {};
-    // display no photo image if no photo
-    resDetail.photoUrl = restaurant.photos
-      ? restaurant.photos[0].getUrl()
-      : 'https://nucomltd.com/wp-content/themes/gecko/assets/images/placeholder.png';
-    resDetail.name = restaurant.name;
-    resDetail.rating = restaurant.rating ? restaurant.rating : 0;
-    resDetail.price_level = restaurant.price_level;
-    resDetail.address = restaurant.formatted_address;
-    resDetail.open = 'Yes';
-    resDetail.distance = restaurant.distance;
-    resDetail.totalRatings = restaurant.user_ratings_total;
-    // google map link for more details or route direaction
-    resDetail.googleMapLink = `https://www.google.com/maps/search/?api=1&query=${restaurant.geometry.location.lat()},${restaurant.geometry.location.lng()}&query_place_id=${
-      restaurant.place_id
-    }`;
-    return resDetail;
-  };
 
   // return the reversed object for updating sorting state
   const getReversedOption = (reversed, typeNum) => {
@@ -219,7 +204,7 @@ const DetailModal = props => {
             totalRatings,
             googleMapLink,
             distance
-          } = getRestaurantDetails(restaurant);
+          } = getBasicResDetails(restaurant);
           return (
             <div className={classes.detailModalCard} key={index}>
               <div
@@ -291,7 +276,8 @@ DetailModal.propTypes = {
   classes: PropTypes.object.isRequired,
   resultRestaurantList: PropTypes.array.isRequired,
   detailOpen: PropTypes.bool.isRequired,
-  setDetailOpen: PropTypes.func.isRequired
+  setDetailOpen: PropTypes.func.isRequired,
+  getBasicResDetails: PropTypes.func.isRequired
 };
 
 export default DetailModal;

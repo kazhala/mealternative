@@ -8,7 +8,7 @@ import { Typography, Box } from '@material-ui/core';
 
 const RestaurantMarker = props => {
   // $hover props determine if the marker is hovered
-  const { classes, $hover, restaurant } = props;
+  const { classes, $hover, restaurant, getBasicResDetails } = props;
 
   return (
     <div>
@@ -35,7 +35,8 @@ const RestaurantMarker = props => {
 RestaurantMarker.propTypes = {
   classes: PropTypes.object.isRequired,
   $hover: PropTypes.any,
-  restaurant: PropTypes.object.isRequired
+  restaurant: PropTypes.object.isRequired,
+  getBasicResDetails: PropTypes.func.isRequired
 };
 
 export default RestaurantMarker;

@@ -55,13 +55,23 @@ const useStyles = makeStyles(theme => ({
   },
   markerDetail: {
     position: 'absolute',
-    transform: 'translate(-50%, 20%)',
-    background: theme.palette.background.default,
+    transform: 'translate(-50%, -140%)',
+    background: 'white',
     border: '1px solid #ccc',
     boxShadow: '0 0 1px 1px #ccc',
     borderRadius: '3px',
-    width: 'max-content',
-    fontSize: '0.5rem'
+    width: '7rem',
+    fontSize: '0.5rem',
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      left: 'calc(50% - 6px)',
+      width: 0,
+      height: 0,
+      borderLeft: '6px solid transparent',
+      borderRight: '6px solid transparent',
+      borderTop: '6px solid white'
+    }
   },
 
   // detail modal
