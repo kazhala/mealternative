@@ -11,8 +11,8 @@ import GoogleMapReact from 'google-map-react';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
 import LocationInputForm from './_components/LocationInputForm';
 import LocationFilterForm from './_components/LocationFilterForm';
-import CenterMarker from './_components/Markers/CenterMarker';
-import RestaurantMarker from './_components/Markers/RestaurantMarker';
+import CenterMarker from './_components/CenterMarker';
+import RestaurantMarker from './_components/RestaurantMarker';
 import DetailModal from './_components/DetailModal';
 
 // Misc
