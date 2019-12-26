@@ -1,3 +1,6 @@
+/*
+  BackDrop common wraper component that add a zIndex and center the child
+*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import useStyles from './Style';

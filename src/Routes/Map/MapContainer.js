@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 
 // Components
 import Map from './Map';
+import ErrorModal from '../../Common/ErrorModal/ErrorModal';
 
 const MapContainer = props => {
   // lat, lng info from redux
@@ -37,6 +38,8 @@ const MapContainer = props => {
   const [nextPage, setNextPage] = useState(null);
   // determine if the detailed information modal should be opened
   const [detailOpen, setDetailOpen] = useState(false);
+  // stores the error state
+  const [error, setError] = useState('');
 
   const {
     mapsApi,
@@ -50,6 +53,10 @@ const MapContainer = props => {
   useEffect(() => {
     setCenterMarker({ lat, lng });
   }, [lat, lng]);
+
+  const handleClearError = () => {
+    setError('');
+  };
 
   // Initiate google map services after map is loaded
   const handleMapApiLoaded = (map, maps) => {
@@ -93,6 +100,7 @@ const MapContainer = props => {
       geoCoderService.geocode({ address }, response => {
         if (!response[0]) {
           console.error("Can't find the address");
+          setError("Can't find the address");
           // if empty, than change to user location stored in redux
           setCenterMarker({ lat, lng });
           return;
@@ -147,6 +155,7 @@ const MapContainer = props => {
         if (status !== 'OK') {
           setResLoading(false);
           console.error('No results found', status);
+          setError(`No results found ${status}`);
         } else {
           // temp list to keep current result, only update state once
           let tempResultList = [];
@@ -214,22 +223,25 @@ const MapContainer = props => {
   };
 
   return (
-    <Map
-      {...props}
-      handleMapApiLoaded={handleMapApiLoaded}
-      mapLoaded={mapLoaded}
-      centerMarker={centerMarker}
-      handleRestaurantSearch={handleRestaurantSearch}
-      handleAutoCompleteUpdate={handleAutoCompleteUpdate}
-      updateCenterMarker={updateCenterMarker}
-      resLoading={resLoading}
-      setResultRestaurantList={setResultRestaurantList}
-      resultRestaurantList={resultRestaurantList}
-      nextPage={nextPage}
-      detailOpen={detailOpen}
-      setDetailOpen={setDetailOpen}
-      getBasicResDetails={getBasicResDetails}
-    />
+    <>
+      <ErrorModal error={error} handleClose={handleClearError} />
+      <Map
+        {...props}
+        handleMapApiLoaded={handleMapApiLoaded}
+        mapLoaded={mapLoaded}
+        centerMarker={centerMarker}
+        handleRestaurantSearch={handleRestaurantSearch}
+        handleAutoCompleteUpdate={handleAutoCompleteUpdate}
+        updateCenterMarker={updateCenterMarker}
+        resLoading={resLoading}
+        setResultRestaurantList={setResultRestaurantList}
+        resultRestaurantList={resultRestaurantList}
+        nextPage={nextPage}
+        detailOpen={detailOpen}
+        setDetailOpen={setDetailOpen}
+        getBasicResDetails={getBasicResDetails}
+      />
+    </>
   );
 };
 

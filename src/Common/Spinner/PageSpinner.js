@@ -1,3 +1,6 @@
+/*
+  A big spinner centered in view port to display loading state
+*/
 import React from 'react';
 import { CircularProgress } from '@material-ui/core';
 import useStyles from './Style';
