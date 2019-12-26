@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import { TextField, CircularProgress, IconButton } from '@material-ui/core';
+import { TextField, IconButton } from '@material-ui/core';
 import {
   AddLocationOutlined,
   LocationOn,
@@ -97,15 +97,6 @@ const LocationInputForm = props => {
             size='small'
             InputLabelProps={{
               shrink: true
-            }}
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {determineLoading() && <CircularProgress />}
-                  {params.InputProps.endAdornment}
-                </>
-              )
             }}
           />
         )}
