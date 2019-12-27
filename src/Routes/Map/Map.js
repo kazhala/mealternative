@@ -79,7 +79,7 @@ const Map = props => {
         clearDetailResDetail={clearDetailResDetail}
       />
 
-      {(!mapLoaded || resLoading) && <PageSpinner />}
+      <PageSpinner loading={!mapLoaded || resLoading} />
       <div className={classes.googleMap}>
         {/* render google map after lat and lng for center position is set */}
         {centerMarker.lat && centerMarker.lng && (

@@ -7,11 +7,11 @@ import useStyles from './Style';
 import { Fade } from '@material-ui/core';
 
 const BackDrop = props => {
-  const { background, children, handleClose } = props;
+  const { background, children, handleClose, show } = props;
   const classes = useStyles();
 
   return (
-    <Fade in={true}>
+    <Fade in={show}>
       <div
         style={{ background }}
         className={classes.backDropRoot}
@@ -26,7 +26,8 @@ const BackDrop = props => {
 BackDrop.propTypes = {
   background: PropTypes.string,
   children: PropTypes.element.isRequired,
-  handleClose: PropTypes.func
+  handleClose: PropTypes.func,
+  show: PropTypes.bool.isRequired
 };
 
 BackDrop.defaultProps = {

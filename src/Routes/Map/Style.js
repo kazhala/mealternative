@@ -153,7 +153,17 @@ const useStyles = makeStyles(theme => ({
   indModalRoot: {
     height: '70%',
     width: '70%',
-    background: 'white'
+    background: 'white',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxShadow: '0 0 1px 1px #ccc',
+    borderRadius: '5px'
+  },
+  modalDetails: {
+    width: '100%',
+    height: '100%',
+    display: 'grid'
   }
 }));
 
