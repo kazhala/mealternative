@@ -41,14 +41,19 @@ const MapContainer = props => {
   // stores the error state
   const [error, setError] = useState('');
   // determine if the detail modal should be opened
-  const [individualModal, setInividualModal] = useState({});
+  const [individualModal, setInividualModal] = useState({
+    show: false,
+    loading: false,
+    details: {}
+  });
 
   const {
     mapsApi,
     autoCompleteService,
     placesServices,
     geoCoderService,
-    mapLoaded
+    mapLoaded,
+    directionService
   } = googleMap;
 
   // get the center marker after lat and lng is set in redux
@@ -222,13 +227,37 @@ const MapContainer = props => {
   const getDetailedResDetail = restaurant => {
     console.log(restaurant);
     setInividualModal({ ...individualModal, show: true, loading: true });
-    setTimeout(() => {
-      setInividualModal(prevState => ({ ...prevState, loading: false }));
-    }, 3000);
+    placesServices.getDetails(
+      { placeId: restaurant.place_id },
+      (detailRes, detailStatus) => {
+        if (detailStatus !== 'OK') {
+          setInividualModal({
+            ...individualModal,
+            show: false,
+            loading: false
+          });
+          console.error('Something went wrong...', detailStatus);
+          setError(`Something went wrong...(${detailStatus})`);
+        } else {
+          const directionRequest = {
+            origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+            destination: detailRes.formatted_address, // To
+            travelMode: 'WALKING'
+          };
+          directionService.route(
+            directionRequest,
+            (routeResult, routeStatus) => {
+              console.log(routeStatus);
+              console.log(routeResult);
+            }
+          );
+        }
+      }
+    );
   };
 
   const clearDetailResDetail = () => {
-    setInividualModal({});
+    setInividualModal({ show: false, loading: false, details: {} });
   };
 
   return (
