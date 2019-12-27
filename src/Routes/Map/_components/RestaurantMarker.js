@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PinDrop } from '@material-ui/icons';
 import { Typography, Box } from '@material-ui/core';
-import { Rating } from '@material-ui/lab';
+import ComboRating from '../../../Common/ComboRating/ComboRating';
 
 const RestaurantMarker = props => {
   // $hover props determine if the marker is hovered
@@ -40,17 +40,7 @@ const RestaurantMarker = props => {
           <Box className={classes.markerName} fontSize='1.3em'>
             {name}
           </Box>
-          <Box className={classes.markerRatingRoot}>
-            ({rating})
-            <Rating
-              className={classes.markerRatingStar}
-              name='restaurant rating'
-              value={rating}
-              precision={0.1}
-              readOnly
-            />
-            ({price_level})
-          </Box>
+          <ComboRating rating={rating} price={price_level} />
           <Box className={classes.markerPrice}>
             {totalRatings} ratings {(distance / 1000).toFixed(2)}km away
           </Box>

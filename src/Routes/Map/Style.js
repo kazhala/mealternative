@@ -170,12 +170,8 @@ const useStyles = makeStyles(theme => ({
     justifySelf: 'center'
   },
   indName: {
-    paddingTop: '1rem'
-  },
-  indRating: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    paddingTop: '1rem',
+    textAlign: 'center'
   }
 }));
 

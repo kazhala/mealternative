@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BackDrop from '../../../Common/BackDrop/BackDrop';
 import { Zoom, CircularProgress, Typography } from '@material-ui/core';
-import { Rating } from '@material-ui/lab';
+import ComboRating from '../../../Common/ComboRating/ComboRating';
 
 const IndividualDetail = props => {
   const { classes, individualModal, clearDetailResDetail } = props;
@@ -43,20 +43,8 @@ const IndividualDetail = props => {
                 <Typography className={classes.indName} variant='h6'>
                   {name}
                 </Typography>
-                <Typography
-                  variant='subtitle2'
-                  component='div'
-                  className={classes.indRating}
-                >
-                  ({rating})
-                  <Rating
-                    className={classes.markerRatingStar}
-                    name='restaurant rating'
-                    value={rating}
-                    precision={0.1}
-                    readOnly
-                  />
-                  ({price_level})
+                <Typography variant='subtitle2' component='div'>
+                  <ComboRating rating={rating} price={price_level} />
                 </Typography>
               </div>
             </div>
