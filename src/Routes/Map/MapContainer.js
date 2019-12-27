@@ -40,6 +40,11 @@ const MapContainer = props => {
   const [detailOpen, setDetailOpen] = useState(false);
   // stores the error state
   const [error, setError] = useState('');
+  // determine if the detail modal should be opened
+  const [individualModal, setInividualModal] = useState({
+    place_id: '',
+    details: {}
+  });
 
   const {
     mapsApi,
@@ -240,6 +245,8 @@ const MapContainer = props => {
         detailOpen={detailOpen}
         setDetailOpen={setDetailOpen}
         getBasicResDetails={getBasicResDetails}
+        individualModal={individualModal}
+        setInividualModal={setInividualModal}
       />
     </>
   );

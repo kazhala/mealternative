@@ -9,7 +9,13 @@ import { Rating } from '@material-ui/lab';
 
 const RestaurantMarker = props => {
   // $hover props determine if the marker is hovered
-  const { classes, $hover, restaurant, getBasicResDetails } = props;
+  const {
+    classes,
+    $hover,
+    restaurant,
+    getBasicResDetails,
+    setInividualModal
+  } = props;
 
   const {
     name,
@@ -29,7 +35,12 @@ const RestaurantMarker = props => {
           className={classes.markerDetail}
           component='div'
           variant='caption'
-          onClick={() => console.log('hello')}
+          onClick={() =>
+            setInividualModal(prevState => ({
+              ...prevState,
+              place_id: restaurant.place_id
+            }))
+          }
         >
           <Box className={classes.markerName} fontSize='1.3em'>
             {name}
@@ -57,7 +68,8 @@ RestaurantMarker.propTypes = {
   classes: PropTypes.object.isRequired,
   $hover: PropTypes.any,
   restaurant: PropTypes.object.isRequired,
-  getBasicResDetails: PropTypes.func.isRequired
+  getBasicResDetails: PropTypes.func.isRequired,
+  setInividualModal: PropTypes.func.isRequired
 };
 
 export default RestaurantMarker;

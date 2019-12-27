@@ -14,6 +14,7 @@ import LocationFilterForm from './_components/LocationFilterForm';
 import CenterMarker from './_components/CenterMarker';
 import RestaurantMarker from './_components/RestaurantMarker';
 import DetailModal from './_components/DetailModal';
+import IndividualDetail from './_components/IndividualDetail';
 
 // Misc
 import { GoogleMapAPIKey } from '../../config';
@@ -35,9 +36,13 @@ const Map = props => {
     resLoading,
     detailOpen,
     setDetailOpen,
-    getBasicResDetails
+    getBasicResDetails,
+    individualModal,
+    setInividualModal
   } = props;
   const classes = useStyles();
+
+  console.log(individualModal);
 
   return (
     <div className={classes.mapRoot}>
@@ -66,6 +71,13 @@ const Map = props => {
         resultRestaurantList={resultRestaurantList}
         classes={classes}
         getBasicResDetails={getBasicResDetails}
+        setInividualModal={setInividualModal}
+      />
+
+      <IndividualDetail
+        classes={classes}
+        individualModal={individualModal}
+        setInividualModal={setInividualModal}
       />
 
       {(!mapLoaded || resLoading) && <PageSpinner />}
@@ -95,6 +107,7 @@ const Map = props => {
                 lng={restaurant.geometry.location.lng()}
                 restaurant={restaurant}
                 getBasicResDetails={getBasicResDetails}
+                setInividualModal={setInividualModal}
               />
             ))}
           </GoogleMapReact>
@@ -119,7 +132,9 @@ Map.propTypes = {
   resLoading: PropTypes.bool.isRequired,
   detailOpen: PropTypes.bool.isRequired,
   setDetailOpen: PropTypes.func.isRequired,
-  getBasicResDetails: PropTypes.func.isRequired
+  getBasicResDetails: PropTypes.func.isRequired,
+  individualModal: PropTypes.object.isRequired,
+  setInividualModal: PropTypes.func.isRequired
 };
 
 export default Map;
