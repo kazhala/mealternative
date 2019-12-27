@@ -4,19 +4,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useStyles from './Style';
+import { Fade } from '@material-ui/core';
 
 const BackDrop = props => {
   const { background, children, handleClose } = props;
   const classes = useStyles();
 
   return (
-    <div
-      style={{ background }}
-      className={classes.backDropRoot}
-      onClick={handleClose}
-    >
-      {children}
-    </div>
+    <Fade in={true}>
+      <div
+        style={{ background }}
+        className={classes.backDropRoot}
+        onClick={handleClose}
+      >
+        {children}
+      </div>
+    </Fade>
   );
 };
 

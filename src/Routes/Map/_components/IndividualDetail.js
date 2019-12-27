@@ -4,29 +4,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BackDrop from '../../../Common/BackDrop/BackDrop';
+import { Zoom } from '@material-ui/core';
 
 const IndividualDetail = props => {
-  const { classes, individualModal, setInividualModal } = props;
+  const { classes, individualModal, clearDetailResDetail } = props;
 
-  const { place_id, details } = individualModal;
-
-  const handleModalClose = () => {
-    setInividualModal({ ...individualModal, place_id: '', details: {} });
-  };
-
-  return (
-    place_id && (
-      <BackDrop handleClose={handleModalClose}>
-        <div>{place_id}</div>
-      </BackDrop>
-    )
-  );
+  return individualModal.show ? (
+    <BackDrop background='rgba(0,0,0,0.5)' handleClose={clearDetailResDetail}>
+      <Zoom in={true}>
+        <div className={classes.indModalRoot}>
+          {!individualModal.loading ? 'hello' : 'loading'}
+        </div>
+      </Zoom>
+    </BackDrop>
+  ) : null;
 };
 
 IndividualDetail.propTypes = {
   classes: PropTypes.object.isRequired,
   individualModal: PropTypes.object.isRequired,
-  setInividualModal: PropTypes.func.isRequired
+  clearDetailResDetail: PropTypes.func.isRequired
 };
 
 export default IndividualDetail;

@@ -147,6 +147,13 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     padding: theme.spacing(0.5),
     borderBottom: '1px solid #ccc'
+  },
+
+  //individualModal
+  indModalRoot: {
+    height: '70%',
+    width: '70%',
+    background: 'white'
   }
 }));
 

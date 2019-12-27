@@ -14,7 +14,7 @@ const RestaurantMarker = props => {
     $hover,
     restaurant,
     getBasicResDetails,
-    setInividualModal
+    getDetailedResDetail
   } = props;
 
   const {
@@ -35,12 +35,7 @@ const RestaurantMarker = props => {
           className={classes.markerDetail}
           component='div'
           variant='caption'
-          onClick={() =>
-            setInividualModal(prevState => ({
-              ...prevState,
-              place_id: restaurant.place_id
-            }))
-          }
+          onClick={() => getDetailedResDetail(restaurant)}
         >
           <Box className={classes.markerName} fontSize='1.3em'>
             {name}
@@ -69,7 +64,7 @@ RestaurantMarker.propTypes = {
   $hover: PropTypes.any,
   restaurant: PropTypes.object.isRequired,
   getBasicResDetails: PropTypes.func.isRequired,
-  setInividualModal: PropTypes.func.isRequired
+  getDetailedResDetail: PropTypes.func.isRequired
 };
 
 export default RestaurantMarker;

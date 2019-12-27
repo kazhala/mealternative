@@ -38,11 +38,10 @@ const Map = props => {
     setDetailOpen,
     getBasicResDetails,
     individualModal,
-    setInividualModal
+    getDetailedResDetail,
+    clearDetailResDetail
   } = props;
   const classes = useStyles();
-
-  console.log(individualModal);
 
   return (
     <div className={classes.mapRoot}>
@@ -71,13 +70,13 @@ const Map = props => {
         resultRestaurantList={resultRestaurantList}
         classes={classes}
         getBasicResDetails={getBasicResDetails}
-        setInividualModal={setInividualModal}
+        getDetailedResDetail={getDetailedResDetail}
       />
 
       <IndividualDetail
         classes={classes}
         individualModal={individualModal}
-        setInividualModal={setInividualModal}
+        clearDetailResDetail={clearDetailResDetail}
       />
 
       {(!mapLoaded || resLoading) && <PageSpinner />}
@@ -107,7 +106,7 @@ const Map = props => {
                 lng={restaurant.geometry.location.lng()}
                 restaurant={restaurant}
                 getBasicResDetails={getBasicResDetails}
-                setInividualModal={setInividualModal}
+                getDetailedResDetail={getDetailedResDetail}
               />
             ))}
           </GoogleMapReact>
@@ -134,7 +133,8 @@ Map.propTypes = {
   setDetailOpen: PropTypes.func.isRequired,
   getBasicResDetails: PropTypes.func.isRequired,
   individualModal: PropTypes.object.isRequired,
-  setInividualModal: PropTypes.func.isRequired
+  getDetailedResDetail: PropTypes.func.isRequired,
+  clearDetailResDetail: PropTypes.func.isRequired
 };
 
 export default Map;

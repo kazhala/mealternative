@@ -41,10 +41,7 @@ const MapContainer = props => {
   // stores the error state
   const [error, setError] = useState('');
   // determine if the detail modal should be opened
-  const [individualModal, setInividualModal] = useState({
-    place_id: '',
-    details: {}
-  });
+  const [individualModal, setInividualModal] = useState({});
 
   const {
     mapsApi,
@@ -222,9 +219,16 @@ const MapContainer = props => {
     return resDetail;
   };
 
-  // eslint-disable-next-line
   const getDetailedResDetail = restaurant => {
-    //
+    console.log(restaurant);
+    setInividualModal({ ...individualModal, show: true, loading: true });
+    setTimeout(() => {
+      setInividualModal(prevState => ({ ...prevState, loading: false }));
+    }, 3000);
+  };
+
+  const clearDetailResDetail = () => {
+    setInividualModal({});
   };
 
   return (
@@ -246,7 +250,8 @@ const MapContainer = props => {
         setDetailOpen={setDetailOpen}
         getBasicResDetails={getBasicResDetails}
         individualModal={individualModal}
-        setInividualModal={setInividualModal}
+        getDetailedResDetail={getDetailedResDetail}
+        clearDetailResDetail={clearDetailResDetail}
       />
     </>
   );
