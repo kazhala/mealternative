@@ -160,10 +160,22 @@ const useStyles = makeStyles(theme => ({
     boxShadow: '0 0 1px 1px #ccc',
     borderRadius: '5px'
   },
-  modalDetails: {
+  indModalDetails: {
     width: '100%',
     height: '100%',
     display: 'grid'
+  },
+  // title
+  indTitle: {
+    justifySelf: 'center'
+  },
+  indName: {
+    paddingTop: '1rem'
+  },
+  indRating: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));
 

@@ -47,6 +47,7 @@ const RestaurantMarker = props => {
               name='restaurant rating'
               value={rating}
               precision={0.1}
+              readOnly
             />
             ({price_level})
           </Box>
