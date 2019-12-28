@@ -1,11 +1,15 @@
 /*
   The restaurant marker that presents the restaurant on the map
 */
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
+import ComboRating from '../../../Common/ComboRating/ComboRating';
 import { PinDrop } from '@material-ui/icons';
 import { Typography, Box } from '@material-ui/core';
-import ComboRating from '../../../Common/ComboRating/ComboRating';
 
 const RestaurantMarker = props => {
   // $hover props determine if the marker is hovered

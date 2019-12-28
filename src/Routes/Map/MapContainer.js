@@ -61,6 +61,7 @@ const MapContainer = props => {
     setCenterMarker({ lat, lng });
   }, [lat, lng]);
 
+  // clear all errors
   const handleClearError = () => {
     setError('');
   };
@@ -218,14 +219,18 @@ const MapContainer = props => {
     resDetail.distance = restaurant.distance;
     resDetail.totalRatings = restaurant.user_ratings_total;
     // google map link for more details or route direaction
+    // TODO: remove it when updating the groupDetailModal
     resDetail.googleMapLink = `https://www.google.com/maps/search/?api=1&query=${restaurant.geometry.location.lat()},${restaurant.geometry.location.lng()}&query_place_id=${
       restaurant.place_id
     }`;
     return resDetail;
   };
 
+  // get the individual details with opening_hours and route minutes
   const getDetailedResDetail = restaurant => {
+    // set loading
     setInividualModal({ ...individualModal, show: true, loading: true });
+    // limit the results returned for cost saving
     const detailRequest = {
       placeId: restaurant.place_id,
       fields: [
@@ -238,12 +243,15 @@ const MapContainer = props => {
         'utc_offset_minutes'
       ]
     };
+
+    // get the details
     placesServices.getDetails(detailRequest, (detailRes, detailStatus) => {
       if (detailStatus !== 'OK') {
         clearDetailResDetail();
         console.error('Something went wrong...', detailStatus);
         setError(`Something went wrong, try again later...(${detailStatus})`);
       } else {
+        // if no error, proceed to get the route details for minutes calculation
         const directionRequest = {
           origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
           destination: restaurant.formatted_address, // To
@@ -257,6 +265,8 @@ const MapContainer = props => {
               `Something went wrong, try again later...(${detailStatus})`
             );
           }
+
+          // store all relative information in the state
           setInividualModal(prevState => ({
             ...prevState,
             loading: false,
@@ -276,6 +286,7 @@ const MapContainer = props => {
     });
   };
 
+  // clears the state for individual details
   const clearDetailResDetail = () => {
     setInividualModal({ show: false, loading: false, details: {} });
   };

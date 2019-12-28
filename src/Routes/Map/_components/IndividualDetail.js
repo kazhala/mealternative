@@ -1,8 +1,12 @@
 /*
   The more detailed model that display all information related to a restaurant
 */
+
+// react
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import BackDrop from '../../../Common/BackDrop/BackDrop';
 import ComboRating from '../../../Common/ComboRating/ComboRating';
 import {
@@ -33,12 +37,11 @@ import {
 const IndividualDetail = props => {
   const { classes, individualModal, clearDetailResDetail } = props;
 
+  // controls the open/close of the expandable list
   const [collapse, setCollapse] = useState({
     review: true,
     openHours: true
   });
-
-  console.log(individualModal);
 
   const { show, loading, details } = individualModal;
   const {
@@ -50,7 +53,6 @@ const IndividualDetail = props => {
     phone,
     opening_hours,
     photoUrl,
-    photos,
     reviews,
     price_level,
     totalRatings,
@@ -58,6 +60,8 @@ const IndividualDetail = props => {
     url
   } = details;
 
+  // handle the open/close of expandable list
+  // ['openHours', 'revie']
   const handleOpen = type => {
     if (type === 0) {
       setCollapse(prevState => ({
@@ -75,6 +79,7 @@ const IndividualDetail = props => {
     }
   };
 
+  // close all expandable list on modal close
   useEffect(() => {
     if (!show) {
       setCollapse({
@@ -97,12 +102,14 @@ const IndividualDetail = props => {
         >
           {!loading ? (
             <div className={classes.indModalDetails}>
+              {/* image gallery */}
               <div
                 className={classes.indThumb}
                 style={{
                   backgroundImage: `url(${photoUrl})`
                 }}
               />
+              {/* title */}
               <div className={classes.indTitle}>
                 <Typography className={classes.indName} variant='h6'>
                   {name}
@@ -112,6 +119,7 @@ const IndividualDetail = props => {
                 </Typography>
               </div>
 
+              {/* list of information */}
               <List
                 dense
                 component='nav'
@@ -144,6 +152,7 @@ const IndividualDetail = props => {
                   <ListItemText primary={`${phone}`} />
                 </ListItem>
 
+                {/* opening_hourse expandable list */}
                 <ListItem divider button onClick={() => handleOpen(0)}>
                   <ListItemIcon>
                     <Schedule />
@@ -168,6 +177,7 @@ const IndividualDetail = props => {
                   </List>
                 </Collapse>
 
+                {/* list that is also a tag */}
                 <ListItem
                   divider
                   component='a'
@@ -200,6 +210,7 @@ const IndividualDetail = props => {
                   <ListItemText primary={address} />
                 </ListItem>
 
+                {/* displays top5 reviews */}
                 <ListItem divider button onClick={() => handleOpen(1)}>
                   <ListItemIcon>
                     <RateReview />
