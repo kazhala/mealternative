@@ -153,24 +153,32 @@ const useStyles = makeStyles(theme => ({
   indModalRoot: {
     height: '70%',
     width: '70%',
-    background: 'white',
+    background: theme.palette.background.paper,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     boxShadow: '0 0 1px 1px #ccc',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    overflowY: 'auto'
   },
   indModalDetails: {
     width: '100%',
     height: '100%',
-    display: 'grid'
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  indThumb: {
+    width: '100%',
+    height: '10rem',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    borderRadius: '5px 5px 0 0'
   },
   // title
   indTitle: {
-    justifySelf: 'center'
+    paddingTop: theme.spacing(1)
   },
   indName: {
-    paddingTop: '1rem',
     textAlign: 'center'
   }
 }));
