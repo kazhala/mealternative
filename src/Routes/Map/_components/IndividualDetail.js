@@ -1,7 +1,7 @@
 /*
   The more detailed model that display all information related to a restaurant
 */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import BackDrop from '../../../Common/BackDrop/BackDrop';
 import ComboRating from '../../../Common/ComboRating/ComboRating';
@@ -12,18 +12,28 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Collapse
 } from '@material-ui/core';
 import {
   ThumbsUpDown,
   DirectionsWalk,
   GpsFixed,
   LocationOn,
-  Phone
+  Phone,
+  Schedule,
+  ExpandLess,
+  ExpandMore,
+  Web
 } from '@material-ui/icons';
 
 const IndividualDetail = props => {
   const { classes, individualModal, clearDetailResDetail } = props;
+
+  const [collapse, setCollapse] = useState({
+    review: true,
+    openHours: true
+  });
 
   console.log(individualModal);
 
@@ -44,6 +54,16 @@ const IndividualDetail = props => {
     website,
     url
   } = details;
+
+  const handleOpen = type => {
+    if (type === 0) {
+      setCollapse(prevState => ({
+        ...prevState,
+        review: false,
+        openHours: !prevState.openHours
+      }));
+    }
+  };
 
   return (
     <BackDrop
@@ -72,7 +92,12 @@ const IndividualDetail = props => {
                   <ComboRating rating={rating} price={price_level} />
                 </Typography>
               </div>
-              <List component='nav' aria-labelledby='restaurant-detail-list'>
+
+              <List
+                dense
+                component='nav'
+                aria-labelledby='restaurant-detail-list'
+              >
                 <ListItem divider>
                   <ListItemIcon>
                     <ThumbsUpDown />
@@ -99,6 +124,45 @@ const IndividualDetail = props => {
                   </ListItemIcon>
                   <ListItemText primary={`${phone}`} />
                 </ListItem>
+
+                <ListItem divider button onClick={() => handleOpen(0)}>
+                  <ListItemIcon>
+                    <Schedule />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      opening_hours && opening_hours.isOpen()
+                        ? 'Open'
+                        : 'Closed'
+                    }
+                  />
+                  {!collapse.openHours ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={!collapse.openHours} timeout='auto' unmountOnExit>
+                  <List component='div' disablePadding dense>
+                    {opening_hours &&
+                      opening_hours.weekday_text.map((info, index) => (
+                        <ListItem key={index} divider>
+                          <ListItemText secondary={info} />
+                        </ListItem>
+                      ))}
+                  </List>
+                </Collapse>
+
+                <ListItem
+                  divider
+                  component='a'
+                  button
+                  href={website}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <ListItemIcon>
+                    <Web />
+                  </ListItemIcon>
+                  <ListItemText primary={website} />
+                </ListItem>
+
                 <ListItem
                   divider
                   component='a'

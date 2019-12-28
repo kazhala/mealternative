@@ -234,7 +234,8 @@ const MapContainer = props => {
         'photos',
         'reviews',
         'url',
-        'website'
+        'website',
+        'utc_offset_minutes'
       ]
     };
     placesServices.getDetails(detailRequest, (detailRes, detailStatus) => {
