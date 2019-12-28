@@ -169,7 +169,7 @@ const useStyles = makeStyles(theme => ({
   },
   indThumb: {
     width: '100%',
-    height: '10rem',
+    height: '100%',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     borderRadius: '5px 5px 0 0'

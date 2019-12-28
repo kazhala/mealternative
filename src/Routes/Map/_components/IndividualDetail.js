@@ -1,7 +1,7 @@
 /*
   The more detailed model that display all information related to a restaurant
 */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BackDrop from '../../../Common/BackDrop/BackDrop';
 import ComboRating from '../../../Common/ComboRating/ComboRating';
@@ -13,7 +13,9 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Collapse
+  Collapse,
+  ListItemAvatar,
+  Avatar
 } from '@material-ui/core';
 import {
   ThumbsUpDown,
@@ -24,7 +26,8 @@ import {
   Schedule,
   ExpandLess,
   ExpandMore,
-  Web
+  Http,
+  RateReview
 } from '@material-ui/icons';
 
 const IndividualDetail = props => {
@@ -59,11 +62,27 @@ const IndividualDetail = props => {
     if (type === 0) {
       setCollapse(prevState => ({
         ...prevState,
-        review: false,
+        review: true,
         openHours: !prevState.openHours
       }));
     }
+    if (type === 1) {
+      setCollapse(prevState => ({
+        ...prevState,
+        review: !prevState.review,
+        openHours: true
+      }));
+    }
   };
+
+  useEffect(() => {
+    if (!show) {
+      setCollapse({
+        review: true,
+        openHours: true
+      });
+    }
+  }, [show]);
 
   return (
     <BackDrop
@@ -158,9 +177,13 @@ const IndividualDetail = props => {
                   rel='noopener noreferrer'
                 >
                   <ListItemIcon>
-                    <Web />
+                    <Http />
                   </ListItemIcon>
-                  <ListItemText primary={website} />
+                  <ListItemText
+                    primary={
+                      <div style={{ overflow: 'hidden' }}>{website}</div>
+                    }
+                  />
                 </ListItem>
 
                 <ListItem
@@ -176,6 +199,57 @@ const IndividualDetail = props => {
                   </ListItemIcon>
                   <ListItemText primary={address} />
                 </ListItem>
+
+                <ListItem divider button onClick={() => handleOpen(1)}>
+                  <ListItemIcon>
+                    <RateReview />
+                  </ListItemIcon>
+                  <ListItemText primary='Reviews' />
+                  {!collapse.review ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={!collapse.review} timeout='auto' unmountOnExit>
+                  <List component='div' disablePadding dense>
+                    {reviews &&
+                      reviews.map((review, index) => (
+                        <ListItem
+                          button
+                          component='a'
+                          href={review.author_url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          divider
+                          key={index}
+                        >
+                          <ListItemAvatar>
+                            <Avatar
+                              alt={`${review.author_name} avatar`}
+                              src={review.profile_photo_url}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={
+                              <div>
+                                {review.author_name}
+                                <Typography
+                                  style={{ opacity: 0.7 }}
+                                  component='div'
+                                  variant='caption'
+                                >
+                                  - {review.relative_time_description} (
+                                  {review.rating}/5)
+                                </Typography>
+                              </div>
+                            }
+                            secondary={
+                              <Typography component='div' variant='caption'>
+                                {review.text}
+                              </Typography>
+                            }
+                          />
+                        </ListItem>
+                      ))}
+                  </List>
+                </Collapse>
               </List>
             </div>
           ) : (
