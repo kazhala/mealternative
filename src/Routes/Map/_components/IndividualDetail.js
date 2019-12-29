@@ -117,7 +117,7 @@ const IndividualDetail = props => {
             <div className={classes.indModalDetails}>
               {/* image gallery */}
               <div className={classes.indModalGalleryRoot}>
-                {photos && (
+                {photos ? (
                   <GridList className={classes.indThumb} cols={1}>
                     {photos.map((photo, index) => (
                       <GridListTile key={index} style={{ height: '100%' }}>
@@ -129,6 +129,12 @@ const IndividualDetail = props => {
                       </GridListTile>
                     ))}
                   </GridList>
+                ) : (
+                  <img
+                    src={'/img/noimage.png'}
+                    alt='not available'
+                    className={classes.indThumb}
+                  />
                 )}
               </div>
 

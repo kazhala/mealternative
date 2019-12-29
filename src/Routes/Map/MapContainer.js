@@ -211,18 +211,13 @@ const MapContainer = props => {
     // display no photo image if no photo
     resDetail.photoUrl = restaurant.photos
       ? restaurant.photos[0].getUrl()
-      : 'https://nucomltd.com/wp-content/themes/gecko/assets/images/placeholder.png';
+      : '/img/noimage.png';
     resDetail.name = restaurant.name;
     resDetail.rating = restaurant.rating ? restaurant.rating : 0;
     resDetail.price_level = restaurant.price_level;
     resDetail.address = restaurant.formatted_address;
     resDetail.distance = restaurant.distance;
     resDetail.totalRatings = restaurant.user_ratings_total;
-    // google map link for more details or route direaction
-    // TODO: remove it when updating the groupDetailModal
-    resDetail.googleMapLink = `https://www.google.com/maps/search/?api=1&query=${restaurant.geometry.location.lat()},${restaurant.geometry.location.lng()}&query_place_id=${
-      restaurant.place_id
-    }`;
     return resDetail;
   };
 

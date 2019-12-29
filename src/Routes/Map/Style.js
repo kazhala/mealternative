@@ -142,7 +142,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
+    backgroundSize: '150% 100%',
+    backgroundPosition: 'center'
   },
   cardDescriptions: {
     width: '100%',
