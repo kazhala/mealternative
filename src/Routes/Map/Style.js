@@ -152,14 +152,20 @@ const useStyles = makeStyles(theme => ({
   //individualModal
   indModalRoot: {
     height: '70%',
-    width: '70%',
+    width: '90%',
     background: theme.palette.background.paper,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     boxShadow: '0 0 1px 1px #ccc',
     borderRadius: '5px',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    position: 'relative'
+  },
+  indModalCloseBtn: {
+    position: 'absolute',
+    top: theme.spacing(1),
+    right: theme.spacing(1)
   },
   indModalDetails: {
     width: '100%',

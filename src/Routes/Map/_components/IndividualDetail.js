@@ -19,7 +19,8 @@ import {
   ListItemText,
   Collapse,
   ListItemAvatar,
-  Avatar
+  Avatar,
+  Fab
 } from '@material-ui/core';
 import {
   ThumbsUpDown,
@@ -31,7 +32,8 @@ import {
   ExpandLess,
   ExpandMore,
   Http,
-  RateReview
+  RateReview,
+  Close
 } from '@material-ui/icons';
 
 const IndividualDetail = props => {
@@ -100,6 +102,14 @@ const IndividualDetail = props => {
           className={classes.indModalRoot}
           onClick={e => e.stopPropagation()}
         >
+          <Fab
+            onClick={clearDetailResDetail}
+            color='primary'
+            size='small'
+            className={classes.indModalCloseBtn}
+          >
+            <Close />
+          </Fab>
           {!loading ? (
             <div className={classes.indModalDetails}>
               {/* image gallery */}
