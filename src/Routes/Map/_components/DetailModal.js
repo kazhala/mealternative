@@ -13,7 +13,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemIcon
+  ListItemIcon,
+  useMediaQuery,
+  useTheme
 } from '@material-ui/core';
 import {
   KeyboardArrowDown,
@@ -185,6 +187,9 @@ const DetailModal = props => {
     }
   }, [resultRestaurantList, optionNum, reversed]);
 
+  const theme = useTheme();
+  const shiftDown = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <>
       <div
@@ -194,7 +199,11 @@ const DetailModal = props => {
       />
       <div
         style={{
-          transform: detailOpen ? 'translateY(0)' : 'translateY(100vh)'
+          transform: shiftDown
+            ? detailOpen
+              ? 'translateY(0)'
+              : 'translateY(100vh)'
+            : null
         }}
         className={classes.detailModalRoot}
       >

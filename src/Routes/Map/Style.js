@@ -130,18 +130,23 @@ const useStyles = makeStyles(theme => ({
     }
   },
   detailModalCloseBtn: {
-    position: 'sticky',
-    top: 0,
-    left: 0,
-    width: '100%',
-    zIndex: '1',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    '&:hover': {
-      background: '#ccc',
-      cursor: 'pointer',
-      borderRadius: '5px 5px 0 0'
+    [theme.breakpoints.down('sm')]: {
+      position: 'sticky',
+      top: 0,
+      left: 0,
+      width: '100%',
+      zIndex: '1',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      '&:hover': {
+        background: '#ccc',
+        cursor: 'pointer',
+        borderRadius: '5px 5px 0 0'
+      }
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
     }
   },
   detailModalDial: {
