@@ -4,11 +4,19 @@ const useStyles = makeStyles(theme => ({
   mapRoot: {
     padding: theme.spacing(1),
     height: '100%',
-    width: '100%'
+    width: '100%',
+    display: 'grid',
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateRows: 'auto 1fr'
+    },
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: '35% 65%',
+      gridGap: theme.spacing(1)
+    }
   },
   googleMap: {
     width: '100%',
-    height: '55%',
+    height: '100%',
     display: 'flex',
     justifyContent: 'center'
   },
@@ -91,28 +99,35 @@ const useStyles = makeStyles(theme => ({
 
   // detail modal
   detailModalBackDrop: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    zIndex: 1,
-    background: 'black',
-    opacity: '0.5',
-    transition: 'opacity 0.3s'
+    [theme.breakpoints.down('sm')]: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      zIndex: 1,
+      background: 'black',
+      opacity: '0.5',
+      transition: 'opacity 0.3s'
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    }
   },
   detailModalRoot: {
-    position: 'fixed',
-    top: '20%',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 2,
-    background: theme.palette.background.default,
-    borderRadius: '5px',
-    border: '1px solid black',
-    transition: 'transform 0.5s',
-    overflowY: 'scroll'
+    [theme.breakpoints.down('sm')]: {
+      position: 'fixed',
+      top: '20%',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 2,
+      background: theme.palette.background.default,
+      borderRadius: '5px',
+      border: '1px solid black',
+      transition: 'transform 0.5s',
+      overflowY: 'scroll'
+    }
   },
   detailModalCloseBtn: {
     position: 'sticky',

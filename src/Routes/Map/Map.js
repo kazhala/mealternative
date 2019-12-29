@@ -45,7 +45,14 @@ const Map = props => {
 
   return (
     <div className={classes.mapRoot}>
-      <React.Fragment>
+      <IndividualDetail
+        classes={classes}
+        individualModal={individualModal}
+        clearDetailResDetail={clearDetailResDetail}
+      />
+
+      <PageSpinner loading={!mapLoaded || resLoading} />
+      <div>
         <LocationInputForm
           centerMarker={centerMarker}
           lat={lat}
@@ -62,24 +69,15 @@ const Map = props => {
           resultRestaurantList={resultRestaurantList}
           setDetailOpen={setDetailOpen}
         />
-      </React.Fragment>
-
-      <DetailModal
-        detailOpen={detailOpen}
-        setDetailOpen={setDetailOpen}
-        resultRestaurantList={resultRestaurantList}
-        classes={classes}
-        getBasicResDetails={getBasicResDetails}
-        getDetailedResDetail={getDetailedResDetail}
-      />
-
-      <IndividualDetail
-        classes={classes}
-        individualModal={individualModal}
-        clearDetailResDetail={clearDetailResDetail}
-      />
-
-      <PageSpinner loading={!mapLoaded || resLoading} />
+        <DetailModal
+          detailOpen={detailOpen}
+          setDetailOpen={setDetailOpen}
+          resultRestaurantList={resultRestaurantList}
+          classes={classes}
+          getBasicResDetails={getBasicResDetails}
+          getDetailedResDetail={getDetailedResDetail}
+        />
+      </div>
       <div className={classes.googleMap}>
         {/* render google map after lat and lng for center position is set */}
         {centerMarker.lat && centerMarker.lng && (
