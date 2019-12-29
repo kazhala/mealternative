@@ -54,7 +54,8 @@ const DetailModal = props => {
     resultRestaurantList,
     detailOpen,
     setDetailOpen,
-    getBasicResDetails
+    getBasicResDetails,
+    getDetailedResDetail
   } = props;
 
   // ['no sort', 'distance', 'rating', 'price']
@@ -273,7 +274,10 @@ const DetailModal = props => {
                     }
                   />
                 </ListItem>
-                <ListItem button>
+                <ListItem
+                  onClick={() => getDetailedResDetail(restaurant)}
+                  button
+                >
                   <ListItemIcon>
                     <More fontSize='small' />
                   </ListItemIcon>
@@ -324,7 +328,8 @@ DetailModal.propTypes = {
   resultRestaurantList: PropTypes.array.isRequired,
   detailOpen: PropTypes.bool.isRequired,
   setDetailOpen: PropTypes.func.isRequired,
-  getBasicResDetails: PropTypes.func.isRequired
+  getBasicResDetails: PropTypes.func.isRequired,
+  getDetailedResDetail: PropTypes.func.isRequired
 };
 
 export default DetailModal;
