@@ -57,7 +57,6 @@ const IndividualDetail = props => {
     phone,
     opening_hours,
     photos,
-    photoUrl,
     reviews,
     price_level,
     totalRatings,
@@ -94,8 +93,6 @@ const IndividualDetail = props => {
     }
   }, [show]);
 
-  console.log(photos);
-
   return (
     <BackDrop
       show={show}
@@ -115,28 +112,26 @@ const IndividualDetail = props => {
           >
             <Close />
           </Fab>
-          {!loading ? (
+
+          {!loading && details ? (
             <div className={classes.indModalDetails}>
               {/* image gallery */}
               <div className={classes.indModalGalleryRoot}>
-                <GridList className={classes.indThumb} cols={1}>
-                  <GridListTile style={{ height: '100%' }}>
-                    <img src={photoUrl} alt='restaurant' />
-                  </GridListTile>
-                  {photos &&
-                    photos.map((photo, index) => (
+                {photos && (
+                  <GridList className={classes.indThumb} cols={1}>
+                    {photos.map((photo, index) => (
                       <GridListTile key={index} style={{ height: '100%' }}>
-                        <img src={photo.getUrl()} alt='restaurant' />
+                        <img
+                          src={photo.getUrl()}
+                          alt='restaurant'
+                          style={{ height: '100%' }}
+                        />
                       </GridListTile>
                     ))}
-                </GridList>
+                  </GridList>
+                )}
               </div>
-              {/* <div */}
-              {/*   className={classes.indThumb} */}
-              {/*   style={{ */}
-              {/*     backgroundImage: `url(${photoUrl})` */}
-              {/*   }} */}
-              {/* /> */}
+
               {/* title */}
               <div className={classes.indTitle}>
                 <Typography className={classes.indName} variant='h6'>
@@ -187,9 +182,11 @@ const IndividualDetail = props => {
                   </ListItemIcon>
                   <ListItemText
                     primary={
-                      opening_hours && opening_hours.isOpen()
-                        ? 'Open'
-                        : 'Closed'
+                      opening_hours
+                        ? opening_hours.isOpen()
+                          ? 'Open'
+                          : 'Closed'
+                        : 'N/A'
                     }
                   />
                   {!collapse.openHours ? <ExpandLess /> : <ExpandMore />}
@@ -210,7 +207,7 @@ const IndividualDetail = props => {
                   divider
                   component='a'
                   button
-                  href={website}
+                  href={website !== 'N/A' ? website : undefined}
                   target='_blank'
                   rel='noopener noreferrer'
                 >

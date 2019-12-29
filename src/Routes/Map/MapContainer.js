@@ -272,12 +272,14 @@ const MapContainer = props => {
             loading: false,
             details: {
               ...getBasicResDetails(restaurant),
-              phone: detailRes.formatted_phone_number,
+              phone: detailRes.formatted_phone_number
+                ? detailRes.formatted_phone_number
+                : 'N/A',
               opening_hours: detailRes.opening_hours,
               photos: detailRes.photos,
               reviews: detailRes.reviews,
               url: detailRes.url,
-              website: detailRes.website,
+              website: detailRes.website ? detailRes.website : 'N/A',
               minutes: routeResult.routes[0].legs[0].duration
             }
           }));
