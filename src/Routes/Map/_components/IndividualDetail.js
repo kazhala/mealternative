@@ -20,7 +20,9 @@ import {
   Collapse,
   ListItemAvatar,
   Avatar,
-  Fab
+  Fab,
+  GridList,
+  GridListTile
 } from '@material-ui/core';
 import {
   ThumbsUpDown,
@@ -54,6 +56,7 @@ const IndividualDetail = props => {
     minutes,
     phone,
     opening_hours,
+    photos,
     photoUrl,
     reviews,
     price_level,
@@ -91,6 +94,8 @@ const IndividualDetail = props => {
     }
   }, [show]);
 
+  console.log(photos);
+
   return (
     <BackDrop
       show={show}
@@ -113,12 +118,25 @@ const IndividualDetail = props => {
           {!loading ? (
             <div className={classes.indModalDetails}>
               {/* image gallery */}
-              <div
-                className={classes.indThumb}
-                style={{
-                  backgroundImage: `url(${photoUrl})`
-                }}
-              />
+              <div className={classes.indModalGalleryRoot}>
+                <GridList className={classes.indThumb} cols={1}>
+                  <GridListTile style={{ height: '100%' }}>
+                    <img src={photoUrl} alt='restaurant' />
+                  </GridListTile>
+                  {photos &&
+                    photos.map((photo, index) => (
+                      <GridListTile key={index} style={{ height: '100%' }}>
+                        <img src={photo.getUrl()} alt='restaurant' />
+                      </GridListTile>
+                    ))}
+                </GridList>
+              </div>
+              {/* <div */}
+              {/*   className={classes.indThumb} */}
+              {/*   style={{ */}
+              {/*     backgroundImage: `url(${photoUrl})` */}
+              {/*   }} */}
+              {/* /> */}
               {/* title */}
               <div className={classes.indTitle}>
                 <Typography className={classes.indName} variant='h6'>

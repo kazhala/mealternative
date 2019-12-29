@@ -152,6 +152,7 @@ const useStyles = makeStyles(theme => ({
   //individualModal
   indModalRoot: {
     height: '70%',
+    minHeight: '40rem',
     width: '90%',
     background: theme.palette.background.paper,
     display: 'flex',
@@ -165,7 +166,8 @@ const useStyles = makeStyles(theme => ({
   indModalCloseBtn: {
     position: 'absolute',
     top: theme.spacing(1),
-    right: theme.spacing(1)
+    right: theme.spacing(1),
+    zIndex: 1
   },
   indModalDetails: {
     width: '100%',
@@ -173,12 +175,19 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column'
   },
+  indModalGalleryRoot: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    borderRadius: '5px 5px 0 0'
+  },
   indThumb: {
     width: '100%',
     height: '100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    borderRadius: '5px 5px 0 0'
+    flexWrap: 'nowrap'
   },
   // title
   indTitle: {
