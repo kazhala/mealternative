@@ -119,6 +119,7 @@ const useStyles = makeStyles(theme => ({
     top: 0,
     left: 0,
     width: '100%',
+    zIndex: '1',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

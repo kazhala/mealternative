@@ -7,7 +7,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import { Typography } from '@material-ui/core';
+import ComboRating from '../../../Common/ComboRating/ComboRating';
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon
+} from '@material-ui/core';
 import {
   KeyboardArrowDown,
   Sort,
@@ -15,7 +22,12 @@ import {
   RateReview,
   AttachMoney,
   Clear,
-  ClearAll
+  ClearAll,
+  Restaurant,
+  LocalOffer,
+  Directions,
+  LocationOn,
+  More
 } from '@material-ui/icons';
 import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
 
@@ -30,7 +42,6 @@ const actions = [
 ];
 
 // the modal style
-// TODO: refactor to common component DarkModal
 const backDropStyle = {
   opacity: '0',
   zIndex: '-1'
@@ -202,9 +213,9 @@ const DetailModal = props => {
             price_level,
             address,
             totalRatings,
-            googleMapLink,
             distance
           } = getBasicResDetails(restaurant);
+
           return (
             <div className={classes.detailModalCard} key={index}>
               <div
@@ -213,30 +224,66 @@ const DetailModal = props => {
                   backgroundImage: `url(${photoUrl})`
                 }}
               />
-              <div className={classes.cardDescriptions}>
-                <Typography variant='body2'>Name: {name}</Typography>
-                <Typography variant='body2'>Rating: {rating}</Typography>
-                <Typography variant='body2'>
-                  price-level: {price_level}
-                </Typography>
-                <Typography variant='body2'>
-                  Total ratings: {totalRatings}
-                </Typography>
-                <Typography variant='body2'>
-                  Distance: {(distance / 1000).toFixed(2)}Km
-                </Typography>
-                <Typography variant='body2'>Address: {address}</Typography>
-                <Typography variant='body2'>
-                  More Info:{' '}
-                  <a
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    href={googleMapLink}
-                  >
-                    Google Map
-                  </a>
-                </Typography>
-              </div>
+              <List component='nav' dense className={classes.cardDescriptions}>
+                <ListItem>
+                  <ListItemIcon>
+                    <Restaurant fontSize='small' />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={<Typography variant='button'>{name}</Typography>}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <LocalOffer fontSize='small' />
+                  </ListItemIcon>
+                  <ComboRating rating={rating} price={price_level} />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <RateReview fontSize='small' />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography variant='caption'>
+                        {totalRatings} reviews
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <Directions fontSize='small' />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography variant='caption'>
+                        {(distance / 1000).toFixed(2)} km away
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <LocationOn fontSize='small' />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography variant='caption'>{address}</Typography>
+                    }
+                  />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <More fontSize='small' />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography variant='caption'>Detailed Info</Typography>
+                    }
+                  />
+                </ListItem>
+              </List>
             </div>
           );
         })}
