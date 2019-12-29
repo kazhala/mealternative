@@ -17,8 +17,8 @@ import {
 import { Autocomplete } from '@material-ui/lab';
 import { Cached, UnfoldMore } from '@material-ui/icons';
 
-// search auto complete, will refactor to separate file
-const searchOptions = ['chinese', 'thai', 'italian', 'pizza', 'ice cream'];
+// misc
+import { searchOptions } from '../../../Common/AutoArray/RestaurantSearchOptions';
 
 const LocationFilterForm = props => {
   const {
@@ -32,12 +32,20 @@ const LocationFilterForm = props => {
 
   // value of auto completion
   const [queryValue, setQueryValue] = useState('');
+  // auto completion src
+  const [autoSrc, setAutoSrc] = useState(searchOptions);
   // radius filter for the search
   const [queryRadius, setQueryRadius] = useState(2);
 
   // handle auto completion change
   const handleChange = e => {
-    setQueryValue(e.target.value);
+    const newValue = e.target.value;
+    setQueryValue(newValue);
+    setAutoSrc(prevState => {
+      const oldValues = [...prevState];
+      oldValues.pop();
+      return [...oldValues, newValue];
+    });
   };
 
   // handle autocompletion select
@@ -74,7 +82,7 @@ const LocationFilterForm = props => {
   return (
     <div>
       <Autocomplete
-        options={searchOptions}
+        options={autoSrc}
         disableOpenOnFocus
         onChange={handleSelect}
         className={classes.locationFilterAutoComplete}
