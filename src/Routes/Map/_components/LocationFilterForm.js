@@ -40,10 +40,12 @@ const LocationFilterForm = props => {
   // handle auto completion change
   const handleChange = e => {
     const newValue = e.target.value;
-    setQueryValue(newValue);
+    // update new auto src value
     setAutoSrc(prevState => {
       const oldValues = [...prevState];
+      // remove the last value
       oldValues.pop();
+      // append the new value
       return [...oldValues, newValue];
     });
   };

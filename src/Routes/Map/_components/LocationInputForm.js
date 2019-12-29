@@ -36,7 +36,6 @@ const LocationInputForm = props => {
 
   // handle input change and renders the auto completion
   const handleChange = e => {
-    setValue(e.target.value);
     // call google map api to update autoCompleteSrc
     // will gave a call back
     handleAutoCompleteUpdate(e.target.value, dataSource =>
