@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
       display: 'grid',
       gridTemplateRows: 'auto auto 1fr',
       height: '100%',
-      overflow: 'scroll',
+      overflowY: 'scroll',
+      overflowX: 'hidden',
       padding: '0 0.3rem'
     }
   },
@@ -49,8 +50,8 @@ const useStyles = makeStyles(theme => ({
 
   // location filter section
   distanceSlider: {
-    paddingLeft: theme.spacing(0.25),
-    paddingRight: theme.spacing(0.25)
+    paddingLeft: theme.spacing(0.3),
+    paddingRight: theme.spacing(0.3)
   },
   sliderTitle: {
     display: 'flex'
@@ -139,7 +140,8 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('md')]: {
       height: '100%',
-      overflow: 'scroll'
+      overflowY: 'scroll',
+      position: 'relative'
     }
   },
   detailModalCloseBtn: {
@@ -148,7 +150,7 @@ const useStyles = makeStyles(theme => ({
       top: 0,
       left: 0,
       width: '100%',
-      zIndex: '1',
+      zIndex: 1,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -165,7 +167,8 @@ const useStyles = makeStyles(theme => ({
   detailModalDial: {
     position: 'sticky',
     bottom: theme.spacing(1),
-    marginLeft: '75%'
+    marginLeft: '75%',
+    zIndex: 1
   },
   detailModalCard: {
     display: 'Grid',
