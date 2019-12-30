@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
       display: 'grid',
       gridTemplateRows: 'auto auto 1fr',
       height: '100%',
-      overflow: 'scroll'
+      overflow: 'scroll',
+      padding: '0 0.3rem'
     }
   },
   googleMap: {
