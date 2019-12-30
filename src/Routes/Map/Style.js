@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
       gridTemplateRows: 'auto 1fr'
     },
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: '40% 60%',
+      gridTemplateColumns: '45% 55%',
       gridGap: theme.spacing(1)
     }
   },
@@ -190,8 +190,6 @@ const useStyles = makeStyles(theme => ({
   //individualModal
   indModalRoot: {
     height: '70%',
-    minHeight: '40rem',
-    width: '90%',
     background: theme.palette.background.paper,
     display: 'flex',
     justifyContent: 'center',
@@ -199,7 +197,15 @@ const useStyles = makeStyles(theme => ({
     boxShadow: '0 0 1px 1px #ccc',
     borderRadius: '5px',
     overflowY: 'auto',
-    position: 'relative'
+    position: 'relative',
+    maxWidth: '30rem',
+    [theme.breakpoints.down('sm')]: {
+      minHeight: '40rem',
+      width: '90%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '40%'
+    }
   },
   indModalCloseBtn: {
     position: 'absolute',
