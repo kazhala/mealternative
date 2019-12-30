@@ -52,7 +52,7 @@ const Map = props => {
       />
 
       <PageSpinner loading={!mapLoaded || resLoading} />
-      <div>
+      <div className={classes.locationSettings}>
         <LocationInputForm
           centerMarker={centerMarker}
           lat={lat}

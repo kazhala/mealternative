@@ -13,12 +13,13 @@ const useStyles = makeStyles(theme => ({
   layout: {
     height: '100%',
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column'
+    display: 'grid',
+    gridTemplateRows: 'auto 1fr'
   },
   contentRoot: {
     height: '100%',
-    width: '100%'
+    width: '100%',
+    overflow: 'scroll'
   },
   offset: theme.mixins.toolbar
 }));

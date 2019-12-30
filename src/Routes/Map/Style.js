@@ -10,8 +10,16 @@ const useStyles = makeStyles(theme => ({
       gridTemplateRows: 'auto 1fr'
     },
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: '35% 65%',
+      gridTemplateColumns: '40% 60%',
       gridGap: theme.spacing(1)
+    }
+  },
+  locationSettings: {
+    [theme.breakpoints.up('md')]: {
+      display: 'grid',
+      gridTemplateRows: 'auto auto 1fr',
+      height: '100%',
+      overflow: 'scroll'
     }
   },
   googleMap: {
@@ -127,6 +135,10 @@ const useStyles = makeStyles(theme => ({
       border: '1px solid black',
       transition: 'transform 0.5s',
       overflowY: 'scroll'
+    },
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
+      overflow: 'scroll'
     }
   },
   detailModalCloseBtn: {
