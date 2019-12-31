@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import ComboRating from '../../../Common/ComboRating/ComboRating';
+import CardSkeleton from './CardSkeleton';
 import {
   Typography,
   List,
@@ -20,11 +21,7 @@ import {
 import {
   KeyboardArrowDown,
   Sort,
-  TimeToLeave,
   RateReview,
-  AttachMoney,
-  Clear,
-  ClearAll,
   Restaurant,
   LocalOffer,
   Directions,
@@ -33,21 +30,12 @@ import {
 } from '@material-ui/icons';
 import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
 
-// speedDial action items
-// typeNum for soring usage
-const actions = [
-  { icon: <Clear />, name: 'Close', typeNum: -1 },
-  { icon: <ClearAll />, name: 'Default', typeNum: 0 },
-  { icon: <TimeToLeave />, name: 'Distance', typeNum: 1 },
-  { icon: <RateReview />, name: 'Rating', typeNum: 2 },
-  { icon: <AttachMoney />, name: 'Price', typeNum: 3 }
-];
-
-// the modal style
-const backDropStyle = {
-  opacity: '0',
-  zIndex: '-1'
-};
+// misc
+import {
+  mapDetailModalSkeletons,
+  actions,
+  backDropStyle
+} from '../../../Common/AutoArray/MapDetailArrays';
 
 // Main component
 const DetailModal = props => {
@@ -215,91 +203,103 @@ const DetailModal = props => {
         </div>
 
         {/* display the list of restaurant */}
-        {sortedResultList.map((restaurant, index) => {
-          const {
-            name,
-            photoUrl,
-            rating,
-            price_level,
-            address,
-            totalRatings,
-            distance
-          } = getBasicResDetails(restaurant);
+        {sortedResultList.length > 0
+          ? sortedResultList.map((restaurant, index) => {
+              const {
+                name,
+                photoUrl,
+                rating,
+                price_level,
+                address,
+                totalRatings,
+                distance
+              } = getBasicResDetails(restaurant);
 
-          return (
-            <div className={classes.detailModalCard} key={index}>
-              <div
-                className={classes.cardImage}
-                style={{
-                  backgroundImage: `url(${photoUrl})`
-                }}
-              />
-              <List component='nav' dense className={classes.cardDescriptions}>
-                <ListItem>
-                  <ListItemIcon>
-                    <Restaurant fontSize='small' />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={<Typography variant='button'>{name}</Typography>}
+              return (
+                <div className={classes.detailModalCard} key={index}>
+                  <div
+                    className={classes.cardImage}
+                    style={{
+                      backgroundImage: `url(${photoUrl})`
+                    }}
                   />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <LocalOffer fontSize='small' />
-                  </ListItemIcon>
-                  <ComboRating rating={rating} price={price_level} />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <RateReview fontSize='small' />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      <Typography variant='caption'>
-                        {totalRatings} reviews
-                      </Typography>
-                    }
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <Directions fontSize='small' />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      <Typography variant='caption'>
-                        {(distance / 1000).toFixed(2)} km away
-                      </Typography>
-                    }
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <LocationOn fontSize='small' />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      <Typography variant='caption'>{address}</Typography>
-                    }
-                  />
-                </ListItem>
-                <ListItem
-                  onClick={() => getDetailedResDetail(restaurant)}
-                  button
-                >
-                  <ListItemIcon>
-                    <More fontSize='small' />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      <Typography variant='caption'>Detailed Info</Typography>
-                    }
-                  />
-                </ListItem>
-              </List>
-            </div>
-          );
-        })}
+                  <List
+                    component='nav'
+                    dense
+                    className={classes.cardDescriptions}
+                  >
+                    <ListItem>
+                      <ListItemIcon>
+                        <Restaurant fontSize='small' />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={
+                          <Typography variant='button'>{name}</Typography>
+                        }
+                      />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <LocalOffer fontSize='small' />
+                      </ListItemIcon>
+                      <ComboRating rating={rating} price={price_level} />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <RateReview fontSize='small' />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={
+                          <Typography variant='caption'>
+                            {totalRatings} reviews
+                          </Typography>
+                        }
+                      />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <Directions fontSize='small' />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={
+                          <Typography variant='caption'>
+                            {(distance / 1000).toFixed(2)} km away
+                          </Typography>
+                        }
+                      />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <LocationOn fontSize='small' />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={
+                          <Typography variant='caption'>{address}</Typography>
+                        }
+                      />
+                    </ListItem>
+                    <ListItem
+                      onClick={() => getDetailedResDetail(restaurant)}
+                      button
+                    >
+                      <ListItemIcon>
+                        <More fontSize='small' />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={
+                          <Typography variant='caption'>
+                            Detailed Info
+                          </Typography>
+                        }
+                      />
+                    </ListItem>
+                  </List>
+                </div>
+              );
+            })
+          : mapDetailModalSkeletons.map(skeleton => (
+              <CardSkeleton key={skeleton} classes={classes} />
+            ))}
 
         {/* speedDial component */}
         {sortedResultList.length > 2 && (

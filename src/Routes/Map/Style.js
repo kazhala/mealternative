@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
       gridTemplateRows: 'auto 1fr'
     },
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: '45% 55%',
+      gridTemplateColumns: '50% 50%',
       gridGap: theme.spacing(1)
     }
   },
