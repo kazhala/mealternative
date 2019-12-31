@@ -1,3 +1,7 @@
+/*
+  The array of auto completion in searching restaurant types
+  empty last index for storing user custom inputs
+*/
 export const searchOptions = [
   'Chinese',
   'Thai',

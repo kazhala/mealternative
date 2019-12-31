@@ -65,6 +65,7 @@ const DetailModal = props => {
   // offset the height of sticky dial
   const [height, setHeight] = useState(0);
 
+  // desctruct values
   const { optionNum, optionOpen, reversed } = sortOption;
 
   // calculate the speedDial component height
@@ -176,11 +177,14 @@ const DetailModal = props => {
     }
   }, [resultRestaurantList, optionNum, reversed]);
 
+  // set the active marker and close the detailModal if on mobile device
   const markSelectMarker = id => {
     setSelectedMarker(id);
     setDetailOpen(false);
   };
 
+  // using material ui to get view port width
+  // inline animation require responsive
   const theme = useTheme();
   const shiftDown = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -193,6 +197,7 @@ const DetailModal = props => {
       />
       <div
         style={{
+          // hide the animation on big device
           transform: shiftDown
             ? detailOpen
               ? 'translateY(0)'

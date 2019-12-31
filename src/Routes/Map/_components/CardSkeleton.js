@@ -1,5 +1,12 @@
+/*
+  The skeleton component to display when there's no results in search
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { Skeleton } from '@material-ui/lab';
 import { List, ListItem, ListItemIcon } from '@material-ui/core';
 import {
@@ -22,6 +29,8 @@ const CardSkeleton = props => {
       >
         <Skeleton disableAnimate height={'95%'} width={'100%'} variant='rect' />
       </div>
+
+      {/* following the same detail structure as results */}
       <List dense className={classes.cardDescriptions}>
         <ListItem>
           <ListItemIcon>

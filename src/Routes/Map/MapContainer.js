@@ -4,7 +4,7 @@
 */
 
 // React
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
@@ -30,6 +30,7 @@ const MapContainer = props => {
 
   // center lat lng position
   const [centerMarker, setCenterMarker] = useState({});
+  // selectedMarker to highlight marker
   const [selectedMarker, setSelectedMarker] = useState('');
   // determine if request data loading
   const [resLoading, setResLoading] = useState(false);
@@ -63,17 +64,14 @@ const MapContainer = props => {
   }, [lat, lng]);
 
   // clear all errors
-  const handleClearError = useCallback(() => {
+  const handleClearError = () => {
     setError('');
-  }, []);
+  };
 
   // check active selected marker
-  const checkSelectedMarker = useCallback(
-    id => {
-      return id === selectedMarker;
-    },
-    [selectedMarker]
-  );
+  const checkSelectedMarker = id => {
+    return id === selectedMarker;
+  };
 
   // Initiate google map services after map is loaded
   const handleMapApiLoaded = (map, maps) => {

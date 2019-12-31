@@ -1,3 +1,6 @@
+/*
+  Contains some of the required arrays for DetailModal component in map route
+*/
 import React from 'react';
 import {
   ClearAll,
@@ -7,6 +10,7 @@ import {
   AttachMoney
 } from '@material-ui/icons';
 
+// determine how many skeleton to show
 export const mapDetailModalSkeletons = [1, 2, 3];
 
 // speedDial action items

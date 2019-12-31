@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  // root
   mapRoot: {
     padding: theme.spacing(1),
     height: '100%',
@@ -14,6 +15,7 @@ const useStyles = makeStyles(theme => ({
       gridGap: theme.spacing(1)
     }
   },
+  // left side on big device
   locationSettings: {
     [theme.breakpoints.up('md')]: {
       display: 'grid',
@@ -24,6 +26,7 @@ const useStyles = makeStyles(theme => ({
       padding: '0 0.3rem'
     }
   },
+  // map
   googleMap: {
     width: '100%',
     height: '100%',

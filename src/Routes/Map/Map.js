@@ -47,13 +47,16 @@ const Map = props => {
 
   return (
     <div className={classes.mapRoot}>
+      {/* position relative to viewport */}
       <IndividualDetail
         classes={classes}
         individualModal={individualModal}
         clearDetailResDetail={clearDetailResDetail}
       />
-
+      {/* position relative to viewport */}
       <PageSpinner loading={!mapLoaded || resLoading} />
+
+      {/* the main details components */}
       <div className={classes.locationSettings}>
         <LocationInputForm
           centerMarker={centerMarker}
@@ -81,6 +84,8 @@ const Map = props => {
           setSelectedMarker={setSelectedMarker}
         />
       </div>
+
+      {/* google map */}
       <div className={classes.googleMap}>
         {/* render google map after lat and lng for center position is set */}
         {centerMarker.lat && centerMarker.lng && (

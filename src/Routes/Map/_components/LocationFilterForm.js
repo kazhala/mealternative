@@ -83,6 +83,8 @@ const LocationFilterForm = props => {
     return `${queryRadius}km`;
   };
 
+  // using material ui to get view port width
+  // for determine fold button showing status
   const theme = useTheme();
   const displayFold = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -129,6 +131,7 @@ const LocationFilterForm = props => {
             onChange={handleDistanceLengthChange}
           />
         </div>
+
         {/* loadmore, detail and search button */}
         <div className={classes.sliderSearchOptions}>
           <div>
@@ -139,6 +142,7 @@ const LocationFilterForm = props => {
             >
               <Cached />
             </IconButton>
+            {/* hide the button on big device */}
             {displayFold && (
               <IconButton
                 onClick={() => setDetailOpen(true)}
