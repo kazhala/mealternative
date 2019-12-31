@@ -45,7 +45,8 @@ const DetailModal = props => {
     detailOpen,
     setDetailOpen,
     getBasicResDetails,
-    getDetailedResDetail
+    getDetailedResDetail,
+    setSelectedMarker
   } = props;
 
   // ['no sort', 'distance', 'rating', 'price']
@@ -175,6 +176,11 @@ const DetailModal = props => {
     }
   }, [resultRestaurantList, optionNum, reversed]);
 
+  const markSelectMarker = id => {
+    setSelectedMarker(id);
+    setDetailOpen(false);
+  };
+
   const theme = useTheme();
   const shiftDown = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -228,7 +234,10 @@ const DetailModal = props => {
                     dense
                     className={classes.cardDescriptions}
                   >
-                    <ListItem>
+                    <ListItem
+                      button
+                      onClick={() => markSelectMarker(restaurant.place_id)}
+                    >
                       <ListItemIcon>
                         <Restaurant fontSize='small' />
                       </ListItemIcon>
@@ -268,7 +277,10 @@ const DetailModal = props => {
                         }
                       />
                     </ListItem>
-                    <ListItem>
+                    <ListItem
+                      button
+                      onClick={() => markSelectMarker(restaurant.place_id)}
+                    >
                       <ListItemIcon>
                         <LocationOn fontSize='small' />
                       </ListItemIcon>
@@ -338,7 +350,8 @@ DetailModal.propTypes = {
   detailOpen: PropTypes.bool.isRequired,
   setDetailOpen: PropTypes.func.isRequired,
   getBasicResDetails: PropTypes.func.isRequired,
-  getDetailedResDetail: PropTypes.func.isRequired
+  getDetailedResDetail: PropTypes.func.isRequired,
+  setSelectedMarker: PropTypes.func.isRequired
 };
 
 export default DetailModal;

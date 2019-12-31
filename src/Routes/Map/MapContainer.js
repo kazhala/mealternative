@@ -4,7 +4,7 @@
 */
 
 // React
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
@@ -30,6 +30,7 @@ const MapContainer = props => {
 
   // center lat lng position
   const [centerMarker, setCenterMarker] = useState({});
+  const [selectedMarker, setSelectedMarker] = useState('');
   // determine if request data loading
   const [resLoading, setResLoading] = useState(false);
   // stores the searched restaurant into array
@@ -62,9 +63,17 @@ const MapContainer = props => {
   }, [lat, lng]);
 
   // clear all errors
-  const handleClearError = () => {
+  const handleClearError = useCallback(() => {
     setError('');
-  };
+  }, []);
+
+  // check active selected marker
+  const checkSelectedMarker = useCallback(
+    id => {
+      return id === selectedMarker;
+    },
+    [selectedMarker]
+  );
 
   // Initiate google map services after map is loaded
   const handleMapApiLoaded = (map, maps) => {
@@ -296,6 +305,8 @@ const MapContainer = props => {
         handleMapApiLoaded={handleMapApiLoaded}
         mapLoaded={mapLoaded}
         centerMarker={centerMarker}
+        checkSelectedMarker={checkSelectedMarker}
+        setSelectedMarker={setSelectedMarker}
         handleRestaurantSearch={handleRestaurantSearch}
         handleAutoCompleteUpdate={handleAutoCompleteUpdate}
         updateCenterMarker={updateCenterMarker}

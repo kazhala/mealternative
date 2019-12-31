@@ -18,7 +18,8 @@ const RestaurantMarker = props => {
     $hover,
     restaurant,
     getBasicResDetails,
-    getDetailedResDetail
+    getDetailedResDetail,
+    checkSelectedMarker
   } = props;
 
   const {
@@ -32,7 +33,11 @@ const RestaurantMarker = props => {
   return (
     <div>
       <div className={classes.centerMarker}>
-        <PinDrop color='primary' fontSize='small' />
+        {checkSelectedMarker(restaurant.place_id) ? (
+          <PinDrop color='error' fontSize='large' />
+        ) : (
+          <PinDrop color='primary' fontSize='small' />
+        )}
       </div>
       {$hover && (
         <Typography
@@ -59,7 +64,8 @@ RestaurantMarker.propTypes = {
   $hover: PropTypes.any,
   restaurant: PropTypes.object.isRequired,
   getBasicResDetails: PropTypes.func.isRequired,
-  getDetailedResDetail: PropTypes.func.isRequired
+  getDetailedResDetail: PropTypes.func.isRequired,
+  checkSelectedMarker: PropTypes.func.isRequired
 };
 
 export default RestaurantMarker;

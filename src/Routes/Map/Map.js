@@ -27,6 +27,8 @@ const Map = props => {
     handleMapApiLoaded,
     mapLoaded,
     centerMarker,
+    checkSelectedMarker,
+    setSelectedMarker,
     handleRestaurantSearch,
     handleAutoCompleteUpdate,
     updateCenterMarker,
@@ -76,6 +78,7 @@ const Map = props => {
           classes={classes}
           getBasicResDetails={getBasicResDetails}
           getDetailedResDetail={getDetailedResDetail}
+          setSelectedMarker={setSelectedMarker}
         />
       </div>
       <div className={classes.googleMap}>
@@ -100,6 +103,7 @@ const Map = props => {
               <RestaurantMarker
                 key={index}
                 classes={classes}
+                checkSelectedMarker={checkSelectedMarker}
                 lat={restaurant.geometry.location.lat()}
                 lng={restaurant.geometry.location.lng()}
                 restaurant={restaurant}
@@ -120,6 +124,8 @@ Map.propTypes = {
   mapLoaded: PropTypes.bool.isRequired,
   handleMapApiLoaded: PropTypes.func.isRequired,
   centerMarker: PropTypes.object.isRequired,
+  checkSelectedMarker: PropTypes.func.isRequired,
+  setSelectedMarker: PropTypes.func.isRequired,
   handleRestaurantSearch: PropTypes.func.isRequired,
   handleAutoCompleteUpdate: PropTypes.func.isRequired,
   updateCenterMarker: PropTypes.func.isRequired,

@@ -94,7 +94,7 @@ const LocationFilterForm = props => {
             label='Restaurant Type'
             variant='outlined'
             fullWidth
-            placeholder='Search restaurant type'
+            placeholder='All restaurants'
             value={queryValue}
             size='small'
             onChange={handleChange}
