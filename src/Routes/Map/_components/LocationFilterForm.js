@@ -12,7 +12,9 @@ import {
   TextField,
   Button,
   Typography,
-  Slider
+  Slider,
+  useTheme,
+  useMediaQuery
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { Cached, UnfoldMore } from '@material-ui/icons';
@@ -81,6 +83,9 @@ const LocationFilterForm = props => {
     return `${queryRadius}km`;
   };
 
+  const theme = useTheme();
+  const displayFold = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <div>
       <Autocomplete
@@ -134,13 +139,15 @@ const LocationFilterForm = props => {
             >
               <Cached />
             </IconButton>
-            <IconButton
-              onClick={() => setDetailOpen(true)}
-              disabled={checkDisable(1)}
-              size='small'
-            >
-              <UnfoldMore />
-            </IconButton>
+            {displayFold && (
+              <IconButton
+                onClick={() => setDetailOpen(true)}
+                disabled={checkDisable(1)}
+                size='small'
+              >
+                <UnfoldMore />
+              </IconButton>
+            )}
           </div>
           <Button
             color='primary'
