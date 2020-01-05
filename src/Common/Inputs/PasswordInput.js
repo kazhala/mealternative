@@ -11,7 +11,7 @@ const PasswordInput = props => {
     <TextField
       variant='outlined'
       placeholder='Password'
-      label='password'
+      label='Password'
       className={className}
       type={showPassword ? 'text' : 'password'}
       InputProps={{

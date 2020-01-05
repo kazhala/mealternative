@@ -11,6 +11,7 @@ import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import OrDivider from '../../Common/Divider/OrDivider';
 import PasswordInput from '../../Common/Inputs/PasswordInput';
+import EmailInput from '../../Common/Inputs/EmailInput';
 
 const SignUp = props => {
   const classes = useStyles();
@@ -27,12 +28,7 @@ const SignUp = props => {
           label='username'
           className={classes.signUpInput}
         />
-        <TextField
-          variant='outlined'
-          placeholder='Email'
-          label='email'
-          className={classes.signUpInput}
-        />
+        <EmailInput className={classes.signUpInput} />
         <PasswordInput className={classes.signUpInput} />
         <div className={classes.signUpButton}>
           <Button variant='contained' color='primary'>
