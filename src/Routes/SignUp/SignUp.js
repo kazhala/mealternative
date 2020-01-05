@@ -4,7 +4,7 @@
 import React from 'react';
 import useStyles from './Style';
 
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { Facebook } from '@material-ui/icons';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
@@ -14,7 +14,20 @@ const SignUp = props => {
 
   return (
     <div className={classes.signUpRoot}>
-      <div>Sign up form</div>
+      <form className={classes.signUpForm}>
+        <TextField
+          variant='outlined'
+          placeholder='User Name'
+          label='username'
+        />
+        <TextField variant='outlined' placeholder='Email' label='email' />
+        <TextField variant='outlined' placeholder='Password' label='password' />
+        <div>
+          <Button variant='contained' color='primary'>
+            Sign Up
+          </Button>
+        </div>
+      </form>
       <div className={classes.signUpSocial}>
         <GoogleLogin
           buttonText='SIGN UP WITH GOOGLE'

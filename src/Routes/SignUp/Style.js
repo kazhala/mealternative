@@ -6,7 +6,14 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
     display: 'grid',
-    justifyItems: 'center'
+    justifyItems: 'center',
+    gridTemplateRows: '70% auto auto'
+  },
+  signUpForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '80%'
   },
   signUpSocial: {
     display: 'flex',

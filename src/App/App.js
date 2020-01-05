@@ -14,8 +14,7 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Button,
-  Typography
+  Button
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import useStyles from './Style';
