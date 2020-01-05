@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '80%'
+    width: '90%'
   },
   signUpInput: {
     margin: theme.spacing(0.5, 0)
@@ -37,7 +37,15 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(17),
     height: theme.spacing(3),
     paddingLeft: '1rem !important',
-    fontSize: '1rem !important'
+    fontSize: '1rem !important',
+    marginBottom: theme.spacing(1)
+  },
+  signUpLinks: {
+    width: '90%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: theme.spacing(2)
   }
 }));
 

@@ -4,6 +4,7 @@
 import React from 'react';
 import useStyles from './Style';
 
+import { Link } from 'react-router-dom';
 import { Button, TextField, Typography } from '@material-ui/core';
 import { Facebook } from '@material-ui/icons';
 import { GoogleLogin } from 'react-google-login';
@@ -17,7 +18,6 @@ const SignUp = props => {
     <div className={classes.signUpRoot}>
       <div className={classes.signUpTitle}>
         <Typography variant='h4'>Sign Up</Typography>
-        <Typography variant='caption'>Mealternative</Typography>
       </div>
       <form className={classes.signUpForm}>
         <TextField
@@ -65,7 +65,9 @@ const SignUp = props => {
           icon={<Facebook />}
         />
       </div>
-      <div>links to forgot password signin</div>
+      <Typography variant='caption' className={classes.signUpLinks}>
+        <Link to='signin'>Already have an account? Sign In</Link>
+      </Typography>
     </div>
   );
 };
