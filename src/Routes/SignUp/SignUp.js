@@ -10,6 +10,7 @@ import { Facebook } from '@material-ui/icons';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import OrDivider from '../../Common/Divider/OrDivider';
+import PasswordInput from '../../Common/Inputs/PasswordInput';
 
 const SignUp = props => {
   const classes = useStyles();
@@ -32,12 +33,7 @@ const SignUp = props => {
           label='email'
           className={classes.signUpInput}
         />
-        <TextField
-          variant='outlined'
-          placeholder='Password'
-          label='password'
-          className={classes.signUpInput}
-        />
+        <PasswordInput className={classes.signUpInput} />
         <div className={classes.signUpButton}>
           <Button variant='contained' color='primary'>
             Sign Up
