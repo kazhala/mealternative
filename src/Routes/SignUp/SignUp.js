@@ -2,18 +2,15 @@ import React from 'react';
 import useStyles from './Style';
 
 const SignUp = props => {
-  // const {  } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.signUpRoot}>
-      <div className={classes.signUpCard}>SignUp</div>
+      <div>social icons</div>
+      <div>Sign up form</div>
+      <div>links to forgot password signin</div>
     </div>
   );
 };
-
-// SignUp.propTypes = {
-//   :  PropTypes.any
-// }
 
 export default SignUp;

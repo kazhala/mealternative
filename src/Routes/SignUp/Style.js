@@ -5,14 +5,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     height: '100%',
     width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  signUpCard: {
-    height: theme.spacing(5),
-    width: theme.spacing(5),
-    border: '1px solid black'
+    display: 'grid'
   }
 }));
 

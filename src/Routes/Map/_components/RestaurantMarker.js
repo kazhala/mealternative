@@ -34,9 +34,9 @@ const RestaurantMarker = props => {
     <div>
       <div className={classes.centerMarker}>
         {checkSelectedMarker(restaurant.place_id) ? (
-          <PinDrop color='error' fontSize='large' />
+          <PinDrop color='primary' fontSize='large' />
         ) : (
-          <PinDrop color='primary' fontSize='small' />
+          <PinDrop color='secondary' fontSize='small' />
         )}
       </div>
       {$hover && (
