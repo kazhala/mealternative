@@ -4,30 +4,47 @@
 import React from 'react';
 import useStyles from './Style';
 
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Typography } from '@material-ui/core';
 import { Facebook } from '@material-ui/icons';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import OrDivider from '../../Common/Divider/OrDivider';
 
 const SignUp = props => {
   const classes = useStyles();
 
   return (
     <div className={classes.signUpRoot}>
+      <div className={classes.signUpTitle}>
+        <Typography variant='h4'>Sign Up</Typography>
+        <Typography variant='caption'>Mealternative</Typography>
+      </div>
       <form className={classes.signUpForm}>
         <TextField
           variant='outlined'
           placeholder='User Name'
           label='username'
+          className={classes.signUpInput}
         />
-        <TextField variant='outlined' placeholder='Email' label='email' />
-        <TextField variant='outlined' placeholder='Password' label='password' />
-        <div>
+        <TextField
+          variant='outlined'
+          placeholder='Email'
+          label='email'
+          className={classes.signUpInput}
+        />
+        <TextField
+          variant='outlined'
+          placeholder='Password'
+          label='password'
+          className={classes.signUpInput}
+        />
+        <div className={classes.signUpButton}>
           <Button variant='contained' color='primary'>
             Sign Up
           </Button>
         </div>
       </form>
+      <OrDivider />
       <div className={classes.signUpSocial}>
         <GoogleLogin
           buttonText='SIGN UP WITH GOOGLE'
