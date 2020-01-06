@@ -7,6 +7,8 @@ import React, { useReducer } from 'react';
 
 // Redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { AuthActions } from '../../Redux/authentication';
 
 // components
 import { Redirect } from 'react-router-dom';
@@ -56,6 +58,7 @@ const SignUpContainer = props => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
+    props.signup(formState);
     console.log('submited', formState);
   };
 
@@ -78,4 +81,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(SignUpContainer);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      signup: AuthActions.signup
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpContainer);
