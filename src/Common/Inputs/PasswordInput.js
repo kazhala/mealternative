@@ -4,7 +4,7 @@ import { TextField, InputAdornment, IconButton } from '@material-ui/core';
 import { Lock, Visibility, VisibilityOff } from '@material-ui/icons';
 
 const PasswordInput = props => {
-  const { className } = props;
+  const { className, name, value, onChange } = props;
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -14,6 +14,9 @@ const PasswordInput = props => {
       label='Password'
       className={className}
       type={showPassword ? 'text' : 'password'}
+      name={name}
+      value={value}
+      onChange={onChange}
       InputProps={{
         startAdornment: (
           <InputAdornment position='start'>
@@ -33,7 +36,10 @@ const PasswordInput = props => {
 };
 
 PasswordInput.propTypes = {
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default PasswordInput;

@@ -4,7 +4,7 @@ import { TextField, InputAdornment } from '@material-ui/core';
 import { Mail } from '@material-ui/icons';
 
 const EmailInput = props => {
-  const { className } = props;
+  const { className, name, value, onChange } = props;
 
   return (
     <TextField
@@ -13,6 +13,9 @@ const EmailInput = props => {
       label='Email'
       className={className}
       type='email'
+      name={name}
+      value={value}
+      onChange={onChange}
       InputProps={{
         startAdornment: (
           <InputAdornment position='start'>
@@ -25,7 +28,10 @@ const EmailInput = props => {
 };
 
 EmailInput.propTypes = {
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default EmailInput;
