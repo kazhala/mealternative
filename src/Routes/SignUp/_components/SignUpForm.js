@@ -12,12 +12,11 @@ import PasswordInput from '../../../Common/Inputs/PasswordInput';
 import EmailInput from '../../../Common/Inputs/EmailInput';
 
 const SignUpForm = props => {
-  const { classes, formState, handleFormChange } = props;
+  const { classes, formState, handleFormChange, handleFormSubmit } = props;
   const { username, email, password } = formState;
-  console.log(formState);
 
   return (
-    <form className={classes.signUpForm}>
+    <form className={classes.signUpForm} onSubmit={handleFormSubmit}>
       <TextField
         variant='outlined'
         placeholder='User name'
@@ -26,6 +25,7 @@ const SignUpForm = props => {
         name='username'
         onChange={handleFormChange}
         className={classes.signUpInput}
+        required
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
@@ -50,6 +50,7 @@ const SignUpForm = props => {
         className={classes.signUpButton}
         variant='contained'
         color='primary'
+        type='submit'
       >
         Sign Up
       </Button>
@@ -67,7 +68,8 @@ const SignUpForm = props => {
 SignUpForm.propTypes = {
   classes: PropTypes.object.isRequired,
   formState: PropTypes.object.isRequired,
-  handleFormChange: PropTypes.func.isRequired
+  handleFormChange: PropTypes.func.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired
 };
 
 export default SignUpForm;

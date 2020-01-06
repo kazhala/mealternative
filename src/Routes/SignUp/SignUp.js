@@ -12,7 +12,7 @@ import SocialSignUp from './_components/SocialSignUp';
 
 const SignUp = props => {
   const classes = useStyles();
-  const { formState, handleFormChange } = props;
+  const { formState, handleFormChange, handleFormSubmit } = props;
 
   return (
     <div className={classes.signUpRoot}>
@@ -22,6 +22,7 @@ const SignUp = props => {
       <SignUpForm
         formState={formState}
         handleFormChange={handleFormChange}
+        handleFormSubmit={handleFormSubmit}
         classes={classes}
       />
       <OrDivider />
@@ -32,7 +33,8 @@ const SignUp = props => {
 
 SignUp.propTypes = {
   formState: PropTypes.object.isRequired,
-  handleFormChange: PropTypes.func.isRequired
+  handleFormChange: PropTypes.func.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired
 };
 
 export default SignUp;

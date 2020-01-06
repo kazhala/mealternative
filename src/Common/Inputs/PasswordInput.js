@@ -17,6 +17,7 @@ const PasswordInput = props => {
       name={name}
       value={value}
       onChange={onChange}
+      required
       InputProps={{
         startAdornment: (
           <InputAdornment position='start'>

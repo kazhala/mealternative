@@ -54,12 +54,18 @@ const SignUpContainer = props => {
     formDispatch({ type: fieldName, payload });
   };
 
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    console.log('submited', formState);
+  };
+
   return (
     <>
       {props.isAuthenticated && <Redirect to='/' />}
       <SignUp
         formState={formState}
         handleFormChange={handleFormChange}
+        handleFormSubmit={handleFormSubmit}
         {...props}
       />
     </>

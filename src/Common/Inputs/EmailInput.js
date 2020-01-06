@@ -10,6 +10,7 @@ const EmailInput = props => {
     <TextField
       variant='outlined'
       placeholder='Email'
+      required
       label='Email'
       className={className}
       type='email'
