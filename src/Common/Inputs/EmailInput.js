@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TextField, InputAdornment } from '@material-ui/core';
 import { Mail } from '@material-ui/icons';
 
-const PasswordInput = props => {
+const EmailInput = props => {
   const { className } = props;
 
   return (
@@ -24,8 +24,8 @@ const PasswordInput = props => {
   );
 };
 
-PasswordInput.propTypes = {
-  classes: PropTypes.string.isRequired
+EmailInput.propTypes = {
+  className: PropTypes.string.isRequired
 };
 
-export default PasswordInput;
+export default EmailInput;

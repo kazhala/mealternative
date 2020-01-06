@@ -33,7 +33,7 @@ const PasswordInput = props => {
 };
 
 PasswordInput.propTypes = {
-  classes: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired
 };
 
 export default PasswordInput;
