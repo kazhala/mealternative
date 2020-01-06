@@ -23,8 +23,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0.5, 0)
   },
   signUpButton: {
-    display: 'flex',
-    justifyContent: 'flex-end'
+    margin: theme.spacing(0.5, 0)
   },
   signUpSocial: {
     display: 'flex',
@@ -41,11 +40,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1)
   },
   signUpLinks: {
-    width: '90%',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginTop: theme.spacing(2)
+    textAlign: 'center',
+    margin: theme.spacing(0.5, 0)
   }
 }));
 
