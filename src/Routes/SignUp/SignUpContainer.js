@@ -63,7 +63,10 @@ const SignUpContainer = props => {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.Auth.isAuthenticated
+    isAuthenticated: state.Auth.isAuthenticated,
+    loading: state.Auth.loading,
+    success: state.Auth.success,
+    error: state.Auth.error
   };
 };
 

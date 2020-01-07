@@ -4,7 +4,8 @@ import {
   TextField,
   Button,
   InputAdornment,
-  Typography
+  Typography,
+  CircularProgress
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { AccountCircle } from '@material-ui/icons';
@@ -12,7 +13,13 @@ import PasswordInput from '../../../Common/Inputs/PasswordInput';
 import EmailInput from '../../../Common/Inputs/EmailInput';
 
 const SignUpForm = props => {
-  const { classes, formState, handleFormChange, handleFormSubmit } = props;
+  const {
+    classes,
+    formState,
+    handleFormChange,
+    handleFormSubmit,
+    loading
+  } = props;
   const { username, email, password } = formState;
 
   return (
@@ -51,8 +58,9 @@ const SignUpForm = props => {
         variant='contained'
         color='primary'
         type='submit'
+        disabled={loading}
       >
-        Sign Up
+        {loading ? <CircularProgress size='1rem' disableShrink /> : 'Sign Up'}
       </Button>
       <Typography
         variant='caption'

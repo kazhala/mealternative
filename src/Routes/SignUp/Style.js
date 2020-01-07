@@ -13,6 +13,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 0),
     textAlign: 'center'
   },
+  signUpAlert: {
+    width: '90%',
+    marginBottom: theme.spacing(1)
+  },
   signUpForm: {
     display: 'flex',
     flexDirection: 'column',
@@ -23,7 +27,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0.5, 0)
   },
   signUpButton: {
-    margin: theme.spacing(0.5, 0)
+    margin: theme.spacing(0.5, 0),
+    height: theme.spacing(2.5)
   },
   signUpSocial: {
     display: 'flex',
