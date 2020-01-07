@@ -59,7 +59,7 @@ const SignUpContainer = props => {
   const handleFormSubmit = e => {
     e.preventDefault();
     props.signup(formState);
-    console.log('submited', formState);
+    // console.log('submited', formState);
   };
 
   return (
