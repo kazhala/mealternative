@@ -17,10 +17,7 @@ import SignUp from './SignUp';
 const initialState = {
   username: '',
   email: '',
-  password: '',
-  error: '',
-  loading: false,
-  success: false
+  password: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -31,17 +28,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, email: action.payload };
     case 'PASSWORD':
       return { ...state, password: action.payload };
-    case 'ERROR':
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-        success: false
-      };
-    case 'SUBMIT':
-      return { ...state, loading: true, error: '', success: false };
-    case 'SUCCESS':
-      return { ...state, loading: false, error: '', success: true };
     default:
       return state;
   }
