@@ -95,7 +95,7 @@ const Map = props => {
               libraries: ['places', 'directions']
             }}
             center={{ lat: centerMarker.lat, lng: centerMarker.lng }}
-            defaultZoom={14}
+            defaultZoom={16}
             yesIWantToUseGoogleMapApiInternals={true}
             onGoogleApiLoaded={({ map, maps }) => handleMapApiLoaded(map, maps)}
           >

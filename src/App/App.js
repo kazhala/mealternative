@@ -34,12 +34,12 @@ const App = props => {
       <AppBar position='fixed'>
         <Toolbar disableGutters className={classes.menuBarLayout}>
           <IconButton>
-            <Menu style={{ color: '#cfd8dc' }} />
+            <Menu style={{ color: '#eceff4' }} />
           </IconButton>
           {isAuthenticated ? null : (
             <div>
-              <Button style={{ color: '#cfd8dc' }}>Sign In</Button>
-              <Button style={{ color: '#cfd8dc' }}>Sign Up</Button>
+              <Button style={{ color: '#eceff4' }}>Sign In</Button>
+              <Button style={{ color: '#eceff4' }}>Sign Up</Button>
             </div>
           )}
         </Toolbar>
