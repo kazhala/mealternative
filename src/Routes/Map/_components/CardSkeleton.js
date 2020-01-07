@@ -27,7 +27,12 @@ const CardSkeleton = props => {
         style={{ display: 'flex', alignItems: 'center' }}
         className={classes.cardImage}
       >
-        <Skeleton disableAnimate height={'95%'} width={'100%'} variant='rect' />
+        <Skeleton
+          animation={false}
+          height={'95%'}
+          width={'100%'}
+          variant='rect'
+        />
       </div>
 
       {/* following the same detail structure as results */}
@@ -36,37 +41,37 @@ const CardSkeleton = props => {
           <ListItemIcon>
             <Restaurant fontSize='small' />
           </ListItemIcon>
-          <Skeleton disableAnimate variant='text' width={'100%'} />
+          <Skeleton animation={false} variant='text' width={'100%'} />
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <LocalOffer fontSize='small' />
           </ListItemIcon>
-          <Skeleton disableAnimate variant='text' width={'100%'} />
+          <Skeleton animation={false} variant='text' width={'100%'} />
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <RateReview fontSize='small' />
           </ListItemIcon>
-          <Skeleton disableAnimate variant='text' width={'100%'} />
+          <Skeleton animation={false} variant='text' width={'100%'} />
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <Directions fontSize='small' />
           </ListItemIcon>
-          <Skeleton disableAnimate variant='text' width={'100%'} />
+          <Skeleton animation={false} variant='text' width={'100%'} />
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <LocationOn fontSize='small' />
           </ListItemIcon>
-          <Skeleton disableAnimate variant='text' width={'100%'} />
+          <Skeleton animation={false} variant='text' width={'100%'} />
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <More fontSize='small' />
           </ListItemIcon>
-          <Skeleton disableAnimate variant='text' width={'100%'} />
+          <Skeleton animation={false} variant='text' width={'100%'} />
         </ListItem>
       </List>
     </div>
