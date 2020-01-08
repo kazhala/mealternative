@@ -27,6 +27,7 @@ const SignUp = props => {
       <div className={classes.signUpTitle}>
         <Typography variant='h4'>Sign Up</Typography>
       </div>
+      {/* alert */}
       <div className={classes.signUpAlert}>
         {success && (
           <Alert severity='success'>
@@ -48,6 +49,7 @@ const SignUp = props => {
         classes={classes}
         loading={loading}
       />
+      {/* divider between form or social signup */}
       <OrDivider />
       <SocialSignUp classes={classes} />
     </div>
@@ -57,7 +59,10 @@ const SignUp = props => {
 SignUp.propTypes = {
   formState: PropTypes.object.isRequired,
   handleFormChange: PropTypes.func.isRequired,
-  handleFormSubmit: PropTypes.func.isRequired
+  handleFormSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  success: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired
 };
 
 export default SignUp;

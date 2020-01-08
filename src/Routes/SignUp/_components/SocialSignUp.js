@@ -1,5 +1,12 @@
+/*
+  Social signup buttons
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { Facebook } from '@material-ui/icons';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
@@ -13,6 +20,7 @@ const SocialSignUp = props => {
         buttonText='SIGN UP WITH GOOGLE'
         className={classes.signUpGoogle}
       />
+      {/* only supports inline */}
       <FacebookLogin
         buttonStyle={{
           display: 'flex',

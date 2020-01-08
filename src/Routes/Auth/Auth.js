@@ -1,3 +1,6 @@
+/*
+  Main Auth component, act as nested routes provider
+*/
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AccountActivate from './_components/AccountActivate';
@@ -29,6 +32,7 @@ const Auth = props => {
           />
         )}
       />
+      {/* TODO:add redirect */}
     </Switch>
   );
 };

@@ -14,12 +14,14 @@ import { AuthActions } from '../../Redux/authentication';
 import { Redirect } from 'react-router-dom';
 import SignUp from './SignUp';
 
+// initil form state
 const initialState = {
   username: '',
   email: '',
   password: ''
 };
 
+// form state handler
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'USERNAME':
@@ -34,21 +36,23 @@ const reducer = (state = initialState, action) => {
 };
 
 const SignUpContainer = props => {
-  const { cleanUp } = props;
+  const { cleanUp, signup } = props;
   const [formState, formDispatch] = useReducer(reducer, initialState);
 
+  // update form state
   const handleFormChange = e => {
     const fieldName = e.target.name.toUpperCase();
     const payload = e.target.value;
     formDispatch({ type: fieldName, payload });
   };
 
+  // submit form
   const handleFormSubmit = e => {
     e.preventDefault();
-    props.signup(formState);
-    // console.log('submited', formState);
+    signup(formState);
   };
 
+  // clean up
   useEffect(() => {
     return () => {
       cleanUp();

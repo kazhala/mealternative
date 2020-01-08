@@ -1,5 +1,12 @@
+/*
+  Auth container for handling all temporary auth actions
+*/
+
+// react
 import React from 'react';
 import Auth from './Auth';
+
+// redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { AuthActions } from '../../Redux/authentication';

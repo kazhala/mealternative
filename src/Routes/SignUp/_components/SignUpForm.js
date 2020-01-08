@@ -1,5 +1,12 @@
+/*
+  Top sign up form
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import {
   TextField,
   Button,
@@ -77,7 +84,8 @@ SignUpForm.propTypes = {
   classes: PropTypes.object.isRequired,
   formState: PropTypes.object.isRequired,
   handleFormChange: PropTypes.func.isRequired,
-  handleFormSubmit: PropTypes.func.isRequired
+  handleFormSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 export default SignUpForm;
