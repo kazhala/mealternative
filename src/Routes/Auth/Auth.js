@@ -32,7 +32,6 @@ const Auth = props => {
           />
         )}
       />
-      {/* TODO:add redirect */}
       <Redirect to='/' />
     </Switch>
   );

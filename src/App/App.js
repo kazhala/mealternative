@@ -3,21 +3,15 @@
   Provide layout
 */
 
-// React
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-// Style
-import {
-  CssBaseline,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Button
-} from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
+// components
+import { CssBaseline } from '@material-ui/core';
 import useStyles from './Style';
+import Header from './Header';
 
 //Routes
 import * as Routes from '../Routes/Routes';
@@ -31,19 +25,7 @@ const App = props => {
     <div className={classes.root}>
       {/* get global css settings (enhancement) */}
       <CssBaseline />
-      <AppBar position='fixed'>
-        <Toolbar disableGutters className={classes.menuBarLayout}>
-          <IconButton>
-            <Menu style={{ color: '#eceff4' }} />
-          </IconButton>
-          {isAuthenticated ? null : (
-            <div>
-              <Button style={{ color: '#eceff4' }}>Sign In</Button>
-              <Button style={{ color: '#eceff4' }}>Sign Up</Button>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
+      <Header classes={classes} isAuthenticated={isAuthenticated} />
 
       {/* provide layout for the main contents */}
       <div className={classes.layout}>
