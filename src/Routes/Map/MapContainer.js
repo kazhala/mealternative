@@ -297,7 +297,6 @@ const MapContainer = props => {
 
   return (
     <>
-      {/* <ErrorModal error={error} handleClose={handleClearError} /> */}
       <ErrorSnack error={error} handleClose={handleClearError} />
       <Map
         {...props}

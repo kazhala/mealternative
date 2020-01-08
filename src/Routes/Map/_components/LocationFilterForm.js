@@ -20,7 +20,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { Cached, UnfoldMore } from '@material-ui/icons';
 
 // misc
-import { searchOptions } from '../../../Common/AutoArray/RestaurantSearchOptions';
+import { searchOptions } from '../../../Common/DefaultValues/RestaurantSearchOptions';
 
 const LocationFilterForm = props => {
   const {

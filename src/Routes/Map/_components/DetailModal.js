@@ -35,7 +35,7 @@ import {
   mapDetailModalSkeletons,
   actions,
   backDropStyle
-} from '../../../Common/AutoArray/MapDetailArrays';
+} from '../../../Common/DefaultValues/MapDetailArrays';
 
 // Main component
 const DetailModal = props => {
