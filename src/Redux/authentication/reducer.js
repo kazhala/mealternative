@@ -1,5 +1,9 @@
+/*
+  Auth related reducer
+*/
 import * as Types from './types';
 
+// TODO: update isAuthenticated
 const initialState = {
   isAuthenticated: false,
   loading: false,

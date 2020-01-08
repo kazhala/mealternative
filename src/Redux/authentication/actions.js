@@ -1,3 +1,6 @@
+/*
+  Action provider for routes
+*/
 import * as Types from './types';
 
 export const signup = formData => ({

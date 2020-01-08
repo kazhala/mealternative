@@ -5,6 +5,7 @@
 import { all, fork } from 'redux-saga/effects';
 import { AuthSagas } from './authentication';
 
+// running all sagas parallel(all) without blocking(fork)
 export default function* rootSaga() {
   try {
     yield all([

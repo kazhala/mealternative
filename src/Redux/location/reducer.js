@@ -1,8 +1,12 @@
+/*
+  reducer for handling current location
+*/
 import * as Types from './types';
 
 const initialState = {
   longitude: '',
   latitude: '',
+  // locaion request option
   options: {
     enableHighAccuracy: true,
     timeout: 5000,

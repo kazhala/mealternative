@@ -1,6 +1,10 @@
+/*
+  Async api calls for sagas
+*/
 import { API } from '../../config';
 import Cookies from 'js-cookie';
 
+// sign up
 export const signUp = async payload => {
   try {
     const res = await fetch(`${API}/pre-signup`, {
@@ -17,6 +21,7 @@ export const signUp = async payload => {
   }
 };
 
+// activate account
 export const activate = async payload => {
   try {
     const res = await fetch(`${API}/signup`, {
@@ -33,6 +38,7 @@ export const activate = async payload => {
   }
 };
 
+// signin
 export const signIn = async payload => {
   console.log(payload);
   const bodyData =
@@ -54,6 +60,7 @@ export const signIn = async payload => {
   }
 };
 
+// store user infor
 export const authenticate = data => {
   if (navigator.cookieEnabled) {
     Cookies.set('token', data.token);

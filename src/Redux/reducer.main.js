@@ -1,3 +1,6 @@
+/*
+  The root reducer
+*/
 import { combineReducers } from 'redux';
 
 import AuthReducer from './authentication';
