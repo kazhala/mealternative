@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 
 // Components
 import Map from './Map';
-import ErrorModal from '../../Common/ErrorModal/ErrorModal';
+import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const MapContainer = props => {
   // lat, lng info from redux
@@ -297,7 +297,8 @@ const MapContainer = props => {
 
   return (
     <>
-      <ErrorModal error={error} handleClose={handleClearError} />
+      {/* <ErrorModal error={error} handleClose={handleClearError} /> */}
+      <ErrorSnack error={error} handleClose={handleClearError} />
       <Map
         {...props}
         handleMapApiLoaded={handleMapApiLoaded}
