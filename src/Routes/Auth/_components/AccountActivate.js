@@ -42,7 +42,6 @@ const AccountActivate = props => {
     history.replace('/signup');
   };
 
-  // TODO: add error handling
   return (
     <>
       <ErrorModal error={error} handleClose={handleErrorClose} />

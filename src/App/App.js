@@ -6,7 +6,7 @@
 // React
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Style
 import {
@@ -59,6 +59,7 @@ const App = props => {
             <Route path='/meals' component={Routes.Meals} />
             <Route path='/map' component={Routes.Map} />
             <Route path='/auth' component={Routes.Auth} />
+            <Redirect to='/' />
           </Switch>
         </div>
       </div>
