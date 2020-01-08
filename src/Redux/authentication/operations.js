@@ -1,4 +1,5 @@
 import { API } from '../../config';
+import Cookies from 'js-cookie';
 
 export const signUp = async payload => {
   try {
@@ -50,5 +51,18 @@ export const signIn = async payload => {
     return res.json();
   } catch (err) {
     console.log('Error', err);
+  }
+};
+
+export const authenticate = data => {
+  if (navigator.cookieEnabled) {
+    Cookies.set('token', data.token);
+    if (window.localStorage) {
+      localStorage.setItem('user', JSON.stringify(data.user));
+    } else {
+      throw new Error("Your browser doesn't support storage, can't login");
+    }
+  } else {
+    throw new Error("Your browser doesn't support cookie, can't login");
   }
 };

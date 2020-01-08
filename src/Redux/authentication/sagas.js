@@ -59,6 +59,7 @@ function* workerSignIn({ payload }) {
   try {
     let response = yield call(Operations.signIn, payload);
     if (response.token) {
+      yield call(Operations.authenticate, response);
       yield put({ type: Types.SUCCESS, payload: 'Sign in success!' });
     } else if (response.error) {
       throw new Error(response.error);
