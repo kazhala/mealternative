@@ -309,6 +309,7 @@ const MapContainer = props => {
         handleAutoCompleteUpdate={handleAutoCompleteUpdate}
         updateCenterMarker={updateCenterMarker}
         resLoading={resLoading}
+        setResLoading={setResLoading}
         setResultRestaurantList={setResultRestaurantList}
         resultRestaurantList={resultRestaurantList}
         nextPage={nextPage}

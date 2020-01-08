@@ -29,7 +29,8 @@ const LocationFilterForm = props => {
     nextPage,
     setResultRestaurantList,
     resultRestaurantList,
-    setDetailOpen
+    setDetailOpen,
+    setResLoading
   } = props;
 
   // value of auto completion
@@ -81,6 +82,11 @@ const LocationFilterForm = props => {
   // display slider value to readable form in slider title
   const displayDistanceLength = () => {
     return `${queryRadius}km`;
+  };
+
+  const requestNextPage = () => {
+    setResLoading(true);
+    nextPage.nextPage();
   };
 
   // using material ui to get view port width
@@ -138,7 +144,7 @@ const LocationFilterForm = props => {
             <IconButton
               disabled={checkDisable(0)}
               size='small'
-              onClick={() => nextPage.nextPage()}
+              onClick={requestNextPage}
             >
               <Cached />
             </IconButton>
@@ -175,7 +181,8 @@ LocationFilterForm.propTypes = {
   nextPage: PropTypes.any,
   setResultRestaurantList: PropTypes.func.isRequired,
   resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setDetailOpen: PropTypes.func.isRequired
+  setDetailOpen: PropTypes.func.isRequired,
+  setResLoading: PropTypes.func.isRequired
 };
 
 export default LocationFilterForm;

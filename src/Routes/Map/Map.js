@@ -36,6 +36,7 @@ const Map = props => {
     resultRestaurantList,
     setResultRestaurantList,
     resLoading,
+    setResLoading,
     detailOpen,
     setDetailOpen,
     getBasicResDetails,
@@ -70,6 +71,7 @@ const Map = props => {
           handleRestaurantSearch={handleRestaurantSearch}
           classes={classes}
           nextPage={nextPage}
+          setResLoading={setResLoading}
           setResultRestaurantList={setResultRestaurantList}
           resultRestaurantList={resultRestaurantList}
           setDetailOpen={setDetailOpen}
@@ -138,6 +140,7 @@ Map.propTypes = {
   setResultRestaurantList: PropTypes.func.isRequired,
   resultRestaurantList: PropTypes.arrayOf(PropTypes.object).isRequired,
   resLoading: PropTypes.bool.isRequired,
+  setResLoading: PropTypes.func.isRequired,
   detailOpen: PropTypes.bool.isRequired,
   setDetailOpen: PropTypes.func.isRequired,
   getBasicResDetails: PropTypes.func.isRequired,
