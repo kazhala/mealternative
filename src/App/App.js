@@ -58,6 +58,7 @@ const App = props => {
             <Route path='/recipes' component={Routes.Recipes} />
             <Route path='/meals' component={Routes.Meals} />
             <Route path='/map' component={Routes.Map} />
+            <Route path='/auth' component={Routes.Auth} />
           </Switch>
         </div>
       </div>
