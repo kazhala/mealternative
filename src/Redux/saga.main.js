@@ -7,7 +7,11 @@ import { AuthSagas } from './authentication';
 
 export default function* rootSaga() {
   try {
-    yield all([fork(AuthSagas.watchSignUp)]);
+    yield all([
+      fork(AuthSagas.watchSignUp),
+      fork(AuthSagas.watchActivate),
+      fork(AuthSagas.watchSignIn)
+    ]);
   } catch (err) {
     console.log(err);
   }
