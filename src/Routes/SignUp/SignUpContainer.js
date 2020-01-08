@@ -3,7 +3,7 @@
 */
 
 // react
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 
 // Redux
 import { connect } from 'react-redux';
@@ -34,6 +34,7 @@ const reducer = (state = initialState, action) => {
 };
 
 const SignUpContainer = props => {
+  const { cleanUp } = props;
   const [formState, formDispatch] = useReducer(reducer, initialState);
 
   const handleFormChange = e => {
@@ -47,6 +48,12 @@ const SignUpContainer = props => {
     props.signup(formState);
     // console.log('submited', formState);
   };
+
+  useEffect(() => {
+    return () => {
+      cleanUp();
+    };
+  }, [cleanUp]);
 
   return (
     <>
@@ -73,7 +80,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      signup: AuthActions.signup
+      signup: AuthActions.signup,
+      cleanUp: AuthActions.cleanUp
     },
     dispatch
   );

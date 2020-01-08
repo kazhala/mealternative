@@ -3,7 +3,15 @@ import { Switch, Route } from 'react-router-dom';
 import AccountActivate from './_components/AccountActivate';
 
 const Auth = props => {
-  const { match, error, success, loading, isAuthenticated, activate } = props;
+  const {
+    cleanUp,
+    match,
+    error,
+    success,
+    loading,
+    isAuthenticated,
+    activate
+  } = props;
   return (
     <Switch>
       <Route
@@ -16,6 +24,7 @@ const Auth = props => {
             loading={loading}
             activate={activate}
             isAuthenticated={isAuthenticated}
+            cleanUp={cleanUp}
             {...props}
           />
         )}

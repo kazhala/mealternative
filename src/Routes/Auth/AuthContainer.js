@@ -20,7 +20,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      activate: AuthActions.activate
+      activate: AuthActions.activate,
+      cleanUp: AuthActions.cleanUp
     },
     dispatch
   );

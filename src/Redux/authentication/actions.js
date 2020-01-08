@@ -14,3 +14,7 @@ export const signin = formData => ({
   type: Types.SIGNIN,
   payload: formData
 });
+
+export const cleanUp = () => ({
+  type: Types.CLEAN
+});

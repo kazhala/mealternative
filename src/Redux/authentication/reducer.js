@@ -20,6 +20,13 @@ const AuthReducer = (state = initialState, action) => {
         loading: false,
         success: ''
       };
+    case Types.CLEAN:
+      return {
+        ...state,
+        error: '',
+        success: '',
+        loading: false
+      };
     default:
       return state;
   }

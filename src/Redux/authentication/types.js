@@ -4,3 +4,4 @@ export const SUCCESS = 'SUCCESS';
 export const BEGIN = 'BEGIN';
 export const ACTIVATE = 'ACTIVATE';
 export const SIGNIN = 'SIGNIN';
+export const CLEAN = 'CLEAN';
