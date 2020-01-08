@@ -9,28 +9,27 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  Button
+  Button,
+  Fade
 } from '@material-ui/core';
 
 const ErrorModal = props => {
   const { handleClose, error } = props;
 
   return (
-    <Dialog
-      open={error ? true : false}
-      onClose={handleClose}
-      aria-labelledby='error dialog'
-    >
-      <DialogTitle>Oops! Something went wrong..</DialogTitle>
-      <DialogContent>
-        <DialogContentText>{error}</DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button variant='outlined' color='secondary' onClick={handleClose}>
-          OK
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <Fade in={error ? true : false}>
+      <Dialog open={true} onClose={handleClose} aria-labelledby='error dialog'>
+        <DialogTitle>Oops! Something went wrong..</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{error}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color='secondary' onClick={handleClose}>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Fade>
   );
 };
 

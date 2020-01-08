@@ -1,12 +1,17 @@
 /*
   Account activation page, display spinner or error information
 */
+
+// react
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
+// compoennts
+import ErrorModal from '../../../Common/ErrorModal/ErrorModal';
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
 
 const AccountActivate = props => {
-  const { activate, loading, success, match, history, cleanUp } = props;
+  const { error, activate, loading, success, match, history, cleanUp } = props;
 
   // only want to call activate once
   const [mounted, setMounted] = useState(false);
@@ -33,9 +38,14 @@ const AccountActivate = props => {
     };
   }, [cleanUp]);
 
+  const handleErrorClose = () => {
+    history.replace('/signup');
+  };
+
   // TODO: add error handling
   return (
     <>
+      <ErrorModal error={error} handleClose={handleErrorClose} />
       <PageSpinner loading={loading} text={'Activating your account..'} />
     </>
   );
