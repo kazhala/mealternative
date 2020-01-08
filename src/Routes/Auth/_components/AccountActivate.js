@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
 
 const AccountActivate = props => {
-  const { activate, loading, success, error, match } = props;
+  const { activate, loading, success, error, match, history } = props;
 
   const [mounted, setMounted] = useState(false);
 
@@ -14,9 +14,20 @@ const AccountActivate = props => {
     }
   }, [match, activate, mounted]);
 
+  useEffect(() => {
+    if (success) {
+      history.replace('/');
+    }
+  }, [success, history]);
+
+  const loadingMessage = success =>
+    success
+      ? 'Account activated! Attempting to sign in..'
+      : 'Activating your account..';
+
   return (
     <>
-      <PageSpinner loading={loading} text={'Activating your account..'} />
+      <PageSpinner loading={loading} text={loadingMessage(success)} />
     </>
   );
 };

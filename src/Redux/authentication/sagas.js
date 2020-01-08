@@ -32,7 +32,9 @@ function* workerActivate({ payload }) {
   yield put({ type: Types.BEGIN });
   try {
     let response = yield call(Operations.activate, payload);
-    console.log(response);
+    if (response.message) {
+      yield put({ type: Types.SUCCESS, payload: response.message });
+    }
     if (response.error) {
       throw new Error(response.error);
     }

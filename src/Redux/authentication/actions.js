@@ -9,3 +9,8 @@ export const activate = token => ({
   type: Types.ACTIVATE,
   payload: token
 });
+
+export const signin = formData => ({
+  type: Types.SIGNIN,
+  payload: formData
+});
