@@ -22,7 +22,7 @@ const initialState = {
 };
 
 // form state handler
-const reducer = (state = initialState, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case 'USERNAME':
       return { ...state, username: action.payload };
