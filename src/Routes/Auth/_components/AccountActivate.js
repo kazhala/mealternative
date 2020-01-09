@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 // compoennts
 import ErrorModal from '../../../Common/ErrorModal/ErrorModal';
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
+import SuccessModal from '../../../Common/InfoModal/SuccessModal';
 
 const AccountActivate = props => {
   const { error, activate, loading, success, match, history, cleanUp } = props;
@@ -27,7 +28,12 @@ const AccountActivate = props => {
   // after success activate(auto signin)/signin redirect to homepage
   useEffect(() => {
     if (success) {
-      history.replace('/');
+      let timer = setTimeout(() => {
+        history.replace('/');
+      }, 3000);
+      return () => {
+        clearTimeout(timer);
+      };
     }
   }, [success, history]);
 
@@ -46,6 +52,11 @@ const AccountActivate = props => {
     <>
       <ErrorModal error={error} handleClose={handleErrorClose} />
       <PageSpinner loading={loading} text={'Activating your account..'} />
+      <SuccessModal
+        success={success}
+        title={'Activation success!'}
+        message={'You will be redirect to homepage shortly..'}
+      />
     </>
   );
 };
