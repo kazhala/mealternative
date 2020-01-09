@@ -73,3 +73,19 @@ export const authenticate = data => {
     throw new Error("Your browser doesn't support cookie, can't login");
   }
 };
+
+// check if the user is authenticated
+export const checkAuthentication = () => {
+  try {
+    const userToken = Cookies.get('token');
+    if (userToken) {
+      const userData = JSON.parse(localStorage.getItem('user'));
+      return userData ? true : false;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};

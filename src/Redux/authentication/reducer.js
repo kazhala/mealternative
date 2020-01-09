@@ -2,10 +2,11 @@
   Auth related reducer
 */
 import * as Types from './types';
+import { checkAuthentication } from './operations';
 
 // TODO: update isAuthenticated
 const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: checkAuthentication(),
   loading: false,
   success: '',
   error: ''
