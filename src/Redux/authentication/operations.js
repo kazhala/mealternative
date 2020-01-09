@@ -89,3 +89,13 @@ export const checkAuthentication = () => {
     return false;
   }
 };
+
+// handle user logout
+export const signOut = () => {
+  try {
+    Cookies.remove('token');
+    localStorage.removeItem('user');
+  } catch (err) {
+    console.log(err);
+  }
+};

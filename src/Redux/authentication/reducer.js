@@ -32,6 +32,10 @@ const AuthReducer = (state = initialState, action) => {
         success: '',
         loading: false
       };
+    case Types.USEROUT:
+      return { ...state, isAuthenticated: false };
+    case Types.USERIN:
+      return { ...state, isAuthenticated: true };
     default:
       return state;
   }

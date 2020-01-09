@@ -11,6 +11,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { LocationActions } from '../Redux/location';
+import { AuthActions } from '../Redux/authentication';
 
 // Components
 import App from './App';
@@ -51,7 +52,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      getLocation: LocationActions.getLocation
+      getLocation: LocationActions.getLocation,
+      signOut: AuthActions.signOut
     },
     dispatch
   );

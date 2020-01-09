@@ -11,7 +11,8 @@ export default function* rootSaga() {
     yield all([
       fork(AuthSagas.watchSignUp),
       fork(AuthSagas.watchActivate),
-      fork(AuthSagas.watchSignIn)
+      fork(AuthSagas.watchSignIn),
+      fork(AuthSagas.watchSignOut)
     ]);
   } catch (err) {
     console.log(err);

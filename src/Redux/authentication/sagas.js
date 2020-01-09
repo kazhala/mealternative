@@ -20,9 +20,23 @@ export function* watchSignIn() {
   yield takeLatest(Types.SIGNIN, workerSignIn);
 }
 
+export function* watchSignOut() {
+  yield takeLatest(Types.SIGNOUT, workerSignOut);
+}
+
 /*
   Worker Saga
 */
+
+// signout worker
+function* workerSignOut() {
+  try {
+    yield call(Operations.signOut);
+    yield put({ type: Types.USEROUT });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 // sign up worker
 function* workerSignUp({ payload }) {
@@ -75,6 +89,7 @@ function* workerSignIn({ payload }) {
     if (response.token) {
       yield call(Operations.authenticate, response);
       yield put({ type: Types.SUCCESS, payload: 'Sign in success!' });
+      yield put({ type: Types.USERIN });
     } else if (response.error) {
       throw new Error(response.error);
     } else {

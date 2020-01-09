@@ -21,3 +21,7 @@ export const signin = formData => ({
 export const cleanUp = () => ({
   type: Types.CLEAN
 });
+
+export const signOut = () => ({
+  type: Types.SIGNOUT
+});

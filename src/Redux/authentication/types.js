@@ -8,3 +8,7 @@ export const CLEAN = 'CLEAN';
 export const SIGNUP = 'SIGNUP';
 export const ACTIVATE = 'ACTIVATE';
 export const SIGNIN = 'SIGNIN';
+
+export const SIGNOUT = 'SIGNOUT';
+export const USEROUT = 'USEROUT';
+export const USERIN = 'USERIN';

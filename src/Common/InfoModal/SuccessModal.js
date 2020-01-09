@@ -26,7 +26,7 @@ const SuccessModal = props => {
 
 SuccessModal.propTypes = {
   message: PropTypes.string.isRequired,
-  success: PropTypes.bool.isRequired,
+  success: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   title: PropTypes.string.isRequired
 };
 

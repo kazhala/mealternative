@@ -6,7 +6,7 @@ import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 
 const Header = props => {
-  const { classes, isAuthenticated, history } = props;
+  const { classes, isAuthenticated, history, signOut } = props;
 
   const handleRouteChange = name => {
     history.push(`/${name}`);
@@ -18,7 +18,13 @@ const Header = props => {
         <IconButton>
           <Menu style={{ color: '#eceff4' }} />
         </IconButton>
-        {isAuthenticated ? null : (
+        {isAuthenticated ? (
+          <div>
+            <Button style={{ color: '#eceff4' }} onClick={signOut}>
+              Sign Out
+            </Button>
+          </div>
+        ) : (
           <div>
             <Button
               onClick={() => handleRouteChange('signin')}
@@ -41,7 +47,8 @@ const Header = props => {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  signOut: PropTypes.func.isRequired
 };
 
 export default withRouter(Header);
