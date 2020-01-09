@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   signUpRoot: {
     padding: theme.spacing(1),
-    // height: '100%',
     width: '100%',
     display: 'grid',
     justifyItems: 'center',
@@ -21,7 +20,16 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '90%'
+    width: '90%',
+    [theme.breakpoints.up('sm')]: {
+      width: '70%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '50%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '35%'
+    }
   },
   signUpInput: {
     margin: theme.spacing(0.5, 0)
