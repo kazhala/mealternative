@@ -4,6 +4,8 @@ import useStyles from './Style';
 import { Typography } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import SignInForm from './_components/SignInForm';
+import OrDivider from '../../Common/Divider/OrDivider';
+import SocialAuth from '../../Common/SocialAuth/SocialAuth';
 
 const SignIn = props => {
   const { formState, handleFormChange, success, loading, error } = props;
@@ -34,8 +36,8 @@ const SignIn = props => {
         handleFormChange={handleFormChange}
         loading={loading}
       />
-      <div>divider</div>
-      <div>social</div>
+      <OrDivider />
+      <SocialAuth />
     </div>
   );
 };

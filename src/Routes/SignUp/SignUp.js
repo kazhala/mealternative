@@ -10,6 +10,7 @@ import OrDivider from '../../Common/Divider/OrDivider';
 import SignUpForm from './_components/SignUpForm';
 import SocialSignUp from './_components/SocialSignUp';
 import { Alert, AlertTitle } from '@material-ui/lab';
+import SocialAuth from '../../Common/SocialAuth/SocialAuth';
 
 const SignUp = props => {
   const classes = useStyles();
@@ -51,7 +52,7 @@ const SignUp = props => {
       />
       {/* divider between form or social signup */}
       <OrDivider />
-      <SocialSignUp classes={classes} />
+      <SocialAuth />
     </div>
   );
 };

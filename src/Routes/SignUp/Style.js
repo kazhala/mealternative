@@ -37,20 +37,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0.5, 0),
     height: theme.spacing(2.5)
   },
-  signUpSocial: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    width: '80%'
-  },
-  signUpGoogle: {
-    width: theme.spacing(17),
-    height: theme.spacing(3),
-    paddingLeft: '1rem !important',
-    fontSize: '1rem !important',
-    marginBottom: theme.spacing(1)
-  },
   signUpLinks: {
     textAlign: 'center',
     margin: theme.spacing(0.5, 0)
