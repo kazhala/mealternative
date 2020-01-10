@@ -8,7 +8,6 @@ import useStyles from './Style';
 import Typography from '@material-ui/core/Typography';
 import OrDivider from '../../Common/Divider/OrDivider';
 import SignUpForm from './_components/SignUpForm';
-import SocialSignUp from './_components/SocialSignUp';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import SocialAuth from '../../Common/SocialAuth/SocialAuth';
 
