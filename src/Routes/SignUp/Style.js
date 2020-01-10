@@ -5,8 +5,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     width: '100%',
     display: 'grid',
-    justifyItems: 'center',
-    gridTemplateRows: 'auto 70% auto auto'
+    justifyItems: 'center'
   },
   signUpTitle: {
     margin: theme.spacing(2, 0),

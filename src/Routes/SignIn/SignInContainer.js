@@ -1,8 +1,9 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { AuthActions } from '../../Redux/authentication';
 import SignIn from './SignIn';
+import { Redirect } from 'react-router-dom';
 
 const initialState = {
   email: '',
@@ -17,23 +18,48 @@ const reducer = (state, action) => {
 };
 
 const SignInContainer = props => {
+  const { isAuthenticated, cleanUp } = props;
   const [formState, formDispatch] = useReducer(reducer, initialState);
 
+  useEffect(() => {
+    return () => {
+      cleanUp();
+    };
+  }, [cleanUp]);
+
+  // update form state
+  const handleFormChange = e => {
+    const fieldName = e.target.name.toUpperCase();
+    const payload = e.target.value;
+    formDispatch({ type: fieldName, payload });
+  };
+
   return (
-    <SignIn formState={formState} formDispatch={formDispatch} {...props} />
+    <>
+      {isAuthenticated && <Redirect to='/' />}
+      <SignIn
+        formState={formState}
+        handleFormChange={handleFormChange}
+        {...props}
+      />
+    </>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.Auth.isAuthenticated
+    isAuthenticated: state.Auth.isAuthenticated,
+    success: state.Auth.success,
+    loading: state.Auth.loading,
+    error: state.Auth.error
   };
 };
 
 const mapDispatchTopProps = dispatch => {
   return bindActionCreators(
     {
-      signin: AuthActions.signin
+      signin: AuthActions.signin,
+      cleanUp: AuthActions.cleanUp
     },
     dispatch
   );
