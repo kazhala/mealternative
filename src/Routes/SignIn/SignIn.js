@@ -8,7 +8,14 @@ import OrDivider from '../../Common/Divider/OrDivider';
 import SocialAuth from '../../Common/SocialAuth/SocialAuth';
 
 const SignIn = props => {
-  const { formState, handleFormChange, success, loading, error } = props;
+  const {
+    handleFormSubmit,
+    formState,
+    handleFormChange,
+    success,
+    loading,
+    error
+  } = props;
   const classes = useStyles();
 
   return (
@@ -35,6 +42,7 @@ const SignIn = props => {
         formState={formState}
         handleFormChange={handleFormChange}
         loading={loading}
+        handleFormSubmit={handleFormSubmit}
       />
       <OrDivider />
       <SocialAuth />

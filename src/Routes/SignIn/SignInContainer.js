@@ -12,13 +12,17 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'EMAIL':
+      return { ...state, email: action.payload };
+    case 'PASSWORD':
+      return { ...state, password: action.payload };
     default:
       return state;
   }
 };
 
 const SignInContainer = props => {
-  const { isAuthenticated, cleanUp } = props;
+  const { isAuthenticated, cleanUp, signin } = props;
   const [formState, formDispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -34,12 +38,18 @@ const SignInContainer = props => {
     formDispatch({ type: fieldName, payload });
   };
 
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    signin(formState);
+  };
+
   return (
     <>
       {isAuthenticated && <Redirect to='/' />}
       <SignIn
         formState={formState}
         handleFormChange={handleFormChange}
+        handleFormSubmit={handleFormSubmit}
         {...props}
       />
     </>
