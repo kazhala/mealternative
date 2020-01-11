@@ -1,15 +1,17 @@
 /*
   Main component for signup
 */
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
 import useStyles from './Style';
 
-import Typography from '@material-ui/core/Typography';
+// components
 import OrDivider from '../../Common/Divider/OrDivider';
 import SignUpForm from './_components/SignUpForm';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import SocialAuth from '../../Common/SocialAuth/SocialAuth';
+import FormRoot from '../../Common/Form/FormRoot';
 
 const SignUp = props => {
   const classes = useStyles();
@@ -23,25 +25,7 @@ const SignUp = props => {
   } = props;
 
   return (
-    <div className={classes.signUpRoot}>
-      <div className={classes.signUpTitle}>
-        <Typography variant='h4'>Sign Up</Typography>
-      </div>
-      {/* alert */}
-      <div className={classes.signUpAlert}>
-        {success && (
-          <Alert severity='success'>
-            <AlertTitle>Success</AlertTitle>
-            {success}
-          </Alert>
-        )}
-        {error && (
-          <Alert severity='error'>
-            <AlertTitle>Error</AlertTitle>
-            {error}
-          </Alert>
-        )}
-      </div>
+    <FormRoot title='Sign Up' success={success} error={error}>
       <SignUpForm
         formState={formState}
         handleFormChange={handleFormChange}
@@ -52,7 +36,7 @@ const SignUp = props => {
       {/* divider between form or social signup */}
       <OrDivider />
       <SocialAuth />
-    </div>
+    </FormRoot>
   );
 };
 

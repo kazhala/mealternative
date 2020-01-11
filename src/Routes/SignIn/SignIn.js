@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useStyles from './Style';
-import { Typography } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import SignInForm from './_components/SignInForm';
 import OrDivider from '../../Common/Divider/OrDivider';
 import SocialAuth from '../../Common/SocialAuth/SocialAuth';
+import FormRoot from '../../Common/Form/FormRoot';
 
 const SignIn = props => {
   const {
@@ -19,24 +18,7 @@ const SignIn = props => {
   const classes = useStyles();
 
   return (
-    <div className={classes.signInRoot}>
-      <div className={classes.signInTitle}>
-        <Typography variant='h4'>Sign In</Typography>
-      </div>
-      <div className={classes.signInAlert}>
-        {success && (
-          <Alert severity='success'>
-            <AlertTitle>Success</AlertTitle>
-            {success}
-          </Alert>
-        )}
-        {error && (
-          <Alert severity='error'>
-            <AlertTitle>Error</AlertTitle>
-            {error}
-          </Alert>
-        )}
-      </div>
+    <FormRoot success={success} error={error} title={'Sign In'}>
       <SignInForm
         classes={classes}
         formState={formState}
@@ -46,7 +28,7 @@ const SignIn = props => {
       />
       <OrDivider />
       <SocialAuth />
-    </div>
+    </FormRoot>
   );
 };
 

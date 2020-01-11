@@ -11,6 +11,7 @@ import { Button, Typography, CircularProgress } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import PasswordInput from '../../../Common/Inputs/PasswordInput';
 import EmailInput from '../../../Common/Inputs/EmailInput';
+import FormWrapper from '../../../Common/Form/FormWrapper';
 
 const SignInForm = props => {
   const {
@@ -23,7 +24,7 @@ const SignInForm = props => {
   const { email, password } = formState;
 
   return (
-    <form className={classes.signInForm} onSubmit={handleFormSubmit}>
+    <FormWrapper onSubmit={handleFormSubmit}>
       <EmailInput
         name='email'
         value={email}
@@ -50,9 +51,10 @@ const SignInForm = props => {
         component='div'
         className={classes.signInLinks}
       >
-        <Link to='/signup'>Don't have an account? Sign In</Link>
+        <Link to='/auth/forgot-password'>Forgot password?</Link>
+        <Link to='/signup'>Don't have an account? Sign Up</Link>
       </Typography>
-    </form>
+    </FormWrapper>
   );
 };
 

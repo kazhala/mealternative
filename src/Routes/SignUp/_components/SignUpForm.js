@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import { AccountCircle } from '@material-ui/icons';
 import PasswordInput from '../../../Common/Inputs/PasswordInput';
 import EmailInput from '../../../Common/Inputs/EmailInput';
+import FormWrapper from '../../../Common/Form/FormWrapper';
 
 const SignUpForm = props => {
   const {
@@ -30,7 +31,7 @@ const SignUpForm = props => {
   const { username, email, password } = formState;
 
   return (
-    <form className={classes.signUpForm} onSubmit={handleFormSubmit}>
+    <FormWrapper onSubmit={handleFormSubmit}>
       <TextField
         variant='outlined'
         placeholder='User name'
@@ -76,7 +77,7 @@ const SignUpForm = props => {
       >
         <Link to='signin'>Already have an account? Sign In</Link>
       </Typography>
-    </form>
+    </FormWrapper>
   );
 };
 

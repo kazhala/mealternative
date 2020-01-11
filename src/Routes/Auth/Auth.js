@@ -4,6 +4,8 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import AccountActivate from './_components/AccountActivate';
+import ForgotPassword from './_components/ForgotPassword';
+import useStyles from './Style';
 
 const Auth = props => {
   const {
@@ -15,6 +17,9 @@ const Auth = props => {
     isAuthenticated,
     activate
   } = props;
+
+  const classes = useStyles();
+
   return (
     <Switch>
       <Route
@@ -31,6 +36,11 @@ const Auth = props => {
             {...props}
           />
         )}
+      />
+      <Route
+        exact
+        path={`${match.url}/forgot-password`}
+        render={props => <ForgotPassword classes={classes} {...props} />}
       />
       <Redirect to='/' />
     </Switch>
