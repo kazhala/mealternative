@@ -4,15 +4,25 @@
 
 // react
 import React from 'react';
-import Auth from './Auth';
 
 // redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { AuthActions } from '../../Redux/authentication';
 
+// components
+import Auth from './Auth';
+import { Redirect } from 'react-router-dom';
+
 const AuthContainer = props => {
-  return <Auth {...props} />;
+  const { isAuthenticated } = props;
+
+  return (
+    <>
+      {isAuthenticated && <Redirect to='/' />}
+      <Auth {...props} />;
+    </>
+  );
 };
 
 const mapStateToProps = state => {

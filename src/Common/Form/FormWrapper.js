@@ -14,7 +14,7 @@ const FormWrapper = props => {
 };
 
 FormWrapper.propTypes = {
-  handleFormSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired
 };
 
