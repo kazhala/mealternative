@@ -6,7 +6,7 @@ import FormWrapper from '../../../Common/Form/FormWrapper';
 import { Typography, Button, CircularProgress } from '@material-ui/core';
 
 const ForgotPassword = props => {
-  const { classes, success, error, cleanUp, loading } = props;
+  const { classes, success, error, cleanUp, loading, forgotPassword } = props;
 
   const [emailState, setEmailState] = useState('');
 
@@ -20,9 +20,14 @@ const ForgotPassword = props => {
     };
   }, [cleanUp]);
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    forgotPassword(emailState);
+  };
+
   return (
     <FormRoot title='Forgot Password' success={success} error={error}>
-      <FormWrapper onSubmit={() => console.log('hello')}>
+      <FormWrapper onSubmit={handleSubmit}>
         <Typography className={classes.forgotSubtitle} variant='caption'>
           Please enter your email below, you will receive a reset link shortly
           in your inbox

@@ -38,7 +38,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       activate: AuthActions.activate,
-      cleanUp: AuthActions.cleanUp
+      cleanUp: AuthActions.cleanUp,
+      forgotPassword: AuthActions.forgotPassword
     },
     dispatch
   );

@@ -24,9 +24,32 @@ export function* watchSignOut() {
   yield takeLatest(Types.SIGNOUT, workerSignOut);
 }
 
+export function* watchForgot() {
+  yield takeLatest(Types.FORGOTPASSWORD, workerForgot);
+}
+
 /*
   Worker Saga
 */
+
+// forgot password woker
+function* workerForgot({ payload }) {
+  yield put({ type: Types.BEGIN });
+  try {
+    let response = yield call(Operations.forgotPassword, payload);
+    if (response.message) {
+      yield put({ type: Types.SUCCESS, payload: response.message });
+    } else if (response.error) {
+      throw new Error(response.error);
+    } else {
+      throw new Error('Something went wrong..');
+    }
+    console.log(response);
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.ERROR, payload: err.message });
+  }
+}
 
 // signout worker
 function* workerSignOut() {

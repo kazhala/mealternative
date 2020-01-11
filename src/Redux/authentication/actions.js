@@ -25,3 +25,8 @@ export const cleanUp = () => ({
 export const signOut = () => ({
   type: Types.SIGNOUT
 });
+
+export const forgotPassword = email => ({
+  type: Types.FORGOTPASSWORD,
+  payload: email
+});

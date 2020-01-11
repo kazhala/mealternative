@@ -38,6 +38,23 @@ export const activate = async payload => {
   }
 };
 
+// forgot password
+export const forgotPassword = async payload => {
+  try {
+    const res = await fetch(`${API}/forgot-password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: payload })
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
 // signin
 export const signIn = async payload => {
   console.log(payload);

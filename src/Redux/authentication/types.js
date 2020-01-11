@@ -12,3 +12,5 @@ export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
 export const USEROUT = 'USEROUT';
 export const USERIN = 'USERIN';
+
+export const FORGOTPASSWORD = 'FORGOTPASSWORD';

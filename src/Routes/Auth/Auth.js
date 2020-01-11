@@ -8,7 +8,15 @@ import ForgotPassword from './_components/ForgotPassword';
 import useStyles from './Style';
 
 const Auth = props => {
-  const { cleanUp, match, error, success, loading, activate } = props;
+  const {
+    cleanUp,
+    match,
+    error,
+    success,
+    loading,
+    activate,
+    forgotPassword
+  } = props;
 
   const classes = useStyles();
 
@@ -38,6 +46,7 @@ const Auth = props => {
             loading={loading}
             cleanUp={cleanUp}
             classes={classes}
+            forgotPassword={forgotPassword}
             {...props}
           />
         )}
