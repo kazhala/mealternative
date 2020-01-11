@@ -2,11 +2,12 @@
   Auth related reducer
 */
 import * as Types from './types';
-import { checkAuthentication } from './operations';
+import { checkAuthentication, getUserInfo } from './operations';
 
 // TODO: update isAuthenticated
 const initialState = {
   isAuthenticated: checkAuthentication(),
+  user: getUserInfo(),
   loading: false,
   success: '',
   error: ''
@@ -33,9 +34,9 @@ const AuthReducer = (state = initialState, action) => {
         loading: false
       };
     case Types.USEROUT:
-      return { ...state, isAuthenticated: false };
+      return { ...state, isAuthenticated: false, user: {} };
     case Types.USERIN:
-      return { ...state, isAuthenticated: true };
+      return { ...state, isAuthenticated: true, user: action.payload };
     default:
       return state;
   }

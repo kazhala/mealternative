@@ -90,6 +90,22 @@ export const checkAuthentication = () => {
   }
 };
 
+// get the user
+export const getUserInfo = () => {
+  try {
+    const userToken = Cookies.get('token');
+    if (userToken) {
+      const userData = JSON.parse(localStorage.getItem('user'));
+      return userData ? userData : {};
+    } else {
+      return {};
+    }
+  } catch (err) {
+    console.log(err);
+    return {};
+  }
+};
+
 // handle user logout
 export const signOut = () => {
   try {
