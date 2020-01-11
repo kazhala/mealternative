@@ -14,7 +14,16 @@ const useStyles = makeStyles(theme => ({
   },
   signInAlert: {
     width: '90%',
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      width: '70%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '50%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '35%'
+    }
   },
   signInForm: {
     display: 'flex',
