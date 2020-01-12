@@ -27,6 +27,12 @@ const Header = props => {
         ) : (
           <div>
             <Button
+              onClick={() => handleRouteChange('map')}
+              style={{ color: '#eceff4' }}
+            >
+              Map
+            </Button>
+            <Button
               onClick={() => handleRouteChange('signin')}
               style={{ color: '#eceff4' }}
             >

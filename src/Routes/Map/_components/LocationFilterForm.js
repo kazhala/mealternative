@@ -3,7 +3,7 @@
 */
 
 // React
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -30,7 +30,8 @@ const LocationFilterForm = props => {
     setResultRestaurantList,
     resultRestaurantList,
     setDetailOpen,
-    setResLoading
+    setResLoading,
+    mapLoaded
   } = props;
 
   // value of auto completion
@@ -39,6 +40,16 @@ const LocationFilterForm = props => {
   const [autoSrc, setAutoSrc] = useState(searchOptions);
   // radius filter for the search
   const [queryRadius, setQueryRadius] = useState(2);
+
+  // determine if its first mount
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    if (mapLoaded && !mounted) {
+      setMounted(true);
+      handleRestaurantSearch(queryValue, queryRadius);
+    }
+  }, [mapLoaded, mounted, queryValue, queryRadius, handleRestaurantSearch]);
 
   // handle auto completion change
   const handleChange = e => {

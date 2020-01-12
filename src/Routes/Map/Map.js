@@ -75,6 +75,7 @@ const Map = props => {
           setResultRestaurantList={setResultRestaurantList}
           resultRestaurantList={resultRestaurantList}
           setDetailOpen={setDetailOpen}
+          mapLoaded={mapLoaded}
         />
         <DetailModal
           detailOpen={detailOpen}
