@@ -31,7 +31,7 @@ const MapContainer = props => {
   // center lat lng position
   const [centerMarker, setCenterMarker] = useState({});
   // selectedMarker to highlight marker
-  const [selectedMarker, setSelectedMarker] = useState('');
+  const [selectedMarker, setSelectedMarker] = useState({});
   // determine if request data loading
   const [resLoading, setResLoading] = useState(false);
   // stores the searched restaurant into array
@@ -70,7 +70,7 @@ const MapContainer = props => {
 
   // check active selected marker
   const checkSelectedMarker = id => {
-    return id === selectedMarker;
+    return id === selectedMarker.place_id;
   };
 
   // Initiate google map services after map is loaded
@@ -108,6 +108,7 @@ const MapContainer = props => {
   // relocate the center of the map based on user input
   // 0 means default location, 1 is user input location
   const updateCenterMarker = (type, address) => {
+    setSelectedMarker({});
     if (type === 0) {
       setCenterMarker({ lat, lng });
     } else {
@@ -151,6 +152,7 @@ const MapContainer = props => {
   // fetch restaurants data
   const handleRestaurantSearch = (queryType, queryRadius) => {
     setResLoading(true);
+    setSelectedMarker({});
     // 1. Create places request (if no queryType, than default restaurant)
     // will update the no queryType request later using nearbySearch api
     const placesRequest = {
@@ -319,6 +321,7 @@ const MapContainer = props => {
         individualModal={individualModal}
         getDetailedResDetail={getDetailedResDetail}
         clearDetailResDetail={clearDetailResDetail}
+        selectedMarker={selectedMarker}
       />
     </>
   );

@@ -180,8 +180,8 @@ const DetailModal = props => {
   }, [resultRestaurantList, optionNum, reversed]);
 
   // set the active marker and close the detailModal if on mobile device
-  const markSelectMarker = id => {
-    setSelectedMarker(id);
+  const markSelectMarker = restaurant => {
+    setSelectedMarker(restaurant);
     setDetailOpen(false);
   };
 
@@ -243,7 +243,7 @@ const DetailModal = props => {
                   >
                     <ListItem
                       button
-                      onClick={() => markSelectMarker(restaurant.place_id)}
+                      onClick={() => markSelectMarker(restaurant)}
                     >
                       <ListItemIcon>
                         <Restaurant fontSize='small' />

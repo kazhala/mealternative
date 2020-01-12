@@ -42,7 +42,8 @@ const Map = props => {
     getBasicResDetails,
     individualModal,
     getDetailedResDetail,
-    clearDetailResDetail
+    clearDetailResDetail,
+    selectedMarker
   } = props;
   const classes = useStyles();
 
@@ -97,7 +98,14 @@ const Map = props => {
               key: GoogleMapAPIKey,
               libraries: ['places', 'directions']
             }}
-            center={{ lat: centerMarker.lat, lng: centerMarker.lng }}
+            center={
+              selectedMarker.geometry
+                ? {
+                    lat: selectedMarker.geometry.location.lat(),
+                    lng: selectedMarker.geometry.location.lng()
+                  }
+                : { lat: centerMarker.lat, lng: centerMarker.lng }
+            }
             defaultZoom={16}
             yesIWantToUseGoogleMapApiInternals={true}
             onGoogleApiLoaded={({ map, maps }) => handleMapApiLoaded(map, maps)}
