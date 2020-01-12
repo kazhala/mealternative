@@ -174,6 +174,8 @@ const DetailModal = props => {
           setSortedResultList(resultRestaurantList);
           break;
       }
+    } else {
+      setSortedResultList([]);
     }
   }, [resultRestaurantList, optionNum, reversed]);
 

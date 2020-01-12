@@ -27,12 +27,7 @@ const CardSkeleton = props => {
         style={{ display: 'flex', alignItems: 'center' }}
         className={classes.cardImage}
       >
-        <Skeleton
-          animation={false}
-          height={'95%'}
-          width={'100%'}
-          variant='rect'
-        />
+        <Skeleton height={'95%'} width={'100%'} variant='rect' />
       </div>
 
       {/* following the same detail structure as results */}
