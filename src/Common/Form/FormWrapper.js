@@ -1,5 +1,12 @@
+/*
+  Form wrapper for simple form styling
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// misc
 import useStyles from './Style';
 
 const FormWrapper = props => {

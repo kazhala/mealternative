@@ -1,5 +1,12 @@
+/*
+  Forgot password component, provide a single field to enter email
+*/
+
+// react
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import FormRoot from '../../../Common/Form/FormRoot';
 import EmailInput from '../../../Common/Inputs/EmailInput';
 import FormWrapper from '../../../Common/Form/FormWrapper';
@@ -14,6 +21,7 @@ const ForgotPassword = props => {
     setEmailState(e.target.value);
   };
 
+  // clean up on unmount
   useEffect(() => {
     return () => {
       cleanUp();
@@ -53,7 +61,12 @@ const ForgotPassword = props => {
 };
 
 ForgotPassword.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  success: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  cleanUp: PropTypes.func.isRequired,
+  forgotPassword: PropTypes.func.isRequired
 };
 
 export default ForgotPassword;

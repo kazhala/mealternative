@@ -1,7 +1,16 @@
+/*
+  Form container for simple form page
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { Typography } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
+
+// misc
 import useStyles from './Style';
 
 const FormRoot = props => {

@@ -1,12 +1,18 @@
 /*
   Main Auth component, act as nested routes provider
 */
+
+// react
 import React from 'react';
+
+// components
 import { Switch, Route, Redirect } from 'react-router-dom';
 import AccountActivate from './_components/AccountActivate';
 import ForgotPassword from './_components/ForgotPassword';
-import useStyles from './Style';
 import PasswordReset from './_components/PasswordReset';
+
+// misc
+import useStyles from './Style';
 
 const Auth = props => {
   const {

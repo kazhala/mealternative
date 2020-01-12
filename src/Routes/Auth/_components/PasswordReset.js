@@ -1,5 +1,12 @@
+/*
+  Reset password component, single input field
+*/
+
+// react
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import FormRoot from '../../../Common/Form/FormRoot';
 import FormWrapper from '../../../Common/Form/FormWrapper';
 import PasswordInput from '../../../Common/Inputs/PasswordInput';
@@ -18,6 +25,7 @@ const PasswordReset = props => {
 
   const [passwordState, setPasswordState] = useState('');
 
+  // clean up
   useEffect(() => {
     return () => {
       cleanUp();
@@ -26,6 +34,7 @@ const PasswordReset = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    // prepare payload, see backend
     const payload = {
       passwordResetToken: match.params.token,
       newPassword: passwordState
@@ -66,7 +75,10 @@ const PasswordReset = props => {
 PasswordReset.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
-  success: PropTypes.string.isRequired
+  success: PropTypes.string.isRequired,
+  cleanUp: PropTypes.func.isRequired,
+  resetPassword: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default PasswordReset;
