@@ -28,7 +28,7 @@ const SignUpForm = props => {
     handleFormSubmit,
     loading
   } = props;
-  const { username, email, password } = formState;
+  const { username, email, password, repeat } = formState;
 
   return (
     <FormWrapper onSubmit={handleFormSubmit}>
@@ -60,6 +60,13 @@ const SignUpForm = props => {
         value={password}
         onChange={handleFormChange}
         className={classes.signUpInput}
+      />
+      <PasswordInput
+        name='repeat'
+        value={repeat}
+        onChange={handleFormChange}
+        className={classes.signUpInput}
+        repeat
       />
       <Button
         className={classes.signUpButton}

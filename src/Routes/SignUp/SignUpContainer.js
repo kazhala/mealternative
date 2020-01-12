@@ -18,7 +18,8 @@ import SignUp from './SignUp';
 const initialState = {
   username: '',
   email: '',
-  password: ''
+  password: '',
+  repeat: ''
 };
 
 // form state handler
@@ -30,13 +31,15 @@ const reducer = (state, action) => {
       return { ...state, email: action.payload };
     case 'PASSWORD':
       return { ...state, password: action.payload };
+    case 'REPEAT':
+      return { ...state, repeat: action.payload };
     default:
       return state;
   }
 };
 
 const SignUpContainer = props => {
-  const { cleanUp, signup } = props;
+  const { cleanUp, signup, formError } = props;
   const [formState, formDispatch] = useReducer(reducer, initialState);
 
   // update form state
@@ -49,7 +52,11 @@ const SignUpContainer = props => {
   // submit form
   const handleFormSubmit = e => {
     e.preventDefault();
-    signup(formState);
+    if (formState.repeat !== formState.password) {
+      formError("Password doesn't match, please double check");
+    } else {
+      signup(formState);
+    }
   };
 
   // clean up
@@ -85,7 +92,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       signup: AuthActions.signup,
-      cleanUp: AuthActions.cleanUp
+      cleanUp: AuthActions.cleanUp,
+      formError: AuthActions.formError
     },
     dispatch
   );

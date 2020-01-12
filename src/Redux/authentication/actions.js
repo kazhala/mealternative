@@ -35,3 +35,8 @@ export const resetPassword = payload => ({
   type: Types.RESETPASSWORD,
   payload
 });
+
+export const formError = error => ({
+  type: Types.ERROR,
+  payload: error
+});
