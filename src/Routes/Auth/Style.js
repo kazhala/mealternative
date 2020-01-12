@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  forgotEmail: {
+  formInput: {
     margin: theme.spacing(0.5, 0)
   },
-  forgotButton: {
+  formButton: {
     margin: theme.spacing(0.5, 0),
     height: theme.spacing(2.5)
   },
-  forgotSubtitle: {
+  formSubtitle: {
     marginBottom: theme.spacing(1),
     opacity: '0.7'
   }

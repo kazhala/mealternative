@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import AccountActivate from './_components/AccountActivate';
 import ForgotPassword from './_components/ForgotPassword';
 import useStyles from './Style';
+import PasswordReset from './_components/PasswordReset';
 
 const Auth = props => {
   const {
@@ -48,6 +49,19 @@ const Auth = props => {
             classes={classes}
             forgotPassword={forgotPassword}
             {...props}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={`${match.url}/password-reset/:token`}
+        render={props => (
+          <PasswordReset
+            error={error}
+            success={success}
+            loading={loading}
+            cleanUp={cleanUp}
+            classes={classes}
           />
         )}
       />

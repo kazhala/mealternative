@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FormRoot from '../../../Common/Form/FormRoot';
-import EmailInput from '../../../Common/Inputs/EmailInput';
 import FormWrapper from '../../../Common/Form/FormWrapper';
-import { Typography, Button, CircularProgress } from '@material-ui/core';
+import PasswordInput from '../../../Common/Inputs/PasswordInput';
+import { Button, CircularProgress, Typography } from '@material-ui/core';
 
-const ForgotPassword = props => {
-  const { classes, success, error, cleanUp, loading, forgotPassword } = props;
+const PasswordReset = props => {
+  const { loading, success, error, cleanUp, classes } = props;
 
-  const [emailState, setEmailState] = useState('');
-
-  const handleEmailChange = e => {
-    setEmailState(e.target.value);
-  };
+  const [passwordState, setPasswordState] = useState('');
 
   useEffect(() => {
     return () => {
@@ -22,21 +18,24 @@ const ForgotPassword = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    forgotPassword(emailState);
+    console.log('lol');
+  };
+
+  const handleChange = e => {
+    setPasswordState(e.target.value);
   };
 
   return (
-    <FormRoot title='Forgot Password' success={success} error={error}>
+    <FormRoot title='Reset Password' success={success} error={error}>
       <FormWrapper onSubmit={handleSubmit}>
         <Typography className={classes.formSubtitle} variant='caption'>
-          Please enter your email below, you will receive a reset link shortly
-          in your inbox
+          Enter your new password below
         </Typography>
-        <EmailInput
+        <PasswordInput
           className={classes.formInput}
-          name='email'
-          value={emailState}
-          onChange={handleEmailChange}
+          value={passwordState}
+          onChange={handleChange}
+          name='password'
         />
         <Button
           className={classes.formButton}
@@ -52,8 +51,10 @@ const ForgotPassword = props => {
   );
 };
 
-ForgotPassword.propTypes = {
-  classes: PropTypes.object.isRequired
+PasswordReset.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+  success: PropTypes.string.isRequired
 };
 
-export default ForgotPassword;
+export default PasswordReset;
