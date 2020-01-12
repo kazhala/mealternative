@@ -40,7 +40,8 @@ const mapDispatchToProps = dispatch => {
       activate: AuthActions.activate,
       cleanUp: AuthActions.cleanUp,
       forgotPassword: AuthActions.forgotPassword,
-      resetPassword: AuthActions.resetPassword
+      resetPassword: AuthActions.resetPassword,
+      formError: AuthActions.formError
     },
     dispatch
   );

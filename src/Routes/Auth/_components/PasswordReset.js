@@ -20,10 +20,12 @@ const PasswordReset = props => {
     cleanUp,
     classes,
     match,
-    resetPassword
+    resetPassword,
+    formError
   } = props;
 
   const [passwordState, setPasswordState] = useState('');
+  const [repeatState, setRepeatState] = useState('');
 
   // clean up
   useEffect(() => {
@@ -34,16 +36,24 @@ const PasswordReset = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // prepare payload, see backend
-    const payload = {
-      passwordResetToken: match.params.token,
-      newPassword: passwordState
-    };
-    resetPassword(payload);
+    if (passwordState !== repeatState) {
+      formError("Password doesn't match, please double check");
+    } else {
+      // prepare payload, see backend
+      const payload = {
+        passwordResetToken: match.params.token,
+        newPassword: passwordState
+      };
+      resetPassword(payload);
+    }
   };
 
-  const handleChange = e => {
+  const handlePasswordChange = e => {
     setPasswordState(e.target.value);
+  };
+
+  const handleRepeatChange = e => {
+    setRepeatState(e.target.value);
   };
 
   return (
@@ -55,8 +65,15 @@ const PasswordReset = props => {
         <PasswordInput
           className={classes.formInput}
           value={passwordState}
-          onChange={handleChange}
+          onChange={handlePasswordChange}
           name='password'
+        />
+        <PasswordInput
+          className={classes.formInput}
+          value={repeatState}
+          onChange={handleRepeatChange}
+          name='repeat'
+          repeat
         />
         <Button
           className={classes.formButton}
@@ -78,7 +95,8 @@ PasswordReset.propTypes = {
   success: PropTypes.string.isRequired,
   cleanUp: PropTypes.func.isRequired,
   resetPassword: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  formError: PropTypes.func.isRequired
 };
 
 export default PasswordReset;

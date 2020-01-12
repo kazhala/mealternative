@@ -23,7 +23,8 @@ const Auth = props => {
     loading,
     activate,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    formError
   } = props;
 
   const classes = useStyles();
@@ -70,6 +71,7 @@ const Auth = props => {
             cleanUp={cleanUp}
             classes={classes}
             resetPassword={resetPassword}
+            formError={formError}
             {...props}
           />
         )}
