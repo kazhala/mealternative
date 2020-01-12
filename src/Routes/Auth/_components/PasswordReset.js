@@ -6,7 +6,15 @@ import PasswordInput from '../../../Common/Inputs/PasswordInput';
 import { Button, CircularProgress, Typography } from '@material-ui/core';
 
 const PasswordReset = props => {
-  const { loading, success, error, cleanUp, classes } = props;
+  const {
+    loading,
+    success,
+    error,
+    cleanUp,
+    classes,
+    match,
+    resetPassword
+  } = props;
 
   const [passwordState, setPasswordState] = useState('');
 
@@ -18,7 +26,11 @@ const PasswordReset = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('lol');
+    const payload = {
+      passwordResetToken: match.params.token,
+      newPassword: passwordState
+    };
+    resetPassword(payload);
   };
 
   const handleChange = e => {

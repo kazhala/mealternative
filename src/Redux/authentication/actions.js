@@ -30,3 +30,8 @@ export const forgotPassword = email => ({
   type: Types.FORGOTPASSWORD,
   payload: email
 });
+
+export const resetPassword = payload => ({
+  type: Types.RESETPASSWORD,
+  payload
+});

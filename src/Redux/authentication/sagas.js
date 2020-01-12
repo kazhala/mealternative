@@ -28,9 +28,31 @@ export function* watchForgot() {
   yield takeLatest(Types.FORGOTPASSWORD, workerForgot);
 }
 
+export function* watchReset() {
+  yield takeLatest(Types.RESETPASSWORD, workerReset);
+}
+
 /*
   Worker Saga
 */
+
+// reset password worker
+function* workerReset({ payload }) {
+  yield put({ type: Types.BEGIN });
+  try {
+    let response = yield call(Operations.resetPassword, payload);
+    if (response.message) {
+      yield put({ type: Types.SUCCESS, payload: response.message });
+    } else if (response.error) {
+      throw new Error(response.error);
+    } else {
+      throw new Error('Something went wrong..');
+    }
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.ERROR, payload: err.message });
+  }
+}
 
 // forgot password woker
 function* workerForgot({ payload }) {

@@ -55,6 +55,23 @@ export const forgotPassword = async payload => {
   }
 };
 
+// reset password
+export const resetPassword = async payload => {
+  try {
+    const res = await fetch(`${API}/reset-password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
 // signin
 export const signIn = async payload => {
   console.log(payload);

@@ -16,7 +16,8 @@ const Auth = props => {
     success,
     loading,
     activate,
-    forgotPassword
+    forgotPassword,
+    resetPassword
   } = props;
 
   const classes = useStyles();
@@ -62,6 +63,8 @@ const Auth = props => {
             loading={loading}
             cleanUp={cleanUp}
             classes={classes}
+            resetPassword={resetPassword}
+            {...props}
           />
         )}
       />

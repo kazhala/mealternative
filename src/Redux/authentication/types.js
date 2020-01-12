@@ -14,3 +14,4 @@ export const USEROUT = 'USEROUT';
 export const USERIN = 'USERIN';
 
 export const FORGOTPASSWORD = 'FORGOTPASSWORD';
+export const RESETPASSWORD = 'RESETPASSWORD';

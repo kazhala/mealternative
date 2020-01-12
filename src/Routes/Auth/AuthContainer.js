@@ -39,7 +39,8 @@ const mapDispatchToProps = dispatch => {
     {
       activate: AuthActions.activate,
       cleanUp: AuthActions.cleanUp,
-      forgotPassword: AuthActions.forgotPassword
+      forgotPassword: AuthActions.forgotPassword,
+      resetPassword: AuthActions.resetPassword
     },
     dispatch
   );
