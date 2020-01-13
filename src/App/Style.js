@@ -26,6 +26,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center'
   },
+  menuBarLeft: {
+    display: 'flex',
+    marginRight: theme.spacing(1)
+  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
 import {
+  useTheme,
+  useMediaQuery,
   AppBar,
   Toolbar,
   IconButton,
@@ -17,7 +19,8 @@ import {
   AccountCircle,
   MenuBookRounded,
   RestaurantMenuRounded,
-  Search
+  Search,
+  MenuRounded
 } from '@material-ui/icons';
 
 const Header = props => {
@@ -47,10 +50,20 @@ const Header = props => {
     signOut();
   };
 
+  // using material ui to get view port width
+  // inline animation require responsive
+  const theme = useTheme();
+  const showMenuIcons = useMediaQuery(theme.breakpoints.up('sm'));
+
   return (
     <AppBar position='fixed'>
       <Toolbar disableGutters className={classes.menuBarLayout}>
-        <div>
+        <div className={classes.menuBarLeft}>
+          {!showMenuIcons && (
+            <IconButton color='inherit'>
+              <MenuRounded />
+            </IconButton>
+          )}
           <IconButton
             style={{ color: '#eceff4' }}
             onClick={() => handleRouteChange('/')}
@@ -73,63 +86,67 @@ const Header = props => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <Tooltip title='Check out meal combinations!'>
-            <IconButton
-              onClick={() => handleRouteChange('/meals')}
-              style={{ color: '#eceff4' }}
-            >
-              <RestaurantMenuRounded />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title='Feel like cooking? Checkout recipes'>
-            <IconButton
-              onClick={() => handleRouteChange('/recipes')}
-              style={{ color: '#eceff4' }}
-            >
-              <MenuBookRounded />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title='Explorer around on the map'>
-            <IconButton
-              onClick={() => handleRouteChange('/map')}
-              style={{ color: '#eceff4' }}
-            >
-              <ExploreRounded />
-            </IconButton>
-          </Tooltip>
+          {showMenuIcons && (
+            <>
+              <Tooltip title='Check out meal combinations!'>
+                <IconButton
+                  onClick={() => handleRouteChange('/meals')}
+                  style={{ color: '#eceff4' }}
+                >
+                  <RestaurantMenuRounded />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title='Feel like cooking? Checkout recipes'>
+                <IconButton
+                  onClick={() => handleRouteChange('/recipes')}
+                  style={{ color: '#eceff4' }}
+                >
+                  <MenuBookRounded />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title='Explorer around on the map'>
+                <IconButton
+                  onClick={() => handleRouteChange('/map')}
+                  style={{ color: '#eceff4' }}
+                >
+                  <ExploreRounded />
+                </IconButton>
+              </Tooltip>
 
-          <IconButton onClick={handleClick} style={{ color: '#eceff4' }}>
-            <AccountCircle />
-          </IconButton>
+              <IconButton onClick={handleClick} style={{ color: '#eceff4' }}>
+                <AccountCircle />
+              </IconButton>
 
-          <Menu
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            {isAuthenticated
-              ? authMenus.map((item, index) => (
-                  <MenuItem
-                    onClick={
-                      item.path
-                        ? () => handleMenuClick(item.path)
-                        : handleSignOut
-                    }
-                    key={index}
-                  >
-                    {item.text}
-                  </MenuItem>
-                ))
-              : noAuthMenus.map((item, index) => (
-                  <MenuItem
-                    key={index}
-                    onClick={() => handleMenuClick(item.path)}
-                  >
-                    {item.text}
-                  </MenuItem>
-                ))}
-          </Menu>
+              <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                {isAuthenticated
+                  ? authMenus.map((item, index) => (
+                      <MenuItem
+                        onClick={
+                          item.path
+                            ? () => handleMenuClick(item.path)
+                            : handleSignOut
+                        }
+                        key={index}
+                      >
+                        {item.text}
+                      </MenuItem>
+                    ))
+                  : noAuthMenus.map((item, index) => (
+                      <MenuItem
+                        key={index}
+                        onClick={() => handleMenuClick(item.path)}
+                      >
+                        {item.text}
+                      </MenuItem>
+                    ))}
+              </Menu>
+            </>
+          )}
         </div>
       </Toolbar>
     </AppBar>
