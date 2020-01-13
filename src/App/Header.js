@@ -64,7 +64,9 @@ const Header = props => {
         handleClose={() => setSideBar(false)}
         classes={classes}
         show={sideBar && !showMenuIcons}
+        isAuthenticated={isAuthenticated}
       />
+
       <AppBar position='fixed'>
         <Toolbar disableGutters className={classes.menuBarLayout}>
           <div className={classes.menuBarLeft}>
@@ -80,6 +82,7 @@ const Header = props => {
               <HomeRounded />
             </IconButton>
           </div>
+
           <div className={classes.menuBarRight}>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -94,6 +97,7 @@ const Header = props => {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>
+
             {showMenuIcons && (
               <>
                 <Tooltip title='Check out meal combinations!'>

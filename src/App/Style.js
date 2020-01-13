@@ -68,8 +68,16 @@ const useStyles = makeStyles(theme => ({
     }
   },
   sideBarRoot: {
-    width: '150px',
+    width: '180px',
     backgroundColor: 'white'
+  },
+  sideBarListItem: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1)
+  },
+  sideBarTitle: {
+    padding: theme.spacing(1, 0.5),
+    textAlign: 'center'
   }
 }));
 
