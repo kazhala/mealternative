@@ -8,13 +8,16 @@ import {
   IconButton,
   Button,
   Menu,
-  MenuItem
+  MenuItem,
+  InputBase
 } from '@material-ui/core';
 import {
   MenuRounded,
   HomeRounded,
-  MapRounded,
-  AccountCircle
+  ExploreRounded,
+  AccountCircle,
+  MenuBookRounded,
+  RestaurantMenuRounded
 } from '@material-ui/icons';
 
 const Header = props => {
@@ -48,10 +51,6 @@ const Header = props => {
     <AppBar position='fixed'>
       <Toolbar disableGutters className={classes.menuBarLayout}>
         <div>
-          <IconButton style={{ color: '#eceff4' }}>
-            <MenuRounded />
-          </IconButton>
-
           <IconButton
             style={{ color: '#eceff4' }}
             onClick={() => handleRouteChange('/')}
@@ -62,10 +61,25 @@ const Header = props => {
 
         <div>
           <IconButton
+            onClick={() => handleRouteChange('/meals')}
+            style={{ color: '#eceff4' }}
+            title='Check out meal combinations!'
+          >
+            <RestaurantMenuRounded />
+          </IconButton>
+          <IconButton
+            onClick={() => handleRouteChange('/recipes')}
+            style={{ color: '#eceff4' }}
+            title='Feel like cooking? Checkout recipes'
+          >
+            <MenuBookRounded />
+          </IconButton>
+          <IconButton
             onClick={() => handleRouteChange('/map')}
             style={{ color: '#eceff4' }}
+            title='Explorer around on the map'
           >
-            <MapRounded />
+            <ExploreRounded />
           </IconButton>
 
           <IconButton onClick={handleClick} style={{ color: '#eceff4' }}>
