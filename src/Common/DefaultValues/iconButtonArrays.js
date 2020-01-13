@@ -26,3 +26,28 @@ export const noAuthArrays = [
   { path: '/signin', text: 'Sign In', icon: <VerifiedUserRounded /> },
   { path: '/signup', text: 'Sign Up', icon: <GroupAddRounded /> }
 ];
+
+export const authMenus = [{ text: 'SignOut' }];
+
+export const noAuthMenus = [
+  { path: '/signin', text: 'Sign In' },
+  { path: '/signup', text: 'Sign Up' }
+];
+
+export const toolTipIcons = [
+  {
+    path: '/meals',
+    title: 'Checkout meal combinations!',
+    icon: <RestaurantMenuRounded />
+  },
+  {
+    path: '/recipes',
+    title: 'Feel like cooking? Checkout recipes',
+    icon: <MenuBookRounded />
+  },
+  {
+    path: '/map',
+    title: 'Explorer around on the map',
+    icon: <ExploreRounded />
+  }
+];

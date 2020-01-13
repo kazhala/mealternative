@@ -13,7 +13,7 @@ import {
   sideBarArrays,
   authArrays,
   noAuthArrays
-} from '../Common/DefaultValues/SideBarArrays';
+} from '../Common/DefaultValues/iconButtonArrays';
 
 const SideBar = props => {
   const {
@@ -55,6 +55,7 @@ const SideBar = props => {
           {!isAuthenticated &&
             noAuthArrays.map((menuItem, index) => (
               <ListItem
+                key={index}
                 button
                 className={classes.sideBarListItem}
                 onClick={() => handleSideBarSelect(menuItem.path)}
@@ -71,6 +72,7 @@ const SideBar = props => {
           {isAuthenticated &&
             authArrays.map((menuItem, index) => (
               <ListItem
+                key={index}
                 button
                 className={classes.sideBarListItem}
                 onClick={() => handleSideBarSelect(menuItem.path)}
