@@ -1,10 +1,20 @@
+/*
+  Sign in container
+*/
+
+// react
 import React, { useReducer, useEffect } from 'react';
+
+// redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { AuthActions } from '../../Redux/authentication';
-import SignIn from './SignIn';
-import { Redirect } from 'react-router-dom';
 
+// components
+import { Redirect } from 'react-router-dom';
+import SignIn from './SignIn';
+
+// useReducer values
 const initialState = {
   email: '',
   password: ''

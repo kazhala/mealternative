@@ -1,6 +1,13 @@
+/*
+  The main header component of the app
+  Contains the sidebar
+*/
+
+// react
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+// components
 import { withRouter } from 'react-router-dom';
 import {
   useTheme,
@@ -20,6 +27,8 @@ import {
   MenuRounded
 } from '@material-ui/icons';
 import SideBar from './SideBar';
+
+// misc
 import {
   authMenus,
   noAuthMenus,
@@ -29,8 +38,10 @@ import {
 const Header = props => {
   const { classes, isAuthenticated, history, signOut } = props;
 
+  // account icon menu anchor element
   const [anchorEl, setAnchorEl] = useState(null);
 
+  // side bar open state
   const [sideBar, setSideBar] = useState(false);
 
   const handleRouteChange = path => {
@@ -45,22 +56,26 @@ const Header = props => {
     setAnchorEl(null);
   };
 
+  // close the menu when item click in menu
   const handleMenuClick = path => {
     handleClose();
     handleRouteChange(path);
   };
 
+  // close the menu on signout
   const handleSignOut = () => {
     handleClose();
     signOut();
   };
 
+  // sign out in array doesn't provide path
   const handleSideBarSelect = path => {
     if (!path) {
       signOut();
     } else {
       handleRouteChange(path);
     }
+    // close the sidebar
     setSideBar(false);
   };
 
@@ -71,6 +86,7 @@ const Header = props => {
 
   return (
     <>
+      {/* sidebar */}
       <SideBar
         handleClose={() => setSideBar(false)}
         classes={classes}
@@ -79,23 +95,24 @@ const Header = props => {
         handleSideBarSelect={handleSideBarSelect}
       />
 
+      {/* app bar */}
       <AppBar position='fixed'>
         <Toolbar disableGutters className={classes.menuBarLayout}>
           <div className={classes.menuBarLeft}>
+            {/* display sidebar menu on small device */}
             {!showMenuIcons && (
               <IconButton onClick={() => setSideBar(true)} color='inherit'>
                 <MenuRounded />
               </IconButton>
             )}
-            <IconButton
-              style={{ color: '#eceff4' }}
-              onClick={() => handleRouteChange('/')}
-            >
+            <IconButton color='inherit' onClick={() => handleRouteChange('/')}>
               <HomeRounded />
             </IconButton>
           </div>
 
+          {/* rightside of the menu bar, contains most icons */}
           <div className={classes.menuBarRight}>
+            {/* search bar, copied style from material ui */}
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <Search />
@@ -110,6 +127,7 @@ const Header = props => {
               />
             </div>
 
+            {/* if big device, display */}
             {showMenuIcons && (
               <>
                 {toolTipIcons.map((menuItem, index) => (
@@ -122,10 +140,11 @@ const Header = props => {
                     </IconButton>
                   </Tooltip>
                 ))}
+
+                {/* small simple menu */}
                 <IconButton onClick={handleClick} style={{ color: '#eceff4' }}>
                   <AccountCircle />
                 </IconButton>
-
                 <Menu
                   anchorEl={anchorEl}
                   keepMounted

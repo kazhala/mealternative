@@ -1,6 +1,12 @@
+/*
+  Side bar of the app for small device
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// components
 import {
   Drawer,
   List,
@@ -9,6 +15,8 @@ import {
   ListItemText,
   Typography
 } from '@material-ui/core';
+
+// misc
 import {
   sideBarArrays,
   authArrays,
@@ -27,6 +35,7 @@ const SideBar = props => {
   return (
     <Drawer open={show} onClose={handleClose}>
       <div className={classes.sideBarRoot}>
+        {/* title */}
         <Typography
           component='div'
           className={classes.sideBarTitle}
@@ -35,6 +44,7 @@ const SideBar = props => {
           Mealternative
         </Typography>
 
+        {/* display the entire list */}
         <List dense component='nav'>
           {sideBarArrays.map((menuItem, index) => (
             <ListItem
@@ -52,6 +62,7 @@ const SideBar = props => {
             </ListItem>
           ))}
 
+          {/* no authenticated only items */}
           {!isAuthenticated &&
             noAuthArrays.map((menuItem, index) => (
               <ListItem
@@ -69,6 +80,7 @@ const SideBar = props => {
               </ListItem>
             ))}
 
+          {/* authenticated only items */}
           {isAuthenticated &&
             authArrays.map((menuItem, index) => (
               <ListItem

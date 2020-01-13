@@ -1,10 +1,19 @@
+/*
+  Main Sign in component
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
-import useStyles from './Style';
+
+// components
 import SignInForm from './_components/SignInForm';
 import OrDivider from '../../Common/Divider/OrDivider';
 import SocialAuth from '../../Common/SocialAuth/SocialAuth';
 import FormRoot from '../../Common/Form/FormRoot';
+
+// misc
+import useStyles from './Style';
 
 const SignIn = props => {
   const {

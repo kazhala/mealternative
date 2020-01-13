@@ -1,3 +1,6 @@
+/*
+  Provide arrays for sidebar and menu bar
+*/
 import React from 'react';
 import {
   HomeRounded,

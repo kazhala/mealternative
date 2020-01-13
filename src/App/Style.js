@@ -22,6 +22,8 @@ const useStyles = makeStyles(theme => ({
     overflow: 'scroll'
   },
   offset: theme.mixins.toolbar,
+
+  // menu bar
   menuBarRight: {
     display: 'flex',
     alignItems: 'center'
@@ -67,6 +69,8 @@ const useStyles = makeStyles(theme => ({
       }
     }
   },
+
+  // sidebar
   sideBarRoot: {
     width: '180px',
     backgroundColor: 'white'
