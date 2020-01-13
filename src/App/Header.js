@@ -6,18 +6,18 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Button,
   Menu,
   MenuItem,
-  InputBase
+  InputBase,
+  Tooltip
 } from '@material-ui/core';
 import {
-  MenuRounded,
   HomeRounded,
   ExploreRounded,
   AccountCircle,
   MenuBookRounded,
-  RestaurantMenuRounded
+  RestaurantMenuRounded,
+  Search
 } from '@material-ui/icons';
 
 const Header = props => {
@@ -59,32 +59,49 @@ const Header = props => {
           </IconButton>
         </div>
 
-        <div>
-          <IconButton
-            onClick={() => handleRouteChange('/meals')}
-            style={{ color: '#eceff4' }}
-            title='Check out meal combinations!'
-          >
-            <RestaurantMenuRounded />
-          </IconButton>
-          <IconButton
-            onClick={() => handleRouteChange('/recipes')}
-            style={{ color: '#eceff4' }}
-            title='Feel like cooking? Checkout recipes'
-          >
-            <MenuBookRounded />
-          </IconButton>
-          <IconButton
-            onClick={() => handleRouteChange('/map')}
-            style={{ color: '#eceff4' }}
-            title='Explorer around on the map'
-          >
-            <ExploreRounded />
-          </IconButton>
+        <div className={classes.menuBarRight}>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <Search />
+            </div>
+            <InputBase
+              placeholder='Search…'
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </div>
+          <Tooltip title='Check out meal combinations!'>
+            <IconButton
+              onClick={() => handleRouteChange('/meals')}
+              style={{ color: '#eceff4' }}
+            >
+              <RestaurantMenuRounded />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Feel like cooking? Checkout recipes'>
+            <IconButton
+              onClick={() => handleRouteChange('/recipes')}
+              style={{ color: '#eceff4' }}
+            >
+              <MenuBookRounded />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Explorer around on the map'>
+            <IconButton
+              onClick={() => handleRouteChange('/map')}
+              style={{ color: '#eceff4' }}
+            >
+              <ExploreRounded />
+            </IconButton>
+          </Tooltip>
 
           <IconButton onClick={handleClick} style={{ color: '#eceff4' }}>
             <AccountCircle />
           </IconButton>
+
           <Menu
             anchorEl={anchorEl}
             keepMounted
