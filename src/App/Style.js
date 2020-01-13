@@ -66,6 +66,10 @@ const useStyles = makeStyles(theme => ({
         width: 200
       }
     }
+  },
+  sideBarRoot: {
+    width: '150px',
+    backgroundColor: 'white'
   }
 }));
 
