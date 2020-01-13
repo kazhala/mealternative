@@ -53,6 +53,15 @@ const Header = props => {
     signOut();
   };
 
+  const handleSideBarSelect = path => {
+    if (!path) {
+      signOut();
+    } else {
+      setSideBar(false);
+      handleRouteChange(path);
+    }
+  };
+
   // using material ui to get view port width
   // inline animation require responsive
   const theme = useTheme();
@@ -65,6 +74,7 @@ const Header = props => {
         classes={classes}
         show={sideBar && !showMenuIcons}
         isAuthenticated={isAuthenticated}
+        handleSideBarSelect={handleSideBarSelect}
       />
 
       <AppBar position='fixed'>

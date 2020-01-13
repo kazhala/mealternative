@@ -10,18 +10,19 @@ import {
   Typography
 } from '@material-ui/core';
 import {
-  HomeRounded,
-  ExploreRounded,
-  AccountCircle,
-  MenuBookRounded,
-  RestaurantMenuRounded,
-  ExitToAppRounded,
-  VerifiedUserRounded,
-  GroupAddRounded
-} from '@material-ui/icons';
+  sideBarArrays,
+  authArrays,
+  noAuthArrays
+} from '../Common/DefaultValues/SideBarArrays';
 
 const SideBar = props => {
-  const { classes, show, handleClose, isAuthenticated } = props;
+  const {
+    classes,
+    show,
+    handleClose,
+    isAuthenticated,
+    handleSideBarSelect
+  } = props;
 
   return (
     <Drawer open={show} onClose={handleClose}>
@@ -35,76 +36,53 @@ const SideBar = props => {
         </Typography>
 
         <List dense component='nav'>
-          <ListItem button className={classes.sideBarListItem}>
-            <ListItemIcon>
-              <HomeRounded />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography variant='body2'>Home</Typography>}
-            />
-          </ListItem>
-          <ListItem button className={classes.sideBarListItem}>
-            <ListItemIcon>
-              <ExploreRounded />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography variant='body2'>Map</Typography>}
-            />
-          </ListItem>
-          <ListItem button className={classes.sideBarListItem}>
-            <ListItemIcon>
-              <MenuBookRounded />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography variant='body2'>Recipes</Typography>}
-            />
-          </ListItem>
+          {sideBarArrays.map((menuItem, index) => (
+            <ListItem
+              key={index}
+              onClick={() => handleSideBarSelect(menuItem.path)}
+              button
+              className={classes.sideBarListItem}
+            >
+              <ListItemIcon>{menuItem.icon}</ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variat='body2'>{menuItem.text}</Typography>
+                }
+              />
+            </ListItem>
+          ))}
 
-          <ListItem button className={classes.sideBarListItem}>
-            <ListItemIcon>
-              <RestaurantMenuRounded />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography variant='body2'>Meals</Typography>}
-            />
-          </ListItem>
-          <ListItem button className={classes.sideBarListItem}>
-            <ListItemIcon>
-              <VerifiedUserRounded />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography variant='body2'>Sign In</Typography>}
-            />
-          </ListItem>
-          <ListItem button className={classes.sideBarListItem}>
-            <ListItemIcon>
-              <GroupAddRounded />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography variant='body2'>Sign Up</Typography>}
-            />
-          </ListItem>
-
-          {isAuthenticated && (
-            <>
-              <ListItem button className={classes.sideBarListItem}>
-                <ListItemIcon>
-                  <AccountCircle />
-                </ListItemIcon>
+          {!isAuthenticated &&
+            noAuthArrays.map((menuItem, index) => (
+              <ListItem
+                button
+                className={classes.sideBarListItem}
+                onClick={() => handleSideBarSelect(menuItem.path)}
+              >
+                <ListItemIcon>{menuItem.icon}</ListItemIcon>
                 <ListItemText
-                  primary={<Typography variant='body2'>Account</Typography>}
+                  primary={
+                    <Typography variant='body2'>{menuItem.text}</Typography>
+                  }
                 />
               </ListItem>
-              <ListItem button className={classes.sideBarListItem}>
-                <ListItemIcon>
-                  <ExitToAppRounded />
-                </ListItemIcon>
+            ))}
+
+          {isAuthenticated &&
+            authArrays.map((menuItem, index) => (
+              <ListItem
+                button
+                className={classes.sideBarListItem}
+                onClick={() => handleSideBarSelect(menuItem.path)}
+              >
+                <ListItemIcon>{menuItem.icon}</ListItemIcon>
                 <ListItemText
-                  primary={<Typography variant='body2'>Sign Out</Typography>}
+                  primary={
+                    <Typography variant='body2'>{menuItem.text}</Typography>
+                  }
                 />
               </ListItem>
-            </>
-          )}
+            ))}
         </List>
       </div>
     </Drawer>
@@ -115,7 +93,8 @@ SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  handleSideBarSelect: PropTypes.func.isRequired
 };
 
 export default SideBar;
