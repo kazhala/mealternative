@@ -142,9 +142,14 @@ const Header = props => {
                 ))}
 
                 {/* small simple menu */}
-                <IconButton onClick={handleClick} style={{ color: '#eceff4' }}>
-                  <AccountCircle />
-                </IconButton>
+                <Tooltip title='Account'>
+                  <IconButton
+                    onClick={handleClick}
+                    style={{ color: '#eceff4' }}
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </Tooltip>
                 <Menu
                   anchorEl={anchorEl}
                   keepMounted

@@ -29,8 +29,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   menuBarLeft: {
-    display: 'flex',
-    marginRight: theme.spacing(1)
+    display: 'flex'
   },
   search: {
     position: 'relative',
@@ -39,11 +38,11 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
-    marginLeft: 0,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(0),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto'
+      marginRight: theme.spacing(1)
     }
   },
   searchIcon: {
@@ -66,6 +65,12 @@ const useStyles = makeStyles(theme => ({
       width: 120,
       '&:focus': {
         width: 200
+      }
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 250,
+      '&:focus': {
+        width: 350
       }
     }
   },
