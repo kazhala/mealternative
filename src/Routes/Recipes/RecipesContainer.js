@@ -1,7 +1,11 @@
+/*
+  Recipe container
+*/
 import React from 'react';
+import Recipes from './Recipes';
 
 const RecipesContainer = props => {
-  return <div>RecipesContainer</div>;
+  return <Recipes {...props} />;
 };
 
 export default RecipesContainer;

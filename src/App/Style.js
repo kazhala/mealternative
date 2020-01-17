@@ -32,17 +32,18 @@ const useStyles = makeStyles(theme => ({
     display: 'flex'
   },
   search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
-    },
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(0),
-    width: '100%',
+    display: 'none',
     [theme.breakpoints.up('sm')]: {
-      marginRight: theme.spacing(1)
+      display: 'block',
+      position: 'relative',
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: fade(theme.palette.common.white, 0.15),
+      '&:hover': {
+        backgroundColor: fade(theme.palette.common.white, 0.25)
+      },
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: '100%'
     }
   },
   searchIcon: {
