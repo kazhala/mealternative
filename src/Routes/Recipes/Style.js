@@ -17,6 +17,11 @@ const useStyles = makeStyles(theme => ({
   recipeSearchField: {
     width: '80%',
     marginRight: theme.spacing(1)
+  },
+  recipeDial: {
+    position: 'absolute',
+    right: theme.spacing(2),
+    bottom: theme.spacing(2)
   }
 }));
 
