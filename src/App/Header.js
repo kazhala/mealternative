@@ -24,7 +24,8 @@ import {
   HomeRounded,
   AccountCircle,
   Search,
-  MenuRounded
+  MenuRounded,
+  FaceRounded
 } from '@material-ui/icons';
 import SideBar from './SideBar';
 
@@ -147,7 +148,7 @@ const Header = props => {
                     onClick={handleClick}
                     style={{ color: '#eceff4' }}
                   >
-                    <AccountCircle />
+                    {isAuthenticated ? <AccountCircle /> : <FaceRounded />}
                   </IconButton>
                 </Tooltip>
                 <Menu
