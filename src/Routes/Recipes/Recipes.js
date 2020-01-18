@@ -24,9 +24,13 @@ const Recipes = props => {
         {/* left part */}
         <div className={classes.recipeBody}>
           <RecipeCard classes={classes} />
+          <RecipeCard classes={classes} />
         </div>
         {/* right part */}
-        <div className={classes.recipeBody}></div>
+        <div className={classes.recipeBody}>
+          <RecipeCard classes={classes} />
+          <RecipeCard classes={classes} />
+        </div>
       </div>
       <SortMenuDial
         classes={classes}

@@ -28,15 +28,17 @@ const useStyles = makeStyles(theme => ({
     gridGap: theme.spacing(1)
   },
   recipeBody: {
-    border: '1px solid black'
+    // border: '1px solid black'
   },
 
   recipeCardRoot: {
-    width: '100%'
+    width: '100%',
+    marginBottom: theme.spacing(1.5)
   },
   recipeCardImage: {
     width: '100%',
-    height: 'auto'
+    height: 'auto',
+    borderRadius: theme.shape.borderRadius
   },
   recipeCardTitle: {
     display: '-webkit-box',
@@ -47,7 +49,9 @@ const useStyles = makeStyles(theme => ({
   },
   recipeCardWithIcon: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    opacity: 0.7,
+    fontSize: theme.spacing(0.7)
   },
   recipeCardRow: {
     display: 'flex',
@@ -56,6 +60,9 @@ const useStyles = makeStyles(theme => ({
   recipeCardAvatar: {
     width: theme.spacing(1.5),
     height: theme.spacing(1.5)
+  },
+  recipeCardRating: {
+    fontSize: theme.spacing(1)
   },
 
   recipeDial: {

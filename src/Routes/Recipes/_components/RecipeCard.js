@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Avatar } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
-import { Bookmarks, ThumbUp } from '@material-ui/icons';
+import { BookmarksOutlined, ThumbUpOutlined } from '@material-ui/icons';
 
 const RecipeCard = props => {
   const { classes } = props;
@@ -24,11 +24,16 @@ const RecipeCard = props => {
       </Typography>
       <div className={classes.recipeCardRow}>
         <div className={classes.recipeCardWithIcon}>
-          <Rating value={3} readOnly size='small' />
+          <Rating
+            className={classes.recipeCardRating}
+            value={3}
+            readOnly
+            size='small'
+          />
           (3)
         </div>
         <div className={classes.recipeCardWithIcon}>
-          <Bookmarks fontSize='small' />
+          <BookmarksOutlined fontSize='small' />
           20.1k
         </div>
       </div>
@@ -38,7 +43,7 @@ const RecipeCard = props => {
           <div>name</div>
         </div>
         <div className={classes.recipeCardWithIcon}>
-          <ThumbUp fontSize='small' />
+          <ThumbUpOutlined fontSize='small' />
           20.1k
         </div>
       </div>
