@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import useStyles from './Style';
 import { Button } from '@material-ui/core';
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/lab';
 import SearchInput from '../../Common/Inputs/SearchInput';
+import SortMenuDial from './_components/SortMenuDial';
 
 const Recipes = props => {
   const classes = useStyles();
@@ -23,14 +23,11 @@ const Recipes = props => {
           Search
         </Button>
       </div>
-      <SpeedDial
-        ariaLabel='Recipe sort speedDial'
-        className={classes.recipeDial}
-        icon={<SpeedDialIcon />}
-        open={sortOption.show}
-        onOpen={() => setSortOption({ ...sortOption, show: true })}
-        onClose={() => setSortOption({ ...sortOption, show: false })}
-      ></SpeedDial>
+      <SortMenuDial
+        classes={classes}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
+      />
     </div>
   );
 };
