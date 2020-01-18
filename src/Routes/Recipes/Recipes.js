@@ -3,6 +3,7 @@ import useStyles from './Style';
 import { Button } from '@material-ui/core';
 import SearchInput from '../../Common/Inputs/SearchInput';
 import SortMenuDial from './_components/SortMenuDial';
+import RecipeCard from './_components/RecipeCard';
 
 const Recipes = props => {
   const { sortOption, setSortOption } = props;
@@ -20,7 +21,11 @@ const Recipes = props => {
         </Button>
       </div>
       <div className={classes.recipeBodyRoot}>
-        <div className={classes.recipeBody}></div>
+        {/* left part */}
+        <div className={classes.recipeBody}>
+          <RecipeCard classes={classes} />
+        </div>
+        {/* right part */}
         <div className={classes.recipeBody}></div>
       </div>
       <SortMenuDial

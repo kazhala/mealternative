@@ -31,6 +31,27 @@ const useStyles = makeStyles(theme => ({
     border: '1px solid black'
   },
 
+  recipeCardRoot: {
+    width: '100%'
+  },
+  recipeCardImage: {
+    width: '100%',
+    height: 'auto'
+  },
+  recipeCardTitle: {
+    display: '-webkit-box',
+    lineClamp: 2,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    boxOrient: 'vertical'
+  },
+  recipeCardQuality: {
+    display: 'flex'
+  },
+  recipeCardCreator: {
+    display: 'flex'
+  },
+
   recipeDial: {
     position: 'absolute',
     right: theme.spacing(2),
