@@ -45,11 +45,17 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     boxOrient: 'vertical'
   },
-  recipeCardQuality: {
-    display: 'flex'
+  recipeCardWithIcon: {
+    display: 'flex',
+    alignItems: 'center'
   },
-  recipeCardCreator: {
-    display: 'flex'
+  recipeCardRow: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  recipeCardAvatar: {
+    width: theme.spacing(1.5),
+    height: theme.spacing(1.5)
   },
 
   recipeDial: {
