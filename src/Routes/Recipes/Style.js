@@ -12,12 +12,25 @@ const useStyles = makeStyles(theme => ({
   recipeSearchRoot: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: theme.spacing(1)
   },
   recipeSearchField: {
     width: '80%',
     marginRight: theme.spacing(1)
   },
+
+  recipeBodyRoot: {
+    width: '100%',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    height: '100%',
+    gridGap: theme.spacing(1)
+  },
+  recipeBody: {
+    border: '1px solid black'
+  },
+
   recipeDial: {
     position: 'absolute',
     right: theme.spacing(2),

@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useStyles from './Style';
 import { Button } from '@material-ui/core';
 import SearchInput from '../../Common/Inputs/SearchInput';
 import SortMenuDial from './_components/SortMenuDial';
 
 const Recipes = props => {
+  const { sortOption, setSortOption } = props;
   const classes = useStyles();
-  const [sortOption, setSortOption] = useState({
-    show: false,
-    optionNum: 0,
-    reversed: {}
-  });
 
   return (
     <div className={classes.recipeRoot}>
@@ -22,6 +18,10 @@ const Recipes = props => {
         <Button variant='contained' color='primary'>
           Search
         </Button>
+      </div>
+      <div className={classes.recipeBodyRoot}>
+        <div className={classes.recipeBody}></div>
+        <div className={classes.recipeBody}></div>
       </div>
       <SortMenuDial
         classes={classes}
