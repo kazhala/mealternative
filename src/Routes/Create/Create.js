@@ -1,15 +1,27 @@
 import React from 'react';
 import useStyles from './Style';
 import DefaultRoute from './_components/DefaultRoute';
+import MealRoute from './_components/MealRoute';
+import RecipeRoute from './_components/RecipeRoute';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 const Create = props => {
+  const { isAuthenticated } = props;
   const classes = useStyles();
+
   return (
     <>
+      {!isAuthenticated && <Redirect to='/signin' />}
       <Switch>
         <Route
-          exact
+          path='/create/recipe'
+          render={props => <RecipeRoute {...props} classes={classes} />}
+        />
+        <Route
+          path='/create/meal'
+          render={props => <MealRoute {...props} classes={classes} />}
+        />
+        <Route
           path='/create'
           render={props => <DefaultRoute {...props} classes={classes} />}
         />

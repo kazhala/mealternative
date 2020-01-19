@@ -15,7 +15,13 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    '&:hover': {
+      borderColor: theme.palette.primary.light,
+      borderWidth: '1px',
+      borderStyle: 'groove',
+      cursor: 'pointer'
+    }
   }
 }));
 
