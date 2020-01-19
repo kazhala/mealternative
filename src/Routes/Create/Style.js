@@ -7,7 +7,16 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     display: 'grid',
     gridTemplateColumns: '1fr',
-    gridTemplateRows: '5fr 1fr 5fr'
+    gridTemplateRows: '5fr 1fr 5fr',
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: '5fr 1fr 5fr',
+      gridTemplateRows: '1fr 2fr',
+      paddingBottom: theme.spacing(15)
+    }
+  },
+  defaultRouteTitle: {
+    gridColumn: '1/-1',
+    placeSelf: 'center'
   },
 
   createPaper: {
@@ -22,6 +31,13 @@ const useStyles = makeStyles(theme => ({
       borderStyle: 'groove',
       cursor: 'pointer'
     }
+  },
+  horizontalOrDividerContainer: {
+    placeSelf: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '90%'
   }
 }));
 

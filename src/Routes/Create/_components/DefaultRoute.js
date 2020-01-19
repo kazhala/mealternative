@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OrDivider from '../../../Common/Divider/OrDivider';
-import { Paper, Typography } from '@material-ui/core';
+import VerticalOrDivider from '../../../Common/Divider/VerticalOrDivider';
+import { Paper, Typography, useTheme, useMediaQuery } from '@material-ui/core';
 import { MenuBook, RestaurantMenu } from '@material-ui/icons';
 
 const DefaultRoute = props => {
@@ -11,8 +12,16 @@ const DefaultRoute = props => {
     history.push(path);
   };
 
+  const theme = useTheme();
+  const displayVerticalDivider = useMediaQuery(theme.breakpoints.up('md'));
+
   return (
     <div className={classes.defaultRouteRoot}>
+      {displayVerticalDivider && (
+        <Typography className={classes.defaultRouteTitle} variant='h4'>
+          Create something amazing!
+        </Typography>
+      )}
       <Paper
         onClick={() => handleRouteClick('/create/recipe')}
         className={classes.createPaper}
@@ -21,7 +30,12 @@ const DefaultRoute = props => {
         <MenuBook fontSize='inherit' color='primary' />
         <Typography variant='h6'>New Recipe</Typography>
       </Paper>
-      <OrDivider />
+      {displayVerticalDivider && <VerticalOrDivider />}
+      {!displayVerticalDivider && (
+        <div className={classes.horizontalOrDividerContainer}>
+          <OrDivider />
+        </div>
+      )}
       <Paper
         onClick={() => handleRouteClick('/create/meal')}
         className={classes.createPaper}
