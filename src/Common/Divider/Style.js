@@ -13,7 +13,6 @@ const useStyles = makeStyles(theme => ({
       background: 'rgba(0,0,0,0.5)',
       top: '50%',
       right: theme.spacing(2),
-      opacity: '0.7',
       [theme.breakpoints.up('sm')]: {
         width: 'calc(100vw / 3.5)'
       },
@@ -31,7 +30,6 @@ const useStyles = makeStyles(theme => ({
       width: 'calc(100vw / 3)',
       background: 'rgba(0,0,0,0.5)',
       top: '50%',
-      opacity: '0.7',
       left: theme.spacing(2),
       [theme.breakpoints.up('sm')]: {
         width: 'calc(100vw / 3.5)'
@@ -42,6 +40,32 @@ const useStyles = makeStyles(theme => ({
       [theme.breakpoints.up('lg')]: {
         width: 'calc(100vw / 7)'
       }
+    }
+  },
+
+  verticalOrDivider: {
+    margin: theme.spacing(0, 2),
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      height: 'calc(100% / 2.5)',
+      width: '1px',
+      top: theme.spacing(1),
+      left: '50%',
+      background: 'rgba(0,0,0,0.5)'
+    },
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      height: 'calc(100% / 2.5)',
+      width: '1px',
+      bottom: theme.spacing(1),
+      left: '50%',
+      background: 'rgba(0,0,0,0.5)'
     }
   }
 }));
