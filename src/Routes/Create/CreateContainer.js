@@ -1,7 +1,8 @@
 import React from 'react';
+import Create from './Create';
 
 const CreateContainer = props => {
-  return <div>CreateContainer</div>;
+  return <Create {...props} />;
 };
 
 export default CreateContainer;

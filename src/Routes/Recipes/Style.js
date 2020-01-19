@@ -26,6 +26,11 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: '1fr 1fr',
     gridGap: theme.spacing(1)
   },
+  recipeBodyColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
 
   recipeCardRoot: {
     width: '100%',
