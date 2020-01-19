@@ -10,11 +10,13 @@ import {
   VerifiedUserRounded,
   GroupAddRounded,
   AccountCircle,
-  ExitToAppRounded
+  ExitToAppRounded,
+  Create
 } from '@material-ui/icons';
 
 export const sideBarArrays = [
   { path: '/', text: 'Home', icon: <HomeRounded /> },
+  { path: '/create', text: 'Create', icon: <Create /> },
   { path: '/map', text: 'Map', icon: <ExploreRounded /> },
   { path: '/recipes', text: 'Recipes', icon: <MenuBookRounded /> },
   { path: '/Meals', text: 'Meals', icon: <RestaurantMenuRounded /> }
@@ -38,6 +40,11 @@ export const noAuthMenus = [
 ];
 
 export const toolTipIcons = [
+  {
+    path: '/create',
+    title: 'Create something new for the community!',
+    icon: <Create />
+  },
   {
     path: '/meals',
     title: 'Checkout meal combinations!',

@@ -26,9 +26,6 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: '1fr 1fr',
     gridGap: theme.spacing(1)
   },
-  recipeBody: {
-    // border: '1px solid black'
-  },
 
   recipeCardRoot: {
     width: '100%',
@@ -50,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     alignItems: 'center',
     gridTemplateColumns: 'auto auto',
-    gridGap: theme.spacing(0.3),
+    gridGap: theme.spacing(0.2),
     opacity: 0.7,
     fontSize: theme.spacing(0.7)
   },
@@ -63,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(1.5)
   },
   recipeCardRating: {
-    fontSize: theme.spacing(1)
+    fontSize: theme.spacing(0.9)
   },
 
   recipeDial: {
