@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
-    height: '100%',
     gridGap: theme.spacing(1)
   },
   recipeBody: {
@@ -48,8 +47,10 @@ const useStyles = makeStyles(theme => ({
     boxOrient: 'vertical'
   },
   recipeCardWithIcon: {
-    display: 'flex',
+    display: 'grid',
     alignItems: 'center',
+    gridTemplateColumns: 'auto auto',
+    gridGap: theme.spacing(0.3),
     opacity: 0.7,
     fontSize: theme.spacing(0.7)
   },

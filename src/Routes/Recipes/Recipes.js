@@ -21,16 +21,11 @@ const Recipes = props => {
         </Button>
       </div>
       <div className={classes.recipeBodyRoot}>
-        {/* left part */}
-        <div className={classes.recipeBody}>
-          <RecipeCard classes={classes} />
-          <RecipeCard classes={classes} />
-        </div>
-        {/* right part */}
-        <div className={classes.recipeBody}>
-          <RecipeCard classes={classes} />
-          <RecipeCard classes={classes} />
-        </div>
+        <RecipeCard classes={classes} />
+        <RecipeCard classes={classes} />
+        <RecipeCard classes={classes} />
+        <RecipeCard classes={classes} />
+        <RecipeCard classes={classes} />
       </div>
       <SortMenuDial
         classes={classes}
