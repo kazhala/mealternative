@@ -8,8 +8,20 @@ import PropTypes from 'prop-types';
 
 // components
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import { Clear, Link, CloudUpload, AddAPhoto } from '@material-ui/icons';
-import { TextField, Button, IconButton } from '@material-ui/core';
+import {
+  Clear,
+  Link,
+  CloudUpload,
+  AddAPhoto,
+  Visibility,
+  VisibilityOff
+} from '@material-ui/icons';
+import {
+  TextField,
+  Button,
+  IconButton,
+  InputAdornment
+} from '@material-ui/core';
 
 const ImageOption = props => {
   const {
@@ -40,6 +52,10 @@ const ImageOption = props => {
     handleDetailChange('thumbFile', '');
   };
 
+  const handleShowPreview = () => {
+    handleDetailChange('thumbUrlPreview', '');
+  };
+
   return (
     <div className={classes.imageOption}>
       <ToggleButtonGroup
@@ -64,6 +80,15 @@ const ImageOption = props => {
             label={urlText}
             onChange={handleChange}
             value={thumbnailImage.url}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton onClick={handleShowPreview}>
+                    <Visibility />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
           />
         )}
         {uploadOption === 'file' && (

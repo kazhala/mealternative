@@ -58,8 +58,16 @@ const RecipeRoute = props => {
           ...prevDetails,
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
-            url: newValue,
-            previewUrl: newValue
+            url: newValue
+          }
+        }));
+        break;
+      case 'thumbUrlPreview':
+        setRecipeDetail(prevDetails => ({
+          ...prevDetails,
+          thumbnailImage: {
+            ...prevDetails.thumbnailImage,
+            previewUrl: prevDetails.thumbnailImage.url
           }
         }));
         break;
