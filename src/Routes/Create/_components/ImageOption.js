@@ -5,7 +5,7 @@ import { Http, CloudUpload, AddAPhoto } from '@material-ui/icons';
 import { TextField, Button } from '@material-ui/core';
 
 const ImageOption = props => {
-  const { classes } = props;
+  const { classes, urlText, fileText } = props;
   const [uploadOption, setUploadOption] = useState('url');
 
   const handleOptionChange = (event, newValue) => {
@@ -33,7 +33,7 @@ const ImageOption = props => {
             fullWidth
             variant='outlined'
             size='small'
-            label='Image URL'
+            label={urlText}
           />
         )}
         {uploadOption === 'file' && (
@@ -51,7 +51,7 @@ const ImageOption = props => {
                 color='primary'
                 component='span'
               >
-                Upload
+                {fileText}
               </Button>
             </label>
           </>
@@ -62,7 +62,9 @@ const ImageOption = props => {
 };
 
 ImageOption.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  urlText: PropTypes.string.isRequired,
+  fileText: PropTypes.string.isRequired
 };
 
 export default ImageOption;

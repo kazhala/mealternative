@@ -40,7 +40,11 @@ const RecipeRoute = props => {
           )
         }}
       />
-      <ImageOption classes={classes} />
+      <ImageOption
+        urlText='Thumbnail Url'
+        fileText='Upload thumbnail'
+        classes={classes}
+      />
     </div>
   );
 };
