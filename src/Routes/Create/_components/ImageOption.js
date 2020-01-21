@@ -12,13 +12,28 @@ import { Link, CloudUpload, AddAPhoto } from '@material-ui/icons';
 import { TextField, Button } from '@material-ui/core';
 
 const ImageOption = props => {
-  const { classes, urlText, fileText } = props;
+  const {
+    thumbnailImage,
+    handleDetailChange,
+    classes,
+    urlText,
+    fileText
+  } = props;
   // determine what to display
   const [uploadOption, setUploadOption] = useState('file');
 
   // update state
   const handleOptionChange = (event, newValue) => {
     setUploadOption(newValue);
+  };
+
+  const handleChange = e => {
+    const { name, value, files } = e.target;
+    if (name === 'media') {
+      handleDetailChange('thumbFile', files[0]);
+    } else {
+      handleDetailChange('thumbUrl', value);
+    }
   };
 
   return (
@@ -43,6 +58,8 @@ const ImageOption = props => {
             variant='outlined'
             size='small'
             label={urlText}
+            onChange={handleChange}
+            value={thumbnailImage.url}
           />
         )}
         {uploadOption === 'file' && (
@@ -52,6 +69,8 @@ const ImageOption = props => {
               type='file'
               id='thumbnail-image-upload'
               className={classes.fileInput}
+              onChange={handleChange}
+              name='media'
             />
             <label htmlFor='thumbnail-image-upload'>
               <Button
@@ -73,7 +92,9 @@ const ImageOption = props => {
 ImageOption.propTypes = {
   classes: PropTypes.object.isRequired,
   urlText: PropTypes.string.isRequired,
-  fileText: PropTypes.string.isRequired
+  fileText: PropTypes.string.isRequired,
+  thumbnailImage: PropTypes.object.isRequired,
+  handleDetailChange: PropTypes.func.isRequired
 };
 
 export default ImageOption;

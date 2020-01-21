@@ -18,7 +18,10 @@ const RecipeRoute = props => {
   const [recipeDetail, setRecipeDetail] = useState({
     title: '',
     description: '',
-    thumbnailImage: '',
+    thumbnailImage: {
+      url: '',
+      file: ''
+    },
     ingredients: [],
     categories: [],
     steps: []
@@ -33,10 +36,32 @@ const RecipeRoute = props => {
   } = recipeDetail;
 
   const handleDetailChange = (name, newValue) => {
-    setRecipeDetail(prevDetails => ({
-      ...prevDetails,
-      [name]: newValue
-    }));
+    switch (name) {
+      case 'thumbFile':
+        setRecipeDetail(prevDetails => ({
+          ...prevDetails,
+          thumbnailImage: {
+            ...prevDetails.thumbnailImage,
+            file: newValue
+          }
+        }));
+        break;
+      case 'thumbUrl':
+        setRecipeDetail(prevDetails => ({
+          ...prevDetails,
+          thumbnailImage: {
+            ...prevDetails.thumbnailImage,
+            url: newValue
+          }
+        }));
+        break;
+      default:
+        setRecipeDetail(prevDetails => ({
+          ...prevDetails,
+          [name]: newValue
+        }));
+        break;
+    }
   };
 
   console.log(recipeDetail);
@@ -50,6 +75,8 @@ const RecipeRoute = props => {
         urlText='Thumbnail Url'
         fileText='Upload thumbnail'
         classes={classes}
+        handleDetailChange={handleDetailChange}
+        thumbnailImage={thumbnailImage}
       />
       <TextField
         size='small'
