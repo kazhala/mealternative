@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: theme.spacing(1)
   },
-  ingredientsRoot: {
+  autoCompletes: {
     width: '100%',
     marginTop: theme.spacing(1)
   },

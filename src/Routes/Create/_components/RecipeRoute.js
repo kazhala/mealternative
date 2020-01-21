@@ -4,10 +4,12 @@ import { TextField, Typography, InputAdornment } from '@material-ui/core';
 import { Title, Description } from '@material-ui/icons';
 import ImageOption from './ImageOption';
 import Ingredients from './Ingredients';
+import Categories from './Categories';
 
 const RecipeRoute = props => {
   const { classes } = props;
   const [ingredients, setIngredients] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   return (
     <div className={classes.routeRoot}>
@@ -54,6 +56,12 @@ const RecipeRoute = props => {
         classes={classes}
         ingredients={ingredients}
         setIngredients={setIngredients}
+      />
+      <Categories
+        classes={classes}
+        categories={categories}
+        setCategories={setCategories}
+        categoryList={[1, 2, 3, 4]}
       />
     </div>
   );

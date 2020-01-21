@@ -9,7 +9,7 @@ const Ingredients = props => {
   const [autoValue, setAutoValue] = useState([]);
 
   const handleAutoChange = (e, value) => {
-    if (value.length > 25) return;
+    if (value.length > 30) return;
     setIngredients(value);
   };
 
@@ -23,7 +23,7 @@ const Ingredients = props => {
 
   return (
     <Autocomplete
-      className={classes.ingredientsRoot}
+      className={classes.autoCompletes}
       multiple
       options={autoValue}
       value={ingredients}
