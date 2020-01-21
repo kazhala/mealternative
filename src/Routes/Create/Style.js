@@ -56,12 +56,17 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: theme.spacing(1)
   },
+  ingredientsRoot: {
+    width: '100%',
+    marginTop: theme.spacing(1)
+  },
+
   imageOption: {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
     marginTop: theme.spacing(1),
-    height: theme.spacing(4)
+    height: theme.spacing(3)
   },
   imageInput: {
     marginLeft: theme.spacing(1),

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import { Http, CloudUpload, AddAPhoto } from '@material-ui/icons';
+import { Link, CloudUpload, AddAPhoto } from '@material-ui/icons';
 import { TextField, Button } from '@material-ui/core';
 
 const ImageOption = props => {
   const { classes, urlText, fileText } = props;
-  const [uploadOption, setUploadOption] = useState('url');
+  const [uploadOption, setUploadOption] = useState('file');
 
   const handleOptionChange = (event, newValue) => {
     setUploadOption(newValue);
@@ -21,7 +21,7 @@ const ImageOption = props => {
         onChange={handleOptionChange}
       >
         <ToggleButton value='url'>
-          <Http />
+          <Link />
         </ToggleButton>
         <ToggleButton value='file'>
           <CloudUpload />
