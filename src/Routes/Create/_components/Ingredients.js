@@ -11,17 +11,23 @@ import { PlaylistAdd } from '@material-ui/icons';
 import { Autocomplete } from '@material-ui/lab';
 
 const Ingredients = props => {
-  const { classes, ingredients } = props;
+  const { classes, ingredients, setIngredients } = props;
+
+  const handleAutoChange = (e, value) => {
+    setIngredients(value);
+  };
 
   return (
     <Autocomplete
       multiple
       className={classes.ingredientsRoot}
       options={[]}
+      defaultValue={ingredients}
+      onChange={handleAutoChange}
       freeSolo
-      renderTags={() => {
-        return ingredients.map((ingredient, index) => (
-          <Chip key={index} label='ingredient' />
+      renderTags={(value, getTagProps) => {
+        return value.map((option, index) => (
+          <Chip variant='outlined' label={option} {...getTagProps({ index })} />
         ));
       }}
       renderInput={params => (

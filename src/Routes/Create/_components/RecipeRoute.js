@@ -7,7 +7,7 @@ import Ingredients from './Ingredients';
 
 const RecipeRoute = props => {
   const { classes } = props;
-  const [ingredients, setIngredients] = useState(['hello', 'test']);
+  const [ingredients, setIngredients] = useState([]);
 
   return (
     <div className={classes.routeRoot}>
