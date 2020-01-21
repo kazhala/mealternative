@@ -55,6 +55,20 @@ const useStyles = makeStyles(theme => ({
   titleInput: {
     width: '100%',
     marginTop: theme.spacing(1)
+  },
+  imageOption: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: theme.spacing(1),
+    height: theme.spacing(4)
+  },
+  imageInput: {
+    marginLeft: theme.spacing(1),
+    width: '100%'
+  },
+  fileInput: {
+    display: 'none'
   }
 }));
 

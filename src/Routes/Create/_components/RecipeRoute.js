@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Typography, InputAdornment } from '@material-ui/core';
 import { Title, Description } from '@material-ui/icons';
+import ImageOption from './ImageOption';
 
 const RecipeRoute = props => {
   const { classes } = props;
@@ -39,7 +40,7 @@ const RecipeRoute = props => {
           )
         }}
       />
-      <input accept='image/*' type='file' />
+      <ImageOption classes={classes} />
     </div>
   );
 };
