@@ -1,5 +1,12 @@
+/*
+  The recipe creation route
+*/
+
+// react
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { TextField, Typography, InputAdornment } from '@material-ui/core';
 import { Title, Description } from '@material-ui/icons';
 import ImageOption from './ImageOption';

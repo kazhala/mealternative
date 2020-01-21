@@ -1,18 +1,28 @@
+/*
+  Ingredient auto complete components
+*/
+
+// react
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
 const Ingredients = props => {
   const { classes, ingredients, setIngredients } = props;
 
+  // single selection of auto completion src
   const [autoValue, setAutoValue] = useState([]);
 
+  // update parents array
   const handleAutoChange = (e, value) => {
     if (value.length > 30) return;
     setIngredients(value);
   };
 
+  // update autocompletion data
   const handleAutoUpdate = (e, value, reason) => {
     setAutoValue(prevValue => {
       const newValues = [...prevValue];
@@ -46,7 +56,9 @@ const Ingredients = props => {
 };
 
 Ingredients.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  ingredients: PropTypes.array.isRequired,
+  setIngredients: PropTypes.func.isRequired
 };
 
 export default Ingredients;
