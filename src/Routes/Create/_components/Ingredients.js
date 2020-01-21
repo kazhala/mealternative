@@ -11,7 +11,7 @@ import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
 const Ingredients = props => {
-  const { classes, ingredients, setIngredients } = props;
+  const { classes, ingredients, handleDetailChange } = props;
 
   // single selection of auto completion src
   const [autoValue, setAutoValue] = useState([]);
@@ -19,7 +19,7 @@ const Ingredients = props => {
   // update parents array
   const handleAutoChange = (e, value) => {
     if (value.length > 30) return;
-    setIngredients(value);
+    handleDetailChange('ingredients', value);
   };
 
   // update autocompletion data
@@ -58,7 +58,7 @@ const Ingredients = props => {
 Ingredients.propTypes = {
   classes: PropTypes.object.isRequired,
   ingredients: PropTypes.array.isRequired,
-  setIngredients: PropTypes.func.isRequired
+  handleDetailChange: PropTypes.func.isRequired
 };
 
 export default Ingredients;

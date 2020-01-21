@@ -11,12 +11,12 @@ import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 
 const Categories = props => {
-  const { classes, categoryList, categories, setCategories } = props;
+  const { classes, categoryList, categories, handleDetailChange } = props;
 
   // update parents state
   const handleAutoChange = (e, value) => {
     if (value.length > 30) return;
-    setCategories(value);
+    handleDetailChange('categories', value);
   };
 
   return (
@@ -44,8 +44,8 @@ const Categories = props => {
 Categories.propTypes = {
   classes: PropTypes.object.isRequired,
   categoryList: PropTypes.array.isRequired,
-  categores: PropTypes.array.isRequired,
-  setCategories: PropTypes.func.isRequired
+  categories: PropTypes.array.isRequired,
+  handleDetailChange: PropTypes.func.isRequired
 };
 
 export default Categories;

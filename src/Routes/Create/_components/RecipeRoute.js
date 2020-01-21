@@ -15,8 +15,31 @@ import Categories from './Categories';
 
 const RecipeRoute = props => {
   const { classes } = props;
-  const [ingredients, setIngredients] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [recipeDetail, setRecipeDetail] = useState({
+    title: '',
+    description: '',
+    thumbnailImage: '',
+    ingredients: [],
+    categories: [],
+    steps: []
+  });
+  const {
+    title,
+    description,
+    thumbnailImage,
+    ingredients,
+    categories,
+    steps
+  } = recipeDetail;
+
+  const handleDetailChange = (name, newValue) => {
+    setRecipeDetail(prevDetails => ({
+      ...prevDetails,
+      [name]: newValue
+    }));
+  };
+
+  console.log(recipeDetail);
 
   return (
     <div className={classes.routeRoot}>
@@ -62,12 +85,12 @@ const RecipeRoute = props => {
       <Ingredients
         classes={classes}
         ingredients={ingredients}
-        setIngredients={setIngredients}
+        handleDetailChange={handleDetailChange}
       />
       <Categories
         classes={classes}
         categories={categories}
-        setCategories={setCategories}
+        handleDetailChange={handleDetailChange}
         categoryList={[1, 2, 3, 4]}
       />
     </div>
