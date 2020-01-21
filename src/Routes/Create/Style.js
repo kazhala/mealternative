@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  // default route
   defaultRouteRoot: {
     padding: theme.spacing(2),
     width: '100%',
@@ -18,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     gridColumn: '1/-1',
     placeSelf: 'center'
   },
-
   createPaper: {
     fontSize: theme.spacing(7),
     display: 'flex',
@@ -38,6 +38,23 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     width: '90%'
+  },
+
+  // recipe route
+  routeRoot: {
+    padding: theme.spacing(1),
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  routeTitle: {
+    textAlign: 'center'
+  },
+  titleInput: {
+    width: '100%',
+    marginTop: theme.spacing(1)
   }
 }));
 
