@@ -61,6 +61,12 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1)
   },
 
+  // image option
+  thumbPreview: {
+    height: 'auto',
+    width: '100%',
+    marginTop: theme.spacing(1)
+  },
   imageOption: {
     width: '100%',
     display: 'flex',

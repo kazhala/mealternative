@@ -7,7 +7,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import { TextField, Typography, InputAdornment } from '@material-ui/core';
+import {
+  TextField,
+  Typography,
+  InputAdornment,
+  Avatar
+} from '@material-ui/core';
 import { Title, Description } from '@material-ui/icons';
 import ImageOption from './ImageOption';
 import Ingredients from './Ingredients';
@@ -20,7 +25,8 @@ const RecipeRoute = props => {
     description: '',
     thumbnailImage: {
       url: '',
-      file: ''
+      file: '',
+      previewUrl: ''
     },
     ingredients: [],
     categories: [],
@@ -42,7 +48,8 @@ const RecipeRoute = props => {
           ...prevDetails,
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
-            file: newValue
+            file: newValue,
+            previewUrl: newValue ? window.URL.createObjectURL(newValue) : ''
           }
         }));
         break;
@@ -51,7 +58,8 @@ const RecipeRoute = props => {
           ...prevDetails,
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
-            url: newValue
+            url: newValue,
+            previewUrl: newValue
           }
         }));
         break;
@@ -71,6 +79,14 @@ const RecipeRoute = props => {
       <Typography className={classes.routeTitle} component='div' variant='h6'>
         Create new recipe
       </Typography>
+      {thumbnailImage.previewUrl && (
+        <Avatar
+          variant='square'
+          className={classes.thumbPreview}
+          src={thumbnailImage.previewUrl}
+          alt='thumbnail preview'
+        />
+      )}
       <ImageOption
         urlText='Thumbnail Url'
         fileText='Upload thumbnail'
@@ -83,6 +99,8 @@ const RecipeRoute = props => {
         placeholder='Title of your recipe'
         variant='outlined'
         label='Title'
+        value={title}
+        onChange={e => handleDetailChange('title', e.target.value)}
         className={classes.titleInput}
         InputProps={{
           startAdornment: (
@@ -99,6 +117,8 @@ const RecipeRoute = props => {
         label='Description'
         multiline
         rows={3}
+        value={description}
+        onChange={e => handleDetailChange('description', e.target.value)}
         className={classes.titleInput}
         InputProps={{
           startAdornment: (

@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 
 // components
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import { Link, CloudUpload, AddAPhoto } from '@material-ui/icons';
-import { TextField, Button } from '@material-ui/core';
+import { Clear, Link, CloudUpload, AddAPhoto } from '@material-ui/icons';
+import { TextField, Button, IconButton } from '@material-ui/core';
 
 const ImageOption = props => {
   const {
@@ -34,6 +34,10 @@ const ImageOption = props => {
     } else {
       handleDetailChange('thumbUrl', value);
     }
+  };
+
+  const handleClear = () => {
+    handleDetailChange('thumbFile', '');
   };
 
   return (
@@ -82,6 +86,9 @@ const ImageOption = props => {
                 {fileText}
               </Button>
             </label>
+            <IconButton onClick={handleClear}>
+              <Clear />
+            </IconButton>
           </>
         )}
       </div>
