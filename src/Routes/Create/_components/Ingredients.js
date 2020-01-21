@@ -1,42 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  TextField,
-  InputAdornment,
-  Paper,
-  Button,
-  Chip
-} from '@material-ui/core';
-import { PlaylistAdd } from '@material-ui/icons';
+import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
 const Ingredients = props => {
   const { classes, ingredients, setIngredients } = props;
 
+  const [autoValue, setAutoValue] = useState([]);
+
   const handleAutoChange = (e, value) => {
+    if (value.length > 25) return;
     setIngredients(value);
+  };
+
+  const handleAutoUpdate = (e, value, reason) => {
+    setAutoValue(prevValue => {
+      const newValues = [...prevValue];
+      newValues.pop();
+      return [...newValues, value];
+    });
   };
 
   return (
     <Autocomplete
-      multiple
       className={classes.ingredientsRoot}
-      options={[]}
-      defaultValue={ingredients}
+      multiple
+      options={autoValue}
+      value={ingredients}
       onChange={handleAutoChange}
+      onInputChange={handleAutoUpdate}
       freeSolo
-      renderTags={(value, getTagProps) => {
-        return value.map((option, index) => (
-          <Chip variant='outlined' label={option} {...getTagProps({ index })} />
-        ));
-      }}
+      size='small'
       renderInput={params => (
         <TextField
           {...params}
           variant='outlined'
-          placeholder='Enter required ingredients'
+          placeholder='Enter ingredients'
           label='Ingredients'
           fullWidth
+          InputLabelProps={{ shrink: true }}
         />
       )}
     />
