@@ -61,6 +61,17 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1)
   },
 
+  // steps
+  stepsRoot: {
+    marginTop: theme.spacing(1),
+    width: '100%'
+  },
+  stepButtons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: theme.spacing(0.5)
+  },
+
   // image option
   thumbPreview: {
     height: 'auto',

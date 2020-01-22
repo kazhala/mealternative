@@ -18,6 +18,7 @@ import ImageOption from './ImageOption';
 import Ingredients from './Ingredients';
 import Categories from './Categories';
 import ErrorSnack from '../../../Common/ErrorModal/ErrorSnack';
+import Steps from './Steps';
 
 const RecipeRoute = props => {
   const {
@@ -38,7 +39,13 @@ const RecipeRoute = props => {
     },
     ingredients: [],
     categories: [],
-    steps: []
+    steps: [
+      {
+        stepTitle: 'Step1',
+        stepDescriptions: '',
+        stepImage: { url: '', file: '', previewUrl: '' }
+      }
+    ]
   });
   const {
     title,
@@ -119,6 +126,7 @@ const RecipeRoute = props => {
           handleDetailChange={handleDetailChange}
           thumbnailImage={thumbnailImage}
         />
+
         <TextField
           size='small'
           placeholder='Title of your recipe'
@@ -166,6 +174,7 @@ const RecipeRoute = props => {
           categoryList={categoryList}
           categoryLoading={categoryLoading}
         />
+        <Steps steps={steps} classes={classes} />
       </div>
     </>
   );
