@@ -9,7 +9,7 @@ import {
   IconButton,
   Button
 } from '@material-ui/core';
-import { ArrowUpward, ArrowDownward } from '@material-ui/icons';
+import { Image, ArrowUpward, ArrowDownward, Clear } from '@material-ui/icons';
 
 const Steps = props => {
   const { classes, steps } = props;
@@ -39,7 +39,31 @@ const Steps = props => {
             </StepLabel>
 
             <StepContent>
+              <div className={classes.stepImage}>
+                <TextField
+                  placeholder='Image Url'
+                  fullWidth
+                  size='small'
+                  variant='outlined'
+                />
+                <input
+                  accept='image/*'
+                  type='file'
+                  id='kazhala'
+                  className={classes.fileInput}
+                  name='media'
+                />
+                <label htmlFor='kazhala'>
+                  <IconButton color='primary' component='span'>
+                    <Image />
+                  </IconButton>
+                </label>
+                <IconButton size='small'>
+                  <Clear />
+                </IconButton>
+              </div>
               <TextField
+                className={classes.stepDescriptions}
                 value={step.stepDescriptions}
                 placeholder='Enter description of the step'
                 rows={4}

@@ -71,6 +71,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     marginTop: theme.spacing(0.5)
   },
+  stepDescriptions: {
+    marginTop: theme.spacing(0.5)
+  },
+  stepImage: {
+    display: 'flex',
+    alignItems: 'center'
+  },
 
   // image option
   thumbPreview: {
