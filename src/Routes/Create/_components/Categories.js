@@ -23,7 +23,7 @@ const Categories = props => {
     <Autocomplete
       className={classes.autoCompletes}
       multiple
-      options={categoryList}
+      options={categoryList.map(category => category.name)}
       value={categories}
       onChange={handleAutoChange}
       size='small'

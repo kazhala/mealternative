@@ -17,6 +17,8 @@ const CreateReducer = (state = initialState, action) => {
       return { ...state, categoryLoading: false, categories: action.payload };
     case Types.ERROR:
       return { ...state, error: action.payload };
+    case Types.CLEAN:
+      return { ...state, categoryLoading: false, error: '' };
     default:
       return state;
   }

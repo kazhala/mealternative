@@ -6,7 +6,7 @@ import RecipeRoute from './_components/RecipeRoute';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 const Create = props => {
-  const { isAuthenticated, getCategories } = props;
+  const { categoryList, cleanUp, isAuthenticated, getCategories } = props;
   const classes = useStyles();
 
   return (
@@ -18,6 +18,8 @@ const Create = props => {
           render={props => (
             <RecipeRoute
               getCategories={getCategories}
+              categoryList={categoryList}
+              cleanUp={cleanUp}
               {...props}
               classes={classes}
             />

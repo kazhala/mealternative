@@ -19,7 +19,7 @@ import Ingredients from './Ingredients';
 import Categories from './Categories';
 
 const RecipeRoute = props => {
-  const { classes, getCategories } = props;
+  const { categoryList, classes, getCategories, cleanUp } = props;
   const [recipeDetail, setRecipeDetail] = useState({
     title: '',
     description: '',
@@ -82,7 +82,10 @@ const RecipeRoute = props => {
 
   useEffect(() => {
     getCategories();
-  }, [getCategories]);
+    return () => {
+      cleanUp();
+    };
+  }, [getCategories, cleanUp]);
 
   console.log(recipeDetail);
 
@@ -150,7 +153,7 @@ const RecipeRoute = props => {
         classes={classes}
         categories={categories}
         handleDetailChange={handleDetailChange}
-        categoryList={[1, 2, 3, 4]}
+        categoryList={categoryList}
       />
     </div>
   );

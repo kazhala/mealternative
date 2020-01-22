@@ -10,14 +10,16 @@ const CreateContainer = props => {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.Auth.isAuthenticated
+    isAuthenticated: state.Auth.isAuthenticated,
+    categoryList: state.Create.categories
   };
 };
 
 const mapDispatchTopProps = dispatch => {
   return bindActionCreators(
     {
-      getCategories: CreateActions.getCategories
+      getCategories: CreateActions.getCategories,
+      cleanUp: CreateActions.cleanUp
     },
     dispatch
   );
