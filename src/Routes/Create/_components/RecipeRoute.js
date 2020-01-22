@@ -3,7 +3,7 @@
 */
 
 // react
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // components
@@ -19,7 +19,7 @@ import Ingredients from './Ingredients';
 import Categories from './Categories';
 
 const RecipeRoute = props => {
-  const { classes } = props;
+  const { classes, getCategories } = props;
   const [recipeDetail, setRecipeDetail] = useState({
     title: '',
     description: '',
@@ -79,6 +79,10 @@ const RecipeRoute = props => {
         break;
     }
   };
+
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
 
   console.log(recipeDetail);
 

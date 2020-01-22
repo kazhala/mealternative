@@ -19,7 +19,14 @@ function* workerGetCategories() {
   yield put({ type: Types.BEGIN_CATEGORIES });
   try {
     const response = yield call(Operations.getCategories);
-    console.log(response);
+    if (response.error) {
+      yield put({
+        type: Types.ERROR,
+        payload: 'Categories faild to fetch, try refresh..'
+      });
+    } else {
+      yield put({ type: Types.SUCCESS_CATEGORIES, payload: response });
+    }
   } catch (err) {
     console.log(err);
   }

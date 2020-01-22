@@ -6,7 +6,7 @@ import RecipeRoute from './_components/RecipeRoute';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 const Create = props => {
-  const { isAuthenticated } = props;
+  const { isAuthenticated, getCategories } = props;
   const classes = useStyles();
 
   return (
@@ -15,7 +15,13 @@ const Create = props => {
       <Switch>
         <Route
           path='/create/recipe'
-          render={props => <RecipeRoute {...props} classes={classes} />}
+          render={props => (
+            <RecipeRoute
+              getCategories={getCategories}
+              {...props}
+              classes={classes}
+            />
+          )}
         />
         <Route
           path='/create/meal'
