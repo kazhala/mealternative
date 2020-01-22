@@ -3,8 +3,8 @@
 */
 import * as Types from './types';
 
-export const fetchCategories = () => {
+export const getCategories = () => {
   return {
-    type: Types.BEGIN_CATEGORIES
+    type: Types.GET_CATEGORIES
   };
 };

@@ -4,6 +4,7 @@
 
 import { all, fork } from 'redux-saga/effects';
 import { AuthSagas } from './authentication';
+import { CreateSagas } from './create';
 
 // running all sagas parallel(all) without blocking(fork)
 export default function* rootSaga() {
@@ -14,7 +15,8 @@ export default function* rootSaga() {
       fork(AuthSagas.watchSignIn),
       fork(AuthSagas.watchSignOut),
       fork(AuthSagas.watchForgot),
-      fork(AuthSagas.watchReset)
+      fork(AuthSagas.watchReset),
+      fork(CreateSagas.watchGetCategories)
     ]);
   } catch (err) {
     console.log(err);
