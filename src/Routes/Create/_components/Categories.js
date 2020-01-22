@@ -11,7 +11,13 @@ import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 
 const Categories = props => {
-  const { classes, categoryList, categories, handleDetailChange } = props;
+  const {
+    classes,
+    categoryList,
+    categoryLoading,
+    categories,
+    handleDetailChange
+  } = props;
 
   // update parents state
   const handleAutoChange = (e, value) => {
@@ -22,6 +28,7 @@ const Categories = props => {
   return (
     <Autocomplete
       className={classes.autoCompletes}
+      loading={categoryLoading}
       multiple
       options={categoryList.map(category => category.name)}
       value={categories}

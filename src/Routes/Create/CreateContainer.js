@@ -11,7 +11,9 @@ const CreateContainer = props => {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.Auth.isAuthenticated,
-    categoryList: state.Create.categories
+    categoryList: state.Create.categories,
+    categoryLoading: state.Create.categoryLoading,
+    error: state.Create.error
   };
 };
 
