@@ -13,8 +13,7 @@ import {
   Link,
   CloudUpload,
   AddAPhoto,
-  Visibility,
-  VisibilityOff
+  Visibility
 } from '@material-ui/icons';
 import {
   TextField,

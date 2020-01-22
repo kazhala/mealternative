@@ -97,7 +97,7 @@ const RecipeRoute = props => {
       )}
       <ImageOption
         urlText='Thumbnail Url'
-        fileText='Upload thumbnail'
+        fileText='Thumbnail'
         classes={classes}
         handleDetailChange={handleDetailChange}
         thumbnailImage={thumbnailImage}

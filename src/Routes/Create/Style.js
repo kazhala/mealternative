@@ -64,6 +64,7 @@ const useStyles = makeStyles(theme => ({
   // image option
   thumbPreview: {
     height: 'auto',
+    maxHeight: theme.spacing(15),
     width: '100%',
     marginTop: theme.spacing(1)
   },
