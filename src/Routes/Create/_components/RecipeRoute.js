@@ -86,6 +86,49 @@ const RecipeRoute = props => {
           }
         }));
         break;
+
+      case 'step':
+        const { index, updateAttribute, newAttributeValue } = newValue;
+        if (updateAttribute === 'stepImageFile') {
+          setRecipeDetail(prevDetails => ({
+            ...prevDetails,
+            [steps[index]]: {
+              ...prevDetails.steps[index],
+              stepImage: {
+                ...prevDetails.steps[index].stepImage,
+                file: newAttributeValue,
+                previewUrl: newAttributeValue
+                  ? window.URL.createObjectURL(newAttributeValue)
+                  : ''
+              }
+            }
+          }));
+        } else if (updateAttribute === 'stepImageUrl') {
+          setRecipeDetail(prevDetails => ({
+            ...prevDetails,
+            [steps[index]]: {
+              ...prevDetails.steps[index],
+              stepImage: {
+                ...prevDetails.steps[index].stepImage,
+                url: newAttributeValue
+              }
+            }
+          }));
+        } else {
+          setRecipeDetail(prevDetails => ({
+            ...prevDetails,
+            steps: [
+              ...prevDetails.steps.slice(0, index),
+              {
+                ...prevDetails.steps[index],
+                [updateAttribute]: newAttributeValue
+              },
+              ...prevDetails.steps.slice(index + 1)
+            ]
+          }));
+        }
+        break;
+
       default:
         setRecipeDetail(prevDetails => ({
           ...prevDetails,
@@ -174,7 +217,11 @@ const RecipeRoute = props => {
           categoryList={categoryList}
           categoryLoading={categoryLoading}
         />
-        <Steps steps={steps} classes={classes} />
+        <Steps
+          handleDetailChange={handleDetailChange}
+          steps={steps}
+          classes={classes}
+        />
       </div>
     </>
   );

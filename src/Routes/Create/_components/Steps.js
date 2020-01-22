@@ -12,7 +12,7 @@ import {
 import { Image, ArrowUpward, ArrowDownward, Clear } from '@material-ui/icons';
 
 const Steps = props => {
-  const { classes, steps } = props;
+  const { classes, steps, handleDetailChange } = props;
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -22,6 +22,15 @@ const Steps = props => {
     } else {
       return steps.length - activeStep <= 1;
     }
+  };
+
+  const handleStepChange = (name, value) => {
+    const updateParams = {
+      index: activeStep,
+      updateAttribute: name,
+      newAttributeValue: value
+    };
+    handleDetailChange('step', updateParams);
   };
 
   return (
@@ -35,6 +44,7 @@ const Steps = props => {
                 placeholder='Title of the step'
                 variant='outlined'
                 size='small'
+                onChange={e => handleStepChange('stepTitle', e.target.value)}
               />
             </StepLabel>
 
