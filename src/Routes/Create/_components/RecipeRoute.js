@@ -94,27 +94,37 @@ const RecipeRoute = props => {
         if (updateAttribute === 'stepImageFile') {
           setRecipeDetail(prevDetails => ({
             ...prevDetails,
-            [steps[index]]: {
-              ...prevDetails.steps[index],
-              stepImage: {
-                ...prevDetails.steps[index].stepImage,
-                file: newAttributeValue,
-                previewUrl: newAttributeValue
-                  ? window.URL.createObjectURL(newAttributeValue)
-                  : ''
-              }
-            }
+            steps: [
+              ...prevDetails.steps.slice(0, index),
+              {
+                ...prevDetails.steps[index],
+                stepImage: {
+                  ...prevDetails.steps[index].stepImage,
+                  file: newAttributeValue,
+                  previewUrl: newAttributeValue
+                    ? window.URL.createObjectURL(newAttributeValue)
+                    : ''
+                }
+              },
+              ...prevDetails.steps.slice(index + 1)
+            ]
           }));
         } else if (updateAttribute === 'stepImageUrl') {
           setRecipeDetail(prevDetails => ({
             ...prevDetails,
-            [steps[index]]: {
-              ...prevDetails.steps[index],
-              stepImage: {
-                ...prevDetails.steps[index].stepImage,
-                url: newAttributeValue
-              }
-            }
+            steps: [
+              ...prevDetails.steps.slice(0, index),
+              {
+                ...prevDetails.steps[index],
+                stepImage: {
+                  ...prevDetails.steps[index].stepImage,
+                  url: newAttributeValue,
+                  previewUrl: newAttributeValue,
+                  file: ''
+                }
+              },
+              ...prevDetails.steps.slice(index + 1)
+            ]
           }));
         } else {
           setRecipeDetail(prevDetails => ({

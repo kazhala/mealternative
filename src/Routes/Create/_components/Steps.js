@@ -55,6 +55,10 @@ const Steps = props => {
                   fullWidth
                   size='small'
                   variant='outlined'
+                  value={step.stepImage.url}
+                  onChange={e =>
+                    handleStepChange('stepImageUrl', e.target.value)
+                  }
                 />
                 <input
                   accept='image/*'
@@ -62,6 +66,9 @@ const Steps = props => {
                   id='kazhala'
                   className={classes.fileInput}
                   name='media'
+                  onChange={e =>
+                    handleStepChange('stepImageFile', e.target.files[0])
+                  }
                 />
                 <label htmlFor='kazhala'>
                   <IconButton color='primary' component='span'>
