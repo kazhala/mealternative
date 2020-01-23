@@ -126,6 +126,23 @@ const RecipeRoute = props => {
               ...prevDetails.steps.slice(index + 1)
             ]
           }));
+        } else if (updateAttribute === 'clearFile') {
+          setRecipeDetail(prevDetails => ({
+            ...prevDetails,
+            steps: [
+              ...prevDetails.steps.slice(0, index),
+              {
+                ...prevDetails.steps[index],
+                stepImage: {
+                  ...prevDetails.steps[index].stepImage,
+                  file: '',
+                  previewUrl: '',
+                  url: ''
+                }
+              },
+              ...prevDetails.steps.slice(index + 1)
+            ]
+          }));
         } else {
           setRecipeDetail(prevDetails => ({
             ...prevDetails,

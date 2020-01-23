@@ -75,7 +75,10 @@ const Steps = props => {
                     <Image />
                   </IconButton>
                 </label>
-                <IconButton size='small'>
+                <IconButton
+                  onClick={e => handleStepChange('clearFile', '')}
+                  size='small'
+                >
                   <Clear />
                 </IconButton>
               </div>
