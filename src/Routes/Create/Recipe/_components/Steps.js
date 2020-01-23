@@ -10,6 +10,7 @@ import {
   Button
 } from '@material-ui/core';
 import { Image, ArrowUpward, ArrowDownward, Clear } from '@material-ui/icons';
+import StepBody from './StepBody';
 
 const Steps = props => {
   const { classes, steps, handleDetailChange } = props;
@@ -53,68 +54,13 @@ const Steps = props => {
             </StepLabel>
 
             <StepContent>
-              <div className={classes.stepImage}>
-                <TextField
-                  placeholder='Image Url'
-                  fullWidth
-                  disabled={checkUrlShouldDisable(step)}
-                  size='small'
-                  variant='outlined'
-                  value={step.stepImage.url}
-                  onChange={e =>
-                    handleStepChange('stepImageUrl', e.target.value)
-                  }
-                />
-                <input
-                  accept='image/*'
-                  type='file'
-                  id='kazhala'
-                  className={classes.fileInput}
-                  name='media'
-                  onChange={e =>
-                    handleStepChange('stepImageFile', e.target.files[0])
-                  }
-                />
-                <label htmlFor='kazhala'>
-                  <IconButton color='primary' component='span'>
-                    <Image />
-                  </IconButton>
-                </label>
-                <IconButton
-                  onClick={e => handleStepChange('clearFile', '')}
-                  size='small'
-                >
-                  <Clear />
-                </IconButton>
-              </div>
-              <TextField
-                className={classes.stepDescriptions}
-                value={step.stepDescriptions}
-                onChange={e =>
-                  handleStepChange('stepDescriptions', e.target.value)
-                }
-                placeholder='Enter description of the step'
-                rows={4}
-                multiline
-                rowsMax={4}
-                fullWidth
-                variant='outlined'
-                size='small'
+              <StepBody
+                classes={classes}
+                step={step}
+                handleStepChange={handleStepChange}
+                checkUrlShouldDisable={checkUrlShouldDisable}
+                checkDisableButton={checkDisableButton}
               />
-
-              <div className={classes.stepButtons}>
-                <div>
-                  <IconButton disabled={checkDisableButton(0)}>
-                    <ArrowUpward />
-                  </IconButton>
-                  <IconButton disabled={checkDisableButton(1)}>
-                    <ArrowDownward />
-                  </IconButton>
-                </div>
-                <Button color='primary' variant='contained'>
-                  ADD step
-                </Button>
-              </div>
             </StepContent>
           </Step>
         ))}
