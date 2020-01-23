@@ -6,14 +6,7 @@ import MealContainer from './Meal/MealContainer';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 const Create = props => {
-  const {
-    error,
-    categoryLoading,
-    categoryList,
-    cleanUp,
-    isAuthenticated,
-    getCategories
-  } = props;
+  const { isAuthenticated } = props;
   const classes = useStyles();
 
   return (
@@ -22,21 +15,11 @@ const Create = props => {
       <Switch>
         <Route
           path='/create/recipe'
-          render={props => (
-            <RecipeContainer
-              error={error}
-              getCategories={getCategories}
-              categoryList={categoryList}
-              cleanUp={cleanUp}
-              {...props}
-              classes={classes}
-              categoryLoading={categoryLoading}
-            />
-          )}
+          render={props => <RecipeContainer {...props} />}
         />
         <Route
           path='/create/meal'
-          render={props => <MealContainer {...props} classes={classes} />}
+          render={props => <MealContainer {...props} />}
         />
         <Route
           path='/create'

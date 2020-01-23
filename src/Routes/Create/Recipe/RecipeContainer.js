@@ -4,31 +4,25 @@
 
 // react
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+
+// redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { CreateActions } from '../../../Redux/create';
 
 // components
-import {
-  TextField,
-  Typography,
-  InputAdornment,
-  Avatar
-} from '@material-ui/core';
-import { Title, Description } from '@material-ui/icons';
-import ImageOption from '../_components/ImageOption';
-import Ingredients from './_components/Ingredients';
-import Categories from '../_components/Categories';
 import ErrorSnack from '../../../Common/ErrorModal/ErrorSnack';
-import Steps from './_components/Steps';
+import Recipe from './Recipe';
 
 const RecipeRoute = props => {
   const {
-    categoryList,
-    classes,
     error,
     categoryLoading,
+    categoryList,
     getCategories,
     cleanUp
   } = props;
+
   const [recipeDetail, setRecipeDetail] = useState({
     title: '',
     description: '',
@@ -47,14 +41,6 @@ const RecipeRoute = props => {
       }
     ]
   });
-  const {
-    title,
-    description,
-    thumbnailImage,
-    ingredients,
-    categories,
-    steps
-  } = recipeDetail;
 
   const handleDetailChange = (name, newValue) => {
     switch (name) {
@@ -180,85 +166,33 @@ const RecipeRoute = props => {
   return (
     <>
       <ErrorSnack error={error} handleClose={cleanUp} />
-      <div className={classes.routeRoot}>
-        <Typography className={classes.routeTitle} component='div' variant='h6'>
-          Create new recipe
-        </Typography>
-        {thumbnailImage.previewUrl && (
-          <Avatar
-            variant='square'
-            className={classes.thumbPreview}
-            src={thumbnailImage.previewUrl}
-            alt='thumbnail preview'
-          />
-        )}
-        <ImageOption
-          urlText='Thumbnail Url'
-          fileText='Thumbnail'
-          classes={classes}
-          handleDetailChange={handleDetailChange}
-          thumbnailImage={thumbnailImage}
-        />
-
-        <TextField
-          size='small'
-          placeholder='Title of your recipe'
-          variant='outlined'
-          label='Title'
-          value={title}
-          onChange={e => handleDetailChange('title', e.target.value)}
-          className={classes.titleInput}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position='start'>
-                <Title />
-              </InputAdornment>
-            )
-          }}
-        />
-        <TextField
-          size='small'
-          placeholder='Description of your recipe'
-          variant='outlined'
-          label='Description'
-          multiline
-          rows={3}
-          value={description}
-          onChange={e => handleDetailChange('description', e.target.value)}
-          className={classes.titleInput}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position='start'>
-                <Description />
-              </InputAdornment>
-            )
-          }}
-        />
-
-        <Ingredients
-          classes={classes}
-          ingredients={ingredients}
-          handleDetailChange={handleDetailChange}
-        />
-        <Categories
-          classes={classes}
-          categories={categories}
-          handleDetailChange={handleDetailChange}
-          categoryList={categoryList}
-          categoryLoading={categoryLoading}
-        />
-        <Steps
-          handleDetailChange={handleDetailChange}
-          steps={steps}
-          classes={classes}
-        />
-      </div>
+      <Recipe
+        recipeDetail={recipeDetail}
+        categoryList={categoryList}
+        categoryLoading={categoryLoading}
+        handleDetailChange={handleDetailChange}
+        {...props}
+      />
     </>
   );
 };
 
-RecipeRoute.propTypes = {
-  classes: PropTypes.object.isRequired
+const mapStateToProps = state => {
+  return {
+    categoryList: state.Create.categories,
+    categoryLoading: state.Create.categoryLoading,
+    error: state.Create.error
+  };
 };
 
-export default RecipeRoute;
+const mapDispatchTopProps = dispatch => {
+  return bindActionCreators(
+    {
+      getCategories: CreateActions.getCategories,
+      cleanUp: CreateActions.cleanUp
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchTopProps)(RecipeRoute);

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const MealRoute = props => {
   // const { classes } = props;
@@ -7,8 +7,8 @@ const MealRoute = props => {
   return <div>MealRoute</div>;
 };
 
-MealRoute.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// MealRoute.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 export default MealRoute;
