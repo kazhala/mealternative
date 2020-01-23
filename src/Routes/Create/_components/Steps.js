@@ -33,6 +33,10 @@ const Steps = props => {
     handleDetailChange('step', updateParams);
   };
 
+  const checkUrlShouldDisable = stepDetail => {
+    return Boolean(stepDetail.stepImage.file);
+  };
+
   return (
     <div className={classes.stepsRoot}>
       <Stepper activeStep={activeStep} orientation='vertical'>
@@ -53,6 +57,7 @@ const Steps = props => {
                 <TextField
                   placeholder='Image Url'
                   fullWidth
+                  disabled={checkUrlShouldDisable(step)}
                   size='small'
                   variant='outlined'
                   value={step.stepImage.url}

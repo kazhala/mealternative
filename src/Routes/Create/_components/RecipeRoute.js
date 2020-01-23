@@ -103,7 +103,8 @@ const RecipeRoute = props => {
                   file: newAttributeValue,
                   previewUrl: newAttributeValue
                     ? window.URL.createObjectURL(newAttributeValue)
-                    : ''
+                    : '',
+                  url: newAttributeValue ? newAttributeValue.name : ''
                 }
               },
               ...prevDetails.steps.slice(index + 1)
