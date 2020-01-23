@@ -9,7 +9,8 @@ const StepBody = props => {
     classes,
     handleStepChange,
     checkUrlShouldDisable,
-    checkDisableButton
+    checkDisableButton,
+    handleAddStep
   } = props;
 
   return (
@@ -76,7 +77,7 @@ const StepBody = props => {
             <ArrowDownward />
           </IconButton>
         </div>
-        <Button color='primary' variant='contained'>
+        <Button onClick={handleAddStep} color='primary' variant='contained'>
           ADD step
         </Button>
       </div>
@@ -89,7 +90,8 @@ StepBody.propTypes = {
   step: PropTypes.object.isRequired,
   handleStepChange: PropTypes.func.isRequired,
   checkUrlShouldDisable: PropTypes.func.isRequired,
-  checkDisableButton: PropTypes.func.isRequired
+  checkDisableButton: PropTypes.func.isRequired,
+  handleAddStep: PropTypes.func.isRequired
 };
 
 export default StepBody;

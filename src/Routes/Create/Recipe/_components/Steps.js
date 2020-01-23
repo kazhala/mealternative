@@ -35,6 +35,11 @@ const Steps = props => {
     return Boolean(stepDetail.stepImage.file);
   };
 
+  const handleAddStep = () => {
+    handleDetailChange('addStep', activeStep);
+    setActiveStep(prevActive => prevActive + 1);
+  };
+
   return (
     <div className={classes.stepsRoot}>
       <Stepper activeStep={activeStep} orientation='vertical'>
@@ -42,6 +47,7 @@ const Steps = props => {
           <Step completed={false} key={index}>
             <StepLabel>
               <TextField
+                onClick={() => setActiveStep(index)}
                 value={step.stepTitle}
                 placeholder='Title of the step'
                 variant='outlined'
@@ -57,6 +63,7 @@ const Steps = props => {
                 handleStepChange={handleStepChange}
                 checkUrlShouldDisable={checkUrlShouldDisable}
                 checkDisableButton={checkDisableButton}
+                handleAddStep={handleAddStep}
               />
             </StepContent>
           </Step>

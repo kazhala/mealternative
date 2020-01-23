@@ -76,6 +76,21 @@ const RecipeRoute = props => {
         }));
         break;
 
+      case 'addStep':
+        setRecipeDetail(prevDetails => ({
+          ...prevDetails,
+          steps: [
+            ...prevDetails.steps.slice(0, newValue + 1),
+            {
+              stepTitle: '',
+              stepDescriptions: '',
+              stepImage: { url: '', file: '', previewUrl: '' }
+            },
+            ...prevDetails.steps.slice(newValue + 1)
+          ]
+        }));
+        break;
+
       case 'step':
         const { index, updateAttribute, newAttributeValue } = newValue;
         if (updateAttribute === 'stepImageFile') {
@@ -161,6 +176,8 @@ const RecipeRoute = props => {
       cleanUp();
     };
   }, [getCategories, cleanUp]);
+
+  console.log(recipeDetail);
 
   return (
     <>
