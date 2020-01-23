@@ -14,11 +14,11 @@ import {
   Avatar
 } from '@material-ui/core';
 import { Title, Description } from '@material-ui/icons';
-import ImageOption from './ImageOption';
-import Ingredients from './Ingredients';
-import Categories from './Categories';
+import ImageOption from '../_components/ImageOption';
+import Ingredients from './_components/Ingredients';
+import Categories from '../_components/Categories';
 import ErrorSnack from '../../../Common/ErrorModal/ErrorSnack';
-import Steps from './Steps';
+import Steps from './_components/Steps';
 
 const RecipeRoute = props => {
   const {

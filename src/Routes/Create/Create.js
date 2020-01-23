@@ -1,8 +1,8 @@
 import React from 'react';
 import useStyles from './Style';
 import DefaultRoute from './_components/DefaultRoute';
-import MealRoute from './_components/MealRoute';
-import RecipeRoute from './_components/RecipeRoute';
+import RecipeContainer from './Recipe/RecipeContainer';
+import MealContainer from './Meal/MealContainer';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 const Create = props => {
@@ -23,7 +23,7 @@ const Create = props => {
         <Route
           path='/create/recipe'
           render={props => (
-            <RecipeRoute
+            <RecipeContainer
               error={error}
               getCategories={getCategories}
               categoryList={categoryList}
@@ -36,7 +36,7 @@ const Create = props => {
         />
         <Route
           path='/create/meal'
-          render={props => <MealRoute {...props} classes={classes} />}
+          render={props => <MealContainer {...props} classes={classes} />}
         />
         <Route
           path='/create'

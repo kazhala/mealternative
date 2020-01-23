@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MealRoute = props => {
-  const { classes } = props;
+  // const { classes } = props;
 
   return <div>MealRoute</div>;
 };
