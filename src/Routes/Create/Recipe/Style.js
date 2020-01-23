@@ -39,6 +39,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center'
   },
+  stepPreview: {
+    width: '100%',
+    height: theme.spacing(10)
+  },
 
   // image option
   thumbPreview: {

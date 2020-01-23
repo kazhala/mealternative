@@ -5,11 +5,8 @@ import {
   Stepper,
   Step,
   StepLabel,
-  TextField,
-  IconButton,
-  Button
+  TextField
 } from '@material-ui/core';
-import { Image, ArrowUpward, ArrowDownward, Clear } from '@material-ui/icons';
 import StepBody from './StepBody';
 
 const Steps = props => {

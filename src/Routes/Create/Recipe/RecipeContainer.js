@@ -50,7 +50,8 @@ const RecipeRoute = props => {
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
             file: newValue,
-            previewUrl: newValue ? window.URL.createObjectURL(newValue) : ''
+            previewUrl: newValue ? window.URL.createObjectURL(newValue) : '',
+            url: ''
           }
         }));
         break;
@@ -160,8 +161,6 @@ const RecipeRoute = props => {
       cleanUp();
     };
   }, [getCategories, cleanUp]);
-
-  console.log(recipeDetail);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextField, IconButton, Button } from '@material-ui/core';
+import { TextField, IconButton, Button, Avatar } from '@material-ui/core';
 import { Image, Clear, ArrowUpward, ArrowDownward } from '@material-ui/icons';
 
 const StepBody = props => {
@@ -14,6 +14,15 @@ const StepBody = props => {
 
   return (
     <>
+      {step.stepImage.previewUrl && (
+        <Avatar
+          variant='square'
+          className={classes.stepPreview}
+          src={step.stepImage.previewUrl}
+          alt='thumbnail preview'
+        />
+      )}
+
       <div className={classes.stepImage}>
         <TextField
           placeholder='Image Url'
@@ -44,6 +53,7 @@ const StepBody = props => {
           <Clear />
         </IconButton>
       </div>
+
       <TextField
         className={classes.stepDescriptions}
         value={step.stepDescriptions}
