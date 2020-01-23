@@ -73,7 +73,9 @@ const RecipeRoute = props => {
           ...prevDetails,
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
-            url: newValue
+            url: newValue,
+            file: '',
+            previewUrl: ''
           }
         }));
         break;

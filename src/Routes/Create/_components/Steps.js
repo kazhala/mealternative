@@ -75,6 +75,9 @@ const Steps = props => {
               <TextField
                 className={classes.stepDescriptions}
                 value={step.stepDescriptions}
+                onChange={e =>
+                  handleStepChange('stepDescriptions', e.target.value)
+                }
                 placeholder='Enter description of the step'
                 rows={4}
                 multiline
