@@ -16,10 +16,11 @@ const StepBody = props => {
     classes,
     handleStepChange,
     checkUrlShouldDisable,
-    checkDisableButton,
+    checkDisableReOrder,
     handleAddStep,
     handleRemoveStep,
-    checkDisableRemove
+    checkDisableRemove,
+    handleReOrder
   } = props;
 
   return (
@@ -79,10 +80,13 @@ const StepBody = props => {
 
       <div className={classes.stepButtons}>
         <div>
-          <IconButton disabled={checkDisableButton(0)}>
+          <IconButton
+            onClick={() => handleReOrder(0)}
+            disabled={checkDisableReOrder(0)}
+          >
             <ArrowUpward />
           </IconButton>
-          <IconButton disabled={checkDisableButton(1)}>
+          <IconButton disabled={checkDisableReOrder(1)}>
             <ArrowDownward />
           </IconButton>
         </div>
@@ -107,10 +111,11 @@ StepBody.propTypes = {
   step: PropTypes.object.isRequired,
   handleStepChange: PropTypes.func.isRequired,
   checkUrlShouldDisable: PropTypes.func.isRequired,
-  checkDisableButton: PropTypes.func.isRequired,
+  checkDisableReOrder: PropTypes.func.isRequired,
   handleAddStep: PropTypes.func.isRequired,
   handleRemoveStep: PropTypes.func.isRequired,
-  checkDisableRemove: PropTypes.func.isRequired
+  checkDisableRemove: PropTypes.func.isRequired,
+  handleReOrder: PropTypes.func.isRequired
 };
 
 export default StepBody;

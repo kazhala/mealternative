@@ -42,6 +42,27 @@ const RecipeRoute = props => {
     ]
   });
 
+  const reOrderArray = (arr, from, to) => {
+    return arr.reduce((prev, current, idx, self) => {
+      if (from === to) {
+        prev.push(current);
+      }
+      if (idx === from) {
+        return prev;
+      }
+      if (from < to) {
+        prev.push(current);
+      }
+      if (idx === to) {
+        prev.push(self[from]);
+      }
+      if (from > to) {
+        prev.push(current);
+      }
+      return prev;
+    }, []);
+  };
+
   const handleDetailChange = (name, newValue) => {
     switch (name) {
       case 'thumbFile':
@@ -99,6 +120,18 @@ const RecipeRoute = props => {
             steps: [...newSteps]
           };
         });
+        break;
+
+      case 'reOrderStep':
+        const { reOrderIndex, reOrderType } = newValue;
+        if (reOrderType === 0) {
+          setRecipeDetail(prevDetails => ({
+            ...prevDetails,
+            steps: [
+              ...reOrderArray(prevDetails.steps, reOrderIndex, reOrderIndex - 1)
+            ]
+          }));
+        }
         break;
 
       case 'step':

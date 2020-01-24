@@ -14,7 +14,7 @@ const Steps = props => {
 
   const [activeStep, setActiveStep] = useState(0);
 
-  const checkDisableButton = btnNum => {
+  const checkDisableReOrder = btnNum => {
     if (btnNum === 0) {
       return activeStep === btnNum;
     } else {
@@ -48,6 +48,18 @@ const Steps = props => {
     handleDetailChange('removeStep', activeStep);
   };
 
+  // [0, 1] 0 = move up, 1 = move down
+  const handleReOrder = type => {
+    const updateParams = {
+      reOrderIndex: activeStep,
+      reOrderType: type
+    };
+    handleDetailChange('reOrderStep', updateParams);
+    type === 0
+      ? setActiveStep(prevActive => prevActive - 1)
+      : setActiveStep(prevActive => prevActive + 1);
+  };
+
   return (
     <div className={classes.stepsRoot}>
       <Stepper activeStep={activeStep} orientation='vertical'>
@@ -68,10 +80,11 @@ const Steps = props => {
               <StepBody
                 classes={classes}
                 step={step}
+                handleReOrder={handleReOrder}
                 checkDisableRemove={checkDisableRemove}
                 handleStepChange={handleStepChange}
                 checkUrlShouldDisable={checkUrlShouldDisable}
-                checkDisableButton={checkDisableButton}
+                checkDisableReOrder={checkDisableReOrder}
                 handleAddStep={handleAddStep}
                 handleRemoveStep={handleRemoveStep}
               />
