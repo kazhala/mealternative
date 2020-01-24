@@ -1,6 +1,13 @@
+/*
+  Body of each step in stepper
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextField, IconButton, Button, Avatar } from '@material-ui/core';
+
+// components
+import { TextField, IconButton, Avatar } from '@material-ui/core';
 import {
   Image,
   Clear,
@@ -25,6 +32,7 @@ const StepBody = props => {
 
   return (
     <>
+      {/* image preview */}
       {step.stepImage.previewUrl && (
         <Avatar
           variant='square'
@@ -34,6 +42,7 @@ const StepBody = props => {
         />
       )}
 
+      {/* image upload or url input */}
       <div className={classes.stepImage}>
         <TextField
           placeholder='Image Url'
@@ -47,12 +56,12 @@ const StepBody = props => {
         <input
           accept='image/*'
           type='file'
-          id='kazhala'
+          id='step-image'
           className={classes.fileInput}
           name='media'
           onChange={e => handleStepChange('stepImageFile', e.target.files[0])}
         />
-        <label htmlFor='kazhala'>
+        <label htmlFor='step-image'>
           <IconButton color='primary' component='span'>
             <Image />
           </IconButton>
@@ -65,6 +74,7 @@ const StepBody = props => {
         </IconButton>
       </div>
 
+      {/* description */}
       <TextField
         className={classes.stepDescriptions}
         value={step.stepDescriptions}
@@ -78,6 +88,7 @@ const StepBody = props => {
         size='small'
       />
 
+      {/* button controls */}
       <div className={classes.stepButtons}>
         <div>
           <IconButton

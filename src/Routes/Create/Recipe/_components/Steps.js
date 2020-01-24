@@ -1,5 +1,12 @@
+/*
+  Steps component for recipe creation
+*/
+
+// react
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import {
   StepContent,
   Stepper,
@@ -12,8 +19,12 @@ import StepBody from './StepBody';
 const Steps = props => {
   const { classes, steps, handleDetailChange } = props;
 
+  // current active step
+  // using material ui stepper to create steps
   const [activeStep, setActiveStep] = useState(0);
 
+  // check if re-order button should be disabled
+  // btnNum[0, 1]
   const checkDisableReOrder = btnNum => {
     if (btnNum === 0) {
       return activeStep === btnNum;
@@ -22,10 +33,12 @@ const Steps = props => {
     }
   };
 
+  // disable remove button when there's only one step
   const checkDisableRemove = () => {
     return Boolean(steps.length < 2);
   };
 
+  // call parent state handler to update step state
   const handleStepChange = (name, value) => {
     const updateParams = {
       index: activeStep,
@@ -35,21 +48,25 @@ const Steps = props => {
     handleDetailChange('step', updateParams);
   };
 
+  // check if the url input should be disabled
   const checkUrlShouldDisable = stepDetail => {
     return Boolean(stepDetail.stepImage.file);
   };
 
+  // add a new step
   const handleAddStep = () => {
     handleDetailChange('addStep', activeStep);
     setActiveStep(prevActive => prevActive + 1);
   };
 
+  // remove step
   const handleRemoveStep = () => {
     handleDetailChange('removeStep', activeStep);
     setActiveStep(prevActive => prevActive - 1);
   };
 
   // [0, 1] 0 = move up, 1 = move down
+  // handle re order
   const handleReOrder = type => {
     const updateParams = {
       reOrderIndex: activeStep,

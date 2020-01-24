@@ -23,6 +23,7 @@ const RecipeRoute = props => {
     cleanUp
   } = props;
 
+  // states for the recipe
   const [recipeDetail, setRecipeDetail] = useState({
     title: '',
     description: '',
@@ -42,6 +43,7 @@ const RecipeRoute = props => {
     ]
   });
 
+  // reorder the array helper function
   const reOrderArray = (arr, from, to) => {
     return arr.reduce((prev, current, idx, self) => {
       if (from === to) {
@@ -63,6 +65,8 @@ const RecipeRoute = props => {
     }, []);
   };
 
+  // update state handler
+  // spreading the object or arrays to prevent manipulation of the states
   const handleDetailChange = (name, newValue) => {
     switch (name) {
       case 'thumbFile':
@@ -71,6 +75,7 @@ const RecipeRoute = props => {
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
             file: newValue,
+            // create a new previewUrl
             previewUrl: newValue ? window.URL.createObjectURL(newValue) : '',
             url: ''
           }
@@ -82,6 +87,7 @@ const RecipeRoute = props => {
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
             url: newValue,
+            // clears the file image information
             file: '',
             previewUrl: ''
           }
@@ -97,10 +103,13 @@ const RecipeRoute = props => {
         }));
         break;
 
+      // add a step into the recipe
       case 'addStep':
         setRecipeDetail(prevDetails => ({
           ...prevDetails,
           steps: [
+            // make a copy of the original step array
+            // put the step into the given index
             ...prevDetails.steps.slice(0, newValue + 1),
             {
               stepTitle: '',
@@ -111,6 +120,7 @@ const RecipeRoute = props => {
           ]
         }));
         break;
+      // remove a step from the step array
       case 'removeStep':
         setRecipeDetail(prevDetails => {
           const newSteps = [...prevDetails.steps];
@@ -122,12 +132,16 @@ const RecipeRoute = props => {
         });
         break;
 
+      // update the order of the step array
+      // orderType = 0 | 1
+      // 0 === 'move up', 1 === 'move down'
       case 'reOrderStep':
         const { reOrderIndex, reOrderType } = newValue;
         if (reOrderType === 0) {
           setRecipeDetail(prevDetails => ({
             ...prevDetails,
             steps: [
+              // using the helper function to reorder
               ...reOrderArray(prevDetails.steps, reOrderIndex, reOrderIndex - 1)
             ]
           }));
@@ -141,18 +155,22 @@ const RecipeRoute = props => {
         }
         break;
 
+      // updating individual step information
       case 'step':
         const { index, updateAttribute, newAttributeValue } = newValue;
+        // handle image upload
         if (updateAttribute === 'stepImageFile') {
           setRecipeDetail(prevDetails => ({
             ...prevDetails,
             steps: [
+              // edit the according step object inside the step array
               ...prevDetails.steps.slice(0, index),
               {
                 ...prevDetails.steps[index],
                 stepImage: {
                   ...prevDetails.steps[index].stepImage,
                   file: newAttributeValue,
+                  // generate temp url for preview
                   previewUrl: newAttributeValue
                     ? window.URL.createObjectURL(newAttributeValue)
                     : '',
@@ -163,6 +181,8 @@ const RecipeRoute = props => {
             ]
           }));
         } else if (updateAttribute === 'stepImageUrl') {
+          // clears the file information
+          // edit the according step object
           setRecipeDetail(prevDetails => ({
             ...prevDetails,
             steps: [
@@ -180,6 +200,8 @@ const RecipeRoute = props => {
             ]
           }));
         } else if (updateAttribute === 'clearFile') {
+          // clears the file and url
+          // edit the according step object
           setRecipeDetail(prevDetails => ({
             ...prevDetails,
             steps: [
@@ -197,6 +219,7 @@ const RecipeRoute = props => {
             ]
           }));
         } else {
+          // if it's not image related, update the according step object attribute
           setRecipeDetail(prevDetails => ({
             ...prevDetails,
             steps: [
@@ -211,6 +234,7 @@ const RecipeRoute = props => {
         }
         break;
 
+      // default state update
       default:
         setRecipeDetail(prevDetails => ({
           ...prevDetails,
@@ -220,9 +244,11 @@ const RecipeRoute = props => {
     }
   };
 
+  // fetch all categories from server on mount
   useEffect(() => {
     getCategories();
     return () => {
+      // cleanup on unmount
       cleanUp();
     };
   }, [getCategories, cleanUp]);

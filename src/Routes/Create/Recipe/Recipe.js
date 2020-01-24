@@ -1,5 +1,12 @@
+/*
+  Recipe component to display the create recipe page
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import {
   InputAdornment,
   TextField,
@@ -11,6 +18,8 @@ import ImageOption from '../_components/ImageOption';
 import Ingredients from './_components/Ingredients';
 import Steps from './_components/Steps';
 import Categories from '../_components/Categories';
+
+// misc
 import useStyles from './Style';
 
 const Recipe = props => {
@@ -32,9 +41,11 @@ const Recipe = props => {
 
   return (
     <div className={classes.routeRoot}>
+      {/* title */}
       <Typography className={classes.routeTitle} component='div' variant='h6'>
         Create new recipe
       </Typography>
+      {/* thumbnailImage preview using material ui avatar */}
       {thumbnailImage.previewUrl && (
         <Avatar
           variant='square'
@@ -43,6 +54,7 @@ const Recipe = props => {
           alt='thumbnail preview'
         />
       )}
+      {/* allow user to choose between url or upload file */}
       <ImageOption
         urlText='Thumbnail Url'
         fileText='Thumbnail'
@@ -51,6 +63,7 @@ const Recipe = props => {
         thumbnailImage={thumbnailImage}
       />
 
+      {/* title input */}
       <TextField
         size='small'
         placeholder='Title of your recipe'
@@ -67,6 +80,7 @@ const Recipe = props => {
           )
         }}
       />
+      {/* description input */}
       <TextField
         size='small'
         placeholder='Description of your recipe'
@@ -86,11 +100,13 @@ const Recipe = props => {
         }}
       />
 
+      {/* ingredients auto complete */}
       <Ingredients
         classes={classes}
         ingredients={ingredients}
         handleDetailChange={handleDetailChange}
       />
+      {/* categories auto complete */}
       <Categories
         classes={classes}
         categories={categories}
@@ -98,6 +114,7 @@ const Recipe = props => {
         categoryList={categoryList}
         categoryLoading={categoryLoading}
       />
+      {/* steps */}
       <Steps
         handleDetailChange={handleDetailChange}
         steps={steps}
