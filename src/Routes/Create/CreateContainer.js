@@ -1,6 +1,16 @@
+/*
+  Create container
+  contains nested routes for create recipe and meal
+*/
+
+// react
 import React from 'react';
-import Create from './Create';
+
+// redux
 import { connect } from 'react-redux';
+
+// components
+import Create from './Create';
 
 const CreateContainer = props => {
   return <Create {...props} />;

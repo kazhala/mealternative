@@ -1,17 +1,28 @@
+/*
+  The default page for create
+  contains links to recipe/meal
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
-import OrDivider from '../../../Common/Divider/OrDivider';
-import VerticalOrDivider from '../../../Common/Divider/VerticalOrDivider';
+
+// components
 import { Paper, Typography, useTheme, useMediaQuery } from '@material-ui/core';
 import { MenuBook, RestaurantMenu } from '@material-ui/icons';
+import OrDivider from '../../../Common/Divider/OrDivider';
+import VerticalOrDivider from '../../../Common/Divider/VerticalOrDivider';
 
 const DefaultRoute = props => {
   const { classes, history } = props;
 
+  // push to history when navigating to recipe or meal
   const handleRouteClick = path => {
     history.push(path);
   };
 
+  // get the theme and breakpoints for inline responsive design
+  // determine display vertifical or horizontal split bar
   const theme = useTheme();
   const displayVerticalDivider = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -22,6 +33,7 @@ const DefaultRoute = props => {
           Create something amazing!
         </Typography>
       )}
+      {/* the clickable paper for recipe */}
       <Paper
         onClick={() => handleRouteClick('/create/recipe')}
         className={classes.createPaper}
@@ -30,12 +42,14 @@ const DefaultRoute = props => {
         <MenuBook fontSize='inherit' color='primary' />
         <Typography variant='h6'>New Recipe</Typography>
       </Paper>
+      {/* based on view port width, display different split bar */}
       {displayVerticalDivider && <VerticalOrDivider />}
       {!displayVerticalDivider && (
         <div className={classes.horizontalOrDividerContainer}>
           <OrDivider />
         </div>
       )}
+      {/* the clickable paper for meal */}
       <Paper
         onClick={() => handleRouteClick('/create/meal')}
         className={classes.createPaper}
@@ -49,7 +63,8 @@ const DefaultRoute = props => {
 };
 
 DefaultRoute.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default DefaultRoute;

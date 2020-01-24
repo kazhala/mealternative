@@ -1,3 +1,7 @@
+/*
+  The default create page styles
+  style for recipe and meal are in nested recipe/meal folder
+*/
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
