@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField, IconButton, Button, Avatar } from '@material-ui/core';
-import { Image, Clear, ArrowUpward, ArrowDownward } from '@material-ui/icons';
+import {
+  Image,
+  Clear,
+  ArrowUpward,
+  ArrowDownward,
+  Add,
+  Remove
+} from '@material-ui/icons';
 
 const StepBody = props => {
   const {
@@ -10,7 +17,8 @@ const StepBody = props => {
     handleStepChange,
     checkUrlShouldDisable,
     checkDisableButton,
-    handleAddStep
+    handleAddStep,
+    handleRemoveStep
   } = props;
 
   return (
@@ -77,9 +85,14 @@ const StepBody = props => {
             <ArrowDownward />
           </IconButton>
         </div>
-        <Button onClick={handleAddStep} color='primary' variant='contained'>
-          ADD step
-        </Button>
+        <div>
+          <IconButton onClick={handleRemoveStep}>
+            <Remove />
+          </IconButton>
+          <IconButton onClick={handleAddStep}>
+            <Add />
+          </IconButton>
+        </div>
       </div>
     </>
   );
@@ -91,7 +104,8 @@ StepBody.propTypes = {
   handleStepChange: PropTypes.func.isRequired,
   checkUrlShouldDisable: PropTypes.func.isRequired,
   checkDisableButton: PropTypes.func.isRequired,
-  handleAddStep: PropTypes.func.isRequired
+  handleAddStep: PropTypes.func.isRequired,
+  handleRemoveStep: PropTypes.func.isRequired
 };
 
 export default StepBody;

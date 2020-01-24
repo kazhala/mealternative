@@ -40,6 +40,10 @@ const Steps = props => {
     setActiveStep(prevActive => prevActive + 1);
   };
 
+  const handleRemoveStep = () => {
+    handleDetailChange('removeStep', activeStep);
+  };
+
   return (
     <div className={classes.stepsRoot}>
       <Stepper activeStep={activeStep} orientation='vertical'>
@@ -64,6 +68,7 @@ const Steps = props => {
                 checkUrlShouldDisable={checkUrlShouldDisable}
                 checkDisableButton={checkDisableButton}
                 handleAddStep={handleAddStep}
+                handleRemoveStep={handleRemoveStep}
               />
             </StepContent>
           </Step>
@@ -75,7 +80,8 @@ const Steps = props => {
 
 Steps.propTypes = {
   classes: PropTypes.object.isRequired,
-  steps: PropTypes.arrayOf(PropTypes.object).isRequired
+  steps: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleDetailChange: PropTypes.func.isRequired
 };
 
 export default Steps;

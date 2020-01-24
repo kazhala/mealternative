@@ -90,6 +90,16 @@ const RecipeRoute = props => {
           ]
         }));
         break;
+      case 'removeStep':
+        setRecipeDetail(prevDetails => {
+          const newSteps = [...prevDetails.steps];
+          newSteps.splice(newValue, 1);
+          return {
+            ...prevDetails,
+            steps: [...newSteps]
+          };
+        });
+        break;
 
       case 'step':
         const { index, updateAttribute, newAttributeValue } = newValue;
