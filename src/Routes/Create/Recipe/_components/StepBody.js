@@ -86,7 +86,10 @@ const StepBody = props => {
           >
             <ArrowUpward />
           </IconButton>
-          <IconButton disabled={checkDisableReOrder(1)}>
+          <IconButton
+            onClick={() => handleReOrder(1)}
+            disabled={checkDisableReOrder(1)}
+          >
             <ArrowDownward />
           </IconButton>
         </div>

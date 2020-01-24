@@ -131,6 +131,13 @@ const RecipeRoute = props => {
               ...reOrderArray(prevDetails.steps, reOrderIndex, reOrderIndex - 1)
             ]
           }));
+        } else if (reOrderType === 1) {
+          setRecipeDetail(prevDetails => ({
+            ...prevDetails,
+            steps: [
+              ...reOrderArray(prevDetails.steps, reOrderIndex, reOrderIndex + 1)
+            ]
+          }));
         }
         break;
 
