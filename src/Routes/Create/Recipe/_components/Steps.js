@@ -46,6 +46,7 @@ const Steps = props => {
 
   const handleRemoveStep = () => {
     handleDetailChange('removeStep', activeStep);
+    setActiveStep(prevActive => prevActive - 1);
   };
 
   // [0, 1] 0 = move up, 1 = move down

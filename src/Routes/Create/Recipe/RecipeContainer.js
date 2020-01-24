@@ -227,8 +227,6 @@ const RecipeRoute = props => {
     };
   }, [getCategories, cleanUp]);
 
-  console.log(recipeDetail);
-
   return (
     <>
       <ErrorSnack error={error} handleClose={cleanUp} />
