@@ -18,7 +18,8 @@ const StepBody = props => {
     checkUrlShouldDisable,
     checkDisableButton,
     handleAddStep,
-    handleRemoveStep
+    handleRemoveStep,
+    checkDisableRemove
   } = props;
 
   return (
@@ -86,7 +87,10 @@ const StepBody = props => {
           </IconButton>
         </div>
         <div>
-          <IconButton onClick={handleRemoveStep}>
+          <IconButton
+            disabled={checkDisableRemove()}
+            onClick={handleRemoveStep}
+          >
             <Remove />
           </IconButton>
           <IconButton onClick={handleAddStep}>
@@ -105,7 +109,8 @@ StepBody.propTypes = {
   checkUrlShouldDisable: PropTypes.func.isRequired,
   checkDisableButton: PropTypes.func.isRequired,
   handleAddStep: PropTypes.func.isRequired,
-  handleRemoveStep: PropTypes.func.isRequired
+  handleRemoveStep: PropTypes.func.isRequired,
+  checkDisableRemove: PropTypes.func.isRequired
 };
 
 export default StepBody;

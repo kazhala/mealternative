@@ -22,6 +22,10 @@ const Steps = props => {
     }
   };
 
+  const checkDisableRemove = () => {
+    return Boolean(steps.length < 2);
+  };
+
   const handleStepChange = (name, value) => {
     const updateParams = {
       index: activeStep,
@@ -64,6 +68,7 @@ const Steps = props => {
               <StepBody
                 classes={classes}
                 step={step}
+                checkDisableRemove={checkDisableRemove}
                 handleStepChange={handleStepChange}
                 checkUrlShouldDisable={checkUrlShouldDisable}
                 checkDisableButton={checkDisableButton}
