@@ -6,7 +6,8 @@ import * as Types from './types';
 const initialState = {
   categories: [],
   categoryLoading: false,
-  error: ''
+  error: '',
+  loading: false
 };
 
 const CreateReducer = (state = initialState, action) => {
@@ -19,6 +20,8 @@ const CreateReducer = (state = initialState, action) => {
       return { ...state, error: action.payload };
     case Types.CLEAN:
       return { ...state, categoryLoading: false, error: '' };
+    case Types.BEGIN:
+      return { ...state, loading: true };
     default:
       return state;
   }

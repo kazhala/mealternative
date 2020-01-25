@@ -10,6 +10,7 @@ import * as Operations from './operations';
 */
 export function* watchGetCategories() {
   yield takeLatest(Types.GET_CATEGORIES, workerGetCategories);
+  yield takeLatest(Types.SUBMIT_RECIPE, workerSubmitRecipe);
 }
 
 /*
@@ -30,4 +31,8 @@ function* workerGetCategories() {
   } catch (err) {
     console.log(err);
   }
+}
+
+function* workerSubmitRecipe({ payload }) {
+  yield put({ type: Types.BEGIN });
 }

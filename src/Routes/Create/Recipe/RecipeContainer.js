@@ -20,7 +20,8 @@ const RecipeRoute = props => {
     categoryLoading,
     categoryList,
     getCategories,
-    cleanUp
+    cleanUp,
+    submitRecipe
   } = props;
 
   // states for the recipe
@@ -246,6 +247,7 @@ const RecipeRoute = props => {
 
   const handleRecipeSubmit = () => {
     console.log(recipeDetail);
+    submitRecipe(recipeDetail);
   };
 
   // fetch all categories from server on mount
@@ -284,7 +286,8 @@ const mapDispatchTopProps = dispatch => {
   return bindActionCreators(
     {
       getCategories: CreateActions.getCategories,
-      cleanUp: CreateActions.cleanUp
+      cleanUp: CreateActions.cleanUp,
+      submitRecipe: CreateActions.submitRecipe
     },
     dispatch
   );
