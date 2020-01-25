@@ -47,6 +47,11 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(10)
   },
 
+  // upload button
+  recipeSubmit: {
+    marginTop: theme.spacing(1)
+  },
+
   // image option
   thumbPreview: {
     height: 'auto',

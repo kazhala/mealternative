@@ -11,9 +11,10 @@ import {
   InputAdornment,
   TextField,
   Typography,
-  Avatar
+  Avatar,
+  Button
 } from '@material-ui/core';
-import { Title, Description } from '@material-ui/icons';
+import { Title, Description, Send } from '@material-ui/icons';
 import ImageOption from '../_components/ImageOption';
 import Ingredients from './_components/Ingredients';
 import Steps from './_components/Steps';
@@ -28,7 +29,8 @@ const Recipe = props => {
     categoryList,
     categoryLoading,
     recipeDetail,
-    handleDetailChange
+    handleDetailChange,
+    handleRecipeSubmit
   } = props;
   const {
     title,
@@ -120,6 +122,17 @@ const Recipe = props => {
         steps={steps}
         classes={classes}
       />
+
+      <Button
+        color='primary'
+        variant='contained'
+        fullWidth
+        className={classes.recipeSubmit}
+        endIcon={<Send />}
+        onClick={handleRecipeSubmit}
+      >
+        Upload
+      </Button>
     </div>
   );
 };
@@ -128,7 +141,8 @@ Recipe.propTypes = {
   categoryList: PropTypes.array.isRequired,
   categoryLoading: PropTypes.bool.isRequired,
   recipeDetail: PropTypes.object.isRequired,
-  handleDetailChange: PropTypes.func.isRequired
+  handleDetailChange: PropTypes.func.isRequired,
+  handleRecipeSubmit: PropTypes.func.isRequired
 };
 
 export default Recipe;

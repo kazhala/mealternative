@@ -244,6 +244,10 @@ const RecipeRoute = props => {
     }
   };
 
+  const handleRecipeSubmit = () => {
+    console.log(recipeDetail);
+  };
+
   // fetch all categories from server on mount
   useEffect(() => {
     getCategories();
@@ -261,6 +265,7 @@ const RecipeRoute = props => {
         categoryList={categoryList}
         categoryLoading={categoryLoading}
         handleDetailChange={handleDetailChange}
+        handleRecipeSubmit={handleRecipeSubmit}
         {...props}
       />
     </>
