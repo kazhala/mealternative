@@ -10,12 +10,12 @@ export const getCategories = () => {
 };
 
 export const cleanUp = () => ({
-  type: Types.CLEAN
+  type: Types.CREATE_CLEAN
 });
 
 export const submitRecipe = payload => {
   return {
-    type: Types.SUBMIT_RECIPE,
+    type: Types.CREATE_SUBMIT_RECIPE,
     payload
   };
 };

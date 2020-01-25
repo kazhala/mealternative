@@ -13,7 +13,7 @@ export function* watchGetCategories() {
 }
 
 export function* watchSubmitRecipe() {
-  yield takeLatest(Types.SUBMIT_RECIPE, workerSubmitRecipe);
+  yield takeLatest(Types.CREATE_SUBMIT_RECIPE, workerSubmitRecipe);
 }
 
 /*
@@ -25,7 +25,7 @@ function* workerGetCategories() {
     const response = yield call(Operations.getCategories);
     if (response.error) {
       yield put({
-        type: Types.ERROR,
+        type: Types.CREAT_ERROR,
         payload: 'Categories faild to fetch, try refresh..'
       });
     } else {
@@ -37,14 +37,17 @@ function* workerGetCategories() {
 }
 
 function* workerSubmitRecipe({ payload }) {
-  yield put({ type: Types.BEGIN });
+  yield put({ type: Types.CREATE_BEGIN });
   console.log(payload);
   try {
     if (
       payload.thumbnailImage.file !== '' &&
       payload.thumbnailImage.url === ''
     ) {
-      yield put({ type: Types.LOADING_TEXT, payload: 'Uploading thumbnail..' });
+      yield put({
+        type: Types.CREATE_LOADING_TEXT,
+        payload: 'Uploading thumbnail..'
+      });
       const response = yield call(
         Operations.uploadRecipeThumb
         // payload.thumbnailImage.file
@@ -56,6 +59,6 @@ function* workerSubmitRecipe({ payload }) {
     }
   } catch (err) {
     console.log(err);
-    yield put({ type: Types.ERROR, payload: err.message });
+    yield put({ type: Types.CREAT_ERROR, payload: err.message });
   }
 }

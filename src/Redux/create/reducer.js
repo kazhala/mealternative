@@ -17,13 +17,19 @@ const CreateReducer = (state = initialState, action) => {
       return { ...state, categoryLoading: true };
     case Types.SUCCESS_CATEGORIES:
       return { ...state, categoryLoading: false, categories: action.payload };
-    case Types.ERROR:
+    case Types.CREAT_ERROR:
       return { ...state, error: action.payload };
-    case Types.CLEAN:
-      return { ...state, categoryLoading: false, error: '' };
-    case Types.BEGIN:
+    case Types.CREATE_CLEAN:
+      return {
+        ...state,
+        categoryLoading: false,
+        error: '',
+        loading: false,
+        loadingText: ''
+      };
+    case Types.CREATE_BEGIN:
       return { ...state, loading: true };
-    case Types.LOADING_TEXT:
+    case Types.CREATE_LOADING_TEXT:
       return { ...state, loadingText: action.payload };
     default:
       return state;
