@@ -7,6 +7,7 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const SUCCESS_CATEGORIES = 'SUCCESS_CATEGORIES';
 
 export const SUBMIT_RECIPE = 'SUBMIT_RECIPE';
+export const LOADING_TEXT = 'LOADING_TEXT';
 
 export const ERROR = 'ERROR';
 export const CLEAN = 'CLEAN';

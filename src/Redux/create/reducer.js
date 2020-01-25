@@ -7,7 +7,8 @@ const initialState = {
   categories: [],
   categoryLoading: false,
   error: '',
-  loading: false
+  loading: false,
+  loadingText: ''
 };
 
 const CreateReducer = (state = initialState, action) => {
@@ -22,6 +23,8 @@ const CreateReducer = (state = initialState, action) => {
       return { ...state, categoryLoading: false, error: '' };
     case Types.BEGIN:
       return { ...state, loading: true };
+    case Types.LOADING_TEXT:
+      return { ...state, loadingText: action.payload };
     default:
       return state;
   }

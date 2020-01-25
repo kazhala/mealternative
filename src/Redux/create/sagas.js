@@ -10,6 +10,9 @@ import * as Operations from './operations';
 */
 export function* watchGetCategories() {
   yield takeLatest(Types.GET_CATEGORIES, workerGetCategories);
+}
+
+export function* watchSubmitRecipe() {
   yield takeLatest(Types.SUBMIT_RECIPE, workerSubmitRecipe);
 }
 
@@ -35,4 +38,24 @@ function* workerGetCategories() {
 
 function* workerSubmitRecipe({ payload }) {
   yield put({ type: Types.BEGIN });
+  console.log(payload);
+  try {
+    if (
+      payload.thumbnailImage.file !== '' &&
+      payload.thumbnailImage.url === ''
+    ) {
+      yield put({ type: Types.LOADING_TEXT, payload: 'Uploading thumbnail..' });
+      const response = yield call(
+        Operations.uploadRecipeThumb
+        // payload.thumbnailImage.file
+      );
+      console.log(response);
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    yield put({ type: Types.ERROR, payload: err.message });
+  }
 }

@@ -246,7 +246,6 @@ const RecipeRoute = props => {
   };
 
   const handleRecipeSubmit = () => {
-    console.log(recipeDetail);
     submitRecipe(recipeDetail);
   };
 
