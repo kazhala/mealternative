@@ -18,7 +18,13 @@ const CreateReducer = (state = initialState, action) => {
     case Types.SUCCESS_CATEGORIES:
       return { ...state, categoryLoading: false, categories: action.payload };
     case Types.CREAT_ERROR:
-      return { ...state, error: action.payload };
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+        categoryLoading: false,
+        loadingText: ''
+      };
     case Types.CREATE_CLEAN:
       return {
         ...state,

@@ -40,22 +40,24 @@ function* workerSubmitRecipe({ payload }) {
   yield put({ type: Types.CREATE_BEGIN });
   console.log(payload);
   try {
-    if (
-      payload.thumbnailImage.file !== '' &&
-      payload.thumbnailImage.url === ''
-    ) {
+    if (payload.thumbnailImage.file && !payload.thumbnailImage.url) {
       yield put({
         type: Types.CREATE_LOADING_TEXT,
         payload: 'Uploading thumbnail..'
       });
       const response = yield call(
-        Operations.uploadRecipeThumb
-        // payload.thumbnailImage.file
+        Operations.uploadRecipeThumb,
+        payload.thumbnailImage.file
       );
-      console.log(response);
       if (response.error) {
         throw new Error(response.error.message);
       }
+      if (response.secure_url) {
+        payload.thumbnailImage.url = response.secure_url;
+      } else {
+        throw new Error('Something went wrong..');
+      }
+      console.log(payload);
     }
   } catch (err) {
     console.log(err);
