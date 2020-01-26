@@ -100,7 +100,11 @@ function* workerSubmitRecipe({ payload }) {
 
     console.log(uploadParams);
     const response = yield call(Operations.uploadRecipe, uploadParams);
-    console.log(response);
+    if (response.error) {
+      throw new Error(response.error);
+    } else {
+      yield put({ type: Types.CREATE_SUCCESS, payload: response.message });
+    }
   } catch (err) {
     console.log(err);
     yield put({ type: Types.CREAT_ERROR, payload: err.message });

@@ -8,7 +8,8 @@ const initialState = {
   categoryLoading: false,
   error: '',
   loading: false,
-  loadingText: ''
+  loadingText: '',
+  success: ''
 };
 
 const CreateReducer = (state = initialState, action) => {
@@ -24,6 +25,15 @@ const CreateReducer = (state = initialState, action) => {
         loading: false,
         categoryLoading: false,
         loadingText: ''
+      };
+    case Types.CREATE_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        loading: false,
+        categoryLoading: false,
+        loadingText: '',
+        success: action.payload
       };
     case Types.CREATE_CLEAN:
       return {
