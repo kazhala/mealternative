@@ -41,7 +41,8 @@ const CreateReducer = (state = initialState, action) => {
         categoryLoading: false,
         error: '',
         loading: false,
-        loadingText: ''
+        loadingText: '',
+        success: ''
       };
     case Types.CREATE_BEGIN:
       return { ...state, loading: true };
