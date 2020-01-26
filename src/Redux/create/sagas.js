@@ -48,6 +48,18 @@ function* workerSubmitRecipe({ payload }) {
   yield put({ type: Types.CREATE_BEGIN });
 
   try {
+    if (uploadParams.title.length < 3 || uploadParams.title.length > 60) {
+      throw new Error('Recipe title should be between 3-60 characters long');
+    }
+    if (uploadParams.description.length > 1000) {
+      throw new Error("Description can't be longer 1000");
+    }
+    if (uploadParams.ingredients.length < 1) {
+      throw new Error('Please enter some required ingredients');
+    }
+    if (uploadParams.categories.length < 1) {
+      throw new Error('Please select at least one category');
+    }
     if (recipeDetail.thumbnailImage.file && !recipeDetail.thumbnailImage.url) {
       console.log('Uploading thumbnail');
       yield put({
