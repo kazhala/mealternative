@@ -1,3 +1,6 @@
+/*
+  API calls for saga
+*/
 import { API, CloudinaryURL } from '../../config';
 import Cookies from 'js-cookie';
 
@@ -16,6 +19,7 @@ export const getCategories = async () => {
   }
 };
 
+// upload thumbnail with mealternative_thumb preset
 export const uploadRecipeThumb = async file => {
   try {
     const data = new FormData();
@@ -32,6 +36,7 @@ export const uploadRecipeThumb = async file => {
   }
 };
 
+// upload thumbnail with mealternative_steps preset
 export const uploadStepImage = async file => {
   try {
     const data = new FormData();
@@ -48,6 +53,7 @@ export const uploadStepImage = async file => {
   }
 };
 
+// call backend to store recipe in db
 export const uploadRecipe = async uploadParams => {
   try {
     const res = await fetch(`${API}/recipe`, {

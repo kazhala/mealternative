@@ -19,6 +19,7 @@ export function* watchSubmitRecipe() {
 /*
   Worker saga
 */
+// get all categories from backend
 function* workerGetCategories() {
   yield put({ type: Types.BEGIN_CATEGORIES });
   try {
@@ -36,8 +37,14 @@ function* workerGetCategories() {
   }
 }
 
+// upload recipe
+// step1 validate input
+// step2 upload thumbnail to cloudinary
+// step3 upload all step images to cloudinary
+// store recipe in backend once all url are created
 function* workerSubmitRecipe({ payload }) {
   const { recipeDetail, selCategoryIds } = payload;
+  // prepare required params to call backend
   const uploadParams = {
     title: recipeDetail.title,
     description: recipeDetail.description,
@@ -45,9 +52,11 @@ function* workerSubmitRecipe({ payload }) {
     categories: [...selCategoryIds]
   };
   console.log(uploadParams);
+  // start loading state
   yield put({ type: Types.CREATE_BEGIN });
 
   try {
+    // client side validation, don't waste usage in cloudinary
     if (uploadParams.title.length < 3 || uploadParams.title.length > 60) {
       throw new Error('Recipe title should be between 3-60 characters long');
     }
@@ -60,6 +69,8 @@ function* workerSubmitRecipe({ payload }) {
     if (uploadParams.categories.length < 1) {
       throw new Error('Please select at least one category');
     }
+
+    // if there is thumbnailImage, upload to cloudinary
     if (recipeDetail.thumbnailImage.file && !recipeDetail.thumbnailImage.url) {
       console.log('Uploading thumbnail');
       yield put({
@@ -73,6 +84,7 @@ function* workerSubmitRecipe({ payload }) {
       if (thumbResponse.error) {
         throw new Error(thumbResponse.error.message);
       }
+      // put the url in params
       if (thumbResponse.secure_url) {
         uploadParams.thumbImageUrl = thumbResponse.secure_url;
       } else {
@@ -80,11 +92,14 @@ function* workerSubmitRecipe({ payload }) {
       }
     }
 
+    // prepare steps params
     const uploadSteps = [];
+    // check each step if need to upload image
     for (let i = 0; i < recipeDetail.steps.length; i++) {
       let eachStep = {};
       eachStep.stepTitle = recipeDetail.steps[i].stepTitle;
       eachStep.stepDescriptions = recipeDetail.steps[i].stepDescriptions;
+      // if file, upload image
       if (recipeDetail.steps[i].stepImage.file) {
         console.log(`Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`);
         yield put({
@@ -98,6 +113,7 @@ function* workerSubmitRecipe({ payload }) {
         if (stepResponse.error) {
           throw new Error(stepResponse.error.message);
         }
+        // store the url
         if (stepResponse.secure_url) {
           eachStep.stepImageUrl = stepResponse.secure_url;
         } else {
@@ -115,6 +131,7 @@ function* workerSubmitRecipe({ payload }) {
       type: Types.CREATE_LOADING_TEXT,
       payload: 'Uploading recipe..'
     });
+    // call backend and store it in db
     const response = yield call(Operations.uploadRecipe, uploadParams);
     if (response.error) {
       throw new Error(response.error);
@@ -123,6 +140,7 @@ function* workerSubmitRecipe({ payload }) {
         type: Types.CREATE_LOADING_TEXT,
         payload: 'Success! Redirecting..'
       });
+      // show success message for 3 seconds before redirecting
       yield delay(3000);
       yield put({ type: Types.CREATE_SUCCESS, payload: response.message });
     }
