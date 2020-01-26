@@ -97,7 +97,10 @@ function* workerSubmitRecipe({ payload }) {
       uploadSteps.push(eachStep);
     }
     uploadParams.steps = [...uploadSteps];
+
     console.log(uploadParams);
+    const response = yield call(Operations.uploadRecipe, uploadParams);
+    console.log(response);
   } catch (err) {
     console.log(err);
     yield put({ type: Types.CREAT_ERROR, payload: err.message });

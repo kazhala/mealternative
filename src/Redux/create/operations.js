@@ -1,4 +1,5 @@
 import { API, CloudinaryURL } from '../../config';
+import Cookies from 'js-cookie';
 
 export const getCategories = async () => {
   try {
@@ -40,6 +41,23 @@ export const uploadStepImage = async file => {
     const res = await fetch(CloudinaryURL, {
       method: 'POST',
       body: data
+    });
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const uploadRecipe = async uploadParams => {
+  try {
+    const res = await fetch(`${API}/recipe`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('token')}`
+      },
+      body: JSON.stringify(uploadParams)
     });
     return res.json();
   } catch (err) {
