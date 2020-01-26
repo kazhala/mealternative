@@ -246,7 +246,15 @@ const RecipeRoute = props => {
   };
 
   const handleRecipeSubmit = () => {
-    submitRecipe(recipeDetail);
+    const selCategoryIds = categoryList.reduce((prev, curr, idx, self) => {
+      recipeDetail.categories.forEach(category => {
+        if (category === curr.name) {
+          prev.push(curr._id);
+        }
+      });
+      return prev;
+    }, []);
+    submitRecipe(recipeDetail, selCategoryIds);
   };
 
   // fetch all categories from server on mount

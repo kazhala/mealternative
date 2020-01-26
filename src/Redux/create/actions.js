@@ -13,9 +13,12 @@ export const cleanUp = () => ({
   type: Types.CREATE_CLEAN
 });
 
-export const submitRecipe = payload => {
+export const submitRecipe = (recipeDetail, selCategoryIds) => {
   return {
     type: Types.CREATE_SUBMIT_RECIPE,
-    payload
+    payload: {
+      recipeDetail,
+      selCategoryIds
+    }
   };
 };

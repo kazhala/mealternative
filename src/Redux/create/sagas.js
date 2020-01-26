@@ -37,16 +37,18 @@ function* workerGetCategories() {
 }
 
 function* workerSubmitRecipe({ payload }) {
-  console.log(payload);
+  const { recipeDetail, selCategoryIds } = payload;
   const uploadParams = {
-    title: payload.title,
-    description: payload.description,
-    ingredients: [...payload.ingredients]
+    title: recipeDetail.title,
+    description: recipeDetail.description,
+    ingredients: [...recipeDetail.ingredients],
+    categories: [...selCategoryIds]
   };
   console.log(uploadParams);
   yield put({ type: Types.CREATE_BEGIN });
+
   try {
-    if (payload.thumbnailImage.file && !payload.thumbnailImage.url) {
+    if (recipeDetail.thumbnailImage.file && !recipeDetail.thumbnailImage.url) {
       console.log('Uploading thumbnail');
       yield put({
         type: Types.CREATE_LOADING_TEXT,
@@ -54,7 +56,7 @@ function* workerSubmitRecipe({ payload }) {
       });
       const thumbResponse = yield call(
         Operations.uploadRecipeThumb,
-        payload.thumbnailImage.file
+        recipeDetail.thumbnailImage.file
       );
       if (thumbResponse.error) {
         throw new Error(thumbResponse.error.message);
@@ -65,20 +67,21 @@ function* workerSubmitRecipe({ payload }) {
         throw new Error('Something went wrong..');
       }
     }
+
     const uploadSteps = [];
-    for (let i = 0; i < payload.steps.length; i++) {
+    for (let i = 0; i < recipeDetail.steps.length; i++) {
       let eachStep = {};
-      eachStep.stepTitle = payload.steps[i].stepTitle;
-      eachStep.stepDescriptions = payload.steps[i].stepDescriptions;
-      if (payload.steps[i].stepImage.file) {
-        console.log(`Uploading ${payload.steps[i].stepTitle}'s image..'`);
+      eachStep.stepTitle = recipeDetail.steps[i].stepTitle;
+      eachStep.stepDescriptions = recipeDetail.steps[i].stepDescriptions;
+      if (recipeDetail.steps[i].stepImage.file) {
+        console.log(`Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`);
         yield put({
           type: Types.CREATE_LOADING_TEXT,
-          payload: `Uploading ${payload.steps[i].stepTitle}'s image..'`
+          payload: `Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`
         });
         let stepResponse = yield call(
           Operations.uploadStepImage,
-          payload.steps[i].stepImage.file
+          recipeDetail.steps[i].stepImage.file
         );
         if (stepResponse.error) {
           throw new Error(stepResponse.error.message);
@@ -89,7 +92,7 @@ function* workerSubmitRecipe({ payload }) {
           throw new Error('Something went wrong..');
         }
       } else {
-        eachStep.stepImageUrl = payload.steps[i].stepImage.url;
+        eachStep.stepImageUrl = recipeDetail.steps[i].stepImage.url;
       }
       uploadSteps.push(eachStep);
     }
