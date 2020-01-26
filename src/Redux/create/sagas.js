@@ -45,20 +45,41 @@ function* workerSubmitRecipe({ payload }) {
         type: Types.CREATE_LOADING_TEXT,
         payload: 'Uploading thumbnail..'
       });
-      const response = yield call(
+      const thumbResponse = yield call(
         Operations.uploadRecipeThumb,
         payload.thumbnailImage.file
       );
-      if (response.error) {
-        throw new Error(response.error.message);
+      if (thumbResponse.error) {
+        throw new Error(thumbResponse.error.message);
       }
-      if (response.secure_url) {
-        payload.thumbnailImage.url = response.secure_url;
+      if (thumbResponse.secure_url) {
+        payload.thumbnailImage.url = thumbResponse.secure_url;
       } else {
         throw new Error('Something went wrong..');
       }
       console.log(payload);
     }
+    for (let i = 0; i < payload.steps.length; i++) {
+      if (payload.steps[i].stepImage.file) {
+        yield put({
+          type: Types.CREATE_LOADING_TEXT,
+          payload: `Uploading ${payload.steps[i].stepTitle}'s image..'`
+        });
+        let stepResponse = yield call(
+          Operations.uploadStepImage,
+          payload.steps[i].stepImage.file
+        );
+        if (stepResponse.error) {
+          throw new Error(stepResponse.error.message);
+        }
+        if (stepResponse.secure_url) {
+          payload.steps[i].stepImage.url = stepResponse.secure_url;
+        } else {
+          throw new Error('Something went wrong..');
+        }
+      }
+    }
+    console.log(payload);
   } catch (err) {
     console.log(err);
     yield put({ type: Types.CREAT_ERROR, payload: err.message });
