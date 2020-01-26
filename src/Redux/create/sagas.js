@@ -1,7 +1,7 @@
 /*
   Create saga to handle async calls
 */
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, delay } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 
@@ -111,10 +111,19 @@ function* workerSubmitRecipe({ payload }) {
     uploadParams.steps = [...uploadSteps];
 
     console.log(uploadParams);
+    yield put({
+      type: Types.CREATE_LOADING_TEXT,
+      payload: 'Uploading recipe..'
+    });
     const response = yield call(Operations.uploadRecipe, uploadParams);
     if (response.error) {
       throw new Error(response.error);
     } else {
+      yield put({
+        type: Types.CREATE_LOADING_TEXT,
+        payload: 'Success! Redirecting..'
+      });
+      yield delay(3000);
       yield put({ type: Types.CREATE_SUCCESS, payload: response.message });
     }
   } catch (err) {

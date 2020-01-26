@@ -14,6 +14,7 @@ import { CreateActions } from '../../../Redux/create';
 import ErrorSnack from '../../../Common/ErrorModal/ErrorSnack';
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
 import Recipe from './Recipe';
+import { Redirect } from 'react-router-dom';
 
 const RecipeRoute = props => {
   const {
@@ -22,7 +23,10 @@ const RecipeRoute = props => {
     categoryList,
     getCategories,
     cleanUp,
-    submitRecipe
+    submitRecipe,
+    success,
+    loading,
+    loadingText
   } = props;
 
   // states for the recipe
@@ -269,11 +273,12 @@ const RecipeRoute = props => {
 
   return (
     <>
+      {success && <Redirect to='/' />}
       <ErrorSnack error={error} handleClose={cleanUp} />
       <PageSpinner
         background='rgba(0,0,0,0.4)'
-        loading={props.loading}
-        text={props.loadingText}
+        loading={loading}
+        text={loadingText}
         textColor='#fff'
       />
       <Recipe
