@@ -9,9 +9,9 @@ import BackDrop from '../BackDrop/BackDrop';
 
 const PageSpinner = props => {
   const classes = useStyles();
-  const { loading, text } = props;
+  const { textColor, loading, text, background } = props;
   return (
-    <BackDrop show={loading}>
+    <BackDrop background={background} show={loading}>
       <div className={classes.spinnerWraper}>
         <CircularProgress
           className={classes.pageSpinner}
@@ -20,7 +20,11 @@ const PageSpinner = props => {
           size='4rem'
         />
         {text && (
-          <Typography component='div' variant='subtitle2'>
+          <Typography
+            style={{ color: textColor }}
+            component='div'
+            variant='subtitle2'
+          >
             {text}
           </Typography>
         )}
@@ -30,7 +34,15 @@ const PageSpinner = props => {
 };
 
 PageSpinner.propTypes = {
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  text: PropTypes.string,
+  background: PropTypes.string,
+  textColor: PropTypes.string
+};
+
+PageSpinner.defaultProps = {
+  background: 'rgba(0,0,0,0.1)',
+  textColor: 'rgba(0,0,0,0.87)'
 };
 
 export default PageSpinner;

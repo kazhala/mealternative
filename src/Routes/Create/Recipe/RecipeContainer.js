@@ -12,6 +12,7 @@ import { CreateActions } from '../../../Redux/create';
 
 // components
 import ErrorSnack from '../../../Common/ErrorModal/ErrorSnack';
+import PageSpinner from '../../../Common/Spinner/PageSpinner';
 import Recipe from './Recipe';
 
 const RecipeRoute = props => {
@@ -269,6 +270,12 @@ const RecipeRoute = props => {
   return (
     <>
       <ErrorSnack error={error} handleClose={cleanUp} />
+      <PageSpinner
+        background='rgba(0,0,0,0.4)'
+        loading={props.loading}
+        text={props.loadingText}
+        textColor='#fff'
+      />
       <Recipe
         recipeDetail={recipeDetail}
         categoryList={categoryList}
@@ -285,7 +292,10 @@ const mapStateToProps = state => {
   return {
     categoryList: state.Create.categories,
     categoryLoading: state.Create.categoryLoading,
-    error: state.Create.error
+    error: state.Create.error,
+    loading: state.Create.loading,
+    success: state.Create.success,
+    loadingText: state.Create.loadingText
   };
 };
 
