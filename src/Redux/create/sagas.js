@@ -37,10 +37,17 @@ function* workerGetCategories() {
 }
 
 function* workerSubmitRecipe({ payload }) {
-  yield put({ type: Types.CREATE_BEGIN });
   console.log(payload);
+  const uploadParams = {
+    title: payload.title,
+    description: payload.description,
+    ingredients: [...payload.ingredients]
+  };
+  console.log(uploadParams);
+  yield put({ type: Types.CREATE_BEGIN });
   try {
     if (payload.thumbnailImage.file && !payload.thumbnailImage.url) {
+      console.log('Uploading thumbnail');
       yield put({
         type: Types.CREATE_LOADING_TEXT,
         payload: 'Uploading thumbnail..'
@@ -53,14 +60,18 @@ function* workerSubmitRecipe({ payload }) {
         throw new Error(thumbResponse.error.message);
       }
       if (thumbResponse.secure_url) {
-        payload.thumbnailImage.url = thumbResponse.secure_url;
+        uploadParams.thumbImageUrl = thumbResponse.secure_url;
       } else {
         throw new Error('Something went wrong..');
       }
-      console.log(payload);
     }
+    const uploadSteps = [];
     for (let i = 0; i < payload.steps.length; i++) {
+      let eachStep = {};
+      eachStep.stepTitle = payload.steps[i].stepTitle;
+      eachStep.stepDescriptions = payload.steps[i].stepDescriptions;
       if (payload.steps[i].stepImage.file) {
+        console.log(`Uploading ${payload.steps[i].stepTitle}'s image..'`);
         yield put({
           type: Types.CREATE_LOADING_TEXT,
           payload: `Uploading ${payload.steps[i].stepTitle}'s image..'`
@@ -73,13 +84,17 @@ function* workerSubmitRecipe({ payload }) {
           throw new Error(stepResponse.error.message);
         }
         if (stepResponse.secure_url) {
-          payload.steps[i].stepImage.url = stepResponse.secure_url;
+          eachStep.stepImageUrl = stepResponse.secure_url;
         } else {
           throw new Error('Something went wrong..');
         }
+      } else {
+        eachStep.stepImageUrl = payload.steps[i].stepImage.url;
       }
+      uploadSteps.push(eachStep);
     }
-    console.log(payload);
+    uploadParams.steps = [...uploadSteps];
+    console.log(uploadParams);
   } catch (err) {
     console.log(err);
     yield put({ type: Types.CREAT_ERROR, payload: err.message });

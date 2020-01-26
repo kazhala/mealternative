@@ -35,7 +35,7 @@ export const uploadStepImage = async file => {
   try {
     const data = new FormData();
     data.append('file', file);
-    data.append('upload_preset', 'mealternative_thumb');
+    data.append('upload_preset', 'mealternative_steps');
     data.append('cloud_name', 'kazhala');
     const res = await fetch(CloudinaryURL, {
       method: 'POST',
