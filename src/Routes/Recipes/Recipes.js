@@ -23,12 +23,26 @@ const Recipes = props => {
       <div className={classes.recipeBodyRoot}>
         <div className={classes.recipeBodyColumn}>
           {displayArray.left.map((recipe, index) => (
-            <RecipeCard key={index} classes={classes} />
+            <RecipeCard
+              thumbnailUrl={recipe.thumbImageUrl}
+              title={recipe.title}
+              name={recipe.postedBy.username}
+              likes={recipe.likes}
+              key={index}
+              classes={classes}
+            />
           ))}
         </div>
         <div className={classes.recipeBodyColumn}>
           {displayArray.right.map((recipe, index) => (
-            <RecipeCard key={index} classes={classes} />
+            <RecipeCard
+              thumbnailUrl={recipe.thumbImageUrl}
+              title={recipe.title}
+              name={recipe.postedBy.username}
+              likes={recipe.likes}
+              key={index}
+              classes={classes}
+            />
           ))}
         </div>
       </div>

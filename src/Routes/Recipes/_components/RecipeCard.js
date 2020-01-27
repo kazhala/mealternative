@@ -5,13 +5,13 @@ import { Rating } from '@material-ui/lab';
 import { BookmarksOutlined, ThumbUpOutlined } from '@material-ui/icons';
 
 const RecipeCard = props => {
-  const { classes } = props;
+  const { classes, title, name, likes, thumbnailUrl } = props;
 
   return (
     <div className={classes.recipeCardRoot}>
       <img
         alt='recipe thumbnail'
-        src='/img/noimage.png'
+        src={thumbnailUrl}
         className={classes.recipeCardImage}
       />
       <Typography
@@ -19,8 +19,7 @@ const RecipeCard = props => {
         component='div'
         variant='subtitle1'
       >
-        Title of the card Title of the card Title of the card Title of the card
-        Title of the card
+        {title}
       </Typography>
       <div className={classes.recipeCardRow}>
         <div className={classes.recipeCardWithIcon}>
@@ -40,11 +39,11 @@ const RecipeCard = props => {
       <div className={classes.recipeCardRow}>
         <div className={classes.recipeCardWithIcon}>
           <Avatar className={classes.recipeCardAvatar}>K</Avatar>
-          <div>name</div>
+          <div>{name}</div>
         </div>
         <div className={classes.recipeCardWithIcon}>
           <ThumbUpOutlined fontSize='small' />
-          20.1k
+          {likes}
         </div>
       </div>
     </div>
@@ -52,7 +51,11 @@ const RecipeCard = props => {
 };
 
 RecipeCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  likes: PropTypes.number.isRequired,
+  thumbnailUrl: PropTypes.string.isRequired
 };
 
 export default RecipeCard;
