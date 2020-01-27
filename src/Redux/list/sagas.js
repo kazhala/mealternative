@@ -16,5 +16,22 @@ export function* watchFetchInitRecipes() {
   Worker sagas
 */
 function* workerFetchInitRecipes() {
-  yield console.log('triggered');
+  yield put({ type: Types.LIST_BEGIN });
+  try {
+    const response = yield call(Operations.fetchInitialRecipes);
+    if (response.error) {
+      throw new Error(response.error);
+    } else {
+      console.log(response);
+      yield put({
+        type: Types.SUCESS_INITIAL_RECIPES,
+        payload: response
+      });
+    }
+  } catch (err) {
+    yield put({
+      type: Types.LIST_ERROR,
+      payload: err.message
+    });
+  }
 }
