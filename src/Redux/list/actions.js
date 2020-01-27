@@ -8,3 +8,9 @@ export const fetch_initial_recipes = () => {
     type: Types.FETCH_INITIAL_RECIPES
   };
 };
+
+export const cleanUp = () => {
+  return {
+    type: Types.LIST_CLEAN
+  };
+};

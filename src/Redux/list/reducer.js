@@ -17,6 +17,8 @@ const ListReducer = (state = initialState, action) => {
       return { ...state, loading: false, error: action.payload };
     case Types.LIST_CLEAN:
       return { ...state, loading: false, error: '' };
+    case Types.LIST_BEGIN:
+      return { ...state, loading: true };
     case Types.SUCESS_INITIAL_RECIPES:
       return {
         ...state,

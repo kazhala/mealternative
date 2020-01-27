@@ -6,9 +6,11 @@ import Recipes from './Recipes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ListActions } from '../../Redux/list';
+import PageSpinner from '../../Common/Spinner/PageSpinner';
+import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const RecipesContainer = props => {
-  const { fetchInitialRecipes } = props;
+  const { cleanUp, fetchInitialRecipes, loading, error } = props;
   const [sortOption, setSortOption] = useState({
     show: false,
     optionNum: 0,
@@ -17,20 +19,42 @@ const RecipesContainer = props => {
 
   useEffect(() => {
     fetchInitialRecipes();
-  }, [fetchInitialRecipes]);
+    return () => {
+      cleanUp();
+    };
+  }, [fetchInitialRecipes, cleanUp]);
 
   return (
-    <Recipes sortOption={sortOption} setSortOption={setSortOption} {...props} />
+    <>
+      <PageSpinner loading={loading} />
+      <ErrorSnack handleClose={cleanUp} error={error} />
+      <Recipes
+        sortOption={sortOption}
+        setSortOption={setSortOption}
+        {...props}
+      />
+    </>
   );
+};
+
+const mapStateToProps = state => {
+  return {
+    error: state.List.error,
+    loading: state.List.loading,
+    recipeList: state.List.recipeList,
+    recipePage: state.List.recipePage,
+    recipeSortOption: state.List.recipeSortOption
+  };
 };
 
 const mapDispatchTopProps = dispatch => {
   return bindActionCreators(
     {
-      fetchInitialRecipes: ListActions.fetch_initial_recipes
+      fetchInitialRecipes: ListActions.fetch_initial_recipes,
+      cleanUp: ListActions.cleanUp
     },
     dispatch
   );
 };
 
-export default connect(null, mapDispatchTopProps)(RecipesContainer);
+export default connect(mapStateToProps, mapDispatchTopProps)(RecipesContainer);
