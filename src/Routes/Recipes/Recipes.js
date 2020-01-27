@@ -6,7 +6,7 @@ import SortMenuDial from './_components/SortMenuDial';
 import RecipeCard from './_components/RecipeCard';
 
 const Recipes = props => {
-  const { sortOption, setSortOption } = props;
+  const { sortOption, setSortOption, displayArray } = props;
   const classes = useStyles();
 
   return (
@@ -22,13 +22,14 @@ const Recipes = props => {
       </div>
       <div className={classes.recipeBodyRoot}>
         <div className={classes.recipeBodyColumn}>
-          <RecipeCard classes={classes} />
-          <RecipeCard classes={classes} />
-          <RecipeCard classes={classes} />
+          {displayArray.left.map((recipe, index) => (
+            <RecipeCard key={index} classes={classes} />
+          ))}
         </div>
         <div className={classes.recipeBodyColumn}>
-          <RecipeCard classes={classes} />
-          <RecipeCard classes={classes} />
+          {displayArray.right.map((recipe, index) => (
+            <RecipeCard key={index} classes={classes} />
+          ))}
         </div>
       </div>
       <SortMenuDial

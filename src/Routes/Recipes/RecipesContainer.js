@@ -10,12 +10,38 @@ import PageSpinner from '../../Common/Spinner/PageSpinner';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const RecipesContainer = props => {
-  const { cleanUp, fetchInitialRecipes, loading, error } = props;
+  const { cleanUp, fetchInitialRecipes, loading, error, recipeList } = props;
   const [sortOption, setSortOption] = useState({
     show: false,
     optionNum: 0,
     reversed: {}
   });
+
+  const [displayArray, setDisplayArray] = useState({
+    left: [],
+    right: []
+  });
+
+  useEffect(() => {
+    if (recipeList.length > 0) {
+      const reducedRecipe = recipeList.reduce(
+        (prev, curr, idx, self) => {
+          if (idx % 2 === 0) {
+            prev.left.push(curr);
+          } else {
+            prev.right.push(curr);
+          }
+          return prev;
+        },
+        { left: [], right: [] }
+      );
+      setDisplayArray(prevArray => ({
+        ...prevArray,
+        left: [...reducedRecipe.left],
+        right: [...reducedRecipe.right]
+      }));
+    }
+  }, [recipeList]);
 
   useEffect(() => {
     fetchInitialRecipes();
@@ -31,6 +57,7 @@ const RecipesContainer = props => {
       <Recipes
         sortOption={sortOption}
         setSortOption={setSortOption}
+        displayArray={displayArray}
         {...props}
       />
     </>
