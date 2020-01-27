@@ -5,7 +5,15 @@ import { Rating } from '@material-ui/lab';
 import { BookmarksOutlined, ThumbUpOutlined } from '@material-ui/icons';
 
 const RecipeCard = props => {
-  const { classes, title, name, likes, thumbnailUrl } = props;
+  const {
+    bookmarks,
+    rating,
+    classes,
+    title,
+    name,
+    likes,
+    thumbnailUrl
+  } = props;
 
   return (
     <div className={classes.recipeCardRoot}>
@@ -25,15 +33,15 @@ const RecipeCard = props => {
         <div className={classes.recipeCardWithIcon}>
           <Rating
             className={classes.recipeCardRating}
-            value={3}
+            value={rating}
             readOnly
             size='small'
           />
-          (3)
+          ({rating})
         </div>
         <div className={classes.recipeCardWithIcon}>
           <BookmarksOutlined fontSize='small' />
-          20.1k
+          {bookmarks}
         </div>
       </div>
       <div className={classes.recipeCardRow}>
@@ -55,7 +63,9 @@ RecipeCard.propTypes = {
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
-  thumbnailUrl: PropTypes.string.isRequired
+  thumbnailUrl: PropTypes.string.isRequired,
+  bookmarks: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired
 };
 
 export default RecipeCard;
