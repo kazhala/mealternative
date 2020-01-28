@@ -21,16 +21,32 @@ export function* watchLoadMoreRecipes() {
 */
 function* workerLoadMoreRecipes() {
   const listState = yield select(Operations.getListState);
-  yield put({ type: Types.LOAD_MORE_BEGIN });
   try {
-    const response = yield call(
-      Operations.loadMoreRecipes,
-      listState.recipePage + 1,
-      listState.recipeSortOption
-    );
-    console.log(response);
+    if (listState.hasNextPage) {
+      yield put({ type: Types.LOAD_MORE_BEGIN });
+      const response = yield call(
+        Operations.loadMoreRecipes,
+        listState.recipePage + 1,
+        listState.recipeSortOption
+      );
+      console.log(response);
+      if (response.error) {
+        throw new Error(response.error);
+      } else {
+        if (response.response.length < 10) {
+          yield put({ type: Types.SET_NEXT_PAGE, payload: false });
+        } else {
+          yield put({ type: Types.SET_NEXT_PAGE, payload: true });
+        }
+        yield put({ type: Types.LOAD_MORE_SUCCESS, payload: response });
+      }
+    }
   } catch (err) {
     console.log(err);
+    yield put({
+      type: Types.LIST_ERROR,
+      payload: err.message
+    });
   }
 }
 

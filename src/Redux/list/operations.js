@@ -18,7 +18,6 @@ export const fetchInitialRecipes = async () => {
 export const getListState = state => state.List;
 
 export const loadMoreRecipes = async (page, orderBy) => {
-  console.log(page, orderBy);
   try {
     const res = await fetch(
       `${API}/recipes/list?page=${page}&${orderBy}=${orderBy}`,
