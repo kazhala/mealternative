@@ -25,7 +25,18 @@ const ListReducer = (state = initialState, action) => {
         loadMoreLoading: false
       };
     case Types.LIST_CLEAN:
-      return { ...state, loading: false, error: '', loadMoreLoading: false };
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        initialPage: 1,
+        recipeList: [],
+        recipePage: 1,
+        totalPages: 1,
+        listCycle: false,
+        recipeSortOption: '',
+        loadMoreLoading: false
+      };
     case Types.LIST_BEGIN:
       return { ...state, loading: true };
     case Types.NEXT_LIST_CYCLE:
