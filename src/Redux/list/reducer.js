@@ -8,7 +8,8 @@ const initialState = {
   error: '',
   recipeList: [],
   recipePage: 1,
-  recipeSortOption: ''
+  recipeSortOption: '',
+  hasNextPage: false
 };
 
 const ListReducer = (state = initialState, action) => {
@@ -19,6 +20,8 @@ const ListReducer = (state = initialState, action) => {
       return { ...state, loading: false, error: '' };
     case Types.LIST_BEGIN:
       return { ...state, loading: true };
+    case Types.SET_NEXT_PAGE:
+      return { ...state, hasNextPage: action.payload };
     case Types.SUCESS_INITIAL_RECIPES:
       return {
         ...state,

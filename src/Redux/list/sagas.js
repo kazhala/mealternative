@@ -20,9 +20,18 @@ export function* watchLoadMoreRecipes() {
   Worker sagas
 */
 function* workerLoadMoreRecipes() {
-  console.log('bottom');
   const listState = yield select(Operations.getListState);
-  console.log(listState);
+  yield put({ type: Types.LOAD_MORE_BEGIN });
+  try {
+    const response = yield call(
+      Operations.loadMoreRecipes,
+      listState.recipePage + 1,
+      listState.recipeSortOption
+    );
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function* workerFetchInitRecipes() {
@@ -33,6 +42,11 @@ function* workerFetchInitRecipes() {
       throw new Error(response.error);
     } else {
       console.log(response);
+      if (response.response.length < 10) {
+        yield put({ type: Types.SET_NEXT_PAGE, payload: false });
+      } else {
+        yield put({ type: Types.SET_NEXT_PAGE, payload: true });
+      }
       yield put({
         type: Types.SUCESS_INITIAL_RECIPES,
         payload: response
