@@ -9,8 +9,15 @@ const Recipes = props => {
   const { sortOption, setSortOption, displayArray } = props;
   const classes = useStyles();
 
+  const handleScroll = e => {
+    const isBottom =
+      e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
+      e.target.clientHeight;
+    isBottom && console.log('loadmore');
+  };
+
   return (
-    <div className={classes.recipeRoot}>
+    <div onScroll={handleScroll} className={classes.recipeRoot}>
       <div className={classes.recipeSearchRoot}>
         <SearchInput
           placeholder='Search Recipe..'

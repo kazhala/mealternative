@@ -7,7 +7,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflowY: 'scroll'
   },
   recipeSearchRoot: {
     width: '100%',
