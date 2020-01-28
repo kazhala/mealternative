@@ -34,3 +34,11 @@ export const loadMoreRecipes = async (page, orderBy) => {
     console.log(err);
   }
 };
+
+export const checkLoadMore = (listCycle, initialPage, recipePage) => {
+  if (!listCycle) {
+    return true;
+  } else {
+    return initialPage !== recipePage + 1;
+  }
+};

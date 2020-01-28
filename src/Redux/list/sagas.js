@@ -28,7 +28,10 @@ function* workerLoadMoreRecipes() {
     listCycle
   } = yield select(Operations.getListState);
   try {
-    if (totalPages !== recipePage) {
+    if (
+      totalPages !== recipePage &&
+      Operations.checkLoadMore(listCycle, initialPage, recipePage)
+    ) {
       yield put({ type: Types.LOAD_MORE_BEGIN });
       const response = yield call(
         Operations.loadMoreRecipes,
