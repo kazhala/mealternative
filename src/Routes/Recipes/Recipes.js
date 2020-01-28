@@ -6,14 +6,14 @@ import SortMenuDial from './_components/SortMenuDial';
 import RecipeCard from './_components/RecipeCard';
 
 const Recipes = props => {
-  const { sortOption, setSortOption, displayArray } = props;
+  const { sortOption, setSortOption, displayArray, loadMoreRecipes } = props;
   const classes = useStyles();
 
   const handleScroll = e => {
     const isBottom =
       e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
       e.target.clientHeight;
-    isBottom && console.log('loadmore');
+    isBottom && loadMoreRecipes();
   };
 
   return (

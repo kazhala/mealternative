@@ -1,7 +1,7 @@
 /*
   list sagas
 */
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 
@@ -12,9 +12,19 @@ export function* watchFetchInitRecipes() {
   yield takeLatest(Types.FETCH_INITIAL_RECIPES, workerFetchInitRecipes);
 }
 
+export function* watchLoadMoreRecipes() {
+  yield takeLatest(Types.LOAD_MORE_RECIPES, workerLoadMoreRecipes);
+}
+
 /*
   Worker sagas
 */
+function* workerLoadMoreRecipes() {
+  console.log('bottom');
+  const listState = yield select(Operations.getListState);
+  console.log(listState);
+}
+
 function* workerFetchInitRecipes() {
   yield put({ type: Types.LIST_BEGIN });
   try {

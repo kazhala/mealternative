@@ -77,8 +77,9 @@ const mapStateToProps = state => {
 const mapDispatchTopProps = dispatch => {
   return bindActionCreators(
     {
-      fetchInitialRecipes: ListActions.fetch_initial_recipes,
-      cleanUp: ListActions.cleanUp
+      fetchInitialRecipes: ListActions.fetchInitialRecipes,
+      cleanUp: ListActions.cleanUp,
+      loadMoreRecipes: ListActions.loadMoreRecipes
     },
     dispatch
   );

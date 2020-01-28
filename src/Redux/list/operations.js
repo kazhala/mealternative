@@ -14,3 +14,5 @@ export const fetchInitialRecipes = async () => {
     console.log(err);
   }
 };
+
+export const getListState = state => state.List;

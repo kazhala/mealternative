@@ -19,7 +19,8 @@ export default function* rootSaga() {
       fork(AuthSagas.watchReset),
       fork(CreateSagas.watchGetCategories),
       fork(CreateSagas.watchSubmitRecipe),
-      fork(ListSagas.watchFetchInitRecipes)
+      fork(ListSagas.watchFetchInitRecipes),
+      fork(ListSagas.watchLoadMoreRecipes)
     ]);
   } catch (err) {
     console.log(err);
