@@ -6,10 +6,12 @@ import * as Types from './types';
 const initialState = {
   loading: false,
   error: '',
+  initialPage: 1,
   recipeList: [],
   recipePage: 1,
+  totalPages: 1,
+  listCycle: false,
   recipeSortOption: '',
-  hasNextPage: false,
   loadMoreLoading: false
 };
 
@@ -26,13 +28,15 @@ const ListReducer = (state = initialState, action) => {
       return { ...state, loading: false, error: '', loadMoreLoading: false };
     case Types.LIST_BEGIN:
       return { ...state, loading: true };
-    case Types.SET_NEXT_PAGE:
-      return { ...state, hasNextPage: action.payload };
+    case Types.NEXT_LIST_CYCLE:
+      return { ...state, listCycle: true };
     case Types.SUCESS_INITIAL_RECIPES:
       return {
         ...state,
         loading: false,
         error: '',
+        initialPage: action.payload.page,
+        totalPages: action.payload.totalPages,
         recipeList: [...action.payload.response],
         recipePage: action.payload.page,
         recipeSortOption: action.payload.sortOption

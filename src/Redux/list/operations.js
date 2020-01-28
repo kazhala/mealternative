@@ -20,7 +20,7 @@ export const getListState = state => state.List;
 export const loadMoreRecipes = async (page, orderBy) => {
   try {
     const res = await fetch(
-      `${API}/recipes/list?page=${page}&${orderBy}=${orderBy}`,
+      `${API}/recipes/list?page=${page}&orderBy=${orderBy}`,
       {
         method: 'GET',
         headers: {

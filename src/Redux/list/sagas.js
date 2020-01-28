@@ -20,24 +20,41 @@ export function* watchLoadMoreRecipes() {
   Worker sagas
 */
 function* workerLoadMoreRecipes() {
-  const listState = yield select(Operations.getListState);
+  const {
+    recipePage,
+    initialPage,
+    recipeSortOption,
+    totalPages,
+    listCycle
+  } = yield select(Operations.getListState);
   try {
-    if (listState.hasNextPage) {
+    if (totalPages !== recipePage) {
       yield put({ type: Types.LOAD_MORE_BEGIN });
       const response = yield call(
         Operations.loadMoreRecipes,
-        listState.recipePage + 1,
-        listState.recipeSortOption
+        recipePage + 1,
+        recipeSortOption
       );
       console.log(response);
       if (response.error) {
         throw new Error(response.error);
       } else {
-        if (response.response.length < 10) {
-          yield put({ type: Types.SET_NEXT_PAGE, payload: false });
-        } else {
-          yield put({ type: Types.SET_NEXT_PAGE, payload: true });
-        }
+        yield put({ type: Types.LOAD_MORE_SUCCESS, payload: response });
+      }
+    } else {
+      if (initialPage === 1) return;
+      if (listCycle) return;
+      yield put({ type: Types.NEXT_LIST_CYCLE });
+      yield put({ type: Types.LOAD_MORE_BEGIN });
+      const response = yield call(
+        Operations.loadMoreRecipes,
+        1,
+        recipeSortOption
+      );
+      console.log(response);
+      if (response.error) {
+        throw new Error(response.error);
+      } else {
         yield put({ type: Types.LOAD_MORE_SUCCESS, payload: response });
       }
     }
@@ -58,11 +75,6 @@ function* workerFetchInitRecipes() {
       throw new Error(response.error);
     } else {
       console.log(response);
-      if (response.response.length < 10) {
-        yield put({ type: Types.SET_NEXT_PAGE, payload: false });
-      } else {
-        yield put({ type: Types.SET_NEXT_PAGE, payload: true });
-      }
       yield put({
         type: Types.SUCESS_INITIAL_RECIPES,
         payload: response
