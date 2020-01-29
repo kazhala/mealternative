@@ -17,7 +17,9 @@ const RecipesContainer = props => {
     loading,
     error,
     recipeList,
-    sortRecipes
+    sortRecipes,
+    recipeSortOption,
+    sorted
   } = props;
   const [showDial, setShowDial] = useState(false);
 
@@ -59,10 +61,29 @@ const RecipesContainer = props => {
     if (typeNum === -1) {
       setShowDial(false);
     } else if (typeNum === 5) {
-      // TODO: run cleanUp
+      cleanUp();
       fetchInitialRecipes();
     } else {
-      sortRecipes(orderBy);
+      sortRecipes(getOrderByStr(orderBy));
+    }
+  };
+
+  const getOrderByStr = orderBy => {
+    if (
+      orderBy === 'rating' ||
+      orderBy === 'likes' ||
+      orderBy === 'bookmarks'
+    ) {
+      return orderBy;
+    }
+    if (sorted && orderBy === recipeSortOption) {
+      if (orderBy.includes('-')) {
+        return orderBy.substring(1);
+      } else {
+        return '-' + orderBy;
+      }
+    } else {
+      return orderBy;
     }
   };
 
@@ -87,7 +108,8 @@ const mapStateToProps = state => {
     loading: state.List.loading,
     recipeList: state.List.recipeList,
     recipePage: state.List.recipePage,
-    recipeSortOption: state.List.recipeSortOption
+    recipeSortOption: state.List.recipeSortOption,
+    sorted: state.List.sorted
   };
 };
 

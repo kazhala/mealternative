@@ -36,7 +36,8 @@ const ListReducer = (state = initialState, action) => {
         totalPages: 1,
         listCycle: false,
         recipeSortOption: '',
-        loadMoreLoading: false
+        loadMoreLoading: false,
+        sorted: false
       };
     case Types.LIST_BEGIN:
       return { ...state, loading: true };
@@ -55,6 +56,7 @@ const ListReducer = (state = initialState, action) => {
       };
     case Types.LOAD_MORE_BEGIN:
       return { ...state, loadMoreLoading: true };
+
     case Types.LOAD_MORE_SUCCESS:
       return {
         ...state,
