@@ -22,3 +22,11 @@ export const actions = [
   { icon: <Grade />, name: 'Ratings', typeNum: 1 },
   { icon: <ThumbUp />, name: 'Likes', typeNum: 0 }
 ];
+
+export const orderByArr = [
+  'likes',
+  'rating',
+  'bookmarks',
+  '-createdAt',
+  'title'
+];

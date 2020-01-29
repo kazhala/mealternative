@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { ListActions } from '../../Redux/list';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
+import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
 
 const RecipesContainer = props => {
   const {
@@ -53,8 +54,16 @@ const RecipesContainer = props => {
     };
   }, [fetchInitialRecipes, cleanUp]);
 
-  const handleSortRecipes = orberBy => {
-    //
+  const handleSortRecipes = typeNum => {
+    const orderBy = orderByArr[typeNum];
+    if (typeNum === -1) {
+      setShowDial(false);
+    } else if (typeNum === 5) {
+      // TODO: run cleanUp
+      fetchInitialRecipes();
+    } else {
+      sortRecipes(orderBy);
+    }
   };
 
   return (
@@ -65,6 +74,7 @@ const RecipesContainer = props => {
         showDial={showDial}
         setShowDial={setShowDial}
         displayArray={displayArray}
+        handleSortRecipes={handleSortRecipes}
         {...props}
       />
     </>

@@ -24,12 +24,18 @@ export function* watchSortRecipes() {
   Worker sagas
 */
 function* workerSortRecipes({ payload }) {
-  yield put({ type: Types.LIST_BEGIN });
+  yield put({ type: Types.SORT_BEGIN });
   try {
-    const response = yield call(Operations.loadMoreRecipes(1, payload));
+    const response = yield call(Operations.loadMoreRecipes, 1, payload);
     console.log(response);
+    if (response.error) {
+      throw new Error(response.error);
+    } else {
+      yield put({ type: Types.SUCCESS_SORT_RECIPES, payload: response });
+    }
   } catch (err) {
     console.log(err);
+    yield put({ type: Types.LIST_ERROR, payload: err.message });
   }
 }
 
