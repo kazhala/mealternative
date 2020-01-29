@@ -5,16 +5,16 @@ import { Sort } from '@material-ui/icons';
 import { actions } from '../../../Common/DefaultValues/RecipeOptions';
 
 const SortMenuDial = props => {
-  const { classes, sortOption, setSortOption } = props;
+  const { classes, showDial, setShowDial } = props;
 
   return (
     <SpeedDial
       ariaLabel='Recipe sort speedDial'
       className={classes.recipeDial}
       icon={<Sort />}
-      open={sortOption.show}
-      onOpen={() => setSortOption({ ...sortOption, show: true })}
-      onClose={() => setSortOption({ ...sortOption, show: false })}
+      open={showDial}
+      onOpen={() => setShowDial(true)}
+      onClose={() => setShowDial(false)}
     >
       {actions.map((action, index) => (
         <SpeedDialAction
@@ -29,8 +29,8 @@ const SortMenuDial = props => {
 
 SortMenuDial.propTypes = {
   classes: PropTypes.object.isRequired,
-  setSortOption: PropTypes.func.isRequired,
-  sortOption: PropTypes.object.isRequired
+  setShowDial: PropTypes.func.isRequired,
+  showDial: PropTypes.bool.isRequired
 };
 
 export default SortMenuDial;

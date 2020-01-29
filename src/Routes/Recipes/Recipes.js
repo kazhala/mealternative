@@ -6,7 +6,13 @@ import SortMenuDial from './_components/SortMenuDial';
 import RecipeCard from './_components/RecipeCard';
 
 const Recipes = props => {
-  const { sortOption, setSortOption, displayArray, loadMoreRecipes } = props;
+  const {
+    showDial,
+    setShowDial,
+    displayArray,
+    loadMoreRecipes,
+    handleSortRecipes
+  } = props;
   const classes = useStyles();
 
   const handleScroll = e => {
@@ -59,8 +65,9 @@ const Recipes = props => {
       </div>
       <SortMenuDial
         classes={classes}
-        sortOption={sortOption}
-        setSortOption={setSortOption}
+        showDial={showDial}
+        setShowDial={setShowDial}
+        handleSortRecipes={handleSortRecipes}
       />
     </div>
   );

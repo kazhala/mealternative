@@ -10,12 +10,15 @@ import PageSpinner from '../../Common/Spinner/PageSpinner';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const RecipesContainer = props => {
-  const { cleanUp, fetchInitialRecipes, loading, error, recipeList } = props;
-  const [sortOption, setSortOption] = useState({
-    show: false,
-    optionNum: 0,
-    reversed: {}
-  });
+  const {
+    cleanUp,
+    fetchInitialRecipes,
+    loading,
+    error,
+    recipeList,
+    sortRecipes
+  } = props;
+  const [showDial, setShowDial] = useState(false);
 
   const [displayArray, setDisplayArray] = useState({
     left: [],
@@ -50,13 +53,17 @@ const RecipesContainer = props => {
     };
   }, [fetchInitialRecipes, cleanUp]);
 
+  const handleSortRecipes = orberBy => {
+    //
+  };
+
   return (
     <>
       <PageSpinner loading={loading} />
       <ErrorSnack handleClose={cleanUp} error={error} />
       <Recipes
-        sortOption={sortOption}
-        setSortOption={setSortOption}
+        showDial={showDial}
+        setShowDial={setShowDial}
         displayArray={displayArray}
         {...props}
       />
@@ -79,7 +86,8 @@ const mapDispatchTopProps = dispatch => {
     {
       fetchInitialRecipes: ListActions.fetchInitialRecipes,
       cleanUp: ListActions.cleanUp,
-      loadMoreRecipes: ListActions.loadMoreRecipes
+      loadMoreRecipes: ListActions.loadMoreRecipes,
+      sortRecipes: ListActions.sortRecipes
     },
     dispatch
   );
