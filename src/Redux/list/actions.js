@@ -20,3 +20,10 @@ export const loadMoreRecipes = () => {
     type: Types.LOAD_MORE_RECIPES
   };
 };
+
+export const sortRecipes = sortOption => {
+  return {
+    type: Types.FETCH_SORT_RECIPES,
+    payload: sortOption
+  };
+};

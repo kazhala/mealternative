@@ -20,7 +20,8 @@ export default function* rootSaga() {
       fork(CreateSagas.watchGetCategories),
       fork(CreateSagas.watchSubmitRecipe),
       fork(ListSagas.watchFetchInitRecipes),
-      fork(ListSagas.watchLoadMoreRecipes)
+      fork(ListSagas.watchLoadMoreRecipes),
+      fork(ListSagas.watchSortRecipes)
     ]);
   } catch (err) {
     console.log(err);

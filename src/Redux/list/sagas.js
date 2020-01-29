@@ -16,9 +16,23 @@ export function* watchLoadMoreRecipes() {
   yield takeLatest(Types.LOAD_MORE_RECIPES, workerLoadMoreRecipes);
 }
 
+export function* watchSortRecipes() {
+  yield takeLatest(Types.FETCH_SORT_RECIPES, workerSortRecipes);
+}
+
 /*
   Worker sagas
 */
+function* workerSortRecipes({ payload }) {
+  yield put({ type: Types.LIST_BEGIN });
+  try {
+    const response = yield call(Operations.loadMoreRecipes(1, payload));
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* workerLoadMoreRecipes() {
   const {
     recipePage,
@@ -39,6 +53,7 @@ function* workerLoadMoreRecipes() {
         recipeSortOption
       );
       console.log(response);
+
       if (response.error) {
         throw new Error(response.error);
       } else {
@@ -47,6 +62,7 @@ function* workerLoadMoreRecipes() {
     } else {
       if (initialPage === 1) return;
       if (listCycle) return;
+
       yield put({ type: Types.NEXT_LIST_CYCLE });
       yield put({ type: Types.LOAD_MORE_BEGIN });
       const response = yield call(
