@@ -141,7 +141,7 @@ function* workerSubmitRecipe({ payload }) {
         payload: 'Success! Redirecting..'
       });
       // show success message for 3 seconds before redirecting
-      yield delay(3000);
+      yield delay(1500);
       yield put({ type: Types.CREATE_SUCCESS, payload: response.message });
     }
   } catch (err) {

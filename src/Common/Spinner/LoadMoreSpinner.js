@@ -12,7 +12,9 @@ const LoadMoreSpinner = props => {
       {loading ? (
         <CircularProgress color='primary' disableShrink size='2rem' />
       ) : (
-        <Typography variant='body2'>{textAlt}</Typography>
+        <Typography style={{ opacity: 0.5 }} variant='body2'>
+          {textAlt}
+        </Typography>
       )}
     </div>
   );

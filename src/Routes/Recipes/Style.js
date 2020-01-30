@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
   recipeCardImage: {
     width: '100%',
-    height: 'auto',
+    height: theme.spacing(10),
     borderRadius: theme.shape.borderRadius
   },
   recipeCardTitle: {
