@@ -1,7 +1,7 @@
 /*
   list sagas
 */
-import { takeLatest, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put, select, delay } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 
@@ -53,6 +53,7 @@ function* workerLoadMoreRecipes() {
       Operations.checkLoadMore(listCycle, initialPage, recipePage)
     ) {
       yield put({ type: Types.LOAD_MORE_BEGIN });
+      yield delay(1000);
       const response = yield call(
         Operations.loadMoreRecipes,
         recipePage + 1,
@@ -71,6 +72,7 @@ function* workerLoadMoreRecipes() {
 
       yield put({ type: Types.NEXT_LIST_CYCLE });
       yield put({ type: Types.LOAD_MORE_BEGIN });
+      yield delay(1000);
       const response = yield call(
         Operations.loadMoreRecipes,
         1,

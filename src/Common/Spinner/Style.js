@@ -9,6 +9,16 @@ const useStyles = makeStyles(theme => ({
   },
   pageSpinner: {
     position: 'relative'
+  },
+
+  loadMoreSpinnerWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    minHeight: theme.spacing(3),
+    maxHeight: theme.spacing(3),
+    height: theme.spacing(3)
   }
 }));
 

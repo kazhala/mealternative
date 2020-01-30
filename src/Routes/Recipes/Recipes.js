@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import SearchInput from '../../Common/Inputs/SearchInput';
 import SortMenuDial from './_components/SortMenuDial';
 import RecipeCard from './_components/RecipeCard';
+import LoadMoreSpinner from '../../Common/Spinner/LoadMoreSpinner';
 
 const Recipes = props => {
   const {
@@ -11,7 +12,8 @@ const Recipes = props => {
     setShowDial,
     displayArray,
     loadMoreRecipes,
-    handleSortRecipes
+    handleSortRecipes,
+    loadMoreLoading
   } = props;
   const classes = useStyles();
 
@@ -63,6 +65,10 @@ const Recipes = props => {
           ))}
         </div>
       </div>
+      <LoadMoreSpinner
+        textAlt="You've reached the bottom"
+        loading={loadMoreLoading}
+      />
       <SortMenuDial
         classes={classes}
         showDial={showDial}

@@ -109,7 +109,8 @@ const mapStateToProps = state => {
     recipeList: state.List.recipeList,
     recipePage: state.List.recipePage,
     recipeSortOption: state.List.recipeSortOption,
-    sorted: state.List.sorted
+    sorted: state.List.sorted,
+    loadMoreLoading: state.List.loadMoreLoading
   };
 };
 
