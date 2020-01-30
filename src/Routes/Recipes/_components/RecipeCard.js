@@ -1,5 +1,12 @@
+/*
+  Individual recipe card
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { Typography, Avatar } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { BookmarksOutlined, ThumbUpOutlined } from '@material-ui/icons';
@@ -17,11 +24,14 @@ const RecipeCard = props => {
 
   return (
     <div className={classes.recipeCardRoot}>
+      {/* thumbnail */}
       <img
         alt='recipe thumbnail'
         src={thumbnailUrl}
         className={classes.recipeCardImage}
       />
+
+      {/* title */}
       <Typography
         className={classes.recipeCardTitle}
         component='div'
@@ -29,6 +39,7 @@ const RecipeCard = props => {
       >
         {title}
       </Typography>
+      {/* rating */}
       <div className={classes.recipeCardRow}>
         <div className={classes.recipeCardWithIcon}>
           <Rating

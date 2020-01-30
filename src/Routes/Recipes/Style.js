@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  // root
   recipeRoot: {
     width: '100%',
     height: '100%',
@@ -21,6 +22,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 
+  // body
   recipeBodyRoot: {
     width: '100%',
     display: 'grid',
@@ -33,6 +35,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
 
+  // inidividual card
   recipeCardRoot: {
     width: '100%',
     marginBottom: theme.spacing(1.5)
@@ -69,6 +72,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.spacing(0.9)
   },
 
+  // speedial
   recipeDial: {
     position: 'absolute',
     right: theme.spacing(2),

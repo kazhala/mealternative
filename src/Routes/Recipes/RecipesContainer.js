@@ -1,13 +1,21 @@
 /*
   Recipe container
 */
+
+// react
 import React, { useState, useEffect } from 'react';
-import Recipes from './Recipes';
+
+// redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ListActions } from '../../Redux/list';
+
+// components
+import Recipes from './Recipes';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
+
+// misc
 import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
 
 const RecipesContainer = props => {
@@ -21,13 +29,16 @@ const RecipesContainer = props => {
     recipeSortOption,
     sorted
   } = props;
+  // speedDial show state
   const [showDial, setShowDial] = useState(false);
 
+  // left side array and rightside array
   const [displayArray, setDisplayArray] = useState({
     left: [],
     right: []
   });
 
+  // split recipeList into left and right array for better ui
   useEffect(() => {
     if (recipeList.length > 0) {
       const reducedRecipe = recipeList.reduce(
@@ -49,6 +60,7 @@ const RecipesContainer = props => {
     }
   }, [recipeList]);
 
+  // onmount, fetch recipe, unmount cleanup
   useEffect(() => {
     fetchInitialRecipes();
     return () => {
@@ -56,6 +68,7 @@ const RecipesContainer = props => {
     };
   }, [fetchInitialRecipes, cleanUp]);
 
+  // handle speedial click to sort recipe request
   const handleSortRecipes = typeNum => {
     const orderBy = orderByArr[typeNum];
     if (typeNum === -1) {
@@ -68,6 +81,7 @@ const RecipesContainer = props => {
     }
   };
 
+  // check reverse sort
   const getOrderByStr = orderBy => {
     if (
       orderBy === 'rating' ||

@@ -1,7 +1,16 @@
+/*
+  sorting menu
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
 import { Sort } from '@material-ui/icons';
+
+// misc
 import { actions } from '../../../Common/DefaultValues/RecipeOptions';
 
 const SortMenuDial = props => {

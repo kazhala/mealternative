@@ -1,10 +1,20 @@
+/*
+  list recipes component
+*/
+
+// react
 import React from 'react';
-import useStyles from './Style';
+import PropTypes from 'prop-types';
+
+// components
 import { Button } from '@material-ui/core';
 import SearchInput from '../../Common/Inputs/SearchInput';
 import SortMenuDial from './_components/SortMenuDial';
 import RecipeCard from './_components/RecipeCard';
 import LoadMoreSpinner from '../../Common/Spinner/LoadMoreSpinner';
+
+// misc
+import useStyles from './Style';
 
 const Recipes = props => {
   const {
@@ -17,6 +27,7 @@ const Recipes = props => {
   } = props;
   const classes = useStyles();
 
+  // check if bottom, perform load more
   const handleScroll = e => {
     const isBottom =
       e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
@@ -26,6 +37,7 @@ const Recipes = props => {
 
   return (
     <div onScroll={handleScroll} className={classes.recipeRoot}>
+      {/* search field */}
       <div className={classes.recipeSearchRoot}>
         <SearchInput
           placeholder='Search Recipe..'
@@ -35,6 +47,7 @@ const Recipes = props => {
           Search
         </Button>
       </div>
+      {/* display array of recipes */}
       <div className={classes.recipeBodyRoot}>
         <div className={classes.recipeBodyColumn}>
           {displayArray.left.map((recipe, index) => (
@@ -65,10 +78,14 @@ const Recipes = props => {
           ))}
         </div>
       </div>
+
+      {/* loadmore spinner */}
       <LoadMoreSpinner
         textAlt="You've reached the bottom"
         loading={loadMoreLoading}
       />
+
+      {/* speedDial */}
       <SortMenuDial
         classes={classes}
         showDial={showDial}
@@ -77,6 +94,13 @@ const Recipes = props => {
       />
     </div>
   );
+};
+
+Recipes.propTypes = {
+  showDial: PropTypes.bool.isRequired,
+  setShowDial: PropTypes.func.isRequired,
+  displayArray: PropTypes.objectOf(PropTypes.array).isRequired,
+  handleSortRecipes: PropTypes.func.isRequired
 };
 
 export default Recipes;
