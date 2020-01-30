@@ -17,6 +17,7 @@ export const fetchInitialRecipes = async () => {
 
 export const getListState = state => state.List;
 
+// backend get request require params in query
 export const loadMoreRecipes = async (page, orderBy) => {
   try {
     const res = await fetch(
@@ -35,10 +36,12 @@ export const loadMoreRecipes = async (page, orderBy) => {
   }
 };
 
+// check if should load more
 export const checkLoadMore = (listCycle, initialPage, recipePage) => {
   if (!listCycle) {
     return true;
   } else {
+    // check if load next page would be the initialpage, avoid duplicate page
     return initialPage !== recipePage + 1;
   }
 };

@@ -1,6 +1,15 @@
+/*
+  Bottom spinner for load more
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { CircularProgress, Typography } from '@material-ui/core';
+
+// misc
 import useStyles from './Style';
 
 const LoadMoreSpinner = props => {

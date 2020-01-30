@@ -23,9 +23,12 @@ export function* watchSortRecipes() {
 /*
   Worker sagas
 */
+
+// sort recipes
 function* workerSortRecipes({ payload }) {
   yield put({ type: Types.SORT_BEGIN });
   try {
+    // get the first page and pass in the sortOption
     const response = yield call(Operations.loadMoreRecipes, 1, payload);
     console.log(response);
     if (response.error) {
@@ -39,7 +42,9 @@ function* workerSortRecipes({ payload }) {
   }
 }
 
+// load more recipes
 function* workerLoadMoreRecipes() {
+  // get the state in store
   const {
     recipePage,
     initialPage,
@@ -47,7 +52,11 @@ function* workerLoadMoreRecipes() {
     totalPages,
     listCycle
   } = yield select(Operations.getListState);
+
   try {
+    // if current page is not the last page
+    // and haven't reach to the original starting page
+    // perform load next page
     if (
       totalPages !== recipePage &&
       Operations.checkLoadMore(listCycle, initialPage, recipePage)
@@ -67,12 +76,15 @@ function* workerLoadMoreRecipes() {
         yield put({ type: Types.LOAD_MORE_SUCCESS, payload: response });
       }
     } else {
+      // if stating page is 1, stop loading more, end
       if (initialPage === 1) return;
+      // if already cylcled, stop loading more, end
       if (listCycle) return;
 
       yield put({ type: Types.NEXT_LIST_CYCLE });
       yield put({ type: Types.LOAD_MORE_BEGIN });
       yield delay(1000);
+      // load first page, start next cycle until the starting page
       const response = yield call(
         Operations.loadMoreRecipes,
         1,
@@ -94,6 +106,7 @@ function* workerLoadMoreRecipes() {
   }
 }
 
+// get initial random recipes
 function* workerFetchInitRecipes() {
   yield put({ type: Types.LIST_BEGIN });
   try {
