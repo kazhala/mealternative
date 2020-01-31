@@ -9,7 +9,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    position: 'relative'
   },
   recipeSearchRoot: {
     width: '100%',
@@ -38,7 +39,11 @@ const useStyles = makeStyles(theme => ({
   // inidividual card
   recipeCardRoot: {
     width: '100%',
-    marginBottom: theme.spacing(1.5)
+    marginBottom: theme.spacing(1.5),
+    cursor: 'pointer',
+    '&:hover': {
+      opacity: '0.8'
+    }
   },
   recipeCardImage: {
     width: '100%',

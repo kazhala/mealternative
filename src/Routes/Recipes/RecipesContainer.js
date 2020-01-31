@@ -20,6 +20,7 @@ import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
 
 const RecipesContainer = props => {
   const {
+    history,
     cleanUp,
     fetchInitialRecipes,
     loading,
@@ -101,11 +102,16 @@ const RecipesContainer = props => {
     }
   };
 
+  const handleCardClick = recipeId => {
+    history.push(`/recipes/detail/${recipeId}`);
+  };
+
   return (
     <>
       <PageSpinner loading={loading} />
       <ErrorSnack handleClose={cleanUp} error={error} />
       <Recipes
+        handleCardClick={handleCardClick}
         showDial={showDial}
         setShowDial={setShowDial}
         displayArray={displayArray}

@@ -20,6 +20,7 @@ import useStyles from './Style';
 
 const Recipes = props => {
   const {
+    handleCardClick,
     showDial,
     setShowDial,
     displayArray,
@@ -54,6 +55,8 @@ const Recipes = props => {
         <div className={classes.recipeBodyColumn}>
           {displayArray.left.map((recipe, index) => (
             <RecipeCard
+              handleCardClick={handleCardClick}
+              recipeId={recipe._id}
               bookmarks={recipe.bookmarks}
               rating={recipe.rating}
               thumbnailUrl={recipe.thumbImageUrl}
@@ -68,6 +71,8 @@ const Recipes = props => {
         <div className={classes.recipeBodyColumn}>
           {displayArray.right.map((recipe, index) => (
             <RecipeCard
+              handleCardClick={handleCardClick}
+              recipeId={recipe._id}
               bookmarks={recipe.bookmarks}
               rating={recipe.rating}
               thumbnailUrl={recipe.thumbImageUrl}
