@@ -20,7 +20,11 @@ function* workerFetchRecipeDetails({ payload }) {
   yield put({ type: Types.RECIPE_BEGIN });
   try {
     const response = yield call(Operations.fetchRecipeDetails, recipeid);
-    console.log(response);
+    if (response.error) {
+      throw new Error(response.error);
+    } else {
+      yield put({ type: Types.FETCH_RECIPE_SUCCESS, payload: response });
+    }
   } catch (err) {
     console.log(err);
     yield put({ type: Types.RECIPE_ERROR, payload: err.message });
