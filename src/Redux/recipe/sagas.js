@@ -17,5 +17,12 @@ export function* watchFetchRecipeDetails() {
 */
 function* workerFetchRecipeDetails({ payload }) {
   const { recipeid } = payload;
-  yield console.log(recipeid);
+  yield put({ type: Types.RECIPE_BEGIN });
+  try {
+    const response = yield call(Operations.fetchRecipeDetails, recipeid);
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+    yield put({ type: Types.RECIPE_ERROR, payload: err.message });
+  }
 }
