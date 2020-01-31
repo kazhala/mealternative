@@ -5,6 +5,7 @@
 // react
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
 // components
 import { Button } from '@material-ui/core';
@@ -12,6 +13,7 @@ import SearchInput from '../../Common/Inputs/SearchInput';
 import SortMenuDial from './_components/SortMenuDial';
 import RecipeCard from './_components/RecipeCard';
 import LoadMoreSpinner from '../../Common/Spinner/LoadMoreSpinner';
+import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
 
 // misc
 import useStyles from './Style';
@@ -83,6 +85,10 @@ const Recipes = props => {
       <LoadMoreSpinner
         textAlt="You've reached the bottom"
         loading={loadMoreLoading}
+      />
+      <Route
+        path='/recipes/detail/:recipeid'
+        render={props => <RecipeDetailContainer {...props} />}
       />
 
       {/* speedDial */}
