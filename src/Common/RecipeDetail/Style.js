@@ -69,11 +69,8 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(10),
     minHeight: theme.spacing(10)
   },
-  stepBtns: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alightItems: 'center',
-    width: '100%'
+  stepLabel: {
+    cursor: 'pointer'
   }
 }));
 
