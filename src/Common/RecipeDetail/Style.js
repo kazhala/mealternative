@@ -10,7 +10,8 @@ const useStyles = makeStyles(theme => ({
     //put on top of the speedDial
     zIndex: 1051,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    overflowY: 'scroll'
   },
   detailCloseBtn: {
     position: 'absolute',
@@ -30,7 +31,8 @@ const useStyles = makeStyles(theme => ({
   // top part
   detailThumbRoot: {
     width: '100%',
-    height: theme.spacing(10)
+    height: theme.spacing(10),
+    minHeight: theme.spacing(10)
   },
   detailTitleDes: {
     width: '100%',
@@ -58,6 +60,20 @@ const useStyles = makeStyles(theme => ({
 
   // lists
   detailListsRoot: {
+    width: '100%'
+  },
+
+  // steps
+  stepImage: {
+    width: '100%',
+    height: theme.spacing(10),
+    background: 'black',
+    minHeight: theme.spacing(10)
+  },
+  stepBtns: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alightItems: 'center',
     width: '100%'
   }
 }));
