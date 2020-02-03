@@ -26,16 +26,19 @@ const Recipes = props => {
     displayArray,
     loadMoreRecipes,
     handleSortRecipes,
-    loadMoreLoading
+    loadMoreLoading,
+    isLoadable
   } = props;
   const classes = useStyles();
 
   // check if bottom, perform load more
   const handleScroll = e => {
-    const isBottom =
-      e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
-      e.target.clientHeight;
-    isBottom && loadMoreRecipes();
+    if (isLoadable) {
+      const isBottom =
+        e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
+        e.target.clientHeight;
+      isBottom && loadMoreRecipes();
+    }
   };
 
   return (
@@ -111,7 +114,8 @@ Recipes.propTypes = {
   showDial: PropTypes.bool.isRequired,
   setShowDial: PropTypes.func.isRequired,
   displayArray: PropTypes.objectOf(PropTypes.array).isRequired,
-  handleSortRecipes: PropTypes.func.isRequired
+  handleSortRecipes: PropTypes.func.isRequired,
+  isLoadable: PropTypes.bool.isRequired
 };
 
 export default Recipes;
