@@ -8,9 +8,11 @@ import TitleDes from './_components/TitleDes';
 import MiscActions from './_components/MiscActions';
 import ListsCatIng from './_components/ListsCatIng';
 import Steps from './_components/Steps';
+import PageSpinner from '../Spinner/PageSpinner';
+import ErrorSnack from '../ErrorModal/ErrorSnack';
 
 const RecipeDetail = props => {
-  const { handleBack, showModal } = props;
+  const { handleBack, showModal, loading, cleanUp, error } = props;
   const classes = useStyles();
 
   return (
@@ -22,21 +24,27 @@ const RecipeDetail = props => {
       unmountOnExit
     >
       <Paper className={classes.detailRecipeRoot}>
-        <Fab
-          color='primary'
-          className={classes.detailCloseBtn}
-          onClick={handleBack}
-          variant='extended'
-        >
-          <ArrowBack />
-          Back
-        </Fab>
-        <Avatar className={classes.detailAvatar}>K</Avatar>
-        <ThumbNail classes={classes} />
-        <TitleDes classes={classes} />
-        <MiscActions classes={classes} />
-        <ListsCatIng classes={classes} />
-        <Steps classes={classes} />
+        <PageSpinner loading={loading} />
+        <ErrorSnack error={error} handleClose={cleanUp} />
+        {!loading && (
+          <>
+            <Fab
+              color='primary'
+              className={classes.detailCloseBtn}
+              onClick={handleBack}
+              variant='extended'
+            >
+              <ArrowBack />
+              Back
+            </Fab>
+            <Avatar className={classes.detailAvatar}>K</Avatar>
+            <ThumbNail classes={classes} />
+            <TitleDes classes={classes} />
+            <MiscActions classes={classes} />
+            <ListsCatIng classes={classes} />
+            <Steps classes={classes} />
+          </>
+        )}
       </Paper>
     </Slide>
   );

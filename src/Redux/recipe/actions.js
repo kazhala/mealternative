@@ -9,3 +9,9 @@ export const fetchRecipeDetails = payload => {
     payload
   };
 };
+
+export const cleanUp = () => {
+  return {
+    type: Types.RECIPE_CLEAR
+  };
+};
