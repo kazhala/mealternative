@@ -18,6 +18,14 @@ const useStyles = makeStyles(theme => ({
     left: theme.spacing(1),
     zIndex: 1
   },
+  detailAvatar: {
+    position: 'absolute',
+    top: theme.spacing(1),
+    right: theme.spacing(1),
+    zIndex: 1,
+    height: theme.spacing(3),
+    width: theme.spacing(3)
+  },
 
   // top part
   detailThumbRoot: {
@@ -46,6 +54,11 @@ const useStyles = makeStyles(theme => ({
   },
   detailBookMark: {
     marginRight: theme.spacing(0.5)
+  },
+
+  // lists
+  detailListsRoot: {
+    width: '100%'
   }
 }));
 
