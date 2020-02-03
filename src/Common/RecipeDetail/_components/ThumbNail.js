@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ThumbNail = props => {
-  const { classes } = props;
+  const { classes, imgUrl } = props;
 
   return (
     <div
       className={classes.detailThumbRoot}
       style={{
-        backgroundImage:
-          'url(https://res.cloudinary.com/kazhala/image/upload/v1580344284/mealternative/thumbnail/hu9hoevzvceyq5vko15e.jpg)',
+        backgroundImage: `url(${imgUrl})`,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: '100%'
@@ -19,7 +18,8 @@ const ThumbNail = props => {
 };
 
 ThumbNail.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  imgUrl: PropTypes.string.isRequired
 };
 
 export default ThumbNail;

@@ -12,8 +12,17 @@ import PageSpinner from '../Spinner/PageSpinner';
 import ErrorSnack from '../ErrorModal/ErrorSnack';
 
 const RecipeDetail = props => {
-  const { handleBack, showModal, loading, cleanUp, error } = props;
+  const {
+    handleBack,
+    showModal,
+    loading,
+    cleanUp,
+    error,
+    recipeDetails
+  } = props;
   const classes = useStyles();
+
+  const { rating, postedBy, thumbImageUrl, title, description } = recipeDetails;
 
   return (
     <Slide
@@ -26,7 +35,7 @@ const RecipeDetail = props => {
       <Paper className={classes.detailRecipeRoot}>
         <PageSpinner loading={loading} />
         <ErrorSnack error={error} handleClose={cleanUp} />
-        {!loading && (
+        {!loading && postedBy && (
           <>
             <Fab
               color='primary'
@@ -37,10 +46,18 @@ const RecipeDetail = props => {
               <ArrowBack />
               Back
             </Fab>
-            <Avatar className={classes.detailAvatar}>K</Avatar>
-            <ThumbNail classes={classes} />
-            <TitleDes classes={classes} />
-            <MiscActions classes={classes} />
+
+            {/* TODO: add profile image upload */}
+            <Avatar className={classes.detailAvatar}>
+              {postedBy.username[0]}
+            </Avatar>
+            <ThumbNail imgUrl={thumbImageUrl} classes={classes} />
+            <TitleDes
+              title={title}
+              description={description}
+              classes={classes}
+            />
+            <MiscActions rating={rating} classes={classes} />
             <ListsCatIng classes={classes} />
             <Steps classes={classes} />
           </>

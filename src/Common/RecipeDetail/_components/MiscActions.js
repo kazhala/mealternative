@@ -4,13 +4,12 @@ import { Rating } from '@material-ui/lab';
 import { BookmarkBorderOutlined, ThumbUpOutlined } from '@material-ui/icons';
 
 const MiscActions = props => {
-  const { classes } = props;
+  const { classes, rating } = props;
 
   return (
     <div className={classes.detailMiscRoot}>
       <div className={classes.detailContainer}>
-        <Rating />
-        (4.0)
+        <Rating name='recipe-rating' value={rating} />({rating})
       </div>
       <div className={classes.detailContainer}>
         <BookmarkBorderOutlined className={classes.detailBookMark} />
@@ -20,8 +19,9 @@ const MiscActions = props => {
   );
 };
 
-Rating.propTypes = {
-  classes: PropTypes.object.isRequired
+MiscActions.propTypes = {
+  classes: PropTypes.object.isRequired,
+  rating: PropTypes.number.isRequired
 };
 
 export default MiscActions;
