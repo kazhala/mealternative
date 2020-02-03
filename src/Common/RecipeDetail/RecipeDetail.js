@@ -7,6 +7,7 @@ import ThumbNail from './_components/ThumbNail';
 import TitleDes from './_components/TitleDes';
 import MiscActions from './_components/MiscActions';
 import ListsCatIng from './_components/ListsCatIng';
+import Steps from './_components/Steps';
 
 const RecipeDetail = props => {
   const { handleBack, showModal } = props;
@@ -35,6 +36,7 @@ const RecipeDetail = props => {
         <TitleDes classes={classes} />
         <MiscActions classes={classes} />
         <ListsCatIng classes={classes} />
+        <Steps classes={classes} />
       </Paper>
     </Slide>
   );
