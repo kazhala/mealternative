@@ -67,7 +67,6 @@ const useStyles = makeStyles(theme => ({
   stepImage: {
     width: '100%',
     height: theme.spacing(10),
-    background: 'black',
     minHeight: theme.spacing(10)
   },
   stepBtns: {

@@ -10,24 +10,28 @@ import {
 } from '@material-ui/core';
 
 const Steps = props => {
-  const { classes } = props;
-
-  const steps = [0, 1, 2, 3, 4, 5];
+  const { classes, steps } = props;
 
   return (
     <Stepper activeStep={1} orientation='vertical'>
       {steps.map((step, index) => (
         <Step completed={false} key={index}>
           <StepLabel>
-            <Typography variant='h6'>title1</Typography>
+            <Typography variant='h6'>{step.stepTitle}</Typography>
           </StepLabel>
           <StepContent>
-            <div className={classes.stepImage} />
-            <Typography variant='body2'>
-              Similique nemo itaque ratione cumque. Laborum occaecati eius
-              ratione ex assumenda. Earum reprehenderit fugit accusantium facere
-              minus quibusdam.
-            </Typography>
+            {step.stepImageUrl && (
+              <div
+                className={classes.stepImage}
+                style={{
+                  backgroundImage: `url(${step.stepImageUrl})`,
+                  backgroundSize: '100%',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center'
+                }}
+              />
+            )}
+            <Typography variant='body2'>{step.stepDescriptions}</Typography>
             <div className={classes.stepBtns}>
               <Button>Back</Button>
               <Button>Next</Button>
@@ -40,7 +44,8 @@ const Steps = props => {
 };
 
 Steps.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  steps: PropTypes.array.isRequired
 };
 
 export default Steps;

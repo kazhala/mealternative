@@ -22,7 +22,16 @@ const RecipeDetail = props => {
   } = props;
   const classes = useStyles();
 
-  const { rating, postedBy, thumbImageUrl, title, description } = recipeDetails;
+  const {
+    ingredients,
+    categories,
+    rating,
+    postedBy,
+    thumbImageUrl,
+    title,
+    description,
+    steps
+  } = recipeDetails;
 
   return (
     <Slide
@@ -58,8 +67,12 @@ const RecipeDetail = props => {
               classes={classes}
             />
             <MiscActions rating={rating} classes={classes} />
-            <ListsCatIng classes={classes} />
-            <Steps classes={classes} />
+            <ListsCatIng
+              ingredients={ingredients}
+              categories={categories}
+              classes={classes}
+            />
+            <Steps steps={steps} classes={classes} />
           </>
         )}
       </Paper>
