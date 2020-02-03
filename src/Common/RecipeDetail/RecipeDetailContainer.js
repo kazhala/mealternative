@@ -21,7 +21,7 @@ const RecipeDetailContainer = props => {
     setShowModal(false);
     setTimeout(() => {
       history.push('/recipes');
-    }, 1000);
+    }, 200);
   };
 
   return (

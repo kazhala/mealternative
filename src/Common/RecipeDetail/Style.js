@@ -6,7 +6,9 @@ const useStyles = makeStyles(theme => ({
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
+    //put on top of the speedDial
+    zIndex: 1051
   }
 }));
 

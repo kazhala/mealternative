@@ -9,7 +9,7 @@ const RecipeDetail = props => {
 
   return (
     <Slide
-      timeout={1000}
+      timeout={200}
       direction='left'
       in={showModal}
       mountOnEnter

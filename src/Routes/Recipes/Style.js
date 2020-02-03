@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     overflowY: 'scroll',
+    overflowX: 'hidden',
     position: 'relative'
   },
   recipeSearchRoot: {
