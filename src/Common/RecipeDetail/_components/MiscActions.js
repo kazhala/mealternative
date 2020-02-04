@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Rating } from '@material-ui/lab';
 import {
@@ -19,6 +19,15 @@ const MiscActions = props => {
     handleLikeAction
   } = props;
 
+  const [isLiked, setIsLiked] = useState(liked);
+  const [likeCount, setLikeCount] = useState(likes);
+
+  const handleLikeClick = () => {
+    isLiked ? setLikeCount(prev => prev - 1) : setLikeCount(prev => prev + 1);
+    setIsLiked(prev => !prev);
+    handleLikeAction();
+  };
+
   return (
     <div className={classes.detailMiscRoot}>
       <div className={classes.detailContainer}>
@@ -33,8 +42,9 @@ const MiscActions = props => {
           )}
           ({bookmarks})
         </div>
-        <div onClick={handleLikeAction} className={classes.detailIconText}>
-          {liked ? <ThumbUp color='primary' /> : <ThumbUpOutlined />}({likes})
+        <div onClick={handleLikeClick} className={classes.detailIconText}>
+          {isLiked ? <ThumbUp color='primary' /> : <ThumbUpOutlined />}(
+          {likeCount})
         </div>
       </div>
     </div>
