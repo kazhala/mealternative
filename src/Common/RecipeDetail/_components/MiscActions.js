@@ -17,7 +17,7 @@ const MiscActions = props => {
         <Rating name='recipe-rating' value={rating} />({rating})
       </div>
       <div className={classes.detailContainer}>
-        <div className={`${classes.detailContainer} ${classes.detailBookMark}`}>
+        <div className={`${classes.detailIconText} ${classes.detailBookMark}`}>
           {booked ? (
             <BookmarkBorder color='primary' />
           ) : (
@@ -25,7 +25,7 @@ const MiscActions = props => {
           )}
           ({bookmarks})
         </div>
-        <div className={classes.detailContainer}>
+        <div className={classes.detailIconText}>
           {liked ? <ThumbUp color='primary' /> : <ThumbUpOutlined />}({likes})
         </div>
       </div>

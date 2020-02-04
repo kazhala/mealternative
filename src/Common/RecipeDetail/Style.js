@@ -55,7 +55,15 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   detailBookMark: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(0.5)
+  },
+  detailIconText: {
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer',
+    '&:hover': {
+      opacity: '0.7'
+    }
   },
 
   // lists
