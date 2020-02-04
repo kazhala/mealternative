@@ -5,7 +5,14 @@ import { bindActionCreators } from 'redux';
 import { RecipeActions } from '../../Redux/recipe';
 
 const RecipeDetailContainer = props => {
-  const { match, history, getRecipeDetails, cleanUp } = props;
+  const {
+    isAuthenticated,
+    match,
+    history,
+    getRecipeDetails,
+    cleanUp,
+    incrementLike
+  } = props;
   const [mounted, setMounted] = useState(false);
   const [showModal, setShowModal] = useState(true);
 
@@ -30,8 +37,21 @@ const RecipeDetailContainer = props => {
     };
   }, [cleanUp]);
 
+  const handleLikeAction = () => {
+    if (!isAuthenticated) {
+      history.push('/signin');
+    } else {
+      incrementLike();
+    }
+  };
+
   return (
-    <RecipeDetail showModal={showModal} handleBack={handleBack} {...props} />
+    <RecipeDetail
+      handleLikeAction={handleLikeAction}
+      showModal={showModal}
+      handleBack={handleBack}
+      {...props}
+    />
   );
 };
 
@@ -39,13 +59,15 @@ const mapStateToProps = state => {
   return {
     loading: state.Recipe.loading,
     error: state.Recipe.error,
-    recipeDetails: state.Recipe.recipeDetails
+    recipeDetails: state.Recipe.recipeDetails,
+    isAuthenticated: state.Auth.isAuthenticated
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      incrementLike: RecipeActions.incrementLike,
       getRecipeDetails: RecipeActions.fetchRecipeDetails,
       cleanUp: RecipeActions.cleanUp
     },

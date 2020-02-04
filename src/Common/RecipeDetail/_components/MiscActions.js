@@ -9,7 +9,15 @@ import {
 } from '@material-ui/icons';
 
 const MiscActions = props => {
-  const { liked, booked, classes, rating, likes, bookmarks } = props;
+  const {
+    liked,
+    booked,
+    classes,
+    rating,
+    likes,
+    bookmarks,
+    handleLikeAction
+  } = props;
 
   return (
     <div className={classes.detailMiscRoot}>
@@ -25,7 +33,7 @@ const MiscActions = props => {
           )}
           ({bookmarks})
         </div>
-        <div className={classes.detailIconText}>
+        <div onClick={handleLikeAction} className={classes.detailIconText}>
           {liked ? <ThumbUp color='primary' /> : <ThumbUpOutlined />}({likes})
         </div>
       </div>
@@ -39,7 +47,8 @@ MiscActions.propTypes = {
   likes: PropTypes.number.isRequired,
   bookmarks: PropTypes.number.isRequired,
   liked: PropTypes.bool,
-  booked: PropTypes.bool
+  booked: PropTypes.bool,
+  handleLikeAction: PropTypes.func.isRequired
 };
 
 export default MiscActions;

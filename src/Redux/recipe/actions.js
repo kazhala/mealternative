@@ -15,3 +15,9 @@ export const cleanUp = () => {
     type: Types.RECIPE_CLEAR
   };
 };
+
+export const incrementLike = () => {
+  return {
+    type: Types.RECIPE_LIKE
+  };
+};

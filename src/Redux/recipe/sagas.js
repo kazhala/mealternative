@@ -12,9 +12,27 @@ export function* watchFetchRecipeDetails() {
   yield takeLatest(Types.FETCH_RECIPE_DETAIL, workerFetchRecipeDetails);
 }
 
+export function* watchIncrementLike() {
+  yield takeLatest(Types.RECIPE_LIKE, workerIncrementLike);
+}
+
 /*
   worker sagas
 */
+function* workerIncrementLike() {
+  const { recipeDetails } = yield select(Operations.getRecipeState);
+  try {
+    const response = yield call(Operations.incrementLike, recipeDetails._id);
+    console.log('response', response);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+  } catch (err) {
+    console.log(err);
+    yield put({ type: Types.RECIPE_ERROR, payload: err.message });
+  }
+}
+
 function* workerFetchRecipeDetails({ payload }) {
   const { recipeid } = payload;
   const { isAuthenticated, user } = yield select(Operations.getAuthState);

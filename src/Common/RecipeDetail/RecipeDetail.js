@@ -13,6 +13,7 @@ import ErrorSnack from '../ErrorModal/ErrorSnack';
 
 const RecipeDetail = props => {
   const {
+    handleLikeAction,
     handleBack,
     showModal,
     loading,
@@ -70,6 +71,7 @@ const RecipeDetail = props => {
               classes={classes}
             />
             <MiscActions
+              handleLikeAction={handleLikeAction}
               likes={likes}
               bookmarks={bookmarks}
               rating={rating}
@@ -91,7 +93,8 @@ const RecipeDetail = props => {
 };
 
 RecipeDetail.propTypes = {
-  recipeDetails: PropTypes.any
+  recipeDetails: PropTypes.any,
+  handleLikeAction: PropTypes.func.isRequired
 };
 
 export default RecipeDetail;
