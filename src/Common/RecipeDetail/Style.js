@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   detailBookMark: {
-    marginRight: theme.spacing(0.5)
+    marginRight: theme.spacing(1)
   },
 
   // lists

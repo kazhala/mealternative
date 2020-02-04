@@ -23,6 +23,8 @@ const RecipeDetail = props => {
   const classes = useStyles();
 
   const {
+    likes,
+    bookmarks,
     ingredients,
     categories,
     rating,
@@ -66,7 +68,12 @@ const RecipeDetail = props => {
               description={description}
               classes={classes}
             />
-            <MiscActions rating={rating} classes={classes} />
+            <MiscActions
+              likes={likes}
+              bookmarks={bookmarks}
+              rating={rating}
+              classes={classes}
+            />
             <ListsCatIng
               ingredients={ingredients}
               categories={categories}
