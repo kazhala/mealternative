@@ -4,7 +4,7 @@ import { Rating } from '@material-ui/lab';
 import {
   BookmarkBorderOutlined,
   ThumbUpOutlined,
-  BookmarkBorder,
+  Bookmark,
   ThumbUp
 } from '@material-ui/icons';
 
@@ -48,11 +48,7 @@ const MiscActions = props => {
           onClick={handleBookClick}
           className={`${classes.detailIconText} ${classes.detailBookMark}`}
         >
-          {isBooked ? (
-            <BookmarkBorder color='primary' />
-          ) : (
-            <BookmarkBorderOutlined />
-          )}
+          {isBooked ? <Bookmark color='primary' /> : <BookmarkBorderOutlined />}
           ({bookCount})
         </div>
         <div onClick={handleLikeClick} className={classes.detailIconText}>
