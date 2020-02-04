@@ -1,7 +1,7 @@
 /*
   recipe detail saga
 */
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 
@@ -17,12 +17,19 @@ export function* watchFetchRecipeDetails() {
 */
 function* workerFetchRecipeDetails({ payload }) {
   const { recipeid } = payload;
+  const { isAuthenticated, user } = yield select(Operations.getAuthState);
   yield put({ type: Types.RECIPE_BEGIN });
   try {
-    const response = yield call(Operations.fetchRecipeDetails, recipeid);
+    let response;
+    if (isAuthenticated) {
+      response = yield call(Operations.authRecipeDetails, recipeid, user._id);
+    } else {
+      response = yield call(Operations.fetchRecipeDetails, recipeid);
+    }
     if (response.error) {
       throw new Error(response.error);
     } else {
+      console.log(response);
       yield put({ type: Types.FETCH_RECIPE_SUCCESS, payload: response });
     }
   } catch (err) {
