@@ -38,8 +38,8 @@ MiscActions.propTypes = {
   rating: PropTypes.number.isRequired,
   likes: PropTypes.number.isRequired,
   bookmarks: PropTypes.number.isRequired,
-  liked: PropTypes.bool.isRequired,
-  booked: PropTypes.bool.isRequired
+  liked: PropTypes.bool,
+  booked: PropTypes.bool
 };
 
 export default MiscActions;

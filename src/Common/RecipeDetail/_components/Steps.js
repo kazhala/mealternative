@@ -1,3 +1,6 @@
+/*
+  stepper component to display recipe steps
+*/
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {

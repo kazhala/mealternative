@@ -1,3 +1,6 @@
+/*
+  display categories and ingredients of a recipe
+*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Category, Kitchen } from '@material-ui/icons';
