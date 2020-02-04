@@ -46,18 +46,17 @@ const RecipeDetail = props => {
       <Paper className={classes.detailRecipeRoot}>
         <PageSpinner loading={loading} />
         <ErrorSnack error={error} handleClose={cleanUp} />
+        <Fab
+          color='primary'
+          className={classes.detailCloseBtn}
+          onClick={handleBack}
+          variant='extended'
+        >
+          <ArrowBack />
+          Back
+        </Fab>
         {!loading && postedBy && (
           <>
-            <Fab
-              color='primary'
-              className={classes.detailCloseBtn}
-              onClick={handleBack}
-              variant='extended'
-            >
-              <ArrowBack />
-              Back
-            </Fab>
-
             {/* TODO: add profile image upload */}
             <Avatar className={classes.detailAvatar}>
               {postedBy.username[0]}
