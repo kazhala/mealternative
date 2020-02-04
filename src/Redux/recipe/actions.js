@@ -21,3 +21,9 @@ export const incrementLike = () => {
     type: Types.RECIPE_LIKE
   };
 };
+
+export const incrementBook = () => {
+  return {
+    type: Types.RECIPE_BOOK
+  };
+};

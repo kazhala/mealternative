@@ -24,7 +24,8 @@ export default function* rootSaga() {
       fork(ListSagas.watchLoadMoreRecipes),
       fork(ListSagas.watchSortRecipes),
       fork(RecipeSagas.watchFetchRecipeDetails),
-      fork(RecipeSagas.watchIncrementLike)
+      fork(RecipeSagas.watchIncrementLike),
+      fork(RecipeSagas.watchIncrementBook)
     ]);
   } catch (err) {
     console.log(err);

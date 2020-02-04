@@ -50,5 +50,21 @@ export const incrementLike = async recipeId => {
   }
 };
 
+export const incrementBook = async recipeId => {
+  try {
+    const res = await fetch(`${API}/user/bookmark/recipe/${recipeId}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('token')}`
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
 export const getAuthState = state => state.Auth;
 export const getRecipeState = state => state.Recipe;

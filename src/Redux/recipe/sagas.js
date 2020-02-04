@@ -16,9 +16,27 @@ export function* watchIncrementLike() {
   yield takeLatest(Types.RECIPE_LIKE, workerIncrementLike);
 }
 
+export function* watchIncrementBook() {
+  yield takeLatest(Types.RECIPE_BOOK, workerIncrementBook);
+}
+
 /*
   worker sagas
 */
+function* workerIncrementBook() {
+  const { recipeDetails } = yield select(Operations.getRecipeState);
+  try {
+    const response = yield call(Operations.incrementBook, recipeDetails._id);
+    console.log('response', response);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.RECIPE_ERROR, payload: err.message });
+  }
+}
+
 function* workerIncrementLike() {
   const { recipeDetails } = yield select(Operations.getRecipeState);
   try {

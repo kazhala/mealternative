@@ -19,7 +19,8 @@ const RecipeDetail = props => {
     loading,
     cleanUp,
     error,
-    recipeDetails
+    recipeDetails,
+    handleBookAction
   } = props;
   const classes = useStyles();
 
@@ -72,6 +73,7 @@ const RecipeDetail = props => {
             />
             <MiscActions
               handleLikeAction={handleLikeAction}
+              handleBookAction={handleBookAction}
               likes={likes}
               bookmarks={bookmarks}
               rating={rating}
@@ -94,7 +96,8 @@ const RecipeDetail = props => {
 
 RecipeDetail.propTypes = {
   recipeDetails: PropTypes.any,
-  handleLikeAction: PropTypes.func.isRequired
+  handleLikeAction: PropTypes.func.isRequired,
+  handleBookAction: PropTypes.func.isRequired
 };
 
 export default RecipeDetail;
