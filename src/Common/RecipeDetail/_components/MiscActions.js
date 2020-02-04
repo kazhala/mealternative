@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Rating } from '@material-ui/lab';
-import { BookmarkBorderOutlined, ThumbUpOutlined } from '@material-ui/icons';
+import {
+  BookmarkBorderOutlined,
+  ThumbUpOutlined,
+  BookmarkBorder,
+  ThumbUp
+} from '@material-ui/icons';
 
 const MiscActions = props => {
-  const { classes, rating, likes, bookmarks } = props;
+  const { liked, booked, classes, rating, likes, bookmarks } = props;
 
   return (
     <div className={classes.detailMiscRoot}>
@@ -13,10 +18,15 @@ const MiscActions = props => {
       </div>
       <div className={classes.detailContainer}>
         <div className={`${classes.detailContainer} ${classes.detailBookMark}`}>
-          <BookmarkBorderOutlined />({bookmarks})
+          {booked ? (
+            <BookmarkBorder color='primary' />
+          ) : (
+            <BookmarkBorderOutlined />
+          )}
+          ({bookmarks})
         </div>
         <div className={classes.detailContainer}>
-          <ThumbUpOutlined />({likes})
+          {liked ? <ThumbUp color='primary' /> : <ThumbUpOutlined />}({likes})
         </div>
       </div>
     </div>
@@ -27,7 +37,9 @@ MiscActions.propTypes = {
   classes: PropTypes.object.isRequired,
   rating: PropTypes.number.isRequired,
   likes: PropTypes.number.isRequired,
-  bookmarks: PropTypes.number.isRequired
+  bookmarks: PropTypes.number.isRequired,
+  liked: PropTypes.bool.isRequired,
+  booked: PropTypes.bool.isRequired
 };
 
 export default MiscActions;

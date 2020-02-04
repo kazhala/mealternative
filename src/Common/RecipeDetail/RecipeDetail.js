@@ -32,7 +32,9 @@ const RecipeDetail = props => {
     thumbImageUrl,
     title,
     description,
-    steps
+    steps,
+    liked,
+    booked
   } = recipeDetails;
 
   return (
@@ -72,6 +74,8 @@ const RecipeDetail = props => {
               bookmarks={bookmarks}
               rating={rating}
               classes={classes}
+              liked={liked}
+              booked={booked}
             />
             <ListsCatIng
               ingredients={ingredients}
