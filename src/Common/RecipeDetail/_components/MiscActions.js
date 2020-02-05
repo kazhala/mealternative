@@ -50,6 +50,7 @@ const MiscActions = props => {
     <div className={classes.detailMiscRoot}>
       <div className={classes.detailContainer}>
         <Rating
+          precision={0.5}
           onChange={handleRatingChange}
           name='recipe-rating'
           value={ratingValue}
