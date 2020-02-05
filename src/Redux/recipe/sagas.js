@@ -39,6 +39,7 @@ function* workerRateRecipe({ payload }) {
     if (response.error) {
       throw new Error(response.error);
     }
+    yield put({ type: Types.RECIPE_MESSAGE, payload: response.message });
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.RECIPE_ERROR, payload: err.message });
@@ -53,6 +54,7 @@ function* workerIncrementBook() {
     if (response.error) {
       throw new Error(response.error);
     }
+    yield put({ type: Types.RECIPE_MESSAGE, payload: response.message });
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.RECIPE_ERROR, payload: err.message });
@@ -67,6 +69,7 @@ function* workerIncrementLike() {
     if (response.error) {
       throw new Error(response.error);
     }
+    yield put({ type: Types.RECIPE_MESSAGE, payload: response.message });
   } catch (err) {
     console.log(err);
     yield put({ type: Types.RECIPE_ERROR, payload: err.message });

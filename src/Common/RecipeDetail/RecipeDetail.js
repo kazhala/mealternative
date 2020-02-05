@@ -10,6 +10,7 @@ import ListsCatIng from './_components/ListsCatIng';
 import Steps from './_components/Steps';
 import PageSpinner from '../Spinner/PageSpinner';
 import ErrorSnack from '../ErrorModal/ErrorSnack';
+import SuccessSnack from '../InfoModal/SuccessSnack';
 
 const RecipeDetail = props => {
   const {
@@ -21,7 +22,8 @@ const RecipeDetail = props => {
     error,
     recipeDetails,
     handleBookAction,
-    handleRateAction
+    handleRateAction,
+    message
   } = props;
   const classes = useStyles();
 
@@ -51,6 +53,7 @@ const RecipeDetail = props => {
       <Paper className={classes.detailRecipeRoot}>
         <PageSpinner loading={loading} />
         <ErrorSnack error={error} handleClose={cleanUp} />
+        <SuccessSnack message={message} handleClose={cleanUp} />
         <Fab
           color='primary'
           className={classes.detailCloseBtn}

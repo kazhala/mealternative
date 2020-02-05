@@ -77,7 +77,8 @@ const mapStateToProps = state => {
     loading: state.Recipe.loading,
     error: state.Recipe.error,
     recipeDetails: state.Recipe.recipeDetails,
-    isAuthenticated: state.Auth.isAuthenticated
+    isAuthenticated: state.Auth.isAuthenticated,
+    message: state.Recipe.message
   };
 };
 
