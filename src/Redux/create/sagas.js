@@ -70,6 +70,15 @@ function* workerSubmitRecipe({ payload }) {
       throw new Error('Please select at least one category');
     }
 
+    recipeDetail.steps.forEach(step => {
+      if ((step.stepTitle.length < 3) | (step.stepTitle.length > 60)) {
+        throw new Error('Each step require a title between 3-60');
+      }
+      if (step.stepDescriptions.length > 1000) {
+        throw new Error("Description can't exceed 1000 in lenght");
+      }
+    });
+
     // if there is thumbnailImage, upload to cloudinary
     if (recipeDetail.thumbnailImage.file && !recipeDetail.thumbnailImage.url) {
       console.log('Uploading thumbnail');
