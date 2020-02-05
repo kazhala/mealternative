@@ -27,3 +27,10 @@ export const incrementBook = () => {
     type: Types.RECIPE_BOOK
   };
 };
+
+export const updateRecipeRating = payload => {
+  return {
+    type: Types.RECIPE_RATE,
+    payload
+  };
+};

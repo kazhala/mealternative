@@ -20,9 +20,31 @@ export function* watchIncrementBook() {
   yield takeLatest(Types.RECIPE_BOOK, workerIncrementBook);
 }
 
+export function* watchRateRecipe() {
+  yield takeLatest(Types.RECIPE_RATE, workerRateRecipe);
+}
+
 /*
   worker sagas
 */
+function* workerRateRecipe({ payload }) {
+  const { recipeDetails } = yield select(Operations.getRecipeState);
+  try {
+    const response = yield call(
+      Operations.rateRecipe,
+      recipeDetails._id,
+      payload
+    );
+    console.log('response', response);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.RECIPE_ERROR, payload: err.message });
+  }
+}
+
 function* workerIncrementBook() {
   const { recipeDetails } = yield select(Operations.getRecipeState);
   try {
