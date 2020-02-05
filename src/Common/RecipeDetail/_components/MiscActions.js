@@ -17,7 +17,8 @@ const MiscActions = props => {
     likes,
     bookmarks,
     handleLikeAction,
-    handleBookAction
+    handleBookAction,
+    handleRateAction
   } = props;
 
   const [isLiked, setIsLiked] = useState(liked);
@@ -25,6 +26,8 @@ const MiscActions = props => {
 
   const [isBooked, setIsBooked] = useState(booked);
   const [bookCount, setBookCount] = useState(bookmarks);
+
+  const [ratingValue, setRatingValue] = useState(rating);
 
   const handleLikeClick = () => {
     isLiked ? setLikeCount(prev => prev - 1) : setLikeCount(prev => prev + 1);
@@ -38,10 +41,20 @@ const MiscActions = props => {
     handleBookAction();
   };
 
+  const handleRatingChange = (e, value) => {
+    setRatingValue(value);
+    handleRateAction(value);
+  };
+
   return (
     <div className={classes.detailMiscRoot}>
       <div className={classes.detailContainer}>
-        <Rating name='recipe-rating' value={rating} />({rating})
+        <Rating
+          onChange={handleRatingChange}
+          name='recipe-rating'
+          value={ratingValue}
+        />
+        ({ratingValue})
       </div>
       <div className={classes.detailContainer}>
         <div
@@ -68,7 +81,8 @@ MiscActions.propTypes = {
   liked: PropTypes.bool,
   booked: PropTypes.bool,
   handleLikeAction: PropTypes.func.isRequired,
-  handleBookAction: PropTypes.func.isRequired
+  handleBookAction: PropTypes.func.isRequired,
+  handleRateAction: PropTypes.func.isRequired
 };
 
 export default MiscActions;

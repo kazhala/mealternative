@@ -74,7 +74,8 @@ export const rateRecipe = async (recipeId, rating) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Cookies.get('token')}`
-      }
+      },
+      body: JSON.stringify({ rating })
     });
     return res.json();
   } catch (err) {

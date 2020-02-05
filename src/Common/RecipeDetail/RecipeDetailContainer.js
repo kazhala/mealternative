@@ -12,7 +12,8 @@ const RecipeDetailContainer = props => {
     getRecipeDetails,
     cleanUp,
     incrementLike,
-    incrementBook
+    incrementBook,
+    updateRecipeRating
   } = props;
   const [mounted, setMounted] = useState(false);
   const [showModal, setShowModal] = useState(true);
@@ -38,26 +39,32 @@ const RecipeDetailContainer = props => {
     };
   }, [cleanUp]);
 
-  const handleLikeAction = () => {
+  const checkAuthentication = () => {
     if (!isAuthenticated) {
       history.push('/signin');
-    } else {
-      incrementLike();
     }
   };
 
+  const handleLikeAction = () => {
+    checkAuthentication();
+    incrementLike();
+  };
+
   const handleBookAction = () => {
-    if (!isAuthenticated) {
-      history.push('/signin');
-    } else {
-      incrementBook();
-    }
+    checkAuthentication();
+    incrementBook();
+  };
+
+  const handleRateAction = newRating => {
+    checkAuthentication();
+    updateRecipeRating(newRating);
   };
 
   return (
     <RecipeDetail
       handleLikeAction={handleLikeAction}
       handleBookAction={handleBookAction}
+      handleRateAction={handleRateAction}
       showModal={showModal}
       handleBack={handleBack}
       {...props}
@@ -77,6 +84,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      updateRecipeRating: RecipeActions.updateRecipeRating,
       incrementBook: RecipeActions.incrementBook,
       incrementLike: RecipeActions.incrementLike,
       getRecipeDetails: RecipeActions.fetchRecipeDetails,
