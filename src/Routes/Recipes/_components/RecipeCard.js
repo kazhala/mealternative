@@ -48,6 +48,7 @@ const RecipeCard = props => {
       <div className={classes.recipeCardRow}>
         <div className={classes.recipeCardWithIcon}>
           <Rating
+            precision={0.5}
             className={classes.recipeCardRating}
             value={rating}
             readOnly
