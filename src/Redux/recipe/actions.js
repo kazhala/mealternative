@@ -9,3 +9,28 @@ export const fetchRecipeDetails = payload => {
     payload
   };
 };
+
+export const cleanUp = () => {
+  return {
+    type: Types.RECIPE_CLEAR
+  };
+};
+
+export const incrementLike = () => {
+  return {
+    type: Types.RECIPE_LIKE
+  };
+};
+
+export const incrementBook = () => {
+  return {
+    type: Types.RECIPE_BOOK
+  };
+};
+
+export const updateRecipeRating = payload => {
+  return {
+    type: Types.RECIPE_RATE,
+    payload
+  };
+};

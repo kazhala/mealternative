@@ -28,10 +28,22 @@ const RecipesContainer = props => {
     recipeList,
     sortRecipes,
     recipeSortOption,
-    sorted
+    sorted,
+    location
   } = props;
   // speedDial show state
   const [showDial, setShowDial] = useState(false);
+
+  // handle check if should loadmore
+  const [isLoadable, setIsLoadable] = useState(true);
+
+  useEffect(() => {
+    if (location.pathname === '/recipes') {
+      setIsLoadable(true);
+    } else {
+      setIsLoadable(false);
+    }
+  }, [location]);
 
   // left side array and rightside array
   const [displayArray, setDisplayArray] = useState({
@@ -116,6 +128,7 @@ const RecipesContainer = props => {
         setShowDial={setShowDial}
         displayArray={displayArray}
         handleSortRecipes={handleSortRecipes}
+        isLoadable={isLoadable}
         {...props}
       />
     </>
