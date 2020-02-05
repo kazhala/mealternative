@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Snackbar, Button } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 const ErrorSnack = props => {
@@ -16,15 +16,7 @@ const ErrorSnack = props => {
       onClose={handleClose}
       autoHideDuration={5000}
     >
-      <Alert
-        severity='error'
-        variant='filled'
-        action={
-          <Button onClick={handleClose} color='inherit' size='small'>
-            Close
-          </Button>
-        }
-      >
+      <Alert severity='error' variant='filled' onClose={handleClose}>
         {error}
       </Alert>
     </Snackbar>
