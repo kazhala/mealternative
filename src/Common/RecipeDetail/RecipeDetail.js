@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paper, Slide, Fab, Avatar } from '@material-ui/core';
+import { Paper, Slide, Fab, Avatar, Tooltip } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 import useStyles from './Style';
 import ThumbNail from './_components/ThumbNail';
@@ -65,10 +65,12 @@ const RecipeDetail = props => {
         </Fab>
         {!loading && postedBy && (
           <>
-            {/* TODO: add profile image upload */}
-            <Avatar className={classes.detailAvatar}>
-              {postedBy.username[0]}
-            </Avatar>
+            <Tooltip title={postedBy.username} alt={postedBy.username}>
+              <Avatar
+                src={postedBy.photoUrl}
+                className={classes.detailAvatar}
+              />
+            </Tooltip>
             <ThumbNail imgUrl={thumbImageUrl} classes={classes} />
             <TitleDes
               title={title}
