@@ -65,6 +65,7 @@ const Recipes = props => {
               thumbnailUrl={recipe.thumbImageUrl}
               title={recipe.title}
               name={recipe.postedBy.username}
+              photoUrl={recipe.postedBy.photoUrl}
               likes={recipe.likes}
               key={index}
               classes={classes}

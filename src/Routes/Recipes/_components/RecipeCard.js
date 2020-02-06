@@ -13,6 +13,7 @@ import { BookmarksOutlined, ThumbUpOutlined } from '@material-ui/icons';
 
 const RecipeCard = props => {
   const {
+    photoUrl,
     handleCardClick,
     recipeId,
     bookmarks,
@@ -63,7 +64,7 @@ const RecipeCard = props => {
       </div>
       <div className={classes.recipeCardRow}>
         <div className={classes.recipeCardWithIcon}>
-          <Avatar className={classes.recipeCardAvatar}>K</Avatar>
+          <Avatar src={photoUrl} className={classes.recipeCardAvatar} />
           <div>{name}</div>
         </div>
         <div className={classes.recipeCardWithIcon}>
@@ -84,7 +85,8 @@ RecipeCard.propTypes = {
   bookmarks: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
   recipeId: PropTypes.string.isRequired,
-  handleCardClick: PropTypes.func.isRequired
+  handleCardClick: PropTypes.func.isRequired,
+  photoUrl: PropTypes.string.isRequired
 };
 
 export default RecipeCard;
