@@ -25,8 +25,7 @@ import {
   HomeRounded,
   AccountCircle,
   Search,
-  MenuRounded,
-  FaceRounded
+  MenuRounded
 } from '@material-ui/icons';
 import SideBar from './SideBar';
 

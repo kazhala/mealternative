@@ -8,3 +8,4 @@ export { default as Meals } from './Meals/MealsContainer';
 export { default as Map } from './Map/MapContainer';
 export { default as Auth } from './Auth/AuthContainer';
 export { default as Create } from './Create/CreateContainer';
+export { default as Account } from './Account/AccountContainer';

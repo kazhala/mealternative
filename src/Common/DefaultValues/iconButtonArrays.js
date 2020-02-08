@@ -32,7 +32,10 @@ export const noAuthArrays = [
   { path: '/signup', text: 'Sign Up', icon: <GroupAddRounded /> }
 ];
 
-export const authMenus = [{ text: 'SignOut' }];
+export const authMenus = [
+  { text: 'Account', path: '/account' },
+  { text: 'SignOut' }
+];
 
 export const noAuthMenus = [
   { path: '/signin', text: 'Sign In' },
