@@ -6,8 +6,9 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     padding: theme.spacing(1),
     display: 'grid',
-    gridTemplateRows: '1fr 4fr',
-    gridTemplateColumns: '1fr'
+    gridTemplateRows: '1fr 3.5fr',
+    gridTemplateColumns: '1fr',
+    gridGap: theme.spacing(1)
   },
   accountTop: {
     display: 'flex',
@@ -20,6 +21,11 @@ const useStyles = makeStyles(theme => ({
   accountAvatar: {
     height: theme.spacing(7),
     width: theme.spacing(7)
+  },
+
+  accountBottom: {
+    width: '100%',
+    height: '100%'
   }
 }));
 
