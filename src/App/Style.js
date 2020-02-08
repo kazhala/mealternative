@@ -75,6 +75,10 @@ const useStyles = makeStyles(theme => ({
       }
     }
   },
+  userAvatar: {
+    height: theme.spacing(1.6),
+    width: theme.spacing(1.6)
+  },
 
   // sidebar
   sideBarRoot: {

@@ -45,6 +45,7 @@ const AppContainer = props => {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.Auth.isAuthenticated,
+    userDetails: state.Auth.user,
     locationOptions: state.Location.options
   };
 };

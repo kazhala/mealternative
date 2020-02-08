@@ -18,7 +18,7 @@ import * as Routes from '../Routes/Routes';
 
 const App = props => {
   // used to determine what to display in app bar
-  const { isAuthenticated, signOut } = props;
+  const { isAuthenticated, signOut, userDetails } = props;
   const classes = useStyles();
 
   return (
@@ -26,6 +26,7 @@ const App = props => {
       {/* get global css settings (enhancement) */}
       <CssBaseline />
       <Header
+        userDetails={userDetails}
         signOut={signOut}
         classes={classes}
         isAuthenticated={isAuthenticated}

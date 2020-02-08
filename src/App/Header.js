@@ -18,7 +18,8 @@ import {
   Menu,
   MenuItem,
   InputBase,
-  Tooltip
+  Tooltip,
+  Avatar
 } from '@material-ui/core';
 import {
   HomeRounded,
@@ -37,7 +38,7 @@ import {
 } from '../Common/DefaultValues/iconButtonArrays';
 
 const Header = props => {
-  const { classes, isAuthenticated, history, signOut } = props;
+  const { userDetails, classes, isAuthenticated, history, signOut } = props;
 
   // account icon menu anchor element
   const [anchorEl, setAnchorEl] = useState(null);
@@ -148,7 +149,14 @@ const Header = props => {
                     onClick={handleClick}
                     style={{ color: '#eceff4' }}
                   >
-                    {isAuthenticated ? <AccountCircle /> : <FaceRounded />}
+                    {isAuthenticated ? (
+                      <Avatar
+                        className={classes.userAvatar}
+                        src={userDetails.photoUrl}
+                      />
+                    ) : (
+                      <AccountCircle />
+                    )}
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -191,7 +199,8 @@ const Header = props => {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  signOut: PropTypes.func.isRequired
+  signOut: PropTypes.func.isRequired,
+  userDetails: PropTypes.object.isRequired
 };
 
 export default withRouter(Header);
