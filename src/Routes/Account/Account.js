@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import useStyles from './Style';
+import { Avatar, Typography } from '@material-ui/core';
 
 const Account = props => {
   const { isAuthenticated, userDetails, checkFetchOtherUser } = props;
@@ -11,8 +12,15 @@ const Account = props => {
     <>
       {!isAuthenticated && !checkFetchOtherUser() && <Redirect to='/' />}
       <div className={classes.accountRoot}>
-        Account
-        {/* adsfadsafs */}
+        <div className={classes.accountTop}>
+          <Avatar
+            className={classes.accountAvatar}
+            src={userDetails.photoUrl}
+          />
+          <Typography variant='h6'>{userDetails.username}</Typography>
+          <Typography variant='caption'>{userDetails.email}</Typography>
+        </div>
+        <div>bottom part</div>
       </div>
     </>
   );
