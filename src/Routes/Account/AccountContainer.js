@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Account from './Account';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const AccountContainer = props => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabChange = (e, value) => {
+    setActiveTab(value);
+  };
+
   const regexPattern = /^\?(\w+?)=(.*)/;
   const searchedUserId = props.location.search.match(regexPattern);
 
@@ -15,7 +21,14 @@ const AccountContainer = props => {
     }
   };
 
-  return <Account checkFetchOtherUser={checkFetchOtherUser} {...props} />;
+  return (
+    <Account
+      activeTab={activeTab}
+      handleTabChange={handleTabChange}
+      checkFetchOtherUser={checkFetchOtherUser}
+      {...props}
+    />
+  );
 };
 
 const mapStateToProps = state => {

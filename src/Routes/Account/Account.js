@@ -2,10 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import useStyles from './Style';
-import { AppBar, Tabs, Tab, Avatar, Typography } from '@material-ui/core';
+import {
+  Paper,
+  AppBar,
+  Tabs,
+  Tab,
+  Avatar,
+  Typography
+} from '@material-ui/core';
+import DetailsTab from './_components/DetailsTab';
 
 const Account = props => {
-  const { isAuthenticated, userDetails, checkFetchOtherUser } = props;
+  const {
+    activeTab,
+    handleTabChange,
+    isAuthenticated,
+    userDetails,
+    checkFetchOtherUser
+  } = props;
   const classes = useStyles();
 
   return (
@@ -23,7 +37,8 @@ const Account = props => {
         <div className={classes.accountBottom}>
           <AppBar position='relative' color='default'>
             <Tabs
-              value={0}
+              value={activeTab}
+              onChange={handleTabChange}
               indicatorColor='primary'
               textColor='primary'
               variant='fullWidth'
@@ -32,6 +47,9 @@ const Account = props => {
               <Tab label='tab2' />
             </Tabs>
           </AppBar>
+          <Paper className={classes.tabPanel} elevation={1}>
+            <DetailsTab classes={classes} tabIndex={0} activeTab={activeTab} />
+          </Paper>
         </div>
       </div>
     </>

@@ -6,9 +6,11 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     padding: theme.spacing(1),
     display: 'grid',
-    gridTemplateRows: '1fr 3.5fr',
+    gridTemplateRows: '1fr 4fr',
     gridTemplateColumns: '1fr',
-    gridGap: theme.spacing(1)
+    gridGap: theme.spacing(1),
+    overflowX: 'hidden',
+    overflowY: 'scroll'
   },
   accountTop: {
     display: 'flex',
@@ -19,13 +21,20 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column'
   },
   accountAvatar: {
-    height: theme.spacing(7),
-    width: theme.spacing(7)
+    height: theme.spacing(5.5),
+    width: theme.spacing(5.5)
   },
 
   accountBottom: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  tabPanel: {
+    height: '100%',
+    width: '100%'
   }
 }));
 
