@@ -18,7 +18,7 @@ const Account = props => {
     activeTab,
     handleTabChange,
     isAuthenticated,
-    userDetails,
+    profileUser,
     checkFetchOtherUser
   } = props;
   const classes = useStyles();
@@ -30,10 +30,14 @@ const Account = props => {
         <div className={classes.accountTop}>
           <Avatar
             className={classes.accountAvatar}
-            src={userDetails.photoUrl}
+            src={profileUser && profileUser.photoUrl}
           />
-          <Typography variant='h6'>{userDetails.username}</Typography>
-          <Typography variant='caption'>{userDetails.email}</Typography>
+          <Typography variant='h6'>
+            {profileUser && profileUser.username}
+          </Typography>
+          <Typography variant='caption'>
+            {profileUser && profileUser.email}
+          </Typography>
         </div>
         <div className={classes.accountBottom}>
           <AppBar position='relative' color='default'>
@@ -51,7 +55,12 @@ const Account = props => {
             </Tabs>
           </AppBar>
           <Paper className={classes.tabPanel} elevation={1}>
-            <DetailsTab classes={classes} tabIndex={0} activeTab={activeTab} />
+            <DetailsTab
+              profileUser={profileUser}
+              classes={classes}
+              tabIndex={0}
+              activeTab={activeTab}
+            />
           </Paper>
         </div>
       </div>

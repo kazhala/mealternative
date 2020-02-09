@@ -56,7 +56,8 @@ const AccountContainer = props => {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.Auth.isAuthenticated,
-    userDetails: state.Auth.user
+    userDetails: state.Auth.user,
+    profileUser: state.Profile.userDetails
   };
 };
 
