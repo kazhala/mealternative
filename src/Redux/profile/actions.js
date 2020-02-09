@@ -6,3 +6,9 @@ export const getProfileDetails = userId => {
     payload: userId
   };
 };
+
+export const cleanUp = () => {
+  return {
+    type: Types.PROFILE_CLEAN
+  };
+};

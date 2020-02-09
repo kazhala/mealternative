@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { ProfileActions } from '../../Redux/profile';
 
 const AccountContainer = props => {
-  const { getProfileDetails, userDetails } = props;
+  const { getProfileDetails, userDetails, cleanUp } = props;
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabChange = (e, value) => {
@@ -43,6 +43,12 @@ const AccountContainer = props => {
     userDetails
   ]);
 
+  useEffect(() => {
+    return () => {
+      cleanUp();
+    };
+  }, [cleanUp]);
+
   return (
     <Account
       activeTab={activeTab}
@@ -64,7 +70,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      getProfileDetails: ProfileActions.getProfileDetails
+      getProfileDetails: ProfileActions.getProfileDetails,
+      cleanUp: ProfileActions.cleanUp
     },
     dispatch
   );
