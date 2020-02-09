@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Account from './Account';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ProfileActions } from '../../Redux/profile';
 
 const AccountContainer = props => {
-  const { getProfileDetails } = props;
+  const { getProfileDetails, userDetails } = props;
   const [activeTab, setActiveTab] = useState(0);
-
-  useEffect(() => {
-    switch (activeTab) {
-      case 0:
-        getProfileDetails();
-        break;
-      default:
-        console.log('wrong');
-    }
-  }, [activeTab, getProfileDetails]);
 
   const handleTabChange = (e, value) => {
     setActiveTab(value);
@@ -25,13 +15,33 @@ const AccountContainer = props => {
   const regexPattern = /^\?(\w+?)=(.*)/;
   const searchedUserId = props.location.search.match(regexPattern);
 
-  const checkFetchOtherUser = () => {
+  const checkFetchOtherUser = useCallback(() => {
     if (searchedUserId) {
       return searchedUserId[1] === 'id' && searchedUserId[2];
     } else {
       return false;
     }
-  };
+  }, [searchedUserId]);
+
+  useEffect(() => {
+    switch (activeTab) {
+      case 0:
+        if (checkFetchOtherUser()) {
+          getProfileDetails(searchedUserId[2]);
+        } else {
+          getProfileDetails(userDetails._id);
+        }
+        break;
+      default:
+        console.log('wrong');
+    }
+  }, [
+    activeTab,
+    getProfileDetails,
+    searchedUserId,
+    checkFetchOtherUser,
+    userDetails
+  ]);
 
   return (
     <Account
