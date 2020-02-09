@@ -41,7 +41,8 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    padding: theme.spacing(1)
   },
   detailsAvatar: {
     display: 'flex',

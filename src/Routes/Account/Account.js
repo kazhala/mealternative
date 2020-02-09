@@ -35,9 +35,6 @@ const Account = props => {
           <Typography variant='h6'>
             {profileUser && profileUser.username}
           </Typography>
-          <Typography variant='caption'>
-            {profileUser && profileUser.email}
-          </Typography>
         </div>
         <div className={classes.accountBottom}>
           <AppBar position='relative' color='default'>
