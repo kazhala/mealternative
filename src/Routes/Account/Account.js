@@ -19,7 +19,8 @@ const Account = props => {
     handleTabChange,
     isAuthenticated,
     profileUser,
-    checkFetchOtherUser
+    checkFetchOtherUser,
+    updateProfileDetails
   } = props;
   const classes = useStyles();
 
@@ -53,6 +54,7 @@ const Account = props => {
           </AppBar>
           <Paper className={classes.tabPanel} elevation={1}>
             <DetailsTab
+              updateProfileDetails={updateProfileDetails}
               profileUser={profileUser}
               classes={classes}
               tabIndex={0}

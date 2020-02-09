@@ -71,7 +71,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       getProfileDetails: ProfileActions.getProfileDetails,
-      cleanUp: ProfileActions.cleanUp
+      cleanUp: ProfileActions.cleanUp,
+      updateProfileDetails: ProfileActions.updateProfileDetails
     },
     dispatch
   );

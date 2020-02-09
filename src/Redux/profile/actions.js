@@ -12,3 +12,10 @@ export const cleanUp = () => {
     type: Types.PROFILE_CLEAN
   };
 };
+
+export const updateProfileDetails = payload => {
+  return {
+    type: Types.PROFILE_UPDATE_USER,
+    payload
+  };
+};

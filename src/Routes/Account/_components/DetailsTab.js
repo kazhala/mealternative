@@ -13,7 +13,13 @@ import {
 } from '@material-ui/icons';
 
 const DetailsTab = props => {
-  const { classes, activeTab, tabIndex, profileUser } = props;
+  const {
+    updateProfileDetails,
+    classes,
+    activeTab,
+    tabIndex,
+    profileUser
+  } = props;
 
   const [displayProfile, setDisplayProfile] = useState(null);
   const [imageOption, setImageOption] = useState('url');
@@ -57,6 +63,11 @@ const DetailsTab = props => {
 
   const checkButtonEnable = () => {
     return profileUser.photoUrl === displayProfile.photoUrl;
+  };
+
+  const handleSubmit = () => {
+    const upDateParams = { ...displayProfile, newImageFile };
+    updateProfileDetails(upDateParams);
   };
 
   return (
@@ -165,7 +176,12 @@ const DetailsTab = props => {
               >
                 Reset
               </Button>
-              <Button variant='outlined' startIcon={<Check />} color='primary'>
+              <Button
+                onClick={handleSubmit}
+                variant='outlined'
+                startIcon={<Check />}
+                color='primary'
+              >
                 Update
               </Button>
             </div>
@@ -182,7 +198,8 @@ DetailsTab.propTypes = {
   classes: PropTypes.object.isRequired,
   activeTab: PropTypes.number.isRequired,
   tabIndex: PropTypes.number.isRequired,
-  profileUser: PropTypes.object
+  profileUser: PropTypes.object,
+  updateProfileDetails: PropTypes.func.isRequired
 };
 
 export default DetailsTab;

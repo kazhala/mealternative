@@ -6,6 +6,10 @@ export function* watchProfileGetUser() {
   yield takeLatest(Types.PROFILE_GET_USER, workerProfileGetUser);
 }
 
+export function* watchProfileUpdateUser() {
+  yield takeLatest(Types.PROFILE_UPDATE_USER, workerProfileUpdateUser);
+}
+
 function* workerProfileGetUser({ payload }) {
   yield put({ type: Types.PROFILE_BEGIN });
   try {
@@ -18,4 +22,8 @@ function* workerProfileGetUser({ payload }) {
     console.log('Error', err);
     yield put({ type: Types.PROFILE_ERROR, payload: err.message });
   }
+}
+
+function* workerProfileUpdateUser({ payload }) {
+  yield console.log(payload);
 }
