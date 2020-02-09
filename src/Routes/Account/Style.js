@@ -42,11 +42,24 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    alignItems: 'center'
+  },
+  avatarDisplay: {
+    height: theme.spacing(3),
+    width: theme.spacing(3),
+    marginBottom: theme.spacing(1)
   },
   detailsAvatar: {
     display: 'flex',
     alignItems: 'center'
+  },
+  toggleButtonGroup: {
+    marginRight: theme.spacing(0.5)
+  },
+
+  fileInput: {
+    display: 'none'
   }
 }));
 
