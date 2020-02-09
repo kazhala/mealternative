@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Account from './Account';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { ProfileActions } from '../../Redux/profile';
 
 const AccountContainer = props => {
+  const { getProfileDetails } = props;
   const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    switch (activeTab) {
+      case 0:
+        getProfileDetails();
+        break;
+      default:
+        console.log('wrong');
+    }
+  }, [activeTab, getProfileDetails]);
 
   const handleTabChange = (e, value) => {
     setActiveTab(value);
@@ -39,7 +51,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  //
+  return bindActionCreators(
+    {
+      getProfileDetails: ProfileActions.getProfileDetails
+    },
+    dispatch
+  );
 };
 
-export default connect(mapStateToProps, null)(AccountContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountContainer);
