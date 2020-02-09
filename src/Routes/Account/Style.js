@@ -58,6 +58,16 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(0.5)
   },
 
+  inputFields: {
+    marginTop: theme.spacing(1)
+  },
+
+  detailSubmitGroup: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+
   fileInput: {
     display: 'none'
   }

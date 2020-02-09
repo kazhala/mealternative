@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
 import { Avatar, TextField, IconButton, Button } from '@material-ui/core';
 import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
-import { Link, CloudUpload, AddAPhoto, Clear } from '@material-ui/icons';
+import {
+  Link,
+  CloudUpload,
+  AddAPhoto,
+  Clear,
+  RotateLeft,
+  Check
+} from '@material-ui/icons';
 
 const DetailsTab = props => {
   const { classes, activeTab, tabIndex, profileUser } = props;
@@ -23,30 +30,28 @@ const DetailsTab = props => {
   }, [profileUser]);
 
   const handleChange = (name, value = null, file = null) => {
-    switch (name) {
-      case 'photoUrl':
-        setDisplayProfile(prevProfile => ({
-          ...prevProfile,
-          photoUrl: value
-        }));
-        break;
-      case 'media':
-        setNewImageFile(file);
-        setDisplayProfile(prevProfile => ({
-          ...prevProfile,
-          photoUrl: window.URL.createObjectURL(file)
-        }));
-        break;
-      case 'clear':
-        setNewImageFile(null);
-        setDisplayProfile(prevProfile => ({
-          ...prevProfile,
-          photoUrl: profileUser.photoUrl
-        }));
-        break;
-      default:
-        console.log(value);
-        break;
+    if (name && value && !file) {
+      setDisplayProfile(prevProfile => ({
+        ...prevProfile,
+        [name]: value
+      }));
+    } else if (name === 'media' && file) {
+      setNewImageFile(file);
+      setDisplayProfile(prevProfile => ({
+        ...prevProfile,
+        photoUrl: window.URL.createObjectURL(file)
+      }));
+    } else if (name === 'clearImage') {
+      setNewImageFile(null);
+      setDisplayProfile(prevProfile => ({
+        ...prevProfile,
+        photoUrl: profileUser.photoUrl
+      }));
+    } else if (name === 'clearAll') {
+      setNewImageFile(null);
+      setDisplayProfile(prevProfile => ({
+        ...profileUser
+      }));
     }
   };
 
@@ -89,6 +94,7 @@ const DetailsTab = props => {
                   value={displayProfile.photoUrl}
                 />
               )}
+
               {imageOption === 'file' && (
                 <>
                   <input
@@ -115,10 +121,53 @@ const DetailsTab = props => {
               )}
               <IconButton
                 disabled={checkButtonEnable()}
-                onClick={e => handleChange('clear')}
+                onClick={e => handleChange('clearImage')}
               >
                 <Clear />
               </IconButton>
+            </div>
+
+            <TextField
+              className={classes.inputFields}
+              value={displayProfile.username}
+              onChange={e => handleChange('username', e.target.value)}
+              variant='outlined'
+              label='Username'
+              fullWidth
+            />
+            <TextField
+              className={classes.inputFields}
+              value={displayProfile.email}
+              onChange={e => handleChange('email', e.target.value)}
+              variant='outlined'
+              label='Email'
+              fullWidth
+            />
+            <TextField
+              className={classes.inputFields}
+              value={displayProfile.about}
+              onChange={e => handleChange('about', e.target.value)}
+              variant='outlined'
+              label='About'
+              fullWidth
+              multiline
+              rowsMax={5}
+              rows={5}
+            />
+
+            <div
+              className={`${classes.detailSubmitGroup} ${classes.inputFields}`}
+            >
+              <Button
+                onClick={() => handleChange('clearAll')}
+                startIcon={<RotateLeft />}
+                color='primary'
+              >
+                Reset
+              </Button>
+              <Button variant='outlined' startIcon={<Check />} color='primary'>
+                Update
+              </Button>
             </div>
           </>
         ) : (
