@@ -35,6 +35,17 @@ const useStyles = makeStyles(theme => ({
   tabPanel: {
     height: '100%',
     width: '100%'
+  },
+
+  detailsTabRoot: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  detailsAvatar: {
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 

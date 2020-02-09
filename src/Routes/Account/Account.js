@@ -10,6 +10,7 @@ import {
   Avatar,
   Typography
 } from '@material-ui/core';
+import { Settings, Book, MenuBook, VpnKey } from '@material-ui/icons';
 import DetailsTab from './_components/DetailsTab';
 
 const Account = props => {
@@ -40,11 +41,13 @@ const Account = props => {
               value={activeTab}
               onChange={handleTabChange}
               indicatorColor='primary'
-              textColor='primary'
               variant='fullWidth'
+              textColor='primary'
             >
-              <Tab label='tab1' />
-              <Tab label='tab2' />
+              <Tab icon={<Settings />} />
+              <Tab icon={<Book />} />
+              <Tab icon={<MenuBook />} />
+              <Tab icon={<VpnKey />} />
             </Tabs>
           </AppBar>
           <Paper className={classes.tabPanel} elevation={1}>
