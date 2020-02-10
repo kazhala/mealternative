@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { Settings, Book, MenuBook, VpnKey } from '@material-ui/icons';
 import DetailsTab from './_components/DetailsTab';
+import PageSpinner from '../../Common/Spinner/PageSpinner';
 
 const Account = props => {
   const {
@@ -21,13 +22,16 @@ const Account = props => {
     profileUser,
     checkFetchOtherUser,
     updateProfileDetails,
-    detailLoading
+    detailLoading,
+    loadingText,
+    loading
   } = props;
   const classes = useStyles();
 
   return (
     <>
       {!isAuthenticated && !checkFetchOtherUser() && <Redirect to='/' />}
+      <PageSpinner loading={loading} text={loadingText} />
       <div className={classes.accountRoot}>
         <div className={classes.accountTop}>
           <Avatar

@@ -33,6 +33,7 @@ const DetailsTab = props => {
   useEffect(() => {
     if (profileUser) {
       setDisplayProfile(profileUser);
+      setNewImageFile(null);
     }
   }, [profileUser]);
 

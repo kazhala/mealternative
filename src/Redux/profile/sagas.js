@@ -1,4 +1,4 @@
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { takeLatest, put, call, delay } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 
@@ -52,7 +52,8 @@ function* workerProfileUpdateUser({ payload }) {
     if (response.error) {
       throw new Error(response.error);
     }
-    console.log(response);
+    yield delay(1000);
+    yield put({ type: Types.PROFILE_STORE_USER, payload: response });
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.PROFILE_ERROR, payload: err.message });

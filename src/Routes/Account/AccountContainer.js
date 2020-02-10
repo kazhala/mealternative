@@ -65,7 +65,8 @@ const mapStateToProps = state => {
     userDetails: state.Auth.user,
     profileUser: state.Profile.userDetails,
     detailLoading: state.Profile.detailLoading,
-    loading: state.Profile.loading
+    loading: state.Profile.loading,
+    loadingText: state.Profile.loadingText
   };
 };
 
