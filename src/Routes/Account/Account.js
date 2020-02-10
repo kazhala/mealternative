@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import useStyles from './Style';
 import {
   Paper,
@@ -12,26 +11,19 @@ import {
 } from '@material-ui/core';
 import { Settings, Book, MenuBook, VpnKey } from '@material-ui/icons';
 import DetailsTab from './_components/DetailsTab';
-import PageSpinner from '../../Common/Spinner/PageSpinner';
 
 const Account = props => {
   const {
     activeTab,
     handleTabChange,
-    isAuthenticated,
     profileUser,
-    checkFetchOtherUser,
     updateProfileDetails,
-    detailLoading,
-    loadingText,
-    loading
+    detailLoading
   } = props;
   const classes = useStyles();
 
   return (
     <>
-      {!isAuthenticated && !checkFetchOtherUser() && <Redirect to='/' />}
-      <PageSpinner loading={loading} text={loadingText} />
       <div className={classes.accountRoot}>
         <div className={classes.accountTop}>
           <Avatar
@@ -74,7 +66,8 @@ const Account = props => {
 };
 
 Account.propTypes = {
-  checkFetchOtherUser: PropTypes.func.isRequired
+  activeTab: PropTypes.number.isRequired,
+  handleTabChange: PropTypes.func.isRequired
 };
 
 export default Account;

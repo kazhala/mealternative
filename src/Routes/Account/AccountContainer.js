@@ -3,9 +3,20 @@ import Account from './Account';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ProfileActions } from '../../Redux/profile';
+import { Redirect } from 'react-router-dom';
+import PageSpinner from '../../Common/Spinner/PageSpinner';
+import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const AccountContainer = props => {
-  const { getProfileDetails, userDetails, cleanUp } = props;
+  const {
+    getProfileDetails,
+    userDetails,
+    cleanUp,
+    isAuthenticated,
+    loading,
+    loadingText,
+    error
+  } = props;
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabChange = (e, value) => {
@@ -24,6 +35,7 @@ const AccountContainer = props => {
   }, [searchedUserId]);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
     switch (activeTab) {
       case 0:
         if (checkFetchOtherUser()) {
@@ -36,6 +48,7 @@ const AccountContainer = props => {
         console.log('wrong');
     }
   }, [
+    isAuthenticated,
     activeTab,
     getProfileDetails,
     searchedUserId,
@@ -50,12 +63,16 @@ const AccountContainer = props => {
   }, [cleanUp]);
 
   return (
-    <Account
-      activeTab={activeTab}
-      handleTabChange={handleTabChange}
-      checkFetchOtherUser={checkFetchOtherUser}
-      {...props}
-    />
+    <>
+      {!isAuthenticated && !checkFetchOtherUser() && <Redirect to='/' />}
+      <PageSpinner loading={loading} text={loadingText} />
+      <ErrorSnack error={error} handleClose={cleanUp} />
+      <Account
+        activeTab={activeTab}
+        handleTabChange={handleTabChange}
+        {...props}
+      />
+    </>
   );
 };
 
@@ -66,7 +83,8 @@ const mapStateToProps = state => {
     profileUser: state.Profile.userDetails,
     detailLoading: state.Profile.detailLoading,
     loading: state.Profile.loading,
-    loadingText: state.Profile.loadingText
+    loadingText: state.Profile.loadingText,
+    error: state.Profile.error
   };
 };
 
