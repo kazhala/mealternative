@@ -1,5 +1,12 @@
+/*
+  Bookmark like and rate action
+*/
+
+// react
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { Rating } from '@material-ui/lab';
 import {
   BookmarkBorderOutlined,
@@ -21,6 +28,7 @@ const MiscActions = props => {
     handleRateAction
   } = props;
 
+  // keep track of the original state for updating purposes
   const [isLiked, setIsLiked] = useState(liked);
   const [likeCount, setLikeCount] = useState(likes);
 
@@ -29,18 +37,21 @@ const MiscActions = props => {
 
   const [ratingValue, setRatingValue] = useState(rating);
 
+  // alternate based on previouse state
   const handleLikeClick = () => {
     isLiked ? setLikeCount(prev => prev - 1) : setLikeCount(prev => prev + 1);
     setIsLiked(prev => !prev);
     handleLikeAction();
   };
 
+  // alternate based on previouse state
   const handleBookClick = () => {
     isBooked ? setBookCount(prev => prev - 1) : setBookCount(prev => prev + 1);
     setIsBooked(prev => !prev);
     handleBookAction();
   };
 
+  // update rating
   const handleRatingChange = (e, value) => {
     setRatingValue(value);
     handleRateAction(value);
@@ -49,6 +60,7 @@ const MiscActions = props => {
   return (
     <div className={classes.detailMiscRoot}>
       <div className={classes.detailContainer}>
+        {/* increment by 0.5 */}
         <Rating
           precision={0.5}
           onChange={handleRatingChange}
@@ -62,10 +74,12 @@ const MiscActions = props => {
           onClick={handleBookClick}
           className={`${classes.detailIconText} ${classes.detailBookMark}`}
         >
+          {/* based on status display different icon */}
           {isBooked ? <Bookmark color='primary' /> : <BookmarkBorderOutlined />}
           ({bookCount})
         </div>
         <div onClick={handleLikeClick} className={classes.detailIconText}>
+          {/* based on status display different icon */}
           {isLiked ? <ThumbUp color='primary' /> : <ThumbUpOutlined />}(
           {likeCount})
         </div>

@@ -14,11 +14,14 @@ import {
 const Steps = props => {
   const { classes, steps } = props;
 
+  // current active step
   const [activeStep, setActiveStep] = useState(0);
 
   return (
     <Stepper activeStep={activeStep} orientation='vertical'>
+      {/* display all steps */}
       {steps.map((step, index) => (
+        // never complete a step
         <Step completed={false} key={index}>
           <StepLabel onClick={() => setActiveStep(index)}>
             <Typography className={classes.stepLabel} variant='h6'>
@@ -26,6 +29,7 @@ const Steps = props => {
             </Typography>
           </StepLabel>
           <StepContent>
+            {/* display image if it contains image */}
             {step.stepImageUrl && (
               <div
                 className={classes.stepImage}

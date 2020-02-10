@@ -1,8 +1,17 @@
+/*
+  container for Detail modal to display recipe information
+*/
+
+// react
 import React, { useEffect, useState } from 'react';
-import RecipeDetail from './RecipeDetail';
+
+// redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { RecipeActions } from '../../Redux/recipe';
+
+// components
+import RecipeDetail from './RecipeDetail';
 
 const RecipeDetailContainer = props => {
   const {
@@ -15,17 +24,25 @@ const RecipeDetailContainer = props => {
     incrementBook,
     updateRecipeRating
   } = props;
+
+  // make useEffect simulates componentDidMount (only exe once)
   const [mounted, setMounted] = useState(false);
+
+  // determine if the modal should be closed
   const [showModal, setShowModal] = useState(true);
 
+  // componentDidMount, fetch details once
   useEffect(() => {
     if (!mounted) {
+      // _id is in params
       console.log(match.params);
       setMounted(true);
       getRecipeDetails(match.params);
     }
   }, [match, mounted, getRecipeDetails]);
 
+  // history go back
+  // timeout 200 for animation finish
   const handleBack = () => {
     setShowModal(false);
     setTimeout(() => {
@@ -33,12 +50,14 @@ const RecipeDetailContainer = props => {
     }, 200);
   };
 
+  // clean up on unmount
   useEffect(() => {
     return () => {
       cleanUp();
     };
   }, [cleanUp]);
 
+  // if not authenticated, redirect
   const checkAuthentication = () => {
     if (!isAuthenticated) {
       history.push('/signin');

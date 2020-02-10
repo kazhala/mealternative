@@ -1,5 +1,12 @@
+/*
+  Title component of detail recipe
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// component
 import { Typography } from '@material-ui/core';
 
 const TitleDes = props => {

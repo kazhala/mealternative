@@ -1,8 +1,12 @@
 /*
   display categories and ingredients of a recipe
 */
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import { Category, Kitchen } from '@material-ui/icons';
 import {
   Chip,
@@ -16,6 +20,7 @@ const ListsCatIng = props => {
   const { classes, categories, ingredients } = props;
 
   return (
+    // two lists to display categories and ingredients
     <List className={classes.detailListsRoot} component='div'>
       <ListItem>
         <ListItemIcon>
@@ -31,6 +36,7 @@ const ListsCatIng = props => {
         <ListItemIcon>
           <Category />
         </ListItemIcon>
+        {/* TODO: categories click to go to category */}
         <ListItemText
           primary={categories.map((cat, index) => (
             <Chip key={index} size='small' label={cat.name} />

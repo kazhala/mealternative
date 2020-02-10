@@ -1,3 +1,8 @@
+/*
+  Thumbnail component fo detail recipe
+*/
+
+// react
 import React from 'react';
 import PropTypes from 'prop-types';
 
