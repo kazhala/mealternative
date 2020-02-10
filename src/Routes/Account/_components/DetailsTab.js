@@ -18,7 +18,8 @@ const DetailsTab = props => {
     classes,
     activeTab,
     tabIndex,
-    profileUser
+    profileUser,
+    detailLoading
   } = props;
 
   const [displayProfile, setDisplayProfile] = useState(null);
@@ -73,7 +74,7 @@ const DetailsTab = props => {
   return (
     activeTab === tabIndex && (
       <div className={classes.detailsTabRoot}>
-        {displayProfile && displayProfile._id ? (
+        {displayProfile && displayProfile._id && (
           <>
             <Avatar
               className={classes.avatarDisplay}
@@ -186,9 +187,8 @@ const DetailsTab = props => {
               </Button>
             </div>
           </>
-        ) : (
-          <PageSpinner loading={true} background='0,0,0,0' />
         )}
+        <PageSpinner loading={detailLoading} background='0,0,0,0' />
       </div>
     )
   );
@@ -199,7 +199,8 @@ DetailsTab.propTypes = {
   activeTab: PropTypes.number.isRequired,
   tabIndex: PropTypes.number.isRequired,
   profileUser: PropTypes.object,
-  updateProfileDetails: PropTypes.func.isRequired
+  updateProfileDetails: PropTypes.func.isRequired,
+  detailLoading: PropTypes.bool.isRequired
 };
 
 export default DetailsTab;

@@ -20,7 +20,8 @@ const Account = props => {
     isAuthenticated,
     profileUser,
     checkFetchOtherUser,
-    updateProfileDetails
+    updateProfileDetails,
+    detailLoading
   } = props;
   const classes = useStyles();
 
@@ -59,6 +60,7 @@ const Account = props => {
               classes={classes}
               tabIndex={0}
               activeTab={activeTab}
+              detailLoading={detailLoading}
             />
           </Paper>
         </div>

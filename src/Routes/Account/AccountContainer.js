@@ -63,7 +63,9 @@ const mapStateToProps = state => {
   return {
     isAuthenticated: state.Auth.isAuthenticated,
     userDetails: state.Auth.user,
-    profileUser: state.Profile.userDetails
+    profileUser: state.Profile.userDetails,
+    detailLoading: state.Profile.detailLoading,
+    loading: state.Profile.loading
   };
 };
 
