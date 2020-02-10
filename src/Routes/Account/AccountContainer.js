@@ -9,6 +9,7 @@ import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const AccountContainer = props => {
   const {
+    clearError,
     getProfileDetails,
     userDetails,
     cleanUp,
@@ -66,7 +67,7 @@ const AccountContainer = props => {
     <>
       {!isAuthenticated && !checkFetchOtherUser() && <Redirect to='/' />}
       <PageSpinner loading={loading} text={loadingText} />
-      <ErrorSnack error={error} handleClose={cleanUp} />
+      <ErrorSnack error={error} handleClose={clearError} />
       <Account
         activeTab={activeTab}
         handleTabChange={handleTabChange}
@@ -93,6 +94,7 @@ const mapDispatchToProps = dispatch => {
     {
       getProfileDetails: ProfileActions.getProfileDetails,
       cleanUp: ProfileActions.cleanUp,
+      clearError: ProfileActions.clearError,
       updateProfileDetails: ProfileActions.updateProfileDetails
     },
     dispatch

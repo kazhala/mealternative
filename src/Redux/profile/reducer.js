@@ -33,6 +33,14 @@ const ProfileReducer = (state = initialState, action) => {
         detailLoading: false,
         loadingText: ''
       };
+    case Types.PROFILE_CLEAR:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        detailLoading: false,
+        loadingText: ''
+      };
     case Types.PROFILE_STORE_USER:
       return {
         ...state,

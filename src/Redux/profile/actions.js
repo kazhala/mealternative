@@ -19,3 +19,9 @@ export const updateProfileDetails = payload => {
     payload
   };
 };
+
+export const clearError = () => {
+  return {
+    type: Types.PROFILE_CLEAR
+  };
+};
