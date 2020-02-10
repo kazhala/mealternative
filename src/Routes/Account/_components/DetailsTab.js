@@ -37,18 +37,7 @@ const DetailsTab = props => {
   }, [profileUser]);
 
   const handleChange = (name, value = null, file = null) => {
-    if (name && value && !file) {
-      setDisplayProfile(prevProfile => ({
-        ...prevProfile,
-        [name]: value
-      }));
-    } else if (name === 'media' && file) {
-      setNewImageFile(file);
-      setDisplayProfile(prevProfile => ({
-        ...prevProfile,
-        photoUrl: window.URL.createObjectURL(file)
-      }));
-    } else if (name === 'clearImage') {
+    if (name === 'clearImage') {
       setNewImageFile(null);
       setDisplayProfile(prevProfile => ({
         ...prevProfile,
@@ -58,6 +47,17 @@ const DetailsTab = props => {
       setNewImageFile(null);
       setDisplayProfile(prevProfile => ({
         ...profileUser
+      }));
+    } else if (name === 'media' && file) {
+      setNewImageFile(file);
+      setDisplayProfile(prevProfile => ({
+        ...prevProfile,
+        photoUrl: window.URL.createObjectURL(file)
+      }));
+    } else {
+      setDisplayProfile(prevProfile => ({
+        ...prevProfile,
+        [name]: value
       }));
     }
   };
