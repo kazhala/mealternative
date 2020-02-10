@@ -28,6 +28,10 @@ function* workerProfileUpdateUser({ payload }) {
   yield put({ type: Types.PROFILE_BEGIN });
   const uploadParams = { ...payload };
   try {
+    let response = yield call(Operations.validateName, uploadParams.username);
+    if (response.error) {
+      throw new Error('username already exists');
+    }
     if (uploadParams.newImageFile) {
       yield put({
         type: Types.PROFILE_LOADING_TEXT,
@@ -48,7 +52,7 @@ function* workerProfileUpdateUser({ payload }) {
     }
     uploadParams.newImageFile = undefined;
     yield put({ type: Types.PROFILE_LOADING_TEXT, payload: 'Updating..' });
-    const response = yield call(Operations.updateProfileDetails, uploadParams);
+    response = yield call(Operations.updateProfileDetails, uploadParams);
     if (response.error) {
       throw new Error(response.error);
     }

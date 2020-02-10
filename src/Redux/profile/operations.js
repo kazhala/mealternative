@@ -48,3 +48,18 @@ export const updateProfileDetails = async params => {
     console.log('Error', err);
   }
 };
+
+export const validateName = async name => {
+  try {
+    const res = await fetch(`${API}/user/check/${name}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
