@@ -48,6 +48,11 @@ function* workerProfileUpdateUser({ payload }) {
     }
     uploadParams.newImageFile = undefined;
     yield put({ type: Types.PROFILE_LOADING_TEXT, payload: 'Updating..' });
+    const response = yield call(Operations.updateProfileDetails, uploadParams);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+    console.log(response);
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.PROFILE_ERROR, payload: err.message });

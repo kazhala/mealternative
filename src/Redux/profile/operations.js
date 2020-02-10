@@ -1,4 +1,5 @@
 import { API, CloudinaryURL } from '../../config';
+import Cookies from 'js-cookie';
 
 export const getProfileDetails = async userId => {
   try {
@@ -24,6 +25,23 @@ export const uploadProfileImage = async file => {
     const res = await fetch(CloudinaryURL, {
       method: 'POST',
       body: data
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const updateProfileDetails = async params => {
+  try {
+    const res = await fetch(`${API}/user/${params._id}/details`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('token')}`
+      },
+      body: JSON.stringify(params)
     });
     return res.json();
   } catch (err) {
