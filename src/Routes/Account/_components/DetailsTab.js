@@ -1,6 +1,12 @@
+/*
+  the account details tab
+*/
+
+// react
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import PageSpinner from '../../../Common/Spinner/PageSpinner';
+
+// components
 import { Avatar, TextField, IconButton, Button } from '@material-ui/core';
 import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
 import {
@@ -11,6 +17,7 @@ import {
   RotateLeft,
   Check
 } from '@material-ui/icons';
+import PageSpinner from '../../../Common/Spinner/PageSpinner';
 
 const DetailsTab = props => {
   const {
@@ -22,40 +29,53 @@ const DetailsTab = props => {
     detailLoading
   } = props;
 
+  // the data to be displayed, keep a copy locally for updating state without
+  // changing calling redux until needed
   const [displayProfile, setDisplayProfile] = useState(null);
+  // current image option [url, file]
   const [imageOption, setImageOption] = useState('url');
+  // get the file data
   const [newImageFile, setNewImageFile] = useState(null);
 
+  // change image otpion
   const handleImageToggle = (e, value) => {
     setImageOption(value);
   };
 
+  // update user detail when data from redux changed
+  // profileUser(redux), displayProfile(local state)
   useEffect(() => {
     if (profileUser) {
       setDisplayProfile(profileUser);
+      // clean up the file data
       setNewImageFile(null);
     }
   }, [profileUser]);
 
+  // update the local state
   const handleChange = (name, value = null, file = null) => {
     if (name === 'clearImage') {
+      // reset the image change
       setNewImageFile(null);
       setDisplayProfile(prevProfile => ({
         ...prevProfile,
         photoUrl: profileUser.photoUrl
       }));
     } else if (name === 'clearAll') {
+      // reset everything
       setNewImageFile(null);
       setDisplayProfile(prevProfile => ({
         ...profileUser
       }));
     } else if (name === 'media' && file) {
+      // store file in state
       setNewImageFile(file);
       setDisplayProfile(prevProfile => ({
         ...prevProfile,
         photoUrl: window.URL.createObjectURL(file)
       }));
     } else {
+      // update state
       setDisplayProfile(prevProfile => ({
         ...prevProfile,
         [name]: value
@@ -63,25 +83,31 @@ const DetailsTab = props => {
     }
   };
 
+  // check if the reset button should be enabled
   const checkButtonEnable = () => {
     return profileUser.photoUrl === displayProfile.photoUrl;
   };
 
+  // submit the data through redux
   const handleSubmit = () => {
     const upDateParams = { ...displayProfile, newImageFile };
     updateProfileDetails(upDateParams);
   };
 
   return (
+    // display if active tab is this tab index
     activeTab === tabIndex && (
       <div className={classes.detailsTabRoot}>
+        {/* onec everything is loaded, display */}
         {displayProfile && displayProfile._id && (
           <>
+            {/* profile avatar */}
             <Avatar
               className={classes.avatarDisplay}
               src={displayProfile.photoUrl}
             />
             <div className={classes.detailsAvatar}>
+              {/* image option toggle group */}
               <ToggleButtonGroup
                 className={classes.toggleButtonGroup}
                 size='small'
@@ -96,6 +122,8 @@ const DetailsTab = props => {
                   <CloudUpload />
                 </ToggleButton>
               </ToggleButtonGroup>
+
+              {/* url input of image */}
               {imageOption === 'url' && (
                 <TextField
                   fullWidth
@@ -108,6 +136,7 @@ const DetailsTab = props => {
                 />
               )}
 
+              {/* file upload for image */}
               {imageOption === 'file' && (
                 <>
                   <input
@@ -140,6 +169,7 @@ const DetailsTab = props => {
               </IconButton>
             </div>
 
+            {/* textfields to enter data */}
             <TextField
               className={classes.inputFields}
               value={displayProfile.email}
@@ -168,6 +198,7 @@ const DetailsTab = props => {
               rows={5}
             />
 
+            {/* submit button group */}
             <div
               className={`${classes.detailSubmitGroup} ${classes.inputFields}`}
             >

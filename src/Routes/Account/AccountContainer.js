@@ -1,9 +1,18 @@
+/*
+  container of the profile page
+*/
+
+// react
 import React, { useState, useEffect, useCallback } from 'react';
-import Account from './Account';
+import { Redirect } from 'react-router-dom';
+
+// redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ProfileActions } from '../../Redux/profile';
-import { Redirect } from 'react-router-dom';
+
+// components
+import Account from './Account';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
@@ -18,15 +27,19 @@ const AccountContainer = props => {
     loadingText,
     error
   } = props;
+  // current tab
   const [activeTab, setActiveTab] = useState(0);
 
+  // update active tab
   const handleTabChange = (e, value) => {
     setActiveTab(value);
   };
 
+  // get the query string if it exists (?id=xxx)
   const regexPattern = /^\?(\w+?)=(.*)/;
   const searchedUserId = props.location.search.match(regexPattern);
 
+  // check if is looking at it's own profile or others profile
   const checkFetchOtherUser = useCallback(() => {
     if (searchedUserId) {
       return searchedUserId[1] === 'id' && searchedUserId[2];
@@ -35,6 +48,7 @@ const AccountContainer = props => {
     }
   }, [searchedUserId]);
 
+  // fetch details for different tabs
   useEffect(() => {
     if (!isAuthenticated) return;
     switch (activeTab) {
@@ -57,6 +71,7 @@ const AccountContainer = props => {
     userDetails
   ]);
 
+  // clean up on unmount
   useEffect(() => {
     return () => {
       cleanUp();
@@ -65,6 +80,7 @@ const AccountContainer = props => {
 
   return (
     <>
+      {/* if is not looking at others and is not login, redirect */}
       {!isAuthenticated && !checkFetchOtherUser() && <Redirect to='/' />}
       <PageSpinner loading={loading} text={loadingText} />
       <ErrorSnack error={error} handleClose={clearError} />
