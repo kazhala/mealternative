@@ -1,4 +1,4 @@
-import { API } from '../../config';
+import { API, CloudinaryURL } from '../../config';
 
 export const getProfileDetails = async userId => {
   try {
@@ -8,6 +8,22 @@ export const getProfileDetails = async userId => {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
+export const uploadProfileImage = async file => {
+  try {
+    const data = new FormData();
+    data.append('file', file);
+    data.append('upload_preset', 'mealternative_profile');
+    data.append('cloud_name', 'kazhala');
+    const res = await fetch(CloudinaryURL, {
+      method: 'POST',
+      body: data
     });
     return res.json();
   } catch (err) {

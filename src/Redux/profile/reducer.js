@@ -4,7 +4,8 @@ const initialState = {
   loading: false,
   error: '',
   userDetails: {},
-  detailLoading: false
+  detailLoading: false,
+  loadingText: ''
 };
 
 const ProfileReducer = (state = initialState, action) => {
@@ -13,12 +14,15 @@ const ProfileReducer = (state = initialState, action) => {
       return { ...state, detailLoading: true, error: '' };
     case Types.PROFILE_BEGIN:
       return { ...state, loading: true, error: '' };
+    case Types.PROFILE_LOADING_TEXT:
+      return { ...state, loadingText: action.payload };
     case Types.PROFILE_ERROR:
       return {
         ...state,
         error: action.payload,
         loading: false,
-        detailLoading: false
+        detailLoading: false,
+        loadingText: ''
       };
     case Types.PROFILE_CLEAN:
       return {
@@ -26,7 +30,8 @@ const ProfileReducer = (state = initialState, action) => {
         loading: false,
         error: '',
         userDetails: {},
-        detailLoading: false
+        detailLoading: false,
+        loadingText: ''
       };
     case Types.PROFILE_STORE_USER:
       return {
@@ -34,7 +39,8 @@ const ProfileReducer = (state = initialState, action) => {
         error: '',
         loading: false,
         userDetails: action.payload,
-        detailLoading: false
+        detailLoading: false,
+        loadingText: ''
       };
     default:
       return state;

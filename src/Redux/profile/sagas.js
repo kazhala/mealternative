@@ -11,7 +11,7 @@ export function* watchProfileUpdateUser() {
 }
 
 function* workerProfileGetUser({ payload }) {
-  yield put({ type: Types.PROFILE_BEGIN });
+  yield put({ type: Types.DETAIL_BEGIN });
   try {
     const response = yield call(Operations.getProfileDetails, payload);
     if (response.error) {
@@ -25,5 +25,31 @@ function* workerProfileGetUser({ payload }) {
 }
 
 function* workerProfileUpdateUser({ payload }) {
-  yield console.log(payload);
+  yield put({ type: Types.PROFILE_BEGIN });
+  const uploadParams = { ...payload };
+  try {
+    if (uploadParams.newImageFile) {
+      yield put({
+        type: Types.PROFILE_LOADING_TEXT,
+        payload: 'Uploading profile image..'
+      });
+      const response = yield call(
+        Operations.uploadProfileImage,
+        payload.newImageFile
+      );
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      if (response.secure_url) {
+        uploadParams.photoUrl = response.secure_url;
+      } else {
+        throw new Error('Something went wrong..');
+      }
+    }
+    uploadParams.newImageFile = undefined;
+    yield put({ type: Types.PROFILE_LOADING_TEXT, payload: 'Updating..' });
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.PROFILE_ERROR, payload: err.message });
+  }
 }
