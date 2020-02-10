@@ -141,18 +141,18 @@ const DetailsTab = props => {
 
             <TextField
               className={classes.inputFields}
+              value={displayProfile.email}
+              variant='outlined'
+              label='Email'
+              fullWidth
+              disabled
+            />
+            <TextField
+              className={classes.inputFields}
               value={displayProfile.username}
               onChange={e => handleChange('username', e.target.value)}
               variant='outlined'
               label='Username'
-              fullWidth
-            />
-            <TextField
-              className={classes.inputFields}
-              value={displayProfile.email}
-              onChange={e => handleChange('email', e.target.value)}
-              variant='outlined'
-              label='Email'
               fullWidth
             />
             <TextField
