@@ -28,7 +28,11 @@ function* workerProfileUpdateUser({ payload }) {
   yield put({ type: Types.PROFILE_BEGIN });
   const uploadParams = { ...payload };
   try {
-    let response = yield call(Operations.validateName, uploadParams.username);
+    let response = yield call(
+      Operations.validateName,
+      uploadParams._id,
+      uploadParams.username
+    );
     if (response.error) {
       throw new Error('username already exists');
     }

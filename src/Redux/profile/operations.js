@@ -49,9 +49,9 @@ export const updateProfileDetails = async params => {
   }
 };
 
-export const validateName = async name => {
+export const validateName = async (userId, username) => {
   try {
-    const res = await fetch(`${API}/user/check/${name}`, {
+    const res = await fetch(`${API}/user/check/${userId}/${username}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
