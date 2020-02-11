@@ -24,9 +24,26 @@ export function* watchProfileGetRecipes() {
   yield takeLatest(Types.PROFILE_GET_RECIPES, workerProfileGetRecipes);
 }
 
+export function* watchRemoveRecipe() {
+  yield takeLatest(Types.PROFILE_REMOVE_RECIPE, workerRemoveRecipe);
+}
+
 /*
   worker sagas
 */
+function* workerRemoveRecipe({ payload }) {
+  try {
+    const response = yield call(Operations.removeRecipe, payload);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+    yield put({ type: Types.PROFILE_INFO, payload: response });
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.PROFILE_ERROR, payload: err.message });
+  }
+}
+
 function* workerProfileGetRecipes({ payload }) {
   // start loading
   yield put({ type: Types.RECIPES_BEGIN });

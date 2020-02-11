@@ -101,3 +101,19 @@ export const getProfileRecipes = async userId => {
     console.log('Error', err);
   }
 };
+
+export const removeRecipe = async recipeId => {
+  try {
+    const res = await fetch(`${API}/recipe/${recipeId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('token')}`
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};

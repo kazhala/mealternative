@@ -24,7 +24,8 @@ const RecipesTab = props => {
     recipesLoading,
     checkFetchOtherUser,
     activeTab,
-    tabIndex
+    tabIndex,
+    handleRemoveRecipe
   } = props;
 
   return (
@@ -68,7 +69,7 @@ const RecipesTab = props => {
                   <IconButton>
                     <Edit />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={e => handleRemoveRecipe(e, recipe._id)}>
                     <DeleteForever />
                   </IconButton>
                 </div>
@@ -87,7 +88,8 @@ RecipesTab.propTypes = {
   recipesLoading: PropTypes.bool.isRequired,
   checkFetchOtherUser: PropTypes.func.isRequired,
   activeTab: PropTypes.number.isRequired,
-  tabIndex: PropTypes.number.isRequired
+  tabIndex: PropTypes.number.isRequired,
+  handleRemoveRecipe: PropTypes.func.isRequired
 };
 
 export default RecipesTab;

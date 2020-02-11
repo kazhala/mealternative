@@ -38,7 +38,8 @@ const Account = props => {
     handleCardClick,
     recipes,
     recipesLoading,
-    checkFetchOtherUser
+    checkFetchOtherUser,
+    handleRemoveRecipe
   } = props;
   const classes = useStyles();
 
@@ -98,6 +99,7 @@ const Account = props => {
             recipes={recipes}
             recipesLoading={recipesLoading}
             checkFetchOtherUser={checkFetchOtherUser}
+            handleRemoveRecipe={handleRemoveRecipe}
           />
         </Paper>
       </div>
@@ -114,7 +116,8 @@ Account.propTypes = {
   activeTab: PropTypes.number.isRequired,
   handleTabChange: PropTypes.func.isRequired,
   handleCardClick: PropTypes.func.isRequired,
-  checkFetchOtherUser: PropTypes.func.isRequired
+  checkFetchOtherUser: PropTypes.func.isRequired,
+  handleRemoveRecipe: PropTypes.func.isRequired
 };
 
 export default Account;

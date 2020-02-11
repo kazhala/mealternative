@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   loadingText: '',
   error: '',
+  info: '',
   userDetails: {},
   bookmarks: [],
   recipes: [],
@@ -18,9 +19,9 @@ const initialState = {
 const ProfileReducer = (state = initialState, action) => {
   switch (action.type) {
     case Types.DETAIL_BEGIN:
-      return { ...state, detailLoading: true, error: '' };
+      return { ...state, detailLoading: true, error: '', info: '' };
     case Types.PROFILE_BEGIN:
-      return { ...state, loading: true, error: '' };
+      return { ...state, loading: true, error: '', info: '' };
     case Types.PROFILE_LOADING_TEXT:
       return { ...state, loadingText: action.payload };
     case Types.PROFILE_ERROR:
@@ -29,6 +30,7 @@ const ProfileReducer = (state = initialState, action) => {
         error: action.payload,
         loading: false,
         detailLoading: false,
+        info: '',
         loadingText: '',
         bookmarksLoading: false,
         recipesLoading: false
@@ -38,6 +40,7 @@ const ProfileReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
+        info: '',
         userDetails: {},
         detailLoading: false,
         loadingText: '',
@@ -49,6 +52,7 @@ const ProfileReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
+        info: '',
         detailLoading: false,
         loadingText: '',
         bookmarksLoading: false,
@@ -64,7 +68,7 @@ const ProfileReducer = (state = initialState, action) => {
         loadingText: ''
       };
     case Types.BOOKMARKS_BEGIN:
-      return { ...state, error: '', bookmarksLoading: true };
+      return { ...state, error: '', bookmarksLoading: true, info: '' };
     case Types.PROFILE_STORE_BOOKMARKS:
       return {
         ...state,
@@ -72,9 +76,11 @@ const ProfileReducer = (state = initialState, action) => {
         bookmarksLoading: false
       };
     case Types.RECIPES_BEGIN:
-      return { ...state, error: '', recipesLoading: true };
+      return { ...state, error: '', recipesLoading: true, info: '' };
     case Types.PROFILE_STORE_RECIPES:
       return { ...state, recipes: [...action.payload], recipesLoading: false };
+    case Types.PROFILE_INFO:
+      return { ...state, error: '', info: action.payload };
     default:
       return state;
   }

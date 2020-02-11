@@ -28,7 +28,8 @@ const AccountContainer = props => {
     error,
     getProfileBookmarks,
     history,
-    getProfileRecipes
+    getProfileRecipes,
+    removeRecipe
   } = props;
   // current tab
   const [activeTab, setActiveTab] = useState(0);
@@ -104,6 +105,13 @@ const AccountContainer = props => {
     }
   };
 
+  const handleRemoveRecipe = (e, recipeId) => {
+    e.stopPropagation();
+    if (window.confirm('Are you sure you want to delete this recipe?')) {
+      removeRecipe(recipeId);
+    }
+  };
+
   return (
     <>
       {/* if is not looking at others and is not login, redirect */}
@@ -115,6 +123,7 @@ const AccountContainer = props => {
         activeTab={activeTab}
         handleTabChange={handleTabChange}
         checkFetchOtherUser={checkFetchOtherUser}
+        handleRemoveRecipe={handleRemoveRecipe}
         {...props}
       />
     </>
@@ -145,7 +154,8 @@ const mapDispatchToProps = dispatch => {
       clearError: ProfileActions.clearError,
       updateProfileDetails: ProfileActions.updateProfileDetails,
       getProfileBookmarks: ProfileActions.getProfileBookmarks,
-      getProfileRecipes: ProfileActions.getProfileRecipes
+      getProfileRecipes: ProfileActions.getProfileRecipes,
+      removeRecipe: ProfileActions.removeRecipe
     },
     dispatch
   );
