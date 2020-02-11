@@ -40,16 +40,6 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
 
-  // individual tabs
-  tabRoot: {
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: theme.spacing(1),
-    alignItems: 'center'
-  },
-
   // profile update
   avatarDisplay: {
     height: theme.spacing(3),
@@ -69,8 +59,16 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end'
   },
 
-  // bookmarks
-  bookmarkCard: {
+  // card display in bookmark and recipe tab
+  tabRoot: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(1),
+    alignItems: 'center'
+  },
+  tabCard: {
     width: '100%',
     display: 'grid',
     gridTemplateColumns: '2.5fr 3fr',
@@ -82,42 +80,37 @@ const useStyles = makeStyles(theme => ({
       boxShadow: '2px 2px 2px #ccc'
     }
   },
-  bookmarkThumb: {
+  cardThumb: {
     height: '100%',
     width: '100%',
     borderRadius: theme.shape.borderRadius
   },
-  bookmarkRight: {
+  cardRight: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     padding: theme.spacing(0.5)
   },
-  bookmarkTitle: {
+  cardText: {
     display: '-webkit-box',
     lineClamp: 2,
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     boxOrient: 'vertical'
   },
-  bookmarkDescription: {
-    display: '-webkit-box',
-    lineClamp: 2,
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    boxOrient: 'vertical'
+  cardMisc: {
+    display: 'flex',
+    alignItems: 'center',
+    opacity: '0.8'
   },
+
+  // bookmarks
   bookmarkOtherData: {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
-  },
-  bookmarkMisc: {
-    display: 'flex',
-    alignItems: 'center',
-    opacity: '0.8'
   },
   bookmarkAvatar: {
     height: theme.spacing(2),
@@ -125,8 +118,12 @@ const useStyles = makeStyles(theme => ({
   },
 
   // recipes tab
-  recipesCard: {
-    //
+  recipeAction: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: theme.spacing(0.5),
+    width: '100%'
   },
 
   // common

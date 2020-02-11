@@ -30,29 +30,26 @@ const BookmarksTab = props => {
           <Paper
             onClick={e => handleCardClick(1, `/account/${bookmark.recipe._id}`)}
             elevation={2}
-            className={classes.bookmarkCard}
+            className={classes.tabCard}
             key={index}
           >
             {/* thumbnail of the recipe */}
             <img
               src={bookmark.recipe.thumbImageUrl}
               alt={bookmark.recipe.title}
-              className={classes.bookmarkThumb}
+              className={classes.cardThumb}
             />
-            <div className={classes.bookmarkRight}>
+            <div className={classes.cardRight}>
               {/* title and description, limited to 2 lines each */}
-              <Typography variant='body1' className={classes.bookmarkTitle}>
+              <Typography variant='body1' className={classes.cardText}>
                 {bookmark.recipe.title}
               </Typography>
-              <Typography
-                variant='caption'
-                className={classes.bookmarkDescription}
-              >
+              <Typography variant='caption' className={classes.cardText}>
                 {bookmark.recipe.description}
               </Typography>
 
               {/* stars and bookmarks and likes count */}
-              <div className={classes.bookmarkMisc}>
+              <div className={classes.cardMisc}>
                 <Rating
                   value={bookmark.recipe.rating}
                   precision={0.1}
@@ -62,13 +59,13 @@ const BookmarksTab = props => {
                 ({bookmark.recipe.rating})
               </div>
               <div className={classes.bookmarkOtherData}>
-                <div className={classes.bookmarkMisc}>
+                <div className={classes.cardMisc}>
                   <ThumbUpOutlined fontSize='small' />
                   {bookmark.recipe.likes}
                   <BookmarkBorder fontSize='small' />
                   {bookmark.recipe.bookmarks}
                 </div>
-                <div className={classes.bookmarkMisc}>
+                <div className={classes.cardMisc}>
                   <Avatar
                     className={classes.bookmarkAvatar}
                     src={bookmark.recipe.postedBy.photoUrl}
