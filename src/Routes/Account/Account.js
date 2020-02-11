@@ -20,6 +20,7 @@ import { Settings, Book, MenuBook, VpnKey } from '@material-ui/icons';
 import DetailsTab from './_components/DetailsTab';
 import BookmarksTab from './_components/BookmarksTab';
 import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
+import RecipesTab from './_components/RecipesTab';
 
 // misc
 import useStyles from './Style';
@@ -34,11 +35,12 @@ const Account = props => {
     bookmarks,
     bookmarksLoading,
     match,
-    handleCardClick
+    handleCardClick,
+    recipes,
+    recipesLoading,
+    checkFetchOtherUser
   } = props;
   const classes = useStyles();
-
-  console.log(match);
 
   return (
     <div className={classes.accountRoot}>
@@ -89,6 +91,14 @@ const Account = props => {
             bookmarksLoading={bookmarksLoading}
             handleCardClick={handleCardClick}
           />
+          <RecipesTab
+            classes={classes}
+            tabIndex={2}
+            activeTab={activeTab}
+            recipes={recipes}
+            recipesLoading={recipesLoading}
+            checkFetchOtherUser={checkFetchOtherUser}
+          />
         </Paper>
       </div>
 
@@ -103,7 +113,8 @@ const Account = props => {
 Account.propTypes = {
   activeTab: PropTypes.number.isRequired,
   handleTabChange: PropTypes.func.isRequired,
-  handleCardClick: PropTypes.func.isRequired
+  handleCardClick: PropTypes.func.isRequired,
+  checkFetchOtherUser: PropTypes.func.isRequired
 };
 
 export default Account;

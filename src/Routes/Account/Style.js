@@ -124,6 +124,11 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(2)
   },
 
+  // recipes tab
+  recipesCard: {
+    //
+  },
+
   // common
   inputFields: {
     marginTop: theme.spacing(1)

@@ -114,6 +114,7 @@ const AccountContainer = props => {
         handleCardClick={handleCardClick}
         activeTab={activeTab}
         handleTabChange={handleTabChange}
+        checkFetchOtherUser={checkFetchOtherUser}
         {...props}
       />
     </>
@@ -130,7 +131,9 @@ const mapStateToProps = state => {
     loadingText: state.Profile.loadingText,
     error: state.Profile.error,
     bookmarks: state.Profile.bookmarks,
-    bookmarksLoading: state.Profile.bookmarksLoading
+    bookmarksLoading: state.Profile.bookmarksLoading,
+    recipesLoading: state.Profile.recipesLoading,
+    recipes: state.Profile.recipes
   };
 };
 
