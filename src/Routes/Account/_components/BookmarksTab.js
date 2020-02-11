@@ -8,9 +8,9 @@ import PropTypes from 'prop-types';
 
 // components
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
-import { Typography } from '@material-ui/core';
+import { Typography, Avatar } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
-import { ThumbUp } from '@material-ui/icons';
+import { ThumbUpOutlined, BookmarkBorder } from '@material-ui/icons';
 
 const BookmarksTab = props => {
   const { bookmarks, classes, bookmarksLoading, activeTab, tabIndex } = props;
@@ -36,19 +36,27 @@ const BookmarksTab = props => {
               >
                 {bookmark.recipe.description}
               </Typography>
+              <div className={classes.bookmarkMisc}>
+                <Rating
+                  value={bookmark.recipe.rating}
+                  precision={0.1}
+                  size='small'
+                  readOnly
+                />
+                ({bookmark.recipe.rating})
+              </div>
               <div className={classes.bookmarkOtherData}>
                 <div className={classes.bookmarkMisc}>
-                  <Rating
-                    value={bookmark.recipe.rating}
-                    precision={0.1}
-                    size='small'
-                    readOnly
-                  />
-                  ({bookmark.recipe.rating})
+                  <ThumbUpOutlined fontSize='small' />
+                  {bookmark.recipe.likes}
+                  <BookmarkBorder fontSize='small' />
+                  {bookmark.recipe.bookmarks}
                 </div>
                 <div className={classes.bookmarkMisc}>
-                  <ThumbUp fontSize='small' color='primary' />(
-                  {bookmark.recipe.likes})
+                  <Avatar
+                    className={classes.bookmarkAvatar}
+                    src={bookmark.recipe.postedBy.photoUrl}
+                  />
                 </div>
               </div>
             </div>

@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
     border: '1px solid black',
     display: 'grid',
     gridTemplateColumns: '2.5fr 3fr',
-    minHeight: theme.spacing(10)
+    minHeight: theme.spacing(8)
   },
   bookmarkThumb: {
     height: '100%',
@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
   },
   bookmarkDescription: {
     display: '-webkit-box',
-    lineClamp: 3,
+    lineClamp: 2,
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     boxOrient: 'vertical'
@@ -104,11 +104,17 @@ const useStyles = makeStyles(theme => ({
   bookmarkOtherData: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   bookmarkMisc: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    opacity: '0.8'
+  },
+  bookmarkAvatar: {
+    height: theme.spacing(2),
+    width: theme.spacing(2)
   },
 
   // common
