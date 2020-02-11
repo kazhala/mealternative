@@ -69,6 +69,43 @@ const useStyles = makeStyles(theme => ({
   },
 
   // bookmarks
+  bookmarkCard: {
+    width: '100%',
+    border: '1px solid black',
+    display: 'grid',
+    gridTemplateColumns: '2.5fr 3fr',
+    minHeight: theme.spacing(10)
+  },
+  bookmarkThumb: {
+    height: '100%',
+    width: '100%'
+  },
+  bookmarkRight: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    padding: theme.spacing(0.5)
+  },
+  bookmarkTitle: {
+    display: '-webkit-box',
+    lineClamp: 2,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    boxOrient: 'vertical'
+  },
+  bookmarkDescription: {
+    display: '-webkit-box',
+    lineClamp: 3,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    boxOrient: 'vertical'
+  },
+  bookmarkOtherData: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
 
   // common
   inputFields: {
