@@ -108,7 +108,9 @@ const mapStateToProps = state => {
     detailLoading: state.Profile.detailLoading,
     loading: state.Profile.loading,
     loadingText: state.Profile.loadingText,
-    error: state.Profile.error
+    error: state.Profile.error,
+    bookmarks: state.Profile.bookmarks,
+    bookmarksLoading: state.Profile.bookmarksLoading
   };
 };
 

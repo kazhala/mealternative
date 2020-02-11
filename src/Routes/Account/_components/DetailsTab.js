@@ -97,7 +97,7 @@ const DetailsTab = props => {
   return (
     // display if active tab is this tab index
     activeTab === tabIndex && (
-      <div className={classes.detailsTabRoot}>
+      <div className={classes.tabRoot}>
         {/* onec everything is loaded, display */}
         {displayProfile && displayProfile._id && (
           <>

@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 import { Settings, Book, MenuBook, VpnKey } from '@material-ui/icons';
 import DetailsTab from './_components/DetailsTab';
+import BookmarksTab from './_components/BookmarksTab';
 
 // misc
 import useStyles from './Style';
@@ -27,7 +28,9 @@ const Account = props => {
     handleTabChange,
     profileUser,
     updateProfileDetails,
-    detailLoading
+    detailLoading,
+    bookmarks,
+    bookmarksLoading
   } = props;
   const classes = useStyles();
 
@@ -72,6 +75,13 @@ const Account = props => {
               tabIndex={0}
               activeTab={activeTab}
               detailLoading={detailLoading}
+            />
+            <BookmarksTab
+              classes={classes}
+              tabIndex={1}
+              activeTab={activeTab}
+              bookmarks={bookmarks}
+              bookmarksLoading={bookmarksLoading}
             />
           </Paper>
         </div>

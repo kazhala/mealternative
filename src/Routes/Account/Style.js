@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  // root
   accountRoot: {
     width: '100%',
     height: '100%',
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(5.5)
   },
 
+  // tab part
   accountBottom: {
     width: '100%',
     height: '100%',
@@ -37,7 +39,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
 
-  detailsTabRoot: {
+  // individual tabs
+  tabRoot: {
     height: '100%',
     width: '100%',
     display: 'flex',
@@ -45,6 +48,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     alignItems: 'center'
   },
+
+  // profile update
   avatarDisplay: {
     height: theme.spacing(3),
     width: theme.spacing(3),
@@ -57,17 +62,18 @@ const useStyles = makeStyles(theme => ({
   toggleButtonGroup: {
     marginRight: theme.spacing(0.5)
   },
-
-  inputFields: {
-    marginTop: theme.spacing(1)
-  },
-
   detailSubmitGroup: {
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-end'
   },
 
+  // bookmarks
+
+  // common
+  inputFields: {
+    marginTop: theme.spacing(1)
+  },
   fileInput: {
     display: 'none'
   }
