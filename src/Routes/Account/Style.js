@@ -106,6 +106,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between'
   },
+  bookmarkMisc: {
+    display: 'flex',
+    alignItems: 'center'
+  },
 
   // common
   inputFields: {
