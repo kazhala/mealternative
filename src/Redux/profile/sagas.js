@@ -28,12 +28,19 @@ export function* watchProfileGetRecipes() {
   worker sagas
 */
 function* workerProfileGetRecipes({ payload }) {
+  // start loading
   yield put({ type: Types.RECIPES_BEGIN });
   try {
-    const response = yield select(Operations.getProfileRecipes);
-    console.log(response);
+    // get recipes
+    const response = yield call(Operations.getProfileRecipes, payload);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+    // store recipes
+    yield put({ type: Types.PROFILE_STORE_RECIPES, payload: response });
   } catch (err) {
     console.log('Error', err);
+    yield put({ type: Types.PROFILE_ERROR, payload: err.message });
   }
 }
 

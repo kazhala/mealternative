@@ -9,8 +9,10 @@ const initialState = {
   error: '',
   userDetails: {},
   bookmarks: [],
+  recipes: [],
   detailLoading: false,
-  bookmarksLoading: false
+  bookmarksLoading: false,
+  recipesLoading: false
 };
 
 const ProfileReducer = (state = initialState, action) => {
@@ -28,7 +30,8 @@ const ProfileReducer = (state = initialState, action) => {
         loading: false,
         detailLoading: false,
         loadingText: '',
-        bookmarksLoading: false
+        bookmarksLoading: false,
+        recipesLoading: false
       };
     case Types.PROFILE_CLEAN:
       return {
@@ -38,7 +41,8 @@ const ProfileReducer = (state = initialState, action) => {
         userDetails: {},
         detailLoading: false,
         loadingText: '',
-        bookmarksLoading: false
+        bookmarksLoading: false,
+        recipesLoading: false
       };
     case Types.PROFILE_CLEAR:
       return {
@@ -47,7 +51,8 @@ const ProfileReducer = (state = initialState, action) => {
         error: '',
         detailLoading: false,
         loadingText: '',
-        bookmarksLoading: false
+        bookmarksLoading: false,
+        recipesLoading: false
       };
     case Types.PROFILE_STORE_USER:
       return {
@@ -66,6 +71,10 @@ const ProfileReducer = (state = initialState, action) => {
         bookmarks: [...action.payload],
         bookmarksLoading: false
       };
+    case Types.RECIPES_BEGIN:
+      return { ...state, error: '', recipesLoading: true };
+    case Types.PROFILE_STORE_RECIPES:
+      return { ...state, recipes: [...action.payload], recipesLoading: false };
     default:
       return state;
   }
