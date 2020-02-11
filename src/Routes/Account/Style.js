@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: '1fr',
     gridGap: theme.spacing(1),
     overflowX: 'hidden',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    position: 'relative'
   },
   accountTop: {
     display: 'flex',

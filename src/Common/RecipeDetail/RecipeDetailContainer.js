@@ -46,7 +46,7 @@ const RecipeDetailContainer = props => {
   const handleBack = () => {
     setShowModal(false);
     setTimeout(() => {
-      history.push('/recipes');
+      history.goBack();
     }, 200);
   };
 
