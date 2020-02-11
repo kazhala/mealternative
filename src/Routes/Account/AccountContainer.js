@@ -26,7 +26,8 @@ const AccountContainer = props => {
     loading,
     loadingText,
     error,
-    getProfileBookmarks
+    getProfileBookmarks,
+    history
   } = props;
   // current tab
   const [activeTab, setActiveTab] = useState(0);
@@ -85,6 +86,12 @@ const AccountContainer = props => {
     };
   }, [cleanUp]);
 
+  const handleCardClick = (type, url) => {
+    if (type === 1) {
+      history.push(url);
+    }
+  };
+
   return (
     <>
       {/* if is not looking at others and is not login, redirect */}
@@ -92,6 +99,7 @@ const AccountContainer = props => {
       <PageSpinner loading={loading} text={loadingText} />
       <ErrorSnack error={error} handleClose={clearError} />
       <Account
+        handleCardClick={handleCardClick}
         activeTab={activeTab}
         handleTabChange={handleTabChange}
         {...props}

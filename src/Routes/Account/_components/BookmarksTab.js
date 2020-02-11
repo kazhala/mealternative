@@ -13,20 +13,34 @@ import { Rating } from '@material-ui/lab';
 import { ThumbUpOutlined, BookmarkBorder } from '@material-ui/icons';
 
 const BookmarksTab = props => {
-  const { bookmarks, classes, bookmarksLoading, activeTab, tabIndex } = props;
+  const {
+    handleCardClick,
+    bookmarks,
+    classes,
+    bookmarksLoading,
+    activeTab,
+    tabIndex
+  } = props;
 
   return (
     activeTab === tabIndex && (
       <div className={classes.tabRoot}>
         <PageSpinner background='rgba(0,0,0,0)' loading={bookmarksLoading} />
         {bookmarks.map((bookmark, index) => (
-          <Paper elevation={2} className={classes.bookmarkCard} key={index}>
+          <Paper
+            onClick={e => handleCardClick(1, `/account/${bookmark.recipe._id}`)}
+            elevation={2}
+            className={classes.bookmarkCard}
+            key={index}
+          >
+            {/* thumbnail of the recipe */}
             <img
               src={bookmark.recipe.thumbImageUrl}
               alt={bookmark.recipe.title}
               className={classes.bookmarkThumb}
             />
             <div className={classes.bookmarkRight}>
+              {/* title and description, limited to 2 lines each */}
               <Typography variant='body1' className={classes.bookmarkTitle}>
                 {bookmark.recipe.title}
               </Typography>
@@ -36,6 +50,8 @@ const BookmarksTab = props => {
               >
                 {bookmark.recipe.description}
               </Typography>
+
+              {/* stars and bookmarks and likes count */}
               <div className={classes.bookmarkMisc}>
                 <Rating
                   value={bookmark.recipe.rating}
@@ -72,7 +88,8 @@ BookmarksTab.propTypes = {
   classes: PropTypes.object.isRequired,
   activeTab: PropTypes.number.isRequired,
   tabIndex: PropTypes.number.isRequired,
-  bookmarksLoading: PropTypes.bool.isRequired
+  bookmarksLoading: PropTypes.bool.isRequired,
+  handleCardClick: PropTypes.func.isRequired
 };
 
 export default BookmarksTab;

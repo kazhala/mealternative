@@ -76,7 +76,11 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: '2.5fr 3fr',
     minHeight: theme.spacing(8),
     marginBottom: theme.spacing(0.5),
-    borderRadius: theme.shape.borderRadius
+    borderRadius: theme.shape.borderRadius,
+    '&:hover': {
+      cursor: 'pointer',
+      boxShadow: '2px 2px 2px #ccc'
+    }
   },
   bookmarkThumb: {
     height: '100%',
