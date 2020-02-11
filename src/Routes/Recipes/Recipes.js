@@ -75,6 +75,7 @@ const Recipes = props => {
         <div className={classes.recipeBodyColumn}>
           {displayArray.right.map((recipe, index) => (
             <RecipeCard
+              photoUrl={recipe.postedBy.photoUrl}
               handleCardClick={handleCardClick}
               recipeId={recipe._id}
               bookmarks={recipe.bookmarks}
