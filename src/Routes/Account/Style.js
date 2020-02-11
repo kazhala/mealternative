@@ -71,14 +71,16 @@ const useStyles = makeStyles(theme => ({
   // bookmarks
   bookmarkCard: {
     width: '100%',
-    border: '1px solid black',
     display: 'grid',
     gridTemplateColumns: '2.5fr 3fr',
-    minHeight: theme.spacing(8)
+    minHeight: theme.spacing(8),
+    marginBottom: theme.spacing(0.5),
+    borderRadius: theme.shape.borderRadius
   },
   bookmarkThumb: {
     height: '100%',
-    width: '100%'
+    width: '100%',
+    borderRadius: theme.shape.borderRadius
   },
   bookmarkRight: {
     display: 'flex',

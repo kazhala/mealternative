@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 // components
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
-import { Typography, Avatar } from '@material-ui/core';
+import { Typography, Avatar, Paper } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { ThumbUpOutlined, BookmarkBorder } from '@material-ui/icons';
 
@@ -20,7 +20,7 @@ const BookmarksTab = props => {
       <div className={classes.tabRoot}>
         <PageSpinner background='rgba(0,0,0,0)' loading={bookmarksLoading} />
         {bookmarks.map((bookmark, index) => (
-          <div className={classes.bookmarkCard} key={index}>
+          <Paper elevation={2} className={classes.bookmarkCard} key={index}>
             <img
               src={bookmark.recipe.thumbImageUrl}
               alt={bookmark.recipe.title}
@@ -60,7 +60,7 @@ const BookmarksTab = props => {
                 </div>
               </div>
             </div>
-          </div>
+          </Paper>
         ))}
       </div>
     )
