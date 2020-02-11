@@ -86,3 +86,18 @@ export const validateName = async (userId, username) => {
     console.log('Error', err);
   }
 };
+
+export const getProfileRecipes = async userId => {
+  try {
+    const res = await fetch(`${API}/user/${userId}/recipes`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};

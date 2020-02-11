@@ -34,3 +34,10 @@ export const getProfileBookmarks = () => {
     type: Types.PROFILE_GET_BOOKMARKS
   };
 };
+
+export const getProfileRecipes = userId => {
+  return {
+    type: Types.PROFILE_GET_RECIPES,
+    payload: userId
+  };
+};

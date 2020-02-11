@@ -20,9 +20,23 @@ export function* watchProfileGetBookmarks() {
   yield takeLatest(Types.PROFILE_GET_BOOKMARKS, workerProfileGetBookmarks);
 }
 
+export function* watchProfileGetRecipes() {
+  yield takeLatest(Types.PROFILE_GET_RECIPES, workerProfileGetRecipes);
+}
+
 /*
   worker sagas
 */
+function* workerProfileGetRecipes({ payload }) {
+  yield put({ type: Types.RECIPES_BEGIN });
+  try {
+    const response = yield select(Operations.getProfileRecipes);
+    console.log(response);
+  } catch (err) {
+    console.log('Error', err);
+  }
+}
+
 function* workerProfileGetBookmarks() {
   // start loading
   yield put({ type: Types.BOOKMARKS_BEGIN });
