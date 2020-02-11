@@ -25,7 +25,8 @@ const AccountContainer = props => {
     isAuthenticated,
     loading,
     loadingText,
-    error
+    error,
+    getProfileBookmarks
   } = props;
   // current tab
   const [activeTab, setActiveTab] = useState(0);
@@ -59,6 +60,11 @@ const AccountContainer = props => {
           getProfileDetails(userDetails._id);
         }
         break;
+      case 1:
+        if (!checkFetchOtherUser()) {
+          getProfileBookmarks();
+        }
+        break;
       default:
         console.log('wrong');
     }
@@ -68,7 +74,8 @@ const AccountContainer = props => {
     getProfileDetails,
     searchedUserId,
     checkFetchOtherUser,
-    userDetails
+    userDetails,
+    getProfileBookmarks
   ]);
 
   // clean up on unmount
@@ -111,7 +118,8 @@ const mapDispatchToProps = dispatch => {
       getProfileDetails: ProfileActions.getProfileDetails,
       cleanUp: ProfileActions.cleanUp,
       clearError: ProfileActions.clearError,
-      updateProfileDetails: ProfileActions.updateProfileDetails
+      updateProfileDetails: ProfileActions.updateProfileDetails,
+      getProfileBookmarks: ProfileActions.getProfileBookmarks
     },
     dispatch
   );

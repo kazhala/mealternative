@@ -29,7 +29,8 @@ export default function* rootSaga() {
       fork(RecipeSagas.watchIncrementBook),
       fork(RecipeSagas.watchRateRecipe),
       fork(ProfileSagas.watchProfileGetUser),
-      fork(ProfileSagas.watchProfileUpdateUser)
+      fork(ProfileSagas.watchProfileUpdateUser),
+      fork(ProfileSagas.watchProfileGetBookmarks)
     ]);
   } catch (err) {
     console.log(err);

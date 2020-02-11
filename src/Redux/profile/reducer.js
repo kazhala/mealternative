@@ -2,10 +2,12 @@ import * as Types from './types';
 
 const initialState = {
   loading: false,
+  loadingText: '',
   error: '',
   userDetails: {},
+  bookmarks: [],
   detailLoading: false,
-  loadingText: ''
+  bookmarkLoading: false
 };
 
 const ProfileReducer = (state = initialState, action) => {
@@ -22,7 +24,8 @@ const ProfileReducer = (state = initialState, action) => {
         error: action.payload,
         loading: false,
         detailLoading: false,
-        loadingText: ''
+        loadingText: '',
+        bookmarkLoading: false
       };
     case Types.PROFILE_CLEAN:
       return {
@@ -31,7 +34,8 @@ const ProfileReducer = (state = initialState, action) => {
         error: '',
         userDetails: {},
         detailLoading: false,
-        loadingText: ''
+        loadingText: '',
+        bookmarkLoading: false
       };
     case Types.PROFILE_CLEAR:
       return {
@@ -39,7 +43,8 @@ const ProfileReducer = (state = initialState, action) => {
         loading: false,
         error: '',
         detailLoading: false,
-        loadingText: ''
+        loadingText: '',
+        bookmarkLoading: false
       };
     case Types.PROFILE_STORE_USER:
       return {
@@ -49,6 +54,14 @@ const ProfileReducer = (state = initialState, action) => {
         userDetails: action.payload,
         detailLoading: false,
         loadingText: ''
+      };
+    case Types.BOOKMARKS_BEGIN:
+      return { ...state, error: '', bookmarkLoading: true };
+    case Types.PROFILE_STORE_BOOKMARKS:
+      return {
+        ...state,
+        bookmarks: [...action.payload],
+        bookmarkLoading: false
       };
     default:
       return state;

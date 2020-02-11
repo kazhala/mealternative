@@ -1,4 +1,4 @@
-import { takeLatest, put, call, delay } from 'redux-saga/effects';
+import { takeLatest, put, call, delay, select } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 
@@ -8,6 +8,25 @@ export function* watchProfileGetUser() {
 
 export function* watchProfileUpdateUser() {
   yield takeLatest(Types.PROFILE_UPDATE_USER, workerProfileUpdateUser);
+}
+
+export function* watchProfileGetBookmarks() {
+  yield takeLatest(Types.PROFILE_GET_BOOKMARKS, workerProfileGetBookmarks);
+}
+
+function* workerProfileGetBookmarks() {
+  yield put({ type: Types.BOOKMARKS_BEGIN });
+  const { user } = yield select(Operations.getAuthState);
+  try {
+    const response = yield call(Operations.getProfileBookmarks, user._id);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+    yield put({ type: Types.PROFILE_STORE_BOOKMARKS, payload: response });
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.PROFILE_ERROR, payload: err.message });
+  }
 }
 
 function* workerProfileGetUser({ payload }) {

@@ -25,3 +25,9 @@ export const clearError = () => {
     type: Types.PROFILE_CLEAR
   };
 };
+
+export const getProfileBookmarks = () => {
+  return {
+    type: Types.PROFILE_GET_BOOKMARKS
+  };
+};

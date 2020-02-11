@@ -1,6 +1,24 @@
 import { API, CloudinaryURL } from '../../config';
 import Cookies from 'js-cookie';
 
+export const getAuthState = state => state.Auth;
+
+export const getProfileBookmarks = async userId => {
+  try {
+    const res = await fetch(`${API}/user/${userId}/bookmarks`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('token')}`
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
 export const getProfileDetails = async userId => {
   try {
     const res = await fetch(`${API}/user/${userId}/details`, {
