@@ -1,3 +1,6 @@
+/*
+  profile actions
+*/
 import * as Types from './types';
 
 export const getProfileDetails = userId => {

@@ -1,6 +1,10 @@
+/*
+  Profile api calls
+*/
 import { API, CloudinaryURL } from '../../config';
 import Cookies from 'js-cookie';
 
+// get the auth state
 export const getAuthState = state => state.Auth;
 
 export const getProfileBookmarks = async userId => {
@@ -34,6 +38,7 @@ export const getProfileDetails = async userId => {
   }
 };
 
+// upload to cloudinary
 export const uploadProfileImage = async file => {
   try {
     const data = new FormData();

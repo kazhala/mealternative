@@ -1,3 +1,6 @@
+/*
+  Profile reducers
+*/
 import * as Types from './types';
 
 const initialState = {
