@@ -110,7 +110,7 @@ const AccountContainer = props => {
   const handleRemoveRecipe = (e, recipeId) => {
     e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this recipe?')) {
-      removeRecipe(recipeId);
+      removeRecipe({ recipeId, userId: userDetails._id });
     }
   };
 

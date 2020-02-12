@@ -33,11 +33,15 @@ export function* watchRemoveRecipe() {
 */
 function* workerRemoveRecipe({ payload }) {
   try {
-    const response = yield call(Operations.removeRecipe, payload);
+    // remove the recipe
+    const response = yield call(Operations.removeRecipe, payload.recipeId);
     if (response.error) {
       throw new Error(response.error);
     }
+    // display success message
     yield put({ type: Types.PROFILE_INFO, payload: response.message });
+    // reload the recipe list
+    yield call(workerProfileGetRecipes, { payload: payload.userId });
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.PROFILE_ERROR, payload: err.message });

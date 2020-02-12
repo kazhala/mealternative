@@ -42,9 +42,9 @@ export const getProfileRecipes = userId => {
   };
 };
 
-export const removeRecipe = recipeId => {
+export const removeRecipe = payload => {
   return {
     type: Types.PROFILE_REMOVE_RECIPE,
-    payload: recipeId
+    payload
   };
 };

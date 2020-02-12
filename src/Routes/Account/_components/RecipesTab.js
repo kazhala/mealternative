@@ -25,7 +25,8 @@ const RecipesTab = props => {
     checkFetchOtherUser,
     activeTab,
     tabIndex,
-    handleRemoveRecipe
+    handleRemoveRecipe,
+    handleCardClick
   } = props;
 
   return (
@@ -33,7 +34,12 @@ const RecipesTab = props => {
       <div className={classes.tabRoot}>
         <PageSpinner loading={recipesLoading} />
         {recipes.map((recipe, index) => (
-          <Paper elevation={2} className={classes.tabCard} key={index}>
+          <Paper
+            onClick={e => handleCardClick(1, `/account/${recipe._id}`)}
+            elevation={2}
+            className={classes.tabCard}
+            key={index}
+          >
             <img
               src={recipe.thumbImageUrl}
               alt={recipe.title}
@@ -89,7 +95,8 @@ RecipesTab.propTypes = {
   checkFetchOtherUser: PropTypes.func.isRequired,
   activeTab: PropTypes.number.isRequired,
   tabIndex: PropTypes.number.isRequired,
-  handleRemoveRecipe: PropTypes.func.isRequired
+  handleRemoveRecipe: PropTypes.func.isRequired,
+  handleCardClick: PropTypes.func.isRequired
 };
 
 export default RecipesTab;

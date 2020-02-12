@@ -93,6 +93,7 @@ const Account = props => {
             handleCardClick={handleCardClick}
           />
           <RecipesTab
+            handleCardClick={handleCardClick}
             classes={classes}
             tabIndex={2}
             activeTab={activeTab}
