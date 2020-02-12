@@ -37,7 +37,7 @@ function* workerRemoveRecipe({ payload }) {
     if (response.error) {
       throw new Error(response.error);
     }
-    yield put({ type: Types.PROFILE_INFO, payload: response });
+    yield put({ type: Types.PROFILE_INFO, payload: response.message });
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.PROFILE_ERROR, payload: err.message });

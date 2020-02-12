@@ -15,9 +15,11 @@ import { ProfileActions } from '../../Redux/profile';
 import Account from './Account';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
+import SuccessSnack from '../../Common/InfoModal/SuccessSnack';
 
 const AccountContainer = props => {
   const {
+    infoMessage,
     clearError,
     getProfileDetails,
     userDetails,
@@ -118,6 +120,7 @@ const AccountContainer = props => {
       {!isAuthenticated && !checkFetchOtherUser() && <Redirect to='/' />}
       <PageSpinner loading={loading} text={loadingText} />
       <ErrorSnack error={error} handleClose={clearError} />
+      <SuccessSnack message={infoMessage} handleClose={clearError} />
       <Account
         handleCardClick={handleCardClick}
         activeTab={activeTab}
@@ -142,7 +145,8 @@ const mapStateToProps = state => {
     bookmarks: state.Profile.bookmarks,
     bookmarksLoading: state.Profile.bookmarksLoading,
     recipesLoading: state.Profile.recipesLoading,
-    recipes: state.Profile.recipes
+    recipes: state.Profile.recipes,
+    infoMessage: state.Profile.info
   };
 };
 

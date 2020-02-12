@@ -42,6 +42,8 @@ const ProfileReducer = (state = initialState, action) => {
         error: '',
         info: '',
         userDetails: {},
+        bookmarks: [],
+        recipes: [],
         detailLoading: false,
         loadingText: '',
         bookmarksLoading: false,
