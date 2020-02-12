@@ -75,8 +75,7 @@ const ProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         error: '',
-        bookmarksLoading: true,
-        bookmarks: []
+        bookmarksLoading: true
       };
     case Types.PROFILE_STORE_BOOKMARKS:
       return {
@@ -88,8 +87,7 @@ const ProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         error: '',
-        recipesLoading: true,
-        recipes: []
+        recipesLoading: true
       };
     case Types.PROFILE_STORE_RECIPES:
       return { ...state, recipes: [...action.payload], recipesLoading: false };
