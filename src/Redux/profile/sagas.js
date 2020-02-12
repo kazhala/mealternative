@@ -146,6 +146,7 @@ function* workerProfileUpdateUser({ payload }) {
     // delay 1sec for better ux
     yield delay(1000);
     yield put({ type: Types.PROFILE_STORE_USER, payload: response });
+    yield put({ type: Types.PROFILE_INFO, payload: 'Update success' });
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.PROFILE_ERROR, payload: err.message });
