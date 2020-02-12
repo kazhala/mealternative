@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     padding: theme.spacing(1),
     display: 'grid',
-    gridTemplateRows: '1fr 4fr',
+    gridTemplateRows: '1fr 5fr',
     gridTemplateColumns: '1fr',
     gridGap: theme.spacing(1),
     overflowX: 'hidden',
@@ -33,11 +33,13 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflowY: 'hidden'
   },
   tabPanel: {
     height: '100%',
-    width: '100%'
+    width: '100%',
+    overflowY: 'auto'
   },
 
   // profile update
@@ -66,13 +68,18 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     padding: theme.spacing(1),
-    alignItems: 'center'
+    alignItems: 'center',
+    '& > :last-child:after': {
+      display: 'block',
+      height: '1rem',
+      marginBottom: '-1rem',
+      content: '""'
+    }
   },
   tabCard: {
     width: '100%',
     display: 'grid',
     gridTemplateColumns: '2.5fr 3fr',
-    minHeight: theme.spacing(8),
     marginBottom: theme.spacing(0.5),
     borderRadius: theme.shape.borderRadius,
     '&:hover': {
