@@ -17,6 +17,9 @@ import PageSpinner from '../../Common/Spinner/PageSpinner';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 import SuccessSnack from '../../Common/InfoModal/SuccessSnack';
 
+// misc
+import queryString from 'query-string';
+
 const AccountContainer = props => {
   const {
     infoMessage,
@@ -31,48 +34,50 @@ const AccountContainer = props => {
     getProfileBookmarks,
     history,
     getProfileRecipes,
-    removeRecipe
+    removeRecipe,
+    location
   } = props;
   // current tab
   const [activeTab, setActiveTab] = useState(0);
+
+  const [otherUserId, setOtherUserId] = useState(null);
 
   // update active tab
   const handleTabChange = (e, value) => {
     setActiveTab(value);
   };
 
-  // get the query string if it exists (?id=xxx)
-  const regexPattern = /^\?(\w+?)=(.*)/;
-  const searchedUserId = props.location.search.match(regexPattern);
-
-  // check if is looking at it's own profile or others profile
-  const checkFetchOtherUser = useCallback(() => {
-    if (searchedUserId) {
-      return searchedUserId[1] === 'id' && searchedUserId[2];
-    } else {
-      return false;
+  useEffect(() => {
+    // get the query string if it exists (?id=xxx)
+    const pageQuery = queryString.parse(location.search);
+    if (pageQuery.id) {
+      setOtherUserId(pageQuery.id);
     }
-  }, [searchedUserId]);
+    if (pageQuery.page) {
+      setActiveTab(Number(pageQuery.page));
+      history.replace(location.path);
+    }
+  }, [location, history]);
 
   // fetch details for different tabs
   useEffect(() => {
     if (!isAuthenticated) return;
     switch (activeTab) {
       case 0:
-        if (checkFetchOtherUser()) {
-          getProfileDetails(searchedUserId[2]);
+        if (otherUserId) {
+          getProfileDetails(otherUserId);
         } else {
           getProfileDetails(userDetails._id);
         }
         break;
       case 1:
-        if (!checkFetchOtherUser()) {
+        if (!otherUserId) {
           getProfileBookmarks();
         }
         break;
       case 2:
-        if (checkFetchOtherUser()) {
-          getProfileRecipes(searchedUserId[2]);
+        if (otherUserId) {
+          getProfileRecipes(otherUserId);
         } else {
           getProfileRecipes(userDetails._id);
         }
@@ -84,8 +89,7 @@ const AccountContainer = props => {
     isAuthenticated,
     activeTab,
     getProfileDetails,
-    searchedUserId,
-    checkFetchOtherUser,
+    otherUserId,
     userDetails,
     getProfileBookmarks,
     getProfileRecipes
@@ -117,7 +121,7 @@ const AccountContainer = props => {
   return (
     <>
       {/* if is not looking at others and is not login, redirect */}
-      {!isAuthenticated && !checkFetchOtherUser() && <Redirect to='/' />}
+      {!isAuthenticated && !otherUserId && <Redirect to='/' />}
       <PageSpinner loading={loading} text={loadingText} />
       <ErrorSnack error={error} handleClose={clearError} />
       <SuccessSnack message={infoMessage} handleClose={clearError} />
@@ -125,7 +129,7 @@ const AccountContainer = props => {
         handleCardClick={handleCardClick}
         activeTab={activeTab}
         handleTabChange={handleTabChange}
-        checkFetchOtherUser={checkFetchOtherUser}
+        otherUserId={otherUserId}
         handleRemoveRecipe={handleRemoveRecipe}
         {...props}
       />

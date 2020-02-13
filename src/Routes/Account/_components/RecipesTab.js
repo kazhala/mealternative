@@ -22,7 +22,7 @@ const RecipesTab = props => {
     classes,
     recipes,
     recipesLoading,
-    checkFetchOtherUser,
+    otherUserId,
     activeTab,
     tabIndex,
     handleRemoveRecipe,
@@ -52,7 +52,7 @@ const RecipesTab = props => {
               <Typography variant='caption' className={classes.cardText}>
                 {recipe.description}
               </Typography>
-              {checkFetchOtherUser() ? (
+              {otherUserId ? (
                 <>
                   <div className={classes.cardMisc}>
                     <Rating
@@ -92,7 +92,7 @@ RecipesTab.propTypes = {
   classes: PropTypes.object.isRequired,
   recipes: PropTypes.array.isRequired,
   recipesLoading: PropTypes.bool.isRequired,
-  checkFetchOtherUser: PropTypes.func.isRequired,
+  otherUserId: PropTypes.any,
   activeTab: PropTypes.number.isRequired,
   tabIndex: PropTypes.number.isRequired,
   handleRemoveRecipe: PropTypes.func.isRequired,
