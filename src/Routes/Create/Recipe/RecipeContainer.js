@@ -9,12 +9,16 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CreateActions } from '../../../Redux/create';
+import { RecipeActions } from '../../../Redux/recipe';
 
 // components
 import ErrorSnack from '../../../Common/ErrorModal/ErrorSnack';
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
 import Recipe from './Recipe';
 import { Redirect } from 'react-router-dom';
+
+// misc
+import queryString from 'query-string';
 
 const RecipeRoute = props => {
   const {
@@ -26,7 +30,9 @@ const RecipeRoute = props => {
     submitRecipe,
     success,
     loading,
-    loadingText
+    loadingText,
+    location,
+    fetchRecipeDetails
   } = props;
 
   // states for the recipe
@@ -48,6 +54,13 @@ const RecipeRoute = props => {
       }
     ]
   });
+
+  useEffect(() => {
+    const updateQuery = queryString.parse(location.search);
+    if (updateQuery.id) {
+      fetchRecipeDetails({ recipeid: updateQuery.id });
+    }
+  }, [location, fetchRecipeDetails]);
 
   // reorder the array helper function
   const reOrderArray = (arr, from, to) => {
@@ -309,7 +322,8 @@ const mapDispatchTopProps = dispatch => {
     {
       getCategories: CreateActions.getCategories,
       cleanUp: CreateActions.cleanUp,
-      submitRecipe: CreateActions.submitRecipe
+      submitRecipe: CreateActions.submitRecipe,
+      fetchRecipeDetails: RecipeActions.fetchRecipeDetails
     },
     dispatch
   );
