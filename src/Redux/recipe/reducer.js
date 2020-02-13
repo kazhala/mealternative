@@ -12,7 +12,13 @@ const RecipeReducer = (state = initialState, action) => {
     case Types.RECIPE_BEGIN:
       return { ...state, loading: true };
     case Types.RECIPE_CLEAR:
-      return { ...state, loading: false, error: '', message: '' };
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        message: '',
+        recipeDetails: {}
+      };
     case Types.RECIPE_ERROR:
       return { ...state, error: action.payload, loading: false };
     case Types.RECIPE_MESSAGE:
