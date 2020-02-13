@@ -26,7 +26,8 @@ const RecipesTab = props => {
     activeTab,
     tabIndex,
     handleRemoveRecipe,
-    handleCardClick
+    handleCardClick,
+    handleEditRecipe
   } = props;
 
   return (
@@ -72,7 +73,7 @@ const RecipesTab = props => {
                 </>
               ) : (
                 <div className={classes.recipeAction}>
-                  <IconButton>
+                  <IconButton onClick={e => handleEditRecipe(e, recipe._id)}>
                     <Edit />
                   </IconButton>
                   <IconButton onClick={e => handleRemoveRecipe(e, recipe._id)}>
@@ -96,7 +97,8 @@ RecipesTab.propTypes = {
   activeTab: PropTypes.number.isRequired,
   tabIndex: PropTypes.number.isRequired,
   handleRemoveRecipe: PropTypes.func.isRequired,
-  handleCardClick: PropTypes.func.isRequired
+  handleCardClick: PropTypes.func.isRequired,
+  handleEditRecipe: PropTypes.func.isRequired
 };
 
 export default RecipesTab;

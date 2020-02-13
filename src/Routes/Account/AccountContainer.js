@@ -3,7 +3,7 @@
 */
 
 // react
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
 // redux
@@ -118,6 +118,11 @@ const AccountContainer = props => {
     }
   };
 
+  const handleEditRecipe = (e, recipeId) => {
+    e.stopPropagation();
+    history.push(`/create/recipe?id=${recipeId}`);
+  };
+
   return (
     <>
       {/* if is not looking at others and is not login, redirect */}
@@ -126,6 +131,7 @@ const AccountContainer = props => {
       <ErrorSnack error={error} handleClose={clearError} />
       <SuccessSnack message={infoMessage} handleClose={clearError} />
       <Account
+        handleEditRecipe={handleEditRecipe}
         handleCardClick={handleCardClick}
         activeTab={activeTab}
         handleTabChange={handleTabChange}
