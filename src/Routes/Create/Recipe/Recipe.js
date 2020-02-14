@@ -12,9 +12,10 @@ import {
   TextField,
   Typography,
   Avatar,
-  Button
+  Button,
+  Fab
 } from '@material-ui/core';
-import { Title, Description, Send } from '@material-ui/icons';
+import { Title, Description, Send, ArrowBack } from '@material-ui/icons';
 import ImageOption from '../_components/ImageOption';
 import Ingredients from './_components/Ingredients';
 import Steps from './_components/Steps';
@@ -31,8 +32,10 @@ const Recipe = props => {
     recipeDetail,
     handleDetailChange,
     handleRecipeSubmit,
-    isUpdate
+    isUpdate,
+    handleUpdateGoBack
   } = props;
+
   const {
     title,
     description,
@@ -44,6 +47,15 @@ const Recipe = props => {
 
   return (
     <div className={classes.routeRoot}>
+      <Fab
+        color='primary'
+        className={classes.updateGoBack}
+        onClick={handleUpdateGoBack}
+        variant='extended'
+      >
+        <ArrowBack />
+        Back
+      </Fab>
       {/* title */}
       <Typography className={classes.routeTitle} component='div' variant='h6'>
         {isUpdate ? 'Update recipe' : 'Create new recipe'}
@@ -144,7 +156,8 @@ Recipe.propTypes = {
   recipeDetail: PropTypes.object.isRequired,
   handleDetailChange: PropTypes.func.isRequired,
   handleRecipeSubmit: PropTypes.func.isRequired,
-  isUpdate: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired
+  isUpdate: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
+  handleUpdateGoBack: PropTypes.func.isRequired
 };
 
 export default Recipe;

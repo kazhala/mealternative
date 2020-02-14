@@ -11,7 +11,13 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'relative'
+  },
+  updateGoBack: {
+    position: 'absolute',
+    top: theme.spacing(0.5),
+    left: theme.spacing(0.5)
   },
   routeTitle: {
     textAlign: 'center'

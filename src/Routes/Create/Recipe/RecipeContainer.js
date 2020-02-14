@@ -4,7 +4,7 @@
 */
 
 // react
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 // redux
 import { connect } from 'react-redux';
@@ -357,19 +357,23 @@ const RecipeRoute = props => {
   // if did not find the udpate recipe, redirect
   const handleClearError = () => {
     if (updateError === 'Did not find the matching recipe') {
-      history.replace('/account?page=2');
+      handleUpdateGoBack();
     } else {
       cleanUp();
       updateClean();
     }
   };
 
+  const handleUpdateGoBack = useCallback(() => {
+    history.push('/account?page=2');
+  }, [history]);
+
   // redirect on update success
   useEffect(() => {
     if (updateSuccess) {
-      history.push('/account?page=2');
+      handleUpdateGoBack();
     }
-  }, [updateSuccess, history]);
+  }, [updateSuccess, history, handleUpdateGoBack]);
 
   return (
     <>
@@ -394,6 +398,7 @@ const RecipeRoute = props => {
         categoryLoading={categoryLoading}
         handleDetailChange={handleDetailChange}
         handleRecipeSubmit={handleRecipeSubmit}
+        handleUpdateGoBack={handleUpdateGoBack}
         {...props}
       />
     </>
