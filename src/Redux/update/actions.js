@@ -15,3 +15,13 @@ export const cleanUp = () => {
     type: Types.UPDATE_CLEAN
   };
 };
+
+export const updateRecipe = (recipeDetail, selCategoryIds) => {
+  return {
+    type: Types.UPDATE_RECIPE,
+    payload: {
+      recipeDetail,
+      selCategoryIds
+    }
+  };
+};

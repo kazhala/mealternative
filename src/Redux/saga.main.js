@@ -34,7 +34,8 @@ export default function* rootSaga() {
       fork(ProfileSagas.watchProfileGetBookmarks),
       fork(ProfileSagas.watchProfileGetRecipes),
       fork(ProfileSagas.watchRemoveRecipe),
-      fork(UpdateSagas.watchGetRecipeDetails)
+      fork(UpdateSagas.watchGetRecipeDetails),
+      fork(UpdateSagas.watchUpdateRecipe)
     ]);
   } catch (err) {
     console.log(err);

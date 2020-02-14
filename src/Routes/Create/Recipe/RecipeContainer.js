@@ -37,7 +37,8 @@ const RecipeRoute = props => {
     updateLoading,
     updateRecipe,
     updateError,
-    updateClean
+    updateClean,
+    submitUpdateRecipe
   } = props;
 
   // states for the recipe
@@ -80,7 +81,7 @@ const RecipeRoute = props => {
 
   // store the update info into state
   useEffect(() => {
-    if (isUpdate && !updateLoading && updateRecipe._id && !updateError) {
+    if (isUpdate && !updateLoading && updateRecipe._id) {
       setRecipeDetail(prevDetails => ({
         ...prevDetails,
         title: updateRecipe.title,
@@ -105,7 +106,7 @@ const RecipeRoute = props => {
         ]
       }));
     }
-  }, [updateLoading, updateRecipe, isUpdate, updateError]);
+  }, [updateLoading, updateRecipe, isUpdate]);
 
   // reorder the array helper function
   const reOrderArray = (arr, from, to) => {
@@ -317,7 +318,11 @@ const RecipeRoute = props => {
       });
       return prev;
     }, []);
-    submitRecipe(recipeDetail, selCategoryIds);
+    if (isUpdate) {
+      submitUpdateRecipe(recipeDetail, selCategoryIds);
+    } else {
+      submitRecipe(recipeDetail, selCategoryIds);
+    }
   };
 
   // fetch all categories from server on mount
@@ -382,7 +387,8 @@ const mapDispatchTopProps = dispatch => {
       cleanUp: CreateActions.cleanUp,
       submitRecipe: CreateActions.submitRecipe,
       getRecipeDetails: UpdateActions.getRecipeDetails,
-      updateClean: UpdateActions.cleanUp
+      updateClean: UpdateActions.cleanUp,
+      submitUpdateRecipe: UpdateActions.updateRecipe
     },
     dispatch
   );
