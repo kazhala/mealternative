@@ -1,5 +1,6 @@
 /*
   The recipe creation route
+  and recipe update
 */
 
 // react
@@ -41,8 +42,20 @@ const RecipeRoute = props => {
     updateClean,
     submitUpdateRecipe,
     updateLoadingText,
-    updateSuccess
+    updateSuccess,
+    updateClear
   } = props;
+
+  /*
+    updateInitLoading is for initial loading for recipe
+    updateLoading is for processing update recipe
+    created 2 to avoid re-render and reset the state
+  */
+
+  /*
+    updateClear is for reset update all state to initial state
+    updateClean is for cleaning up all errors and loading
+  */
 
   // states for the recipe
   const [recipeDetail, setRecipeDetail] = useState({
@@ -85,6 +98,7 @@ const RecipeRoute = props => {
   // store the update info into state
   useEffect(() => {
     if (isUpdate && !updateInitLoading && updateRecipe._id) {
+      console.log('check re-render');
       setRecipeDetail(prevDetails => ({
         ...prevDetails,
         title: updateRecipe.title,
@@ -312,6 +326,8 @@ const RecipeRoute = props => {
     }
   };
 
+  // get the category id from category name
+  // check if it is updating
   const handleRecipeSubmit = () => {
     const selCategoryIds = categoryList.reduce((prev, curr, idx, self) => {
       recipeDetail.categories.forEach(category => {
@@ -334,10 +350,11 @@ const RecipeRoute = props => {
     return () => {
       // cleanup on unmount
       cleanUp();
-      updateClean();
+      updateClear();
     };
-  }, [getCategories, cleanUp, updateClean]);
+  }, [getCategories, cleanUp, updateClear]);
 
+  // if did not find the udpate recipe, redirect
   const handleClearError = () => {
     if (updateError === 'Did not find the matching recipe') {
       history.replace('/account?page=2');
@@ -347,6 +364,7 @@ const RecipeRoute = props => {
     }
   };
 
+  // redirect on update success
   useEffect(() => {
     if (updateSuccess) {
       history.push('/account?page=2');
@@ -407,6 +425,7 @@ const mapDispatchTopProps = dispatch => {
       submitRecipe: CreateActions.submitRecipe,
       getRecipeDetails: UpdateActions.getRecipeDetails,
       updateClean: UpdateActions.cleanUp,
+      updateClear: UpdateActions.clearUpdate,
       submitUpdateRecipe: UpdateActions.updateRecipe
     },
     dispatch

@@ -45,6 +45,16 @@ const UpdateReducer = (state = initialState, action) => {
       return { ...state, loading: false, success: true, initLoading: false };
     case Types.UPDATE_INIT:
       return { ...state, initLoading: true, error: '', loading: false };
+    case Types.UPDATE_CLEAR:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        loadingText: '',
+        recipeDetails: {},
+        success: false,
+        initLoading: false
+      };
     default:
       return state;
   }

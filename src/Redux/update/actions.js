@@ -16,6 +16,12 @@ export const cleanUp = () => {
   };
 };
 
+export const clearUpdate = () => {
+  return {
+    type: Types.UPDATE_CLEAR
+  };
+};
+
 export const updateRecipe = (recipeDetail, selCategoryIds, recipeId) => {
   return {
     type: Types.UPDATE_RECIPE,
