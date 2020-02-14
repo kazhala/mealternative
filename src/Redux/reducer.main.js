@@ -9,6 +9,7 @@ import CreateReducer from './create';
 import ListReducer from './list';
 import RecipeReducer from './recipe';
 import ProfileReducer from './profile';
+import UpdateReducer from './update';
 
 const MainReducer = combineReducers({
   Auth: AuthReducer,
@@ -16,7 +17,8 @@ const MainReducer = combineReducers({
   Create: CreateReducer,
   List: ListReducer,
   Recipe: RecipeReducer,
-  Profile: ProfileReducer
+  Profile: ProfileReducer,
+  Update: UpdateReducer
 });
 
 export default MainReducer;

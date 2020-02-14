@@ -8,6 +8,7 @@ import { CreateSagas } from './create';
 import { ListSagas } from './list';
 import { RecipeSagas } from './recipe';
 import { ProfileSagas } from './profile';
+import { UpdateSagas } from './update';
 
 // running all sagas parallel(all) without blocking(fork)
 export default function* rootSaga() {
@@ -32,7 +33,8 @@ export default function* rootSaga() {
       fork(ProfileSagas.watchProfileUpdateUser),
       fork(ProfileSagas.watchProfileGetBookmarks),
       fork(ProfileSagas.watchProfileGetRecipes),
-      fork(ProfileSagas.watchRemoveRecipe)
+      fork(ProfileSagas.watchRemoveRecipe),
+      fork(UpdateSagas.watchGetRecipeDetails)
     ]);
   } catch (err) {
     console.log(err);

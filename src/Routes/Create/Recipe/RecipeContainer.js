@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CreateActions } from '../../../Redux/create';
-import { RecipeActions } from '../../../Redux/recipe';
+import { UpdateActions } from '../../../Redux/update';
 
 // components
 import ErrorSnack from '../../../Common/ErrorModal/ErrorSnack';
@@ -32,7 +32,10 @@ const RecipeRoute = props => {
     loading,
     loadingText,
     location,
-    fetchRecipeDetails
+    getRecipeDetails,
+    updateLoading,
+    updateRecipe,
+    updateError
   } = props;
 
   // states for the recipe
@@ -55,12 +58,26 @@ const RecipeRoute = props => {
     ]
   });
 
+  const [isUpdate, setIsUpdate] = useState(false);
+
   useEffect(() => {
     const updateQuery = queryString.parse(location.search);
     if (updateQuery.id) {
-      fetchRecipeDetails({ recipeid: updateQuery.id });
+      setIsUpdate(updateQuery.id);
     }
-  }, [location, fetchRecipeDetails]);
+  }, [location]);
+
+  useEffect(() => {
+    if (isUpdate) {
+      getRecipeDetails(isUpdate);
+    }
+  }, [isUpdate, getRecipeDetails]);
+
+  useEffect(() => {
+    if (isUpdate && !updateLoading && updateRecipe._id && !updateError) {
+      console.log('update');
+    }
+  }, [updateLoading, updateRecipe, isUpdate, updateError]);
 
   // reorder the array helper function
   const reOrderArray = (arr, from, to) => {
@@ -287,10 +304,10 @@ const RecipeRoute = props => {
   return (
     <>
       {success && <Redirect to='/' />}
-      <ErrorSnack error={error} handleClose={cleanUp} />
+      <ErrorSnack error={error || updateError} handleClose={cleanUp} />
       <PageSpinner
         background='rgba(0,0,0,0.4)'
-        loading={loading}
+        loading={loading || updateLoading}
         text={loadingText}
         textColor='#fff'
       />
@@ -313,7 +330,10 @@ const mapStateToProps = state => {
     error: state.Create.error,
     loading: state.Create.loading,
     success: state.Create.success,
-    loadingText: state.Create.loadingText
+    loadingText: state.Create.loadingText,
+    updateLoading: state.Update.loading,
+    updateError: state.Update.error,
+    updateRecipe: state.Update.recipeDetails
   };
 };
 
@@ -323,7 +343,7 @@ const mapDispatchTopProps = dispatch => {
       getCategories: CreateActions.getCategories,
       cleanUp: CreateActions.cleanUp,
       submitRecipe: CreateActions.submitRecipe,
-      fetchRecipeDetails: RecipeActions.fetchRecipeDetails
+      getRecipeDetails: UpdateActions.getRecipeDetails
     },
     dispatch
   );
