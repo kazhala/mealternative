@@ -35,7 +35,8 @@ const RecipeRoute = props => {
     getRecipeDetails,
     updateLoading,
     updateRecipe,
-    updateError
+    updateError,
+    updateClean
   } = props;
 
   // states for the recipe
@@ -301,10 +302,15 @@ const RecipeRoute = props => {
     };
   }, [getCategories, cleanUp]);
 
+  const handleClearError = () => {
+    cleanUp();
+    updateClean();
+  };
+
   return (
     <>
       {success && <Redirect to='/' />}
-      <ErrorSnack error={error || updateError} handleClose={cleanUp} />
+      <ErrorSnack error={error || updateError} handleClose={handleClearError} />
       <PageSpinner
         background='rgba(0,0,0,0.4)'
         loading={loading || updateLoading}
@@ -343,7 +349,8 @@ const mapDispatchTopProps = dispatch => {
       getCategories: CreateActions.getCategories,
       cleanUp: CreateActions.cleanUp,
       submitRecipe: CreateActions.submitRecipe,
-      getRecipeDetails: UpdateActions.getRecipeDetails
+      getRecipeDetails: UpdateActions.getRecipeDetails,
+      updateClean: UpdateActions.cleanUp
     },
     dispatch
   );

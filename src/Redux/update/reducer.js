@@ -21,8 +21,7 @@ const UpdateReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
-        loadingText: '',
-        recipeDetails: {}
+        loadingText: ''
       };
     case Types.UPDATE_STORE_RECIPE:
       return { ...state, loading: false, recipeDetails: action.payload };
