@@ -35,11 +35,13 @@ const RecipeRoute = props => {
     location,
     getRecipeDetails,
     updateLoading,
+    updateInitLoading,
     updateRecipe,
     updateError,
     updateClean,
     submitUpdateRecipe,
-    updateLoadingText
+    updateLoadingText,
+    updateSuccess
   } = props;
 
   // states for the recipe
@@ -82,7 +84,7 @@ const RecipeRoute = props => {
 
   // store the update info into state
   useEffect(() => {
-    if (isUpdate && !updateLoading && updateRecipe._id) {
+    if (isUpdate && !updateInitLoading && updateRecipe._id) {
       setRecipeDetail(prevDetails => ({
         ...prevDetails,
         title: updateRecipe.title,
@@ -107,7 +109,7 @@ const RecipeRoute = props => {
         ]
       }));
     }
-  }, [updateLoading, updateRecipe, isUpdate]);
+  }, [updateInitLoading, updateRecipe, isUpdate]);
 
   // reorder the array helper function
   const reOrderArray = (arr, from, to) => {
@@ -332,8 +334,9 @@ const RecipeRoute = props => {
     return () => {
       // cleanup on unmount
       cleanUp();
+      updateClean();
     };
-  }, [getCategories, cleanUp]);
+  }, [getCategories, cleanUp, updateClean]);
 
   const handleClearError = () => {
     if (updateError === 'Did not find the matching recipe') {
@@ -343,6 +346,12 @@ const RecipeRoute = props => {
       updateClean();
     }
   };
+
+  useEffect(() => {
+    if (updateSuccess) {
+      history.push('/account?page=2');
+    }
+  }, [updateSuccess, history]);
 
   return (
     <>
@@ -384,7 +393,9 @@ const mapStateToProps = state => {
     updateLoading: state.Update.loading,
     updateError: state.Update.error,
     updateRecipe: state.Update.recipeDetails,
-    updateLoadingText: state.Update.loadingText
+    updateLoadingText: state.Update.loadingText,
+    updateInitLoading: state.Update.initLoading,
+    updateSuccess: state.Update.success
   };
 };
 

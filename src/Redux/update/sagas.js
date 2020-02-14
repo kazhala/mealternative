@@ -1,7 +1,7 @@
 /*
   sagas for update redux
 */
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, delay } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 import * as CreateOperations from '../create/operations';
@@ -21,7 +21,7 @@ export function* watchUpdateRecipe() {
   worker sagas
 */
 function* workerGetRecipeDetails({ payload }) {
-  yield put({ type: Types.UPDATE_BEGIN });
+  yield put({ type: Types.UPDATE_INIT });
   try {
     const response = yield call(Operations.getRecipeDetails, payload);
     if (response.error) {
@@ -146,6 +146,8 @@ function* workerUpdateRecipe({ payload }) {
         type: Types.UPDATE_LOADING_TEXT,
         payload: 'Success! Redirecting..'
       });
+      yield delay(2000);
+      yield put({ type: Types.UPDATE_SUCCESS });
     }
   } catch (err) {
     console.log('Error', err);
