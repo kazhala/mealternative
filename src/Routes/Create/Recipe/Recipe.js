@@ -30,7 +30,8 @@ const Recipe = props => {
     categoryLoading,
     recipeDetail,
     handleDetailChange,
-    handleRecipeSubmit
+    handleRecipeSubmit,
+    isUpdate
   } = props;
   const {
     title,
@@ -45,7 +46,7 @@ const Recipe = props => {
     <div className={classes.routeRoot}>
       {/* title */}
       <Typography className={classes.routeTitle} component='div' variant='h6'>
-        Create new recipe
+        {isUpdate ? 'Update recipe' : 'Create new recipe'}
       </Typography>
       {/* thumbnailImage preview using material ui avatar */}
       {thumbnailImage.previewUrl && (
@@ -142,7 +143,8 @@ Recipe.propTypes = {
   categoryLoading: PropTypes.bool.isRequired,
   recipeDetail: PropTypes.object.isRequired,
   handleDetailChange: PropTypes.func.isRequired,
-  handleRecipeSubmit: PropTypes.func.isRequired
+  handleRecipeSubmit: PropTypes.func.isRequired,
+  isUpdate: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired
 };
 
 export default Recipe;

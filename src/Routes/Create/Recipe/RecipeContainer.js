@@ -22,6 +22,7 @@ import queryString from 'query-string';
 
 const RecipeRoute = props => {
   const {
+    history,
     error,
     categoryLoading,
     categoryList,
@@ -59,8 +60,10 @@ const RecipeRoute = props => {
     ]
   });
 
+  // determine if is update or create new
   const [isUpdate, setIsUpdate] = useState(false);
 
+  // store the update Id into state
   useEffect(() => {
     const updateQuery = queryString.parse(location.search);
     if (updateQuery.id) {
@@ -68,12 +71,14 @@ const RecipeRoute = props => {
     }
   }, [location]);
 
+  // fetch the update recipe details
   useEffect(() => {
     if (isUpdate) {
       getRecipeDetails(isUpdate);
     }
   }, [isUpdate, getRecipeDetails]);
 
+  // store the update info into state
   useEffect(() => {
     if (isUpdate && !updateLoading && updateRecipe._id && !updateError) {
       console.log('update');
@@ -303,8 +308,12 @@ const RecipeRoute = props => {
   }, [getCategories, cleanUp]);
 
   const handleClearError = () => {
-    cleanUp();
-    updateClean();
+    if (updateError === 'Did not find the matching recipe') {
+      history.replace('/account?page=2');
+    } else {
+      cleanUp();
+      updateClean();
+    }
   };
 
   return (
@@ -318,6 +327,7 @@ const RecipeRoute = props => {
         textColor='#fff'
       />
       <Recipe
+        isUpdate={isUpdate}
         recipeDetail={recipeDetail}
         categoryList={categoryList}
         categoryLoading={categoryLoading}
