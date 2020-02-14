@@ -81,7 +81,29 @@ const RecipeRoute = props => {
   // store the update info into state
   useEffect(() => {
     if (isUpdate && !updateLoading && updateRecipe._id && !updateError) {
-      console.log('update');
+      setRecipeDetail(prevDetails => ({
+        ...prevDetails,
+        title: updateRecipe.title,
+        description: updateRecipe.description,
+        thumbnailImage: {
+          ...prevDetails.thumbnailImage,
+          url: updateRecipe.thumbImageUrl,
+          previewUrl: updateRecipe.thumbImageUrl
+        },
+        ingredients: updateRecipe.ingredients,
+        categories: [...updateRecipe.categories.map(category => category.name)],
+        steps: [
+          ...updateRecipe.steps.map(step => ({
+            stepTitle: step.stepTitle,
+            stepDescriptions: step.stepDescriptions,
+            stepImage: {
+              url: step.stepImageUrl,
+              file: '',
+              previewUrl: step.stepImageUrl
+            }
+          }))
+        ]
+      }));
     }
   }, [updateLoading, updateRecipe, isUpdate, updateError]);
 

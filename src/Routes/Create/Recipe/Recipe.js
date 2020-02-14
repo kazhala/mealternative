@@ -132,7 +132,7 @@ const Recipe = props => {
         endIcon={<Send />}
         onClick={handleRecipeSubmit}
       >
-        Upload
+        {isUpdate ? 'Update' : 'Upload'}
       </Button>
     </div>
   );
