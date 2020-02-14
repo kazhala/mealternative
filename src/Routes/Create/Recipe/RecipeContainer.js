@@ -38,7 +38,8 @@ const RecipeRoute = props => {
     updateRecipe,
     updateError,
     updateClean,
-    submitUpdateRecipe
+    submitUpdateRecipe,
+    updateLoadingText
   } = props;
 
   // states for the recipe
@@ -319,7 +320,7 @@ const RecipeRoute = props => {
       return prev;
     }, []);
     if (isUpdate) {
-      submitUpdateRecipe(recipeDetail, selCategoryIds);
+      submitUpdateRecipe(recipeDetail, selCategoryIds, isUpdate);
     } else {
       submitRecipe(recipeDetail, selCategoryIds);
     }
@@ -349,8 +350,14 @@ const RecipeRoute = props => {
       <ErrorSnack error={error || updateError} handleClose={handleClearError} />
       <PageSpinner
         background='rgba(0,0,0,0.4)'
-        loading={loading || updateLoading}
+        loading={loading}
         text={loadingText}
+        textColor='#fff'
+      />
+      <PageSpinner
+        background='rgba(0,0,0,0.4)'
+        loading={updateLoading}
+        text={updateLoadingText}
         textColor='#fff'
       />
       <Recipe
@@ -376,7 +383,8 @@ const mapStateToProps = state => {
     loadingText: state.Create.loadingText,
     updateLoading: state.Update.loading,
     updateError: state.Update.error,
-    updateRecipe: state.Update.recipeDetails
+    updateRecipe: state.Update.recipeDetails,
+    updateLoadingText: state.Update.loadingText
   };
 };
 

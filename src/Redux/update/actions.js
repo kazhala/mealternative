@@ -16,12 +16,13 @@ export const cleanUp = () => {
   };
 };
 
-export const updateRecipe = (recipeDetail, selCategoryIds) => {
+export const updateRecipe = (recipeDetail, selCategoryIds, recipeId) => {
   return {
     type: Types.UPDATE_RECIPE,
     payload: {
       recipeDetail,
-      selCategoryIds
+      selCategoryIds,
+      recipeId
     }
   };
 };

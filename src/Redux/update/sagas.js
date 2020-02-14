@@ -40,29 +40,31 @@ function* workerGetRecipeDetails({ payload }) {
 // step3 upload all step images to cloudinary
 // store recipe in backend once all url are created
 function* workerUpdateRecipe({ payload }) {
-  const { recipeDetail, selCategoryIds } = payload;
+  const { recipeDetail, selCategoryIds, recipeId } = payload;
   // prepare required params to call backend
-  const uploadParams = {
+  const updateParams = {
+    id: recipeId,
     title: recipeDetail.title,
     description: recipeDetail.description,
     ingredients: [...recipeDetail.ingredients],
-    categories: [...selCategoryIds]
+    categories: [...selCategoryIds],
+    thumbImageUrl: recipeDetail.thumbnailImage.url
   };
-  yield console.log(uploadParams);
+  yield console.log(updateParams);
 
   yield put({ type: Types.UPDATE_BEGIN });
   try {
     // client side validation, don't waste usage in cloudinary
-    if (uploadParams.title.length < 3 || uploadParams.title.length > 60) {
+    if (updateParams.title.length < 3 || updateParams.title.length > 60) {
       throw new Error('Recipe title should be between 3-60 characters long');
     }
-    if (uploadParams.description.length > 1000) {
+    if (updateParams.description.length > 1000) {
       throw new Error("Description can't be longer 1000");
     }
-    if (uploadParams.ingredients.length < 1) {
+    if (updateParams.ingredients.length < 1) {
       throw new Error('Please enter some required ingredients');
     }
-    if (uploadParams.categories.length < 1) {
+    if (updateParams.categories.length < 1) {
       throw new Error('Please select at least one category');
     }
 
@@ -91,10 +93,59 @@ function* workerUpdateRecipe({ payload }) {
       }
       // put the url in params
       if (thumbResponse.secure_url) {
-        uploadParams.thumbImageUrl = thumbResponse.secure_url;
+        updateParams.thumbImageUrl = thumbResponse.secure_url;
       } else {
         throw new Error('Something went wrong..');
       }
+    }
+
+    // prepare steps params
+    const uploadSteps = [];
+    // check each step if need to upload image
+    for (let i = 0; i < recipeDetail.steps.length; i++) {
+      let eachStep = {};
+      eachStep.stepTitle = recipeDetail.steps[i].stepTitle;
+      eachStep.stepDescriptions = recipeDetail.steps[i].stepDescriptions;
+      // if file, upload image
+      if (recipeDetail.steps[i].stepImage.file) {
+        console.log(`Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`);
+        yield put({
+          type: Types.UPDATE_LOADING_TEXT,
+          payload: `Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`
+        });
+        let stepResponse = yield call(
+          CreateOperations.uploadStepImage,
+          recipeDetail.steps[i].stepImage.file
+        );
+        if (stepResponse.error) {
+          throw new Error(stepResponse.error.message);
+        }
+        // store the url
+        if (stepResponse.secure_url) {
+          eachStep.stepImageUrl = stepResponse.secure_url;
+        } else {
+          throw new Error('Something went wrong..');
+        }
+      } else {
+        eachStep.stepImageUrl = recipeDetail.steps[i].stepImage.url;
+      }
+      uploadSteps.push(eachStep);
+    }
+    updateParams.steps = [...uploadSteps];
+
+    console.log(updateParams);
+    yield put({
+      type: Types.UPDATE_LOADING_TEXT,
+      payload: 'Uploading recipe..'
+    });
+    const response = yield call(Operations.updateRecipe, updateParams);
+    if (response.error) {
+      throw new Error(response.error);
+    } else {
+      yield put({
+        type: Types.UPDATE_LOADING_TEXT,
+        payload: 'Success! Redirecting..'
+      });
     }
   } catch (err) {
     console.log('Error', err);
