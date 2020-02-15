@@ -132,9 +132,7 @@ const AccountContainer = props => {
   // handle submit update password request
   const handleUpdatePassword = (e, password) => {
     e.preventDefault();
-    if (window.confirm('Are you sure you want to update your password?')) {
-      updatePassword(password);
-    }
+    updatePassword(password);
   };
 
   return (

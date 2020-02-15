@@ -45,6 +45,9 @@ function* workerUpdatePassword({ payload }) {
     if (newPassword !== confirmPassword) {
       throw new Error('Password did not match');
     }
+    if (!window.confirm('Are you sure you want to update your password')) {
+      throw new Error('Password update canceled by user');
+    }
     const response = yield call(
       Operations.updatePassword,
       oldPassword,
