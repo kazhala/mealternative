@@ -138,6 +138,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1, 0)
   },
   passwordInput: {
+    width: '90%',
     margin: theme.spacing(1, 0)
   },
 

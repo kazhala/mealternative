@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 
 // components
 import PasswordInput from '../../../Common/Inputs/PasswordInput';
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
+import { Check } from '@material-ui/icons';
 
 const PasswordTab = props => {
   const { classes, tabIndex, activeTab } = props;
@@ -20,6 +21,7 @@ const PasswordTab = props => {
   });
 
   const handleChange = e => {
+    e.persist();
     setPassword(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -55,6 +57,15 @@ const PasswordTab = props => {
           name='confirmPassword'
           onChange={handleChange}
         />
+        <Button
+          onClick={() => console.log('hello')}
+          variant='contained'
+          endIcon={<Check />}
+          className={classes.passwordInput}
+          color='primary'
+        >
+          Update
+        </Button>
       </div>
     )
   );
