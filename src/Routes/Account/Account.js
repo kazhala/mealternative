@@ -21,6 +21,7 @@ import DetailsTab from './_components/DetailsTab';
 import BookmarksTab from './_components/BookmarksTab';
 import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
 import RecipesTab from './_components/RecipesTab';
+import PasswordTab from './_components/PasswordTab';
 
 // misc
 import useStyles from './Style';
@@ -104,6 +105,7 @@ const Account = props => {
             otherUserId={otherUserId}
             handleRemoveRecipe={handleRemoveRecipe}
           />
+          <PasswordTab activeTab={activeTab} tabIndex={3} classes={classes} />
         </Paper>
       </div>
 

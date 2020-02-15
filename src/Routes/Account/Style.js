@@ -133,6 +133,14 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
 
+  // password tab
+  passwordTitle: {
+    margin: theme.spacing(1, 0)
+  },
+  passwordInput: {
+    margin: theme.spacing(1, 0)
+  },
+
   // common
   inputFields: {
     marginTop: theme.spacing(1)
