@@ -16,7 +16,6 @@ import { UpdateActions } from '../../../Redux/update';
 import ErrorSnack from '../../../Common/ErrorModal/ErrorSnack';
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
 import Recipe from './Recipe';
-import { Redirect } from 'react-router-dom';
 
 // misc
 import queryString from 'query-string';
@@ -370,14 +369,13 @@ const RecipeRoute = props => {
 
   // redirect on update success
   useEffect(() => {
-    if (updateSuccess) {
+    if (updateSuccess || success) {
       handleUpdateGoBack();
     }
-  }, [updateSuccess, history, handleUpdateGoBack]);
+  }, [updateSuccess, history, handleUpdateGoBack, success]);
 
   return (
     <>
-      {success && <Redirect to='/' />}
       <ErrorSnack error={error || updateError} handleClose={handleClearError} />
       <PageSpinner
         background='rgba(0,0,0,0.4)'

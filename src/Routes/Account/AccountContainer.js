@@ -83,6 +83,9 @@ const AccountContainer = props => {
           getProfileRecipes(userDetails._id);
         }
         break;
+      case 3:
+        console.log('Update password');
+        break;
       default:
         console.log('wrong');
     }
