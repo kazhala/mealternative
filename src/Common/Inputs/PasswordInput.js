@@ -4,14 +4,14 @@ import { TextField, InputAdornment, IconButton } from '@material-ui/core';
 import { Repeat, Lock, Visibility, VisibilityOff } from '@material-ui/icons';
 
 const PasswordInput = props => {
-  const { className, name, value, onChange, repeat } = props;
+  const { className, name, value, onChange, repeat, label } = props;
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <TextField
       variant='outlined'
       placeholder={repeat ? 'Repeat password' : 'Password'}
-      label={repeat ? 'Confirm' : 'Password'}
+      label={repeat ? 'Confirm' : label}
       className={className}
       type={showPassword ? 'text' : 'password'}
       name={name}
@@ -41,7 +41,12 @@ PasswordInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  repeat: PropTypes.bool
+  repeat: PropTypes.bool,
+  label: PropTypes.string
+};
+
+PasswordInput.defaultProps = {
+  label: 'Password'
 };
 
 export default PasswordInput;
