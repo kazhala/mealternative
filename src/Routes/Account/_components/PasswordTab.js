@@ -3,7 +3,7 @@
 */
 
 // react
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // components
@@ -12,7 +12,13 @@ import { Typography, Button } from '@material-ui/core';
 import { Check } from '@material-ui/icons';
 
 const PasswordTab = props => {
-  const { classes, tabIndex, activeTab } = props;
+  const {
+    infoMessage,
+    classes,
+    tabIndex,
+    activeTab,
+    handleUpdatePassword
+  } = props;
 
   const [password, setPassword] = useState({
     oldPassword: '',
@@ -28,11 +34,20 @@ const PasswordTab = props => {
     }));
   };
 
+  useEffect(() => {
+    if (infoMessage === 'Successfully updated password') {
+      setPassword({ oldPassword: '', newPassword: '', confirmPassword: '' });
+    }
+  }, [infoMessage]);
+
   const { oldPassword, newPassword, confirmPassword } = password;
 
   return (
     activeTab === tabIndex && (
-      <div className={classes.tabRoot}>
+      <form
+        onSubmit={e => handleUpdatePassword(e, password)}
+        className={classes.tabRoot}
+      >
         <Typography variant='h6' className={classes.passwordTitle}>
           Update your password
         </Typography>
@@ -58,7 +73,7 @@ const PasswordTab = props => {
           onChange={handleChange}
         />
         <Button
-          onClick={() => console.log('hello')}
+          type='submit'
           variant='contained'
           endIcon={<Check />}
           className={classes.passwordInput}
@@ -66,7 +81,7 @@ const PasswordTab = props => {
         >
           Update
         </Button>
-      </div>
+      </form>
     )
   );
 };
@@ -74,7 +89,9 @@ const PasswordTab = props => {
 PasswordTab.propTypes = {
   classes: PropTypes.object.isRequired,
   tabIndex: PropTypes.number.isRequired,
-  activeTab: PropTypes.number.isRequired
+  activeTab: PropTypes.number.isRequired,
+  handleUpdatePassword: PropTypes.func.isRequired,
+  infoMessage: PropTypes.string
 };
 
 export default PasswordTab;

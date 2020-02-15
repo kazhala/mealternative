@@ -22,6 +22,7 @@ import queryString from 'query-string';
 
 const AccountContainer = props => {
   const {
+    updatePassword,
     infoMessage,
     clearError,
     getProfileDetails,
@@ -123,6 +124,11 @@ const AccountContainer = props => {
     history.push(`/create/recipe?id=${recipeId}`);
   };
 
+  const handleUpdatePassword = (e, password) => {
+    e.preventDefault();
+    updatePassword(password);
+  };
+
   return (
     <>
       {/* if is not looking at others and is not login, redirect */}
@@ -131,12 +137,14 @@ const AccountContainer = props => {
       <ErrorSnack error={error} handleClose={clearError} />
       <SuccessSnack message={infoMessage} handleClose={clearError} />
       <Account
+        handleUpdatePassword={handleUpdatePassword}
         handleEditRecipe={handleEditRecipe}
         handleCardClick={handleCardClick}
         activeTab={activeTab}
         handleTabChange={handleTabChange}
         otherUserId={otherUserId}
         handleRemoveRecipe={handleRemoveRecipe}
+        infoMessage={infoMessage}
         {...props}
       />
     </>
@@ -169,7 +177,8 @@ const mapDispatchToProps = dispatch => {
       updateProfileDetails: ProfileActions.updateProfileDetails,
       getProfileBookmarks: ProfileActions.getProfileBookmarks,
       getProfileRecipes: ProfileActions.getProfileRecipes,
-      removeRecipe: ProfileActions.removeRecipe
+      removeRecipe: ProfileActions.removeRecipe,
+      updatePassword: ProfileActions.updatePassword
     },
     dispatch
   );

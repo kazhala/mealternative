@@ -28,9 +28,36 @@ export function* watchRemoveRecipe() {
   yield takeLatest(Types.PROFILE_REMOVE_RECIPE, workerRemoveRecipe);
 }
 
+export function* watchUpdatePassword() {
+  yield takeLatest(Types.PROFILE_UPDATE_PASSWORD, workerUpdatePassword);
+}
+
 /*
   worker sagas
 */
+function* workerUpdatePassword({ payload }) {
+  const { oldPassword, newPassword, confirmPassword } = payload;
+  yield put({ type: Types.PROFILE_BEGIN });
+  try {
+    if (newPassword !== confirmPassword) {
+      throw new Error('Password did not match');
+    }
+    const response = yield call(
+      Operations.updatePassword,
+      oldPassword,
+      newPassword
+    );
+    if (response.error) {
+      throw new Error(response.error);
+    }
+    yield put({ type: Types.PROFILE_CLEAR });
+    yield put({ type: Types.PROFILE_INFO, payload: response.message });
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.PROFILE_ERROR, payload: err.message });
+  }
+}
+
 function* workerRemoveRecipe({ payload }) {
   try {
     // remove the recipe

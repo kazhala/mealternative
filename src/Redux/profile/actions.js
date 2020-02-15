@@ -48,3 +48,10 @@ export const removeRecipe = payload => {
     payload
   };
 };
+
+export const updatePassword = payload => {
+  return {
+    type: Types.PROFILE_UPDATE_PASSWORD,
+    payload
+  };
+};

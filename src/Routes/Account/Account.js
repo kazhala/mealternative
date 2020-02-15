@@ -41,7 +41,9 @@ const Account = props => {
     recipesLoading,
     otherUserId,
     handleRemoveRecipe,
-    handleEditRecipe
+    handleEditRecipe,
+    handleUpdatePassword,
+    infoMessage
   } = props;
   const classes = useStyles();
 
@@ -105,7 +107,13 @@ const Account = props => {
             otherUserId={otherUserId}
             handleRemoveRecipe={handleRemoveRecipe}
           />
-          <PasswordTab activeTab={activeTab} tabIndex={3} classes={classes} />
+          <PasswordTab
+            handleUpdatePassword={handleUpdatePassword}
+            activeTab={activeTab}
+            tabIndex={3}
+            classes={classes}
+            infoMessage={infoMessage}
+          />
         </Paper>
       </div>
 
@@ -123,7 +131,9 @@ Account.propTypes = {
   handleCardClick: PropTypes.func.isRequired,
   otherUserId: PropTypes.any,
   handleRemoveRecipe: PropTypes.func.isRequired,
-  handleEditRecipe: PropTypes.func.isRequired
+  handleEditRecipe: PropTypes.func.isRequired,
+  handleUpdatePassword: PropTypes.func.isRequired,
+  infoMessage: PropTypes.string
 };
 
 export default Account;

@@ -7,6 +7,23 @@ import Cookies from 'js-cookie';
 // get the auth state
 export const getAuthState = state => state.Auth;
 
+export const updatePassword = async (oldPassword, newPassword) => {
+  try {
+    const res = await fetch(`${API}/user/:userId/password`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('token')}`
+      },
+      body: JSON.stringify({ oldPassword, newPassword })
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
 export const getProfileBookmarks = async userId => {
   try {
     const res = await fetch(`${API}/user/${userId}/bookmarks`, {
