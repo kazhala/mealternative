@@ -47,15 +47,17 @@ const Recipe = props => {
 
   return (
     <div className={classes.routeRoot}>
-      <Fab
-        color='primary'
-        className={classes.updateGoBack}
-        onClick={handleUpdateGoBack}
-        variant='extended'
-      >
-        <ArrowBack />
-        Back
-      </Fab>
+      {isUpdate && (
+        <Fab
+          color='primary'
+          className={classes.updateGoBack}
+          onClick={handleUpdateGoBack}
+          variant='extended'
+        >
+          <ArrowBack />
+          Back
+        </Fab>
+      )}
       {/* title */}
       <Typography className={classes.routeTitle} component='div' variant='h6'>
         {isUpdate ? 'Update recipe' : 'Create new recipe'}
