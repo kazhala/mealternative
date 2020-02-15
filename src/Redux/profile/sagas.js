@@ -35,10 +35,13 @@ export function* watchUpdatePassword() {
 /*
   worker sagas
 */
+
+// update password
 function* workerUpdatePassword({ payload }) {
   const { oldPassword, newPassword, confirmPassword } = payload;
   yield put({ type: Types.PROFILE_BEGIN });
   try {
+    // validate
     if (newPassword !== confirmPassword) {
       throw new Error('Password did not match');
     }
@@ -50,6 +53,8 @@ function* workerUpdatePassword({ payload }) {
     if (response.error) {
       throw new Error(response.error);
     }
+    // no need for other success state, clear loading and erro state on success
+    // dispatch the info next
     yield put({ type: Types.PROFILE_CLEAR });
     yield put({ type: Types.PROFILE_INFO, payload: response.message });
   } catch (err) {

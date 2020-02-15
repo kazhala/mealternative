@@ -112,6 +112,7 @@ const AccountContainer = props => {
     }
   };
 
+  // confirm if user wants to remove the recipe
   const handleRemoveRecipe = (e, recipeId) => {
     e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this recipe?')) {
@@ -119,14 +120,18 @@ const AccountContainer = props => {
     }
   };
 
+  // push to edit recipe
   const handleEditRecipe = (e, recipeId) => {
     e.stopPropagation();
     history.push(`/create/recipe?id=${recipeId}`);
   };
 
+  // handle submit update password request
   const handleUpdatePassword = (e, password) => {
     e.preventDefault();
-    updatePassword(password);
+    if (window.confirm('Are you sure you want to update your password?')) {
+      updatePassword(password);
+    }
   };
 
   return (

@@ -3,6 +3,15 @@
 */
 import * as Types from './types';
 
+/*
+  loading: general page loading
+  loadingText: text under the spinner
+  error: general page error
+  info: genral page success
+  detailLoading: tab specific loading
+  bookmarksLoading
+  recipesLoading
+*/
 const initialState = {
   loading: false,
   loadingText: '',
@@ -16,6 +25,8 @@ const initialState = {
   recipesLoading: false
 };
 
+// PROFILE_CLEAN: clear everything on unmount
+// PROFILE_CLEAR: remove all error and loading states
 const ProfileReducer = (state = initialState, action) => {
   switch (action.type) {
     case Types.DETAIL_BEGIN:

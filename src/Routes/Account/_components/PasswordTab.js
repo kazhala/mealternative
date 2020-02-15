@@ -20,13 +20,16 @@ const PasswordTab = props => {
     handleUpdatePassword
   } = props;
 
+  // password state
   const [password, setPassword] = useState({
     oldPassword: '',
     newPassword: '',
     confirmPassword: ''
   });
 
+  // handle state update
   const handleChange = e => {
+    // allow async action with event object
     e.persist();
     setPassword(prevState => ({
       ...prevState,
@@ -34,6 +37,7 @@ const PasswordTab = props => {
     }));
   };
 
+  // clear the state when success update
   useEffect(() => {
     if (infoMessage === 'Successfully updated password') {
       setPassword({ oldPassword: '', newPassword: '', confirmPassword: '' });
