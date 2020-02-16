@@ -29,9 +29,10 @@ export const clearError = () => {
   };
 };
 
-export const getProfileBookmarks = () => {
+export const getProfileBookmarks = payload => {
   return {
-    type: Types.PROFILE_GET_BOOKMARKS
+    type: Types.PROFILE_GET_BOOKMARKS,
+    payload
   };
 };
 

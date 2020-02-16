@@ -72,8 +72,10 @@ const AccountContainer = props => {
         }
         break;
       case 1:
-        if (!otherUserId) {
-          getProfileBookmarks();
+        if (otherUserId) {
+          getProfileBookmarks(otherUserId);
+        } else {
+          getProfileBookmarks(userDetails._id);
         }
         break;
       case 2:

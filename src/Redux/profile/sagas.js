@@ -1,7 +1,7 @@
 /*
   Profile page saga handlers
 */
-import { takeLatest, put, call, delay, select } from 'redux-saga/effects';
+import { takeLatest, put, call, delay } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 
@@ -100,14 +100,12 @@ function* workerProfileGetRecipes({ payload }) {
   }
 }
 
-function* workerProfileGetBookmarks() {
+function* workerProfileGetBookmarks({ payload }) {
   // start loading
   yield put({ type: Types.BOOKMARKS_BEGIN });
-  // get the userId from redux state
-  const { user } = yield select(Operations.getAuthState);
   try {
     // fetch all bookmarks
-    const response = yield call(Operations.getProfileBookmarks, user._id);
+    const response = yield call(Operations.getProfileBookmarks, payload);
     if (response.error) {
       throw new Error(response.error);
     }

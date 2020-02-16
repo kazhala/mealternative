@@ -4,9 +4,6 @@
 import { API, CloudinaryURL } from '../../config';
 import Cookies from 'js-cookie';
 
-// get the auth state
-export const getAuthState = state => state.Auth;
-
 export const updatePassword = async (oldPassword, newPassword) => {
   try {
     const res = await fetch(`${API}/user/:userId/password`, {
