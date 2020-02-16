@@ -56,7 +56,11 @@ const AccountContainer = props => {
     }
     if (pageQuery.page) {
       setActiveTab(Number(pageQuery.page));
-      history.replace(location.path);
+      if (pageQuery.id) {
+        history.replace(`${location.pathname}?id=${pageQuery.id}`);
+      } else {
+        history.replace(location.pathname);
+      }
     }
   }, [location, history]);
 
