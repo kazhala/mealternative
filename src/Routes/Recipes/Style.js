@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
 
   // speedial
   recipeDial: {
-    position: 'absolute',
+    position: 'fixed',
     right: theme.spacing(2),
     bottom: theme.spacing(2)
   }
