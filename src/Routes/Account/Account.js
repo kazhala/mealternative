@@ -16,7 +16,7 @@ import {
   Avatar,
   Typography
 } from '@material-ui/core';
-import { Settings, Book, MenuBook, VpnKey } from '@material-ui/icons';
+import { Details, Settings, Book, MenuBook, VpnKey } from '@material-ui/icons';
 import DetailsTab from './_components/DetailsTab';
 import BookmarksTab from './_components/BookmarksTab';
 import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
@@ -71,16 +71,21 @@ const Account = props => {
             variant='fullWidth'
             textColor='primary'
           >
-            <Tab icon={<Settings />} />
+            {!otherUserId ? (
+              <Tab icon={<Settings />} />
+            ) : (
+              <Tab icon={<Details />} />
+            )}
             <Tab icon={<Book />} />
             <Tab icon={<MenuBook />} />
-            <Tab icon={<VpnKey />} />
+            {!otherUserId && <Tab icon={<VpnKey />} />}
           </Tabs>
         </AppBar>
 
         {/* tab panel to display information */}
         <Paper className={classes.tabPanel} elevation={1}>
           <DetailsTab
+            otherUserId={otherUserId}
             updateProfileDetails={updateProfileDetails}
             profileUser={profileUser}
             classes={classes}

@@ -54,6 +54,7 @@ const AccountContainer = props => {
     if (pageQuery.id) {
       setOtherUserId(pageQuery.id);
     }
+    // replace the search queryString once processed
     if (pageQuery.page) {
       setActiveTab(Number(pageQuery.page));
       if (pageQuery.id) {

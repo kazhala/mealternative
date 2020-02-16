@@ -7,7 +7,16 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import { Avatar, TextField, IconButton, Button } from '@material-ui/core';
+import {
+  Avatar,
+  TextField,
+  IconButton,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from '@material-ui/core';
 import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
 import {
   Link,
@@ -15,7 +24,10 @@ import {
   AddAPhoto,
   Clear,
   RotateLeft,
-  Check
+  Check,
+  Description,
+  ContactMail,
+  Person
 } from '@material-ui/icons';
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
 
@@ -26,7 +38,8 @@ const DetailsTab = props => {
     activeTab,
     tabIndex,
     profileUser,
-    detailLoading
+    detailLoading,
+    otherUserId
   } = props;
 
   // the data to be displayed, keep a copy locally for updating state without
@@ -99,7 +112,7 @@ const DetailsTab = props => {
     activeTab === tabIndex && (
       <div className={classes.tabRoot}>
         {/* onec everything is loaded, display */}
-        {displayProfile && displayProfile._id && (
+        {displayProfile && displayProfile._id && !otherUserId && (
           <>
             {/* profile avatar */}
             <Avatar
@@ -220,6 +233,32 @@ const DetailsTab = props => {
             </div>
           </>
         )}
+        {displayProfile && displayProfile._id && otherUserId && (
+          <List
+            component='div'
+            style={{ width: '100%' }}
+            aria-label='user information'
+          >
+            <ListItem divider>
+              <ListItemIcon>
+                <ContactMail />
+              </ListItemIcon>
+              <ListItemText primary={profileUser.email} />
+            </ListItem>
+            <ListItem divider>
+              <ListItemIcon>
+                <Person />
+              </ListItemIcon>
+              <ListItemText primary={profileUser.username} />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <Description />
+              </ListItemIcon>
+              <ListItemText primary={profileUser.about} />
+            </ListItem>
+          </List>
+        )}
         <PageSpinner loading={detailLoading} background='0,0,0,0' />
       </div>
     )
@@ -232,7 +271,8 @@ DetailsTab.propTypes = {
   tabIndex: PropTypes.number.isRequired,
   profileUser: PropTypes.object,
   updateProfileDetails: PropTypes.func.isRequired,
-  detailLoading: PropTypes.bool.isRequired
+  detailLoading: PropTypes.bool.isRequired,
+  otherUserId: PropTypes.string
 };
 
 export default DetailsTab;
