@@ -53,15 +53,10 @@ const AccountContainer = props => {
     const pageQuery = queryString.parse(location.search);
     if (pageQuery.id) {
       setOtherUserId(pageQuery.id);
-    }
-    // replace the search queryString once processed
-    if (pageQuery.page) {
+    } else if (pageQuery.page) {
+      // replace the search queryString once processed
       setActiveTab(Number(pageQuery.page));
-      if (pageQuery.id) {
-        history.replace(`${location.pathname}?id=${pageQuery.id}`);
-      } else {
-        history.replace(location.pathname);
-      }
+      history.replace(location.pathname);
     }
   }, [location, history]);
 
