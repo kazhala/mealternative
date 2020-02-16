@@ -97,9 +97,9 @@ const RecipesContainer = props => {
   // check reverse sort
   const getOrderByStr = orderBy => {
     if (
-      orderBy === 'rating' ||
-      orderBy === 'likes' ||
-      orderBy === 'bookmarks'
+      orderBy === '-rating' ||
+      orderBy === '-likes' ||
+      orderBy === '-bookmarks'
     ) {
       return orderBy;
     }
