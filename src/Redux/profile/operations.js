@@ -27,8 +27,7 @@ export const getProfileBookmarks = async userId => {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${Cookies.get('token')}`
+        'Content-Type': 'application/json'
       }
     });
     return res.json();
