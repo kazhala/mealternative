@@ -52,13 +52,22 @@ const AccountContainer = props => {
     // get the query string if it exists (?id=xxx)
     const pageQuery = queryString.parse(location.search);
     if (pageQuery.id) {
-      setOtherUserId(pageQuery.id);
+      // if is user itself, don't set to other user profile
+      if (pageQuery.id === userDetails._id) {
+        if (pageQuery.page) {
+          // replace the search queryString once processed
+          setActiveTab(Number(pageQuery.page));
+          history.replace(location.pathname);
+        }
+      } else {
+        setOtherUserId(pageQuery.id);
+      }
     } else if (pageQuery.page) {
       // replace the search queryString once processed
       setActiveTab(Number(pageQuery.page));
       history.replace(location.pathname);
     }
-  }, [location, history]);
+  }, [location, history, userDetails]);
 
   // fetch details for different tabs
   useEffect(() => {
