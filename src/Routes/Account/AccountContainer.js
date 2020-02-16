@@ -114,12 +114,8 @@ const AccountContainer = props => {
   }, [cleanUp]);
 
   // handle card click to get the recipe modal in (see common/DetailRecipe)
-  // [1, 2] matches tab index
-  // 1 is bookmark 2 is recipe tab
-  const handleCardClick = (type, url) => {
-    if (type === 1) {
-      history.push(url);
-    }
+  const handleCardClick = url => {
+    history.push(url);
   };
 
   // confirm if user wants to remove the recipe

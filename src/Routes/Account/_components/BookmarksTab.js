@@ -28,7 +28,7 @@ const BookmarksTab = props => {
         <PageSpinner background='rgba(0,0,0,0)' loading={bookmarksLoading} />
         {bookmarks.map((bookmark, index) => (
           <Paper
-            onClick={e => handleCardClick(1, `/account/${bookmark.recipe._id}`)}
+            onClick={e => handleCardClick(`/account/${bookmark.recipe._id}`)}
             elevation={2}
             className={classes.tabCard}
             key={index}

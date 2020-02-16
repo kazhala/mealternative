@@ -36,7 +36,7 @@ const RecipesTab = props => {
         <PageSpinner loading={recipesLoading} />
         {recipes.map((recipe, index) => (
           <Paper
-            onClick={e => handleCardClick(1, `/account/${recipe._id}`)}
+            onClick={e => handleCardClick(`/account/${recipe._id}`)}
             elevation={2}
             className={classes.tabCard}
             key={index}
