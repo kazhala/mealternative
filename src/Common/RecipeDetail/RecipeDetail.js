@@ -32,7 +32,8 @@ const RecipeDetail = props => {
     recipeDetails,
     handleBookAction,
     handleRateAction,
-    message
+    message,
+    history
   } = props;
   const classes = useStyles();
 
@@ -82,6 +83,7 @@ const RecipeDetail = props => {
           <>
             <Tooltip title={postedBy.username} alt={postedBy.username}>
               <Avatar
+                onClick={() => history.push(`/account?id=${postedBy._id}`)}
                 src={postedBy.photoUrl}
                 className={classes.detailAvatar}
               />

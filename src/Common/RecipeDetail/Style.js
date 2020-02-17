@@ -25,7 +25,8 @@ const useStyles = makeStyles(theme => ({
     right: theme.spacing(1),
     zIndex: 1,
     height: theme.spacing(3),
-    width: theme.spacing(3)
+    width: theme.spacing(3),
+    cursor: 'pointer'
   },
 
   // top part
