@@ -51,6 +51,7 @@ const AccountContainer = props => {
   useEffect(() => {
     // get the query string if it exists (?id=xxx)
     const pageQuery = queryString.parse(location.search);
+    if (!isAuthenticated && !pageQuery.id) history.replace('/');
     if (pageQuery.id) {
       // if is user itself, don't set to other user profile
       if (pageQuery.id === userDetails._id) {
@@ -67,11 +68,10 @@ const AccountContainer = props => {
       setActiveTab(Number(pageQuery.page));
       history.replace(location.pathname);
     }
-  }, [location, history, userDetails]);
+  }, [location, history, userDetails, isAuthenticated]);
 
   // fetch details for different tabs
   useEffect(() => {
-    if (!isAuthenticated) return;
     switch (activeTab) {
       case 0:
         if (otherUserId) {
@@ -101,7 +101,6 @@ const AccountContainer = props => {
         console.log('wrong');
     }
   }, [
-    isAuthenticated,
     activeTab,
     getProfileDetails,
     otherUserId,
@@ -144,8 +143,6 @@ const AccountContainer = props => {
 
   return (
     <>
-      {/* if is not looking at others and is not login, redirect */}
-      {!isAuthenticated && !otherUserId && <Redirect to='/' />}
       <PageSpinner loading={loading} text={loadingText} />
       <ErrorSnack error={error} handleClose={clearError} />
       <SuccessSnack message={infoMessage} handleClose={clearError} />
