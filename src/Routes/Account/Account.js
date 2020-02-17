@@ -76,8 +76,8 @@ const Account = props => {
             ) : (
               <Tab icon={<Details />} />
             )}
-            <Tab icon={<Book />} />
             <Tab icon={<MenuBook />} />
+            {!otherUserId && <Tab icon={<Book />} />}
             {!otherUserId && <Tab icon={<VpnKey />} />}
           </Tabs>
         </AppBar>
@@ -93,24 +93,24 @@ const Account = props => {
             activeTab={activeTab}
             detailLoading={detailLoading}
           />
-          <BookmarksTab
-            classes={classes}
-            tabIndex={1}
-            activeTab={activeTab}
-            bookmarks={bookmarks}
-            bookmarksLoading={bookmarksLoading}
-            handleCardClick={handleCardClick}
-          />
           <RecipesTab
             handleEditRecipe={handleEditRecipe}
             handleCardClick={handleCardClick}
             classes={classes}
-            tabIndex={2}
+            tabIndex={1}
             activeTab={activeTab}
             recipes={recipes}
             recipesLoading={recipesLoading}
             otherUserId={otherUserId}
             handleRemoveRecipe={handleRemoveRecipe}
+          />
+          <BookmarksTab
+            classes={classes}
+            tabIndex={2}
+            activeTab={activeTab}
+            bookmarks={bookmarks}
+            bookmarksLoading={bookmarksLoading}
+            handleCardClick={handleCardClick}
           />
           <PasswordTab
             handleUpdatePassword={handleUpdatePassword}

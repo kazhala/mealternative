@@ -74,6 +74,10 @@ const Header = props => {
     if (!path) {
       signOut();
     } else {
+      if (path === '/account') {
+        handleRouteChange(path);
+        window.location.reload();
+      }
       handleRouteChange(path);
     }
     // close the sidebar

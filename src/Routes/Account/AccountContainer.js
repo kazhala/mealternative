@@ -59,16 +59,22 @@ const AccountContainer = props => {
           // replace the search queryString once processed
           setActiveTab(Number(pageQuery.page));
           history.replace(location.pathname);
+        } else {
+          setActiveTab(0);
+          history.replace(location.pathname);
         }
       } else {
         setOtherUserId(pageQuery.id);
+        if (activeTab === 2) {
+          setActiveTab(0);
+        }
       }
     } else if (pageQuery.page) {
       // replace the search queryString once processed
       setActiveTab(Number(pageQuery.page));
       history.replace(location.pathname);
     }
-  }, [location, history, userDetails, isAuthenticated]);
+  }, [location, history, userDetails, isAuthenticated, activeTab]);
 
   // fetch details for different tabs
   useEffect(() => {
@@ -82,17 +88,13 @@ const AccountContainer = props => {
         break;
       case 1:
         if (otherUserId) {
-          getProfileBookmarks(otherUserId);
-        } else {
-          getProfileBookmarks(userDetails._id);
-        }
-        break;
-      case 2:
-        if (otherUserId) {
           getProfileRecipes(otherUserId);
         } else {
           getProfileRecipes(userDetails._id);
         }
+        break;
+      case 2:
+        getProfileBookmarks(userDetails._id);
         break;
       case 3:
         console.log('Update password');
