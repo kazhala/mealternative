@@ -10,7 +10,7 @@ import { Route } from 'react-router-dom';
 // components
 import { Button } from '@material-ui/core';
 import SearchInput from '../../Common/Inputs/SearchInput';
-import SortMenuDial from './_components/SortMenuDial';
+import SortMenuDial from '../../Common/RecipeSort/SortMenuDial';
 import RecipeCard from '../../Common/RecipeCard/RecipeCard';
 import LoadMoreSpinner from '../../Common/Spinner/LoadMoreSpinner';
 import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
@@ -102,7 +102,6 @@ const Recipes = props => {
 
       {/* speedDial */}
       <SortMenuDial
-        classes={classes}
         showDial={showDial}
         setShowDial={setShowDial}
         handleSortRecipes={handleSortRecipes}

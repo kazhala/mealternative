@@ -11,10 +11,12 @@ import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
 import { Sort } from '@material-ui/icons';
 
 // misc
-import { actions } from '../../../Common/DefaultValues/RecipeOptions';
+import { actions } from '../DefaultValues/RecipeOptions';
+import useStyles from './Style';
 
 const SortMenuDial = props => {
-  const { handleSortRecipes, classes, showDial, setShowDial } = props;
+  const { handleSortRecipes, showDial, setShowDial } = props;
+  const classes = useStyles();
 
   return (
     <SpeedDial
@@ -38,7 +40,6 @@ const SortMenuDial = props => {
 };
 
 SortMenuDial.propTypes = {
-  classes: PropTypes.object.isRequired,
   setShowDial: PropTypes.func.isRequired,
   showDial: PropTypes.bool.isRequired,
   handleSortRecipes: PropTypes.func.isRequired
