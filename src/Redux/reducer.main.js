@@ -10,6 +10,7 @@ import ListReducer from './list';
 import RecipeReducer from './recipe';
 import ProfileReducer from './profile';
 import UpdateReducer from './update';
+import CategoryReducer from './category';
 
 const MainReducer = combineReducers({
   Auth: AuthReducer,
@@ -18,7 +19,8 @@ const MainReducer = combineReducers({
   List: ListReducer,
   Recipe: RecipeReducer,
   Profile: ProfileReducer,
-  Update: UpdateReducer
+  Update: UpdateReducer,
+  Category: CategoryReducer
 });
 
 export default MainReducer;
