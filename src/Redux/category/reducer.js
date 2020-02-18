@@ -22,7 +22,8 @@ const CategoryReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
-        recipes: [...action.payload]
+        recipes: [...action.payload.recipes],
+        page: action.payload.page
       };
     default:
       return state;
