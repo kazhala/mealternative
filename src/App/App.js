@@ -48,6 +48,7 @@ const App = props => {
             <Route path='/auth' component={Routes.Auth} />
             <Route path='/create' component={Routes.Create} />
             <Route path='/account' component={Routes.Account} />
+            <Route path='/category' component={Routes.Category} />
             <Redirect to='/' />
           </Switch>
         </div>
