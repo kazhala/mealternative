@@ -11,7 +11,7 @@ import { Route } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import SearchInput from '../../Common/Inputs/SearchInput';
 import SortMenuDial from './_components/SortMenuDial';
-import RecipeCard from './_components/RecipeCard';
+import RecipeCard from '../../Common/RecipeCard/RecipeCard';
 import LoadMoreSpinner from '../../Common/Spinner/LoadMoreSpinner';
 import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
 
@@ -85,7 +85,6 @@ const Recipes = props => {
               name={recipe.postedBy.username}
               likes={recipe.likes}
               key={index}
-              classes={classes}
             />
           ))}
         </div>

@@ -1,5 +1,6 @@
 /*
-  Individual recipe card
+  Individual recipe card common compoenents
+  used in listing recipes
 */
 
 // react
@@ -11,6 +12,9 @@ import { Typography, Avatar } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { BookmarksOutlined, ThumbUpOutlined } from '@material-ui/icons';
 
+// misc
+import useStyles from './Style';
+
 const RecipeCard = props => {
   const {
     photoUrl,
@@ -18,12 +22,12 @@ const RecipeCard = props => {
     recipeId,
     bookmarks,
     rating,
-    classes,
     title,
     name,
     likes,
     thumbnailUrl
   } = props;
+  const classes = useStyles();
 
   return (
     <div
@@ -77,7 +81,6 @@ const RecipeCard = props => {
 };
 
 RecipeCard.propTypes = {
-  classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
