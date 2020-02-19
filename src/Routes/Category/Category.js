@@ -16,6 +16,8 @@ const Category = props => {
   const { recipes, category } = props;
   const classes = useStyles();
 
+  console.log(recipes);
+
   return (
     <div className={classes.categoryRoot}>
       {category && (
