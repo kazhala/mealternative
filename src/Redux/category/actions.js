@@ -9,3 +9,15 @@ export const getCategoryRecipes = payload => {
     payload
   };
 };
+
+export const cleanUp = () => {
+  return {
+    type: Types.CATEGORY_CLEAN
+  };
+};
+
+export const clearError = () => {
+  return {
+    type: Types.CATEGORY_CLEAR_ERROR
+  };
+};

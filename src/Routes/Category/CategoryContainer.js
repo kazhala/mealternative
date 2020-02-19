@@ -4,7 +4,7 @@
 */
 
 // react
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // redux
 import { connect } from 'react-redux';
@@ -14,25 +14,46 @@ import { CategoryActions } from '../../Redux/category';
 // components
 import Category from './Category';
 import PageSpinner from '../../Common/Spinner/PageSpinner';
+import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 // misc
 import queryString from 'query-string';
 
 const CategoryContainer = props => {
-  const { location, history, getCategoryRecipes, loading, error } = props;
+  const {
+    location,
+    history,
+    getCategoryRecipes,
+    loading,
+    error,
+    cleanUp,
+    clearError
+  } = props;
+
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const queryParams = queryString.parse(location.search);
-    if (!queryParams.id) {
-      history.replace('/');
-    } else {
-      getCategoryRecipes(queryParams.id);
+    if (!mounted) {
+      const queryParams = queryString.parse(location.search);
+      if (!queryParams.id) {
+        history.replace('/');
+      } else {
+        setMounted(true);
+        getCategoryRecipes(queryParams.id);
+      }
     }
-  }, [location, history, getCategoryRecipes]);
+  }, [location, history, getCategoryRecipes, mounted]);
+
+  useEffect(() => {
+    return () => {
+      cleanUp();
+    };
+  }, [cleanUp]);
 
   return (
     <>
       <PageSpinner loading={loading} />
+      <ErrorSnack error={error} handleClose={clearError} />
       <Category {...props} />;
     </>
   );
@@ -50,7 +71,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      getCategoryRecipes: CategoryActions.getCategoryRecipes
+      getCategoryRecipes: CategoryActions.getCategoryRecipes,
+      cleanUp: CategoryActions.cleanUp,
+      clearError: CategoryActions.clearError
     },
     dispatch
   );

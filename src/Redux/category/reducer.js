@@ -7,7 +7,8 @@ const initialState = {
   loading: false,
   error: '',
   recipes: [],
-  category: ''
+  category: '',
+  page: 1
 };
 
 const CategoryReducer = (state = initialState, action) => {
@@ -17,7 +18,14 @@ const CategoryReducer = (state = initialState, action) => {
     case Types.CATEGOR_ERROR:
       return { ...state, loading: false, error: action.payload };
     case Types.CATEGORY_CLEAN:
-      return { ...state, error: '', loading: false };
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        recipes: [],
+        category: '',
+        page: 1
+      };
     case Types.CATEGORY_STORE_RECIPES:
       return {
         ...state,
@@ -27,6 +35,8 @@ const CategoryReducer = (state = initialState, action) => {
         page: action.payload.page,
         category: action.payload.category
       };
+    case Types.CATEGORY_CLEAR_ERROR:
+      return { ...state, error: '', loading: false };
     default:
       return state;
   }
