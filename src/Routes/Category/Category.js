@@ -26,6 +26,7 @@ const Category = props => {
               backgroundImage: `url(${category.imageUrl})`,
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat'
+              // backgroundAttachment: 'scroll'
             }}
           >
             <Typography className={classes.categoryTitle} variant='h3'>
@@ -40,7 +41,8 @@ const Category = props => {
 };
 
 Category.propTypes = {
-  // recipes: PropTypes.array.isRequired
+  recipes: PropTypes.array.isRequired,
+  category: PropTypes.object.isRequired
 };
 
 export default Category;
