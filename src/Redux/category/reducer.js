@@ -6,7 +6,8 @@ import * as Types from './types';
 const initialState = {
   loading: false,
   error: '',
-  recipes: []
+  recipes: [],
+  category: ''
 };
 
 const CategoryReducer = (state = initialState, action) => {
@@ -23,7 +24,8 @@ const CategoryReducer = (state = initialState, action) => {
         loading: false,
         error: '',
         recipes: [...action.payload.recipes],
-        page: action.payload.page
+        page: action.payload.page,
+        category: action.payload.category
       };
     default:
       return state;
