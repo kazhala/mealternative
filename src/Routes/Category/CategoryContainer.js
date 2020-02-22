@@ -4,7 +4,7 @@
 */
 
 // react
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 // redux
 import { connect } from 'react-redux';
@@ -34,6 +34,8 @@ const CategoryContainer = props => {
   const [mounted, setMounted] = useState(false);
   const [categoryId, setCategoryId] = useState(null);
 
+  const topElementRef = useRef(null);
+
   // left side array and rightside array
   const [displayArray, setDisplayArray] = useState({
     left: [],
@@ -53,6 +55,10 @@ const CategoryContainer = props => {
       }
     }
   }, [location, history, getCategoryRecipes, mounted, categoryId]);
+
+  useEffect(() => {
+    topElementRef.current.scrollTo(0, 0);
+  }, [categoryId, topElementRef]);
 
   // split recipes into left and right array for better ui
   useEffect(() => {
@@ -93,6 +99,7 @@ const CategoryContainer = props => {
       <Category
         handleCardClick={handleCardClick}
         displayArray={displayArray}
+        topElementRef={topElementRef}
         {...props}
       />
     </>

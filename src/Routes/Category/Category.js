@@ -16,11 +16,11 @@ import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContain
 import useStyles from './Style';
 
 const Category = props => {
-  const { displayArray, category, handleCardClick } = props;
+  const { topElementRef, displayArray, category, handleCardClick } = props;
   const classes = useStyles();
 
   return (
-    <div className={classes.categoryRoot}>
+    <div ref={topElementRef} className={classes.categoryRoot}>
       {category && (
         <>
           <div
@@ -83,7 +83,8 @@ const Category = props => {
 Category.propTypes = {
   displayArray: PropTypes.objectOf(PropTypes.array).isRequired,
   category: PropTypes.object.isRequired,
-  handleCardClick: PropTypes.func.isRequired
+  handleCardClick: PropTypes.func.isRequired,
+  topElementRef: PropTypes.any
 };
 
 export default Category;
