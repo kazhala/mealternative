@@ -16,8 +16,7 @@ const RecipeReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
-        message: '',
-        recipeDetails: {}
+        message: ''
       };
     case Types.RECIPE_ERROR:
       return { ...state, error: action.payload, loading: false };
