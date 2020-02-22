@@ -42,7 +42,13 @@ const Recipes = props => {
   };
 
   return (
-    <div onScroll={handleScroll} className={classes.recipeRoot}>
+    <div
+      style={{
+        overflowY: isLoadable ? 'scroll' : 'hidden'
+      }}
+      onScroll={handleScroll}
+      className={classes.recipeRoot}
+    >
       {/* search field */}
       <div className={classes.recipeSearchRoot}>
         <SearchInput
