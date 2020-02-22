@@ -31,9 +31,12 @@ const CategoryContainer = props => {
     recipes
   } = props;
 
+  // determine if the component has mounted
   const [mounted, setMounted] = useState(false);
+  // used to detect changes in category id in the query string
   const [categoryId, setCategoryId] = useState(null);
-
+  // create a ref for top element in the page
+  // used to scroll to top
   const topElementRef = useRef(null);
 
   // left side array and rightside array
@@ -42,20 +45,25 @@ const CategoryContainer = props => {
     right: []
   });
 
+  // check if id changes or if its mounted
+  // avoid un-wanted re-render
   useEffect(() => {
     const queryParams = queryString.parse(location.search);
     if (!mounted || queryParams.id !== categoryId) {
-      console.log('re-rendered');
+      // if no id found, redirect
       if (!queryParams.id) {
         history.replace('/');
       } else {
+        // stop re-rendering
         setMounted(true);
         setCategoryId(queryParams.id);
+        // get data through redux
         getCategoryRecipes(queryParams.id);
       }
     }
   }, [location, history, getCategoryRecipes, mounted, categoryId]);
 
+  // scroll to top once category is changed to another
   useEffect(() => {
     topElementRef.current.scrollTo(0, 0);
   }, [categoryId, topElementRef]);
@@ -86,6 +94,10 @@ const CategoryContainer = props => {
     history.push(`/category/detail/${id}?id=${categoryId}`);
   };
 
+  const handleLoadMore = () => {
+    console.log('load more');
+  };
+
   useEffect(() => {
     return () => {
       cleanUp();
@@ -97,6 +109,7 @@ const CategoryContainer = props => {
       <PageSpinner loading={loading} />
       <ErrorSnack error={error} handleClose={clearError} />
       <Category
+        handleLoadMore={handleLoadMore}
         handleCardClick={handleCardClick}
         displayArray={displayArray}
         topElementRef={topElementRef}

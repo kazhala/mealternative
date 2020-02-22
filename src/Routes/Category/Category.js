@@ -16,26 +16,35 @@ import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContain
 import useStyles from './Style';
 
 const Category = props => {
-  const { topElementRef, displayArray, category, handleCardClick } = props;
+  const {
+    handleLoadMore,
+    topElementRef,
+    displayArray,
+    category,
+    handleCardClick
+  } = props;
   const classes = useStyles();
 
   return (
     <div ref={topElementRef} className={classes.categoryRoot}>
+      {/* display all recipes in this category */}
       {category && (
         <>
+          {/* top thumbnail part */}
           <div
             className={classes.categoryThumb}
             style={{
               backgroundImage: `url(${category.imageUrl})`,
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat'
-              // backgroundAttachment: 'scroll'
             }}
           >
             <Typography className={classes.categoryTitle} variant='h3'>
               {category.name}
             </Typography>
           </div>
+
+          {/* main body of the category, display all recipes */}
           <div className={classes.categoryBody}>
             <div className={classes.categoryBodyColumn}>
               {displayArray.left.map((recipe, index) => (
@@ -72,6 +81,8 @@ const Category = props => {
           </div>
         </>
       )}
+
+      {/* route contains the detail recipe component */}
       <Route
         path='/category/detail/:recipeid'
         render={props => <RecipeDetailContainer {...props} />}
@@ -84,7 +95,8 @@ Category.propTypes = {
   displayArray: PropTypes.objectOf(PropTypes.array).isRequired,
   category: PropTypes.object.isRequired,
   handleCardClick: PropTypes.func.isRequired,
-  topElementRef: PropTypes.any
+  topElementRef: PropTypes.any,
+  handleLoadMore: PropTypes.func.isRequired
 };
 
 export default Category;
