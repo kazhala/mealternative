@@ -23,6 +23,7 @@ import useStyles from './Style';
 
 const RecipeDetail = props => {
   const {
+    handleCategoryClick,
     handleLikeAction,
     handleBack,
     showModal,
@@ -108,6 +109,7 @@ const RecipeDetail = props => {
               booked={booked}
             />
             <ListsCatIng
+              handleCategoryClick={handleCategoryClick}
               ingredients={ingredients}
               categories={categories}
               classes={classes}
@@ -126,6 +128,7 @@ RecipeDetail.propTypes = {
   handleLikeAction: PropTypes.func.isRequired,
   handleBookAction: PropTypes.func.isRequired,
   handleRateAction: PropTypes.func.isRequired,
+  handleCategoryClick: PropTypes.func.isRequired,
   showModal: PropTypes.bool.isRequired,
   handleBack: PropTypes.func.isRequired
 };

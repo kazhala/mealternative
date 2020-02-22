@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 
 const ListsCatIng = props => {
-  const { classes, categories, ingredients } = props;
+  const { handleCategoryClick, classes, categories, ingredients } = props;
 
   return (
     // two lists to display categories and ingredients
@@ -39,7 +39,12 @@ const ListsCatIng = props => {
         {/* TODO: categories click to go to category */}
         <ListItemText
           primary={categories.map((cat, index) => (
-            <Chip key={index} size='small' label={cat.name} />
+            <Chip
+              onClick={() => handleCategoryClick(cat._id)}
+              key={index}
+              size='small'
+              label={cat.name}
+            />
           ))}
         />
       </ListItem>
@@ -50,7 +55,8 @@ const ListsCatIng = props => {
 ListsCatIng.propTypes = {
   classes: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
-  ingredients: PropTypes.array.isRequired
+  ingredients: PropTypes.array.isRequired,
+  handleCategoryClick: PropTypes.func.isRequired
 };
 
 export default ListsCatIng;

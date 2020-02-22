@@ -79,8 +79,13 @@ const RecipeDetailContainer = props => {
     updateRecipeRating(newRating);
   };
 
+  const handleCategoryClick = id => {
+    history.push(`/category?id=${id}`);
+  };
+
   return (
     <RecipeDetail
+      handleCategoryClick={handleCategoryClick}
       handleLikeAction={handleLikeAction}
       handleBookAction={handleBookAction}
       handleRateAction={handleRateAction}
