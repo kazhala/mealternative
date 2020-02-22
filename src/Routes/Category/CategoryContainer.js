@@ -27,10 +27,17 @@ const CategoryContainer = props => {
     loading,
     error,
     cleanUp,
-    clearError
+    clearError,
+    recipes
   } = props;
 
   const [mounted, setMounted] = useState(false);
+
+  // left side array and rightside array
+  const [displayArray, setDisplayArray] = useState({
+    left: [],
+    right: []
+  });
 
   useEffect(() => {
     if (!mounted) {
@@ -44,6 +51,28 @@ const CategoryContainer = props => {
     }
   }, [location, history, getCategoryRecipes, mounted]);
 
+  // split recipes into left and right array for better ui
+  useEffect(() => {
+    if (recipes.length > 0) {
+      const reducedRecipe = recipes.reduce(
+        (prev, curr, idx, self) => {
+          if (idx % 2 === 0) {
+            prev.left.push(curr);
+          } else {
+            prev.right.push(curr);
+          }
+          return prev;
+        },
+        { left: [], right: [] }
+      );
+      setDisplayArray(prevArray => ({
+        ...prevArray,
+        left: [...reducedRecipe.left],
+        right: [...reducedRecipe.right]
+      }));
+    }
+  }, [recipes]);
+
   useEffect(() => {
     return () => {
       cleanUp();
@@ -54,7 +83,7 @@ const CategoryContainer = props => {
     <>
       <PageSpinner loading={loading} />
       <ErrorSnack error={error} handleClose={clearError} />
-      <Category {...props} />;
+      <Category displayArray={displayArray} {...props} />;
     </>
   );
 };

@@ -8,15 +8,16 @@ import PropTypes from 'prop-types';
 
 // components
 import { Typography } from '@material-ui/core';
+import RecipeCard from '../../Common/RecipeCard/RecipeCard';
 
 // misc
 import useStyles from './Style';
 
 const Category = props => {
-  const { recipes, category } = props;
+  const { displayArray, category } = props;
   const classes = useStyles();
 
-  console.log(recipes);
+  console.log(displayArray);
 
   return (
     <div className={classes.categoryRoot}>
@@ -35,7 +36,40 @@ const Category = props => {
               {category.name}
             </Typography>
           </div>
-          <div>list of recipes</div>
+          <div className={classes.categoryBody}>
+            <div className={classes.categoryBodyColumn}>
+              {displayArray.left.map((recipe, index) => (
+                <RecipeCard
+                  key={index}
+                  title={recipe.title}
+                  name={recipe.postedBy.username}
+                  likes={recipe.likes}
+                  thumbnailUrl={recipe.thumbImageUrl}
+                  bookmarks={recipe.bookmarks}
+                  rating={recipe.rating}
+                  recipeId={recipe._id}
+                  handleCardClick={() => console.log('Yes')}
+                  photoUrl={recipe.postedBy.photoUrl}
+                />
+              ))}
+            </div>
+            <div className={classes.categoryBodyColumn}>
+              {displayArray.right.map((recipe, index) => (
+                <RecipeCard
+                  key={index}
+                  title={recipe.title}
+                  name={recipe.postedBy.username}
+                  likes={recipe.likes}
+                  thumbnailUrl={recipe.thumbImageUrl}
+                  bookmarks={recipe.bookmarks}
+                  rating={recipe.rating}
+                  recipeId={recipe._id}
+                  handleCardClick={() => console.log('Yes')}
+                  photoUrl={recipe.postedBy.photoUrl}
+                />
+              ))}
+            </div>
+          </div>
         </>
       )}
     </div>
@@ -43,7 +77,7 @@ const Category = props => {
 };
 
 Category.propTypes = {
-  recipes: PropTypes.array.isRequired,
+  displayArray: PropTypes.objectOf(PropTypes.array).isRequired,
   category: PropTypes.object.isRequired
 };
 

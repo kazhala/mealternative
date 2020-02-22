@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
   },
   categoryThumb: {
     width: '100%',
-    height: theme.spacing(10),
+    minHeight: theme.spacing(10),
+    maxHeight: theme.spacing(10),
     position: 'relative'
   },
   categoryTitle: {
@@ -21,6 +22,20 @@ const useStyles = makeStyles(theme => ({
     left: theme.spacing(1),
     bottom: theme.spacing(1),
     color: theme.palette.common.white
+  },
+
+  categoryBody: {
+    width: '100%',
+    height: '100%',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gridGap: theme.spacing(1),
+    padding: theme.spacing(1)
+  },
+  categoryBodyColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 }));
 

@@ -7,7 +7,7 @@ const initialState = {
   loading: false,
   error: '',
   recipes: [],
-  category: '',
+  category: {},
   page: 1
 };
 
@@ -23,7 +23,7 @@ const CategoryReducer = (state = initialState, action) => {
         loading: false,
         error: '',
         recipes: [],
-        category: '',
+        category: {},
         page: 1
       };
     case Types.CATEGORY_STORE_RECIPES:
