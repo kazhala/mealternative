@@ -17,6 +17,7 @@ import useStyles from './Style';
 
 const Category = props => {
   const {
+    isLoadable,
     handleLoadMore,
     topElementRef,
     displayArray,
@@ -25,8 +26,25 @@ const Category = props => {
   } = props;
   const classes = useStyles();
 
+  // check if bottom, perform load more
+  const handleScroll = e => {
+    if (isLoadable) {
+      const isBottom =
+        e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
+        e.target.clientHeight;
+      isBottom && handleLoadMore();
+    }
+  };
+
   return (
-    <div ref={topElementRef} className={classes.categoryRoot}>
+    <div
+      style={{
+        overflowY: isLoadable ? 'scroll' : 'hidden'
+      }}
+      onScroll={handleScroll}
+      ref={topElementRef}
+      className={classes.categoryRoot}
+    >
       {/* display all recipes in this category */}
       {category && (
         <>
@@ -96,7 +114,8 @@ Category.propTypes = {
   category: PropTypes.object.isRequired,
   handleCardClick: PropTypes.func.isRequired,
   topElementRef: PropTypes.any,
-  handleLoadMore: PropTypes.func.isRequired
+  handleLoadMore: PropTypes.func.isRequired,
+  isLoadable: PropTypes.bool.isRequired
 };
 
 export default Category;

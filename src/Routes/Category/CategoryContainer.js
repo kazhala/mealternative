@@ -35,6 +35,17 @@ const CategoryContainer = props => {
   const [mounted, setMounted] = useState(false);
   // used to detect changes in category id in the query string
   const [categoryId, setCategoryId] = useState(null);
+  // check if the page should be able to load more
+  const [isLoadable, setIsLoadable] = useState(true);
+
+  useEffect(() => {
+    if (location.pathname === '/category') {
+      setIsLoadable(true);
+    } else {
+      setIsLoadable(false);
+    }
+  }, [location]);
+
   // create a ref for top element in the page
   // used to scroll to top
   const topElementRef = useRef(null);
@@ -109,6 +120,7 @@ const CategoryContainer = props => {
       <PageSpinner loading={loading} />
       <ErrorSnack error={error} handleClose={clearError} />
       <Category
+        isLoadable={isLoadable}
         handleLoadMore={handleLoadMore}
         handleCardClick={handleCardClick}
         displayArray={displayArray}
