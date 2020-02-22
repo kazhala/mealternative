@@ -5,19 +5,19 @@
 // react
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
 // components
 import { Typography } from '@material-ui/core';
 import RecipeCard from '../../Common/RecipeCard/RecipeCard';
+import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
 
 // misc
 import useStyles from './Style';
 
 const Category = props => {
-  const { displayArray, category } = props;
+  const { displayArray, category, handleCardClick } = props;
   const classes = useStyles();
-
-  console.log(displayArray);
 
   return (
     <div className={classes.categoryRoot}>
@@ -48,7 +48,7 @@ const Category = props => {
                   bookmarks={recipe.bookmarks}
                   rating={recipe.rating}
                   recipeId={recipe._id}
-                  handleCardClick={() => console.log('Yes')}
+                  handleCardClick={handleCardClick}
                   photoUrl={recipe.postedBy.photoUrl}
                 />
               ))}
@@ -64,7 +64,7 @@ const Category = props => {
                   bookmarks={recipe.bookmarks}
                   rating={recipe.rating}
                   recipeId={recipe._id}
-                  handleCardClick={() => console.log('Yes')}
+                  handleCardClick={handleCardClick}
                   photoUrl={recipe.postedBy.photoUrl}
                 />
               ))}
@@ -72,13 +72,18 @@ const Category = props => {
           </div>
         </>
       )}
+      <Route
+        path='/category/detail/:recipeid'
+        render={props => <RecipeDetailContainer {...props} />}
+      />
     </div>
   );
 };
 
 Category.propTypes = {
   displayArray: PropTypes.objectOf(PropTypes.array).isRequired,
-  category: PropTypes.object.isRequired
+  category: PropTypes.object.isRequired,
+  handleCardClick: PropTypes.func.isRequired
 };
 
 export default Category;

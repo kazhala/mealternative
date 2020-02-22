@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   categoryThumb: {
     width: '100%',
     minHeight: theme.spacing(10),
-    maxHeight: theme.spacing(10),
+    height: theme.spacing(10),
     position: 'relative'
   },
   categoryTitle: {
@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridGap: theme.spacing(1),
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    overflowY: 'hidden'
   },
   categoryBodyColumn: {
     display: 'flex',

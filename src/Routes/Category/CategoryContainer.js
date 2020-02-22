@@ -73,6 +73,10 @@ const CategoryContainer = props => {
     }
   }, [recipes]);
 
+  const handleCardClick = id => {
+    history.push(`/category/detail/${id}`);
+  };
+
   useEffect(() => {
     return () => {
       cleanUp();
@@ -83,7 +87,12 @@ const CategoryContainer = props => {
     <>
       <PageSpinner loading={loading} />
       <ErrorSnack error={error} handleClose={clearError} />
-      <Category displayArray={displayArray} {...props} />;
+      <Category
+        handleCardClick={handleCardClick}
+        displayArray={displayArray}
+        {...props}
+      />
+      ;
     </>
   );
 };
