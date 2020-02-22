@@ -92,7 +92,6 @@ const CategoryContainer = props => {
         displayArray={displayArray}
         {...props}
       />
-      ;
     </>
   );
 };
