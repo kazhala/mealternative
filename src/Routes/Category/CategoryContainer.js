@@ -32,6 +32,7 @@ const CategoryContainer = props => {
   } = props;
 
   const [mounted, setMounted] = useState(false);
+  const [categoryId, setCategoryId] = useState(null);
 
   // left side array and rightside array
   const [displayArray, setDisplayArray] = useState({
@@ -40,16 +41,18 @@ const CategoryContainer = props => {
   });
 
   useEffect(() => {
-    if (!mounted) {
-      const queryParams = queryString.parse(location.search);
+    const queryParams = queryString.parse(location.search);
+    if (!mounted || queryParams.id !== categoryId) {
+      console.log('re-rendered');
       if (!queryParams.id) {
         history.replace('/');
       } else {
         setMounted(true);
+        setCategoryId(queryParams.id);
         getCategoryRecipes(queryParams.id);
       }
     }
-  }, [location, history, getCategoryRecipes, mounted]);
+  }, [location, history, getCategoryRecipes, mounted, categoryId]);
 
   // split recipes into left and right array for better ui
   useEffect(() => {
@@ -74,7 +77,7 @@ const CategoryContainer = props => {
   }, [recipes]);
 
   const handleCardClick = id => {
-    history.push(`/category/detail/${id}`);
+    history.push(`/category/detail/${id}?id=${categoryId}`);
   };
 
   useEffect(() => {
