@@ -364,7 +364,7 @@ const RecipeRoute = props => {
   };
 
   const handleUpdateGoBack = useCallback(() => {
-    history.push('/account?page=2');
+    history.push('/account?page=1');
   }, [history]);
 
   // redirect on update success
