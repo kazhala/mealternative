@@ -27,3 +27,10 @@ export const loadMore = () => {
     type: Types.CATEGORY_LOADMORE
   };
 };
+
+export const sortRecipes = payload => {
+  return {
+    type: Types.CATEGORY_SORT,
+    payload
+  };
+};

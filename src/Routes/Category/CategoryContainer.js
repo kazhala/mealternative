@@ -4,7 +4,7 @@
 */
 
 // react
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 // redux
 import { connect } from 'react-redux';
@@ -18,9 +18,11 @@ import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 // misc
 import queryString from 'query-string';
+import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
 
 const CategoryContainer = props => {
   const {
+    sortRecipes,
     location,
     history,
     getCategoryRecipes,
@@ -77,10 +79,14 @@ const CategoryContainer = props => {
     }
   }, [location, history, getCategoryRecipes, mounted, categoryId]);
 
+  const scrollToTop = useCallback(() => {
+    topElementRef.current.scrollTo(0, 0);
+  }, []);
+
   // scroll to top once category is changed to another
   useEffect(() => {
-    topElementRef.current.scrollTo(0, 0);
-  }, [categoryId, topElementRef]);
+    scrollToTop();
+  }, [categoryId, scrollToTop]);
 
   // split recipes into left and right array for better ui
   useEffect(() => {
@@ -112,6 +118,22 @@ const CategoryContainer = props => {
     loadMore();
   };
 
+  // handle speedial click to sort recipe request
+  const handleSortRecipes = typeNum => {
+    const orderBy = orderByArr[typeNum];
+    if (typeNum === -1) {
+      setShowDial(false);
+    } else if (typeNum === 5) {
+      clearError();
+      getCategoryRecipes(categoryId);
+      scrollToTop();
+    } else {
+      sortRecipes(orderBy);
+      getCategoryRecipes(categoryId);
+      scrollToTop();
+    }
+  };
+
   useEffect(() => {
     return () => {
       cleanUp();
@@ -130,6 +152,7 @@ const CategoryContainer = props => {
         topElementRef={topElementRef}
         showDial={showDial}
         setShowDial={setShowDial}
+        handleSortRecipes={handleSortRecipes}
         {...props}
       />
     </>
@@ -152,7 +175,8 @@ const mapDispatchToProps = dispatch => {
       getCategoryRecipes: CategoryActions.getCategoryRecipes,
       cleanUp: CategoryActions.cleanUp,
       clearError: CategoryActions.clearError,
-      loadMore: CategoryActions.loadMore
+      loadMore: CategoryActions.loadMore,
+      sortRecipes: CategoryActions.sortRecipes
     },
     dispatch
   );

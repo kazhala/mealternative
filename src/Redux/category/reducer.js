@@ -58,6 +58,8 @@ const CategoryReducer = (state = initialState, action) => {
       };
     case Types.CATEGORY_CLEAR_ERROR:
       return { ...state, error: '', loading: false, loadMoreLoading: false };
+    case Types.CATEGORY_SORT:
+      return { ...state, sortOption: action.payload };
     default:
       return state;
   }

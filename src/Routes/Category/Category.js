@@ -19,6 +19,7 @@ import useStyles from './Style';
 
 const Category = props => {
   const {
+    handleSortRecipes,
     isLoadable,
     handleLoadMore,
     topElementRef,
@@ -108,7 +109,7 @@ const Category = props => {
       <SortMenuDial
         showDial={showDial}
         setShowDial={setShowDial}
-        handleSortRecipes={() => console.log('hello')}
+        handleSortRecipes={handleSortRecipes}
       />
 
       {/* route contains the detail recipe component */}
@@ -128,7 +129,8 @@ Category.propTypes = {
   handleLoadMore: PropTypes.func.isRequired,
   isLoadable: PropTypes.bool.isRequired,
   showDial: PropTypes.bool.isRequired,
-  setShowDial: PropTypes.func.isRequired
+  setShowDial: PropTypes.func.isRequired,
+  handleSortRecipes: PropTypes.func.isRequired
 };
 
 export default Category;
