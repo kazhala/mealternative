@@ -28,7 +28,8 @@ const CategoryContainer = props => {
     error,
     cleanUp,
     clearError,
-    recipes
+    recipes,
+    loadMore
   } = props;
 
   // determine if the component has mounted
@@ -106,7 +107,7 @@ const CategoryContainer = props => {
   };
 
   const handleLoadMore = () => {
-    console.log('load more');
+    loadMore();
   };
 
   useEffect(() => {
@@ -145,7 +146,8 @@ const mapDispatchToProps = dispatch => {
     {
       getCategoryRecipes: CategoryActions.getCategoryRecipes,
       cleanUp: CategoryActions.cleanUp,
-      clearError: CategoryActions.clearError
+      clearError: CategoryActions.clearError,
+      loadMore: CategoryActions.loadMore
     },
     dispatch
   );

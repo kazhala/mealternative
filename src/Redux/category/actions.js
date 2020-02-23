@@ -21,3 +21,9 @@ export const clearError = () => {
     type: Types.CATEGORY_CLEAR_ERROR
   };
 };
+
+export const loadMore = () => {
+  return {
+    type: Types.CATEGORY_LOADMORE
+  };
+};

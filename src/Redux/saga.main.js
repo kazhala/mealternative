@@ -38,7 +38,8 @@ export default function* rootSaga() {
       fork(ProfileSagas.watchUpdatePassword),
       fork(UpdateSagas.watchGetRecipeDetails),
       fork(UpdateSagas.watchUpdateRecipe),
-      fork(CategorySagas.watchGetCategoryRecipes)
+      fork(CategorySagas.watchGetCategoryRecipes),
+      fork(CategorySagas.watchLoadMoreRecipe)
     ]);
   } catch (err) {
     console.log(err);

@@ -2,7 +2,7 @@
   category sagas
 */
 import * as Types from './types';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { takeLatest, put, call, select } from 'redux-saga/effects';
 import * as Operations from './operations';
 
 /*
@@ -10,6 +10,10 @@ import * as Operations from './operations';
 */
 export function* watchGetCategoryRecipes() {
   yield takeLatest(Types.CATEGORY_GET_RECIPES, workerGetCategoryRecipes);
+}
+
+export function* watchLoadMoreRecipe() {
+  yield takeLatest(Types.CATEGORY_LOADMORE, workerLoadMoreRecipe);
 }
 
 /*
@@ -27,4 +31,8 @@ function* workerGetCategoryRecipes({ payload }) {
     console.log('Error', err);
     yield put({ type: Types.CATEGOR_ERROR, payload: err.message });
   }
+}
+
+function* workerLoadMoreRecipe() {
+  yield console.log('hello');
 }
