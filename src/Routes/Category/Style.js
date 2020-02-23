@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 
   categoryBody: {
     width: '100%',
-    height: '100%',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridGap: theme.spacing(1),

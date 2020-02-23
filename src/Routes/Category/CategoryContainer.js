@@ -137,7 +137,8 @@ const mapStateToProps = state => {
     loading: state.Category.loading,
     error: state.Category.error,
     recipes: state.Category.recipes,
-    category: state.Category.category
+    category: state.Category.category,
+    loadMoreLoading: state.Category.loadMoreLoading
   };
 };
 

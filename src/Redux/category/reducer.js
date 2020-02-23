@@ -45,7 +45,7 @@ const CategoryReducer = (state = initialState, action) => {
         category: action.payload.category
       };
     case Types.CATEGORY_LOADMORE_LOADING:
-      return { ...state, loadMoreLoading: false, error: '' };
+      return { ...state, loadMoreLoading: true, error: '' };
     case Types.CATEGORY_LOADMORE_SUCCESS:
       return {
         ...state,
