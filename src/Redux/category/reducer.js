@@ -10,7 +10,8 @@ const initialState = {
   recipes: [],
   category: {},
   page: 1,
-  totalPages: 1
+  totalPages: 1,
+  sortOption: '-rating'
 };
 
 const CategoryReducer = (state = initialState, action) => {
@@ -32,7 +33,8 @@ const CategoryReducer = (state = initialState, action) => {
         error: '',
         recipes: [],
         category: {},
-        page: 1
+        page: 1,
+        sortOption: '-rating'
       };
     case Types.CATEGORY_STORE_RECIPES:
       return {

@@ -3,15 +3,18 @@
 */
 import { API } from '../../config';
 
-export const getCategoryRecipes = async id => {
+export const getCategoryRecipes = async (id, sortOption) => {
   try {
-    const res = await fetch(`${API}/recipes/category?id=${id}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
+    const res = await fetch(
+      `${API}/recipes/category?id=${id}&sort=${sortOption}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    );
     return res.json();
   } catch (err) {
     console.log('Error', err);
@@ -20,15 +23,18 @@ export const getCategoryRecipes = async id => {
 
 export const getCategoryState = state => state.Category;
 
-export const loadMoreRecipes = async (id, page) => {
+export const loadMoreRecipes = async (id, sortOption, page) => {
   try {
-    const res = await fetch(`${API}/recipes/category?id=${id}&page=${page}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
+    const res = await fetch(
+      `${API}/recipes/category?id=${id}&page=${page}&sort=${sortOption}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    );
     return res.json();
   } catch (err) {
     console.log('Error', err);

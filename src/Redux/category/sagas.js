@@ -20,9 +20,14 @@ export function* watchLoadMoreRecipe() {
   worker sagas
 */
 function* workerGetCategoryRecipes({ payload }) {
+  const { sortOption } = yield select(Operations.getCategoryState);
   yield put({ type: Types.CATEGORY_BEGIN });
   try {
-    const response = yield call(Operations.getCategoryRecipes, payload);
+    const response = yield call(
+      Operations.getCategoryRecipes,
+      payload,
+      sortOption
+    );
     if (response.error) {
       throw new Error(response.error);
     }
@@ -34,7 +39,7 @@ function* workerGetCategoryRecipes({ payload }) {
 }
 
 function* workerLoadMoreRecipe() {
-  const { page, totalPages, category } = yield select(
+  const { page, totalPages, category, sortOption } = yield select(
     Operations.getCategoryState
   );
   if (page < totalPages) {
@@ -43,6 +48,7 @@ function* workerLoadMoreRecipe() {
       const response = yield call(
         Operations.loadMoreRecipes,
         category._id,
+        sortOption,
         page + 1
       );
       if (response.error) {
