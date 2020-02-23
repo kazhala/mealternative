@@ -12,6 +12,7 @@ import { Typography } from '@material-ui/core';
 import RecipeCard from '../../Common/RecipeCard/RecipeCard';
 import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
 import LoadMoreSpinner from '../../Common/Spinner/LoadMoreSpinner';
+import SortMenuDial from '../../Common/RecipeSort/SortMenuDial';
 
 // misc
 import useStyles from './Style';
@@ -24,7 +25,9 @@ const Category = props => {
     displayArray,
     category,
     handleCardClick,
-    loadMoreLoading
+    loadMoreLoading,
+    showDial,
+    setShowDial
   } = props;
   const classes = useStyles();
 
@@ -102,6 +105,12 @@ const Category = props => {
         loading={loadMoreLoading}
       />
 
+      <SortMenuDial
+        showDial={showDial}
+        setShowDial={setShowDial}
+        handleSortRecipes={() => console.log('hello')}
+      />
+
       {/* route contains the detail recipe component */}
       <Route
         path='/category/detail/:recipeid'
@@ -117,7 +126,9 @@ Category.propTypes = {
   handleCardClick: PropTypes.func.isRequired,
   topElementRef: PropTypes.any,
   handleLoadMore: PropTypes.func.isRequired,
-  isLoadable: PropTypes.bool.isRequired
+  isLoadable: PropTypes.bool.isRequired,
+  showDial: PropTypes.bool.isRequired,
+  setShowDial: PropTypes.func.isRequired
 };
 
 export default Category;

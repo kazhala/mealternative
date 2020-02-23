@@ -38,6 +38,8 @@ const CategoryContainer = props => {
   const [categoryId, setCategoryId] = useState(null);
   // check if the page should be able to load more
   const [isLoadable, setIsLoadable] = useState(true);
+  // sort dial open state
+  const [showDial, setShowDial] = useState(false);
 
   useEffect(() => {
     if (location.pathname === '/category') {
@@ -126,6 +128,8 @@ const CategoryContainer = props => {
         handleCardClick={handleCardClick}
         displayArray={displayArray}
         topElementRef={topElementRef}
+        showDial={showDial}
+        setShowDial={setShowDial}
         {...props}
       />
     </>
