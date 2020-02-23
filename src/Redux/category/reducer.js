@@ -8,7 +8,8 @@ const initialState = {
   error: '',
   recipes: [],
   category: {},
-  page: 1
+  page: 1,
+  totalPages: 1
 };
 
 const CategoryReducer = (state = initialState, action) => {
@@ -33,6 +34,7 @@ const CategoryReducer = (state = initialState, action) => {
         error: '',
         recipes: [...action.payload.recipes],
         page: action.payload.page,
+        totalPages: action.payload.totalPages,
         category: action.payload.category
       };
     case Types.CATEGORY_CLEAR_ERROR:
