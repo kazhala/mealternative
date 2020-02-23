@@ -5,6 +5,7 @@ import * as Types from './types';
 
 const initialState = {
   loading: false,
+  loadMoreLoading: false,
   error: '',
   recipes: [],
   category: {},
@@ -17,11 +18,17 @@ const CategoryReducer = (state = initialState, action) => {
     case Types.CATEGORY_BEGIN:
       return { ...state, loading: true, error: '' };
     case Types.CATEGOR_ERROR:
-      return { ...state, loading: false, error: action.payload };
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        loadMoreLoading: false
+      };
     case Types.CATEGORY_CLEAN:
       return {
         ...state,
         loading: false,
+        loadMoreLoading: false,
         error: '',
         recipes: [],
         category: {},
@@ -37,8 +44,18 @@ const CategoryReducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
         category: action.payload.category
       };
+    case Types.CATEGORY_LOADMORE_LOADING:
+      return { ...state, loadMoreLoading: false, error: '' };
+    case Types.CATEGORY_LOADMORE_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        loadMoreLoading: false,
+        page: action.payload.page,
+        recipes: [...state.recipes, ...action.payload.recipes]
+      };
     case Types.CATEGORY_CLEAR_ERROR:
-      return { ...state, error: '', loading: false };
+      return { ...state, error: '', loading: false, loadMoreLoading: false };
     default:
       return state;
   }

@@ -17,3 +17,20 @@ export const getCategoryRecipes = async id => {
     console.log('Error', err);
   }
 };
+
+export const getCategoryState = state => state.Category;
+
+export const loadMoreRecipes = async (id, page) => {
+  try {
+    const res = await fetch(`${API}/recipes/category?id=${id}&page=${page}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};

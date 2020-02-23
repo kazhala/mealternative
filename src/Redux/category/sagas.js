@@ -34,5 +34,24 @@ function* workerGetCategoryRecipes({ payload }) {
 }
 
 function* workerLoadMoreRecipe() {
-  yield console.log('hello');
+  const { page, totalPages, category } = yield select(
+    Operations.getCategoryState
+  );
+  if (page < totalPages) {
+    yield put({ type: Types.CATEGORY_LOADMORE_LOADING });
+    try {
+      const response = yield call(
+        Operations.loadMoreRecipes,
+        category._id,
+        page + 1
+      );
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      yield put({ type: Types.CATEGORY_LOADMORE_SUCCESS, payload: response });
+    } catch (err) {
+      console.log('Error', err);
+      yield put({ type: Types.CATEGOR_ERROR, payload: err.message });
+    }
+  }
 }
