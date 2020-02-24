@@ -31,7 +31,8 @@ const CategoryContainer = props => {
     cleanUp,
     clearError,
     recipes,
-    loadMore
+    loadMore,
+    resetSort
   } = props;
 
   // determine if the component has mounted
@@ -123,8 +124,9 @@ const CategoryContainer = props => {
     const orderBy = orderByArr[typeNum];
     if (typeNum === -1) {
       setShowDial(false);
-    } else if (typeNum === 5) {
+    } else if (typeNum === 4) {
       clearError();
+      resetSort();
       getCategoryRecipes(categoryId);
       scrollToTop();
     } else {
@@ -165,7 +167,8 @@ const mapStateToProps = state => {
     error: state.Category.error,
     recipes: state.Category.recipes,
     category: state.Category.category,
-    loadMoreLoading: state.Category.loadMoreLoading
+    loadMoreLoading: state.Category.loadMoreLoading,
+    sortOption: state.Category.sortOption
   };
 };
 
@@ -176,7 +179,8 @@ const mapDispatchToProps = dispatch => {
       cleanUp: CategoryActions.cleanUp,
       clearError: CategoryActions.clearError,
       loadMore: CategoryActions.loadMore,
-      sortRecipes: CategoryActions.sortRecipes
+      sortRecipes: CategoryActions.sortRecipes,
+      resetSort: CategoryActions.resetSort
     },
     dispatch
   );

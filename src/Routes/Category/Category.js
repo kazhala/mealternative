@@ -19,6 +19,7 @@ import useStyles from './Style';
 
 const Category = props => {
   const {
+    sortOption,
     handleSortRecipes,
     isLoadable,
     handleLoadMore,
@@ -110,6 +111,7 @@ const Category = props => {
         showDial={showDial}
         setShowDial={setShowDial}
         handleSortRecipes={handleSortRecipes}
+        activeSelection={sortOption}
       />
 
       {/* route contains the detail recipe component */}

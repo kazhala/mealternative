@@ -34,3 +34,9 @@ export const sortRecipes = payload => {
     payload
   };
 };
+
+export const resetSort = () => {
+  return {
+    type: Types.CATEGORY_SORT_RESET
+  };
+};
