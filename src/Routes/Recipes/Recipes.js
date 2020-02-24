@@ -17,6 +17,7 @@ import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContain
 
 // misc
 import useStyles from './Style';
+import { handleScroll } from '../../Common/LoadMore/LoadMore';
 
 const Recipes = props => {
   const {
@@ -32,22 +33,12 @@ const Recipes = props => {
   } = props;
   const classes = useStyles();
 
-  // check if bottom, perform load more
-  const handleScroll = e => {
-    if (isLoadable) {
-      const isBottom =
-        e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
-        e.target.clientHeight;
-      isBottom && loadMoreRecipes();
-    }
-  };
-
   return (
     <div
       style={{
         overflowY: isLoadable ? 'scroll' : 'hidden'
       }}
-      onScroll={handleScroll}
+      onScroll={e => handleScroll(e, isLoadable, loadMoreRecipes)}
       className={classes.recipeRoot}
     >
       {/* search field */}

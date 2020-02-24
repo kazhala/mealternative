@@ -16,6 +16,7 @@ import SortMenuDial from '../../Common/RecipeSort/SortMenuDial';
 
 // misc
 import useStyles from './Style';
+import { handleScroll } from '../../Common/LoadMore/LoadMore';
 
 const Category = props => {
   const {
@@ -33,22 +34,12 @@ const Category = props => {
   } = props;
   const classes = useStyles();
 
-  // check if bottom, perform load more
-  const handleScroll = e => {
-    if (isLoadable) {
-      const isBottom =
-        e.target.scrollHeight - Math.ceil(e.target.scrollTop) ===
-        e.target.clientHeight;
-      isBottom && handleLoadMore();
-    }
-  };
-
   return (
     <div
       style={{
         overflowY: isLoadable ? 'scroll' : 'hidden'
       }}
-      onScroll={handleScroll}
+      onScroll={e => handleScroll(e, isLoadable, handleLoadMore)}
       ref={topElementRef}
       className={classes.categoryRoot}
     >
