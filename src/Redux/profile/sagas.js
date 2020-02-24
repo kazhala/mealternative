@@ -1,7 +1,7 @@
 /*
   Profile page saga handlers
 */
-import { takeLatest, put, call, delay } from 'redux-saga/effects';
+import { takeLatest, put, call, delay, select } from 'redux-saga/effects';
 import * as Types from './types';
 import * as Operations from './operations';
 
@@ -84,11 +84,16 @@ function* workerRemoveRecipe({ payload }) {
 }
 
 function* workerProfileGetRecipes({ payload }) {
+  const { recipePage } = yield select(Operations.getProfileState);
   // start loading
   yield put({ type: Types.RECIPES_BEGIN });
   try {
     // get recipes
-    const response = yield call(Operations.getProfileRecipes, payload);
+    const response = yield call(
+      Operations.getProfileRecipes,
+      payload,
+      recipePage
+    );
     if (response.error) {
       throw new Error(response.error);
     }

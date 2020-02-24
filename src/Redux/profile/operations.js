@@ -4,6 +4,8 @@
 import { API, CloudinaryURL } from '../../config';
 import Cookies from 'js-cookie';
 
+export const getProfileState = state => state.Profile;
+
 export const updatePassword = async (oldPassword, newPassword) => {
   try {
     const res = await fetch(`${API}/user/:userId/password`, {
@@ -100,9 +102,9 @@ export const validateName = async (userId, username) => {
   }
 };
 
-export const getProfileRecipes = async userId => {
+export const getProfileRecipes = async (userId, page) => {
   try {
-    const res = await fetch(`${API}/user/${userId}/recipes`, {
+    const res = await fetch(`${API}/user/${userId}/recipes?page=${page}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
