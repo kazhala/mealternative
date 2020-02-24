@@ -27,7 +27,8 @@ const Recipes = props => {
     loadMoreRecipes,
     handleSortRecipes,
     loadMoreLoading,
-    isLoadable
+    isLoadable,
+    getCurrentSortOption
   } = props;
   const classes = useStyles();
 
@@ -111,6 +112,7 @@ const Recipes = props => {
         showDial={showDial}
         setShowDial={setShowDial}
         handleSortRecipes={handleSortRecipes}
+        activeSelection={getCurrentSortOption()}
       />
     </div>
   );
@@ -121,7 +123,8 @@ Recipes.propTypes = {
   setShowDial: PropTypes.func.isRequired,
   displayArray: PropTypes.objectOf(PropTypes.array).isRequired,
   handleSortRecipes: PropTypes.func.isRequired,
-  isLoadable: PropTypes.bool.isRequired
+  isLoadable: PropTypes.bool.isRequired,
+  getCurrentSortOption: PropTypes.func.isRequired
 };
 
 export default Recipes;

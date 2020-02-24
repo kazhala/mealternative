@@ -86,36 +86,24 @@ const RecipesContainer = props => {
     const orderBy = orderByArr[typeNum];
     if (typeNum === -1) {
       setShowDial(false);
-    } else if (typeNum === 5) {
+    } else if (typeNum === 4) {
       cleanUp();
       fetchInitialRecipes();
     } else {
-      sortRecipes(getOrderByStr(orderBy));
-    }
-  };
-
-  // check reverse sort
-  const getOrderByStr = orderBy => {
-    if (
-      orderBy === '-rating' ||
-      orderBy === '-likes' ||
-      orderBy === '-bookmarks'
-    ) {
-      return orderBy;
-    }
-    if (sorted && orderBy === recipeSortOption) {
-      if (orderBy.includes('-')) {
-        return orderBy.substring(1);
-      } else {
-        return '-' + orderBy;
-      }
-    } else {
-      return orderBy;
+      sortRecipes(orderBy);
     }
   };
 
   const handleCardClick = recipeId => {
     history.push(`/recipes/detail/${recipeId}`);
+  };
+
+  const getCurrentSortOption = () => {
+    if (sorted) {
+      return recipeSortOption;
+    } else {
+      return '';
+    }
   };
 
   return (
@@ -129,6 +117,7 @@ const RecipesContainer = props => {
         displayArray={displayArray}
         handleSortRecipes={handleSortRecipes}
         isLoadable={isLoadable}
+        getCurrentSortOption={getCurrentSortOption}
         {...props}
       />
     </>
