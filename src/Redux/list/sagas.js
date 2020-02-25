@@ -20,9 +20,23 @@ export function* watchSortRecipes() {
   yield takeLatest(Types.FETCH_SORT_RECIPES, workerSortRecipes);
 }
 
+export function* watchSearchRecipes() {
+  yield takeLatest(Types.SEARCH_RECIPES, workerSearchRecipes);
+}
+
 /*
   Worker sagas
 */
+// search recipes
+function* workerSearchRecipes({ payload }) {
+  yield put({ type: Types.SEARCH_BEGIN, payload });
+  try {
+    yield console.log('hello');
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.LIST_ERROR, payload: err.message });
+  }
+}
 
 // sort recipes
 function* workerSortRecipes({ payload }) {

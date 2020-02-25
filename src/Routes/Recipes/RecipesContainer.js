@@ -29,7 +29,8 @@ const RecipesContainer = props => {
     sortRecipes,
     recipeSortOption,
     sorted,
-    location
+    location,
+    clearError
   } = props;
   // speedDial show state
   const [showDial, setShowDial] = useState(false);
@@ -117,7 +118,7 @@ const RecipesContainer = props => {
   return (
     <>
       <PageSpinner loading={loading} />
-      <ErrorSnack handleClose={cleanUp} error={error} />
+      <ErrorSnack handleClose={clearError} error={error} />
       <Recipes
         handleSearch={handleSearch}
         searchInput={searchInput}
@@ -153,7 +154,8 @@ const mapDispatchTopProps = dispatch => {
       fetchInitialRecipes: ListActions.fetchInitialRecipes,
       cleanUp: ListActions.cleanUp,
       loadMoreRecipes: ListActions.loadMoreRecipes,
-      sortRecipes: ListActions.sortRecipes
+      sortRecipes: ListActions.sortRecipes,
+      clearError: ListActions.clearError
     },
     dispatch
   );

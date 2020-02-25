@@ -13,7 +13,8 @@ const initialState = {
   listCycle: false,
   recipeSortOption: '',
   loadMoreLoading: false,
-  sorted: false
+  sorted: false,
+  search: ''
 };
 
 const ListReducer = (state = initialState, action) => {
@@ -25,6 +26,8 @@ const ListReducer = (state = initialState, action) => {
         error: action.payload,
         loadMoreLoading: false
       };
+    case Types.LIST_CLEAR_ERROR:
+      return { ...state, loading: false, error: '' };
     case Types.LIST_CLEAN:
       return {
         ...state,
@@ -37,7 +40,8 @@ const ListReducer = (state = initialState, action) => {
         listCycle: false,
         recipeSortOption: '',
         loadMoreLoading: false,
-        sorted: false
+        sorted: false,
+        search: ''
       };
     case Types.LIST_BEGIN:
       return { ...state, loading: true };
@@ -79,6 +83,8 @@ const ListReducer = (state = initialState, action) => {
         recipePage: action.payload.page,
         recipeSortOption: action.payload.sortOption
       };
+    case Types.SEARCH_BEGIN:
+      return { ...state, loading: true, search: action.payload };
     default:
       return state;
   }

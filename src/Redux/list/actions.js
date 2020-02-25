@@ -27,3 +27,16 @@ export const sortRecipes = sortOption => {
     payload: sortOption
   };
 };
+
+export const searchRecipes = search => {
+  return {
+    type: Types.SEARCH_RECIPES,
+    payload: search
+  };
+};
+
+export const clearError = () => {
+  return {
+    type: Types.LIST_CLEAR_ERROR
+  };
+};
