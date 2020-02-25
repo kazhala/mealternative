@@ -46,7 +46,8 @@ const Account = props => {
     handleUpdatePassword,
     infoMessage,
     handleLoadMore,
-    isLoadable
+    isLoadable,
+    tabTopEleRef
   } = props;
   const classes = useStyles();
 
@@ -87,6 +88,7 @@ const Account = props => {
 
         {/* tab panel to display information */}
         <Paper
+          ref={tabTopEleRef}
           onScroll={e => handleScroll(e, isLoadable, handleLoadMore)}
           className={classes.tabPanel}
           elevation={1}

@@ -3,7 +3,7 @@
 */
 
 // react
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 // redux
 import { connect } from 'react-redux';
@@ -46,6 +46,9 @@ const AccountContainer = props => {
   // check if the page should be able to load more
   const [isLoadable, setIsLoadable] = useState(true);
 
+  // scroll to top on tab change
+  const tabTopEleRef = useRef(null);
+
   // update active tab
   const handleTabChange = (e, value) => {
     setActiveTab(value);
@@ -87,6 +90,10 @@ const AccountContainer = props => {
     }
   }, [location, history, userDetails, isAuthenticated, activeTab]);
 
+  const scrollToTop = useCallback(() => {
+    tabTopEleRef.current.scrollTo(0, 0);
+  }, []);
+
   // fetch details for different tabs
   useEffect(() => {
     switch (activeTab) {
@@ -98,6 +105,7 @@ const AccountContainer = props => {
         }
         break;
       case 1:
+        scrollToTop();
         if (otherUserId) {
           getProfileRecipes(otherUserId);
         } else {
@@ -105,6 +113,7 @@ const AccountContainer = props => {
         }
         break;
       case 2:
+        scrollToTop();
         getProfileBookmarks(userDetails._id);
         break;
       case 3:
@@ -114,6 +123,7 @@ const AccountContainer = props => {
         console.log('wrong');
     }
   }, [
+    scrollToTop,
     activeTab,
     getProfileDetails,
     otherUserId,
@@ -163,6 +173,9 @@ const AccountContainer = props => {
           loadMoreRecipes(userDetails._id);
         }
         break;
+      case 2:
+        console.log('hello');
+        break;
       default:
         return;
     }
@@ -174,6 +187,7 @@ const AccountContainer = props => {
       <ErrorSnack error={error} handleClose={clearError} />
       <SuccessSnack message={infoMessage} handleClose={clearError} />
       <Account
+        tabTopEleRef={tabTopEleRef}
         isLoadable={isLoadable}
         handleLoadMore={handleLoadMore}
         handleUpdatePassword={handleUpdatePassword}

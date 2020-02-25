@@ -118,7 +118,7 @@ const ProfileReducer = (state = initialState, action) => {
       };
     case Types.PROFILE_INFO:
       return { ...state, error: '', info: action.payload };
-    case Types.PROFILE_LOADMORE_SUCCESS:
+    case Types.PROFILE_LOADMORE_RECIPES_SUCCESS:
       return {
         ...state,
         recipes: [...state.recipes, ...action.payload.recipes],

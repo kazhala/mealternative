@@ -53,7 +53,10 @@ function* workerLoadMoreRecipes({ payload }) {
       if (response.error) {
         throw new Error(response.error);
       }
-      yield put({ type: Types.PROFILE_LOADMORE_SUCCESS, payload: response });
+      yield put({
+        type: Types.PROFILE_LOADMORE_RECIPES_SUCCESS,
+        payload: response
+      });
     }
   } catch (err) {
     console.log('Error', err);
@@ -109,16 +112,12 @@ function* workerRemoveRecipe({ payload }) {
 }
 
 function* workerProfileGetRecipes({ payload }) {
-  const { recipePage } = yield select(Operations.getProfileState);
+  // const { recipePage } = yield select(Operations.getProfileState);
   // start loading
   yield put({ type: Types.RECIPES_BEGIN });
   try {
     // get recipes
-    const response = yield call(
-      Operations.getProfileRecipes,
-      payload,
-      recipePage
-    );
+    const response = yield call(Operations.getProfileRecipes, payload, 1);
     if (response.error) {
       throw new Error(response.error);
     }
