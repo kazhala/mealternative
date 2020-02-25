@@ -11,7 +11,7 @@ const initialState = {
   category: {},
   page: 1,
   totalPages: 1,
-  sortOption: '-rating'
+  sortOption: '-likes'
 };
 
 const CategoryReducer = (state = initialState, action) => {
