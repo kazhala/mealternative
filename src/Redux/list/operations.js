@@ -36,6 +36,25 @@ export const loadMoreRecipes = async (page, orderBy) => {
   }
 };
 
+// handle different loadmore when search field is not empty
+export const searchLoadMore = async (page, orderBy, search) => {
+  try {
+    const res = await fetch(
+      `${API}/recipes/search?page=${page}&orderBy=${orderBy}&search=${search}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};
+
 // check if should load more
 export const checkLoadMore = (listCycle, initialPage, recipePage) => {
   if (!listCycle) {

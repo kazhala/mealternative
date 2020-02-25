@@ -68,7 +68,8 @@ function* workerLoadMoreRecipes() {
     initialPage,
     recipeSortOption,
     totalPages,
-    listCycle
+    listCycle,
+    search
   } = yield select(Operations.getListState);
 
   try {
@@ -80,12 +81,23 @@ function* workerLoadMoreRecipes() {
       Operations.checkLoadMore(listCycle, initialPage, recipePage)
     ) {
       yield put({ type: Types.LOAD_MORE_BEGIN });
-      yield delay(1000);
-      const response = yield call(
-        Operations.loadMoreRecipes,
-        recipePage + 1,
-        recipeSortOption
-      );
+      yield delay(500);
+
+      let response;
+      if (search) {
+        response = yield call(
+          Operations.searchLoadMore,
+          recipePage + 1,
+          recipeSortOption,
+          search
+        );
+      } else {
+        response = yield call(
+          Operations.loadMoreRecipes,
+          recipePage + 1,
+          recipeSortOption
+        );
+      }
       console.log(response);
 
       if (response.error) {
@@ -101,7 +113,7 @@ function* workerLoadMoreRecipes() {
 
       yield put({ type: Types.NEXT_LIST_CYCLE });
       yield put({ type: Types.LOAD_MORE_BEGIN });
-      yield delay(1000);
+      yield delay(500);
       // load first page, start next cycle until the starting page
       const response = yield call(
         Operations.loadMoreRecipes,
