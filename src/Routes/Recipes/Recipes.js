@@ -21,6 +21,9 @@ import { handleScroll } from '../../Common/LoadMore/LoadMore';
 
 const Recipes = props => {
   const {
+    handleSearch,
+    searchInput,
+    setSearchInput,
     handleCardClick,
     showDial,
     setShowDial,
@@ -42,15 +45,17 @@ const Recipes = props => {
       className={classes.recipeRoot}
     >
       {/* search field */}
-      <div className={classes.recipeSearchRoot}>
+      <form onSubmit={handleSearch} className={classes.recipeSearchRoot}>
         <SearchInput
+          value={searchInput}
+          onChange={e => setSearchInput(e.target.value)}
           placeholder='Search Recipe..'
           classes={classes.recipeSearchField}
         />
-        <Button variant='contained' color='primary'>
+        <Button type='submit' variant='contained' color='primary'>
           Search
         </Button>
-      </div>
+      </form>
       {/* display array of recipes */}
       <div className={classes.recipeBodyRoot}>
         <div className={classes.recipeBodyColumn}>
@@ -115,7 +120,10 @@ Recipes.propTypes = {
   displayArray: PropTypes.objectOf(PropTypes.array).isRequired,
   handleSortRecipes: PropTypes.func.isRequired,
   isLoadable: PropTypes.bool.isRequired,
-  getCurrentSortOption: PropTypes.func.isRequired
+  getCurrentSortOption: PropTypes.func.isRequired,
+  searchInput: PropTypes.string.isRequired,
+  setSearchInput: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func.isRequired
 };
 
 export default Recipes;

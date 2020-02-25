@@ -37,6 +37,9 @@ const RecipesContainer = props => {
   // handle check if should loadmore
   const [isLoadable, setIsLoadable] = useState(true);
 
+  // state for search field
+  const [searchInput, setSearchInput] = useState('');
+
   useEffect(() => {
     if (location.pathname === '/recipes') {
       setIsLoadable(true);
@@ -106,11 +109,19 @@ const RecipesContainer = props => {
     }
   };
 
+  const handleSearch = e => {
+    e.preventDefault();
+    console.log(searchInput);
+  };
+
   return (
     <>
       <PageSpinner loading={loading} />
       <ErrorSnack handleClose={cleanUp} error={error} />
       <Recipes
+        handleSearch={handleSearch}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
         handleCardClick={handleCardClick}
         showDial={showDial}
         setShowDial={setShowDial}
