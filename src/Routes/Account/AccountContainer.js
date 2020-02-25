@@ -36,7 +36,8 @@ const AccountContainer = props => {
     getProfileRecipes,
     removeRecipe,
     location,
-    loadMoreRecipes
+    loadMoreRecipes,
+    loadMoreBookmarks
   } = props;
 
   // current tab
@@ -174,7 +175,7 @@ const AccountContainer = props => {
         }
         break;
       case 2:
-        console.log('hello');
+        loadMoreBookmarks(userDetails._id);
         break;
       default:
         return;
@@ -232,7 +233,8 @@ const mapDispatchToProps = dispatch => {
       getProfileRecipes: ProfileActions.getProfileRecipes,
       removeRecipe: ProfileActions.removeRecipe,
       updatePassword: ProfileActions.updatePassword,
-      loadMoreRecipes: ProfileActions.loadMoreRecipes
+      loadMoreRecipes: ProfileActions.loadMoreRecipes,
+      loadMoreBookmarks: ProfileActions.loadMoreBookmarks
     },
     dispatch
   );

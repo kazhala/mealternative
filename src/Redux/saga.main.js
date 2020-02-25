@@ -37,6 +37,7 @@ export default function* rootSaga() {
       fork(ProfileSagas.watchRemoveRecipe),
       fork(ProfileSagas.watchUpdatePassword),
       fork(ProfileSagas.watchLoadMoreRecipes),
+      fork(ProfileSagas.watchLoadMoreBookmarks),
       fork(UpdateSagas.watchGetRecipeDetails),
       fork(UpdateSagas.watchUpdateRecipe),
       fork(CategorySagas.watchGetCategoryRecipes),

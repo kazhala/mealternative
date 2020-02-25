@@ -99,7 +99,9 @@ const ProfileReducer = (state = initialState, action) => {
     case Types.PROFILE_STORE_BOOKMARKS:
       return {
         ...state,
-        bookmarks: [...action.payload],
+        bookmarks: [...action.payload.bookmarks],
+        bookmarkPage: action.payload.page,
+        totalBookmarkPage: action.payload.totalPages,
         bookmarksLoading: false
       };
     case Types.RECIPES_BEGIN:
@@ -124,6 +126,13 @@ const ProfileReducer = (state = initialState, action) => {
         recipes: [...state.recipes, ...action.payload.recipes],
         recipePage: action.payload.page,
         totalRecipePage: action.payload.totalPages
+      };
+    case Types.PROFILE_LOADMORE_BOOKMARKS_SUCCESS:
+      return {
+        ...state,
+        bookmarks: [...state.bookmarks, ...action.payload.bookmarks],
+        bookmarkPage: action.payload.page,
+        totalBookmarkPage: action.payload.totalPages
       };
     default:
       return state;

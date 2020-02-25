@@ -23,9 +23,9 @@ export const updatePassword = async (oldPassword, newPassword) => {
   }
 };
 
-export const getProfileBookmarks = async userId => {
+export const getProfileBookmarks = async (userId, page) => {
   try {
-    const res = await fetch(`${API}/user/${userId}/bookmarks`, {
+    const res = await fetch(`${API}/user/${userId}/bookmarks?page=${page}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

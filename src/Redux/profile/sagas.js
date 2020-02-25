@@ -36,9 +36,38 @@ export function* watchLoadMoreRecipes() {
   yield takeLatest(Types.PROFILE_LOADMORE_RECIPES, workerLoadMoreRecipes);
 }
 
+export function* watchLoadMoreBookmarks() {
+  yield takeLatest(Types.PROFILE_LOADMORE_BOOKMARKS, workerLoadMoreBookmarks);
+}
+
 /*
   worker sagas
 */
+function* workerLoadMoreBookmarks({ payload }) {
+  const { bookmarkPage, totalBookmarkPage } = yield select(
+    Operations.getProfileState
+  );
+  try {
+    if (bookmarkPage !== totalBookmarkPage) {
+      const response = yield call(
+        Operations.getProfileBookmarks,
+        payload,
+        bookmarkPage + 1
+      );
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      yield put({
+        type: Types.PROFILE_LOADMORE_BOOKMARKS_SUCCESS,
+        payload: response
+      });
+    }
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.PROFILE_ERROR, payload: err.message });
+  }
+}
+
 function* workerLoadMoreRecipes({ payload }) {
   const { recipePage, totalRecipePage } = yield select(
     Operations.getProfileState
@@ -134,7 +163,7 @@ function* workerProfileGetBookmarks({ payload }) {
   yield put({ type: Types.BOOKMARKS_BEGIN });
   try {
     // fetch all bookmarks
-    const response = yield call(Operations.getProfileBookmarks, payload);
+    const response = yield call(Operations.getProfileBookmarks, payload, 1);
     if (response.error) {
       throw new Error(response.error);
     }

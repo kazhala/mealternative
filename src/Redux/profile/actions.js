@@ -63,3 +63,10 @@ export const loadMoreRecipes = userId => {
     payload: userId
   };
 };
+
+export const loadMoreBookmarks = userId => {
+  return {
+    type: Types.PROFILE_LOADMORE_BOOKMARKS,
+    payload: userId
+  };
+};
