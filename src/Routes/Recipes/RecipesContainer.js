@@ -93,7 +93,11 @@ const RecipesContainer = props => {
       setShowDial(false);
     } else if (typeNum === 4) {
       cleanUp();
-      fetchInitialRecipes();
+      if (searchInput) {
+        searchRecipes(searchInput);
+      } else {
+        fetchInitialRecipes();
+      }
     } else {
       sortRecipes(orderBy);
     }
