@@ -37,15 +37,26 @@ const AccountContainer = props => {
     removeRecipe,
     location
   } = props;
+
   // current tab
   const [activeTab, setActiveTab] = useState(0);
-
+  // check if is on other user's profile page
   const [otherUserId, setOtherUserId] = useState(null);
+  // check if the page should be able to load more
+  const [isLoadable, setIsLoadable] = useState(true);
 
   // update active tab
   const handleTabChange = (e, value) => {
     setActiveTab(value);
   };
+
+  useEffect(() => {
+    if (location.pathname === '/account') {
+      setIsLoadable(true);
+    } else {
+      setIsLoadable(false);
+    }
+  }, [location]);
 
   useEffect(() => {
     // get the query string if it exists (?id=xxx)
@@ -142,12 +153,18 @@ const AccountContainer = props => {
     updatePassword(password);
   };
 
+  const handleLoadMore = () => {
+    console.log('hello');
+  };
+
   return (
     <>
       <PageSpinner loading={loading} text={loadingText} />
       <ErrorSnack error={error} handleClose={clearError} />
       <SuccessSnack message={infoMessage} handleClose={clearError} />
       <Account
+        isLoadable={isLoadable}
+        handleLoadMore={handleLoadMore}
         handleUpdatePassword={handleUpdatePassword}
         handleEditRecipe={handleEditRecipe}
         handleCardClick={handleCardClick}

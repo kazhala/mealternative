@@ -25,6 +25,7 @@ import PasswordTab from './_components/PasswordTab';
 
 // misc
 import useStyles from './Style';
+import { handleScroll } from '../../Common/LoadMore/LoadMore';
 
 const Account = props => {
   const {
@@ -43,7 +44,9 @@ const Account = props => {
     handleRemoveRecipe,
     handleEditRecipe,
     handleUpdatePassword,
-    infoMessage
+    infoMessage,
+    handleLoadMore,
+    isLoadable
   } = props;
   const classes = useStyles();
 
@@ -83,7 +86,11 @@ const Account = props => {
         </AppBar>
 
         {/* tab panel to display information */}
-        <Paper className={classes.tabPanel} elevation={1}>
+        <Paper
+          onScroll={e => handleScroll(e, isLoadable, handleLoadMore)}
+          className={classes.tabPanel}
+          elevation={1}
+        >
           <DetailsTab
             otherUserId={otherUserId}
             updateProfileDetails={updateProfileDetails}
@@ -138,7 +145,9 @@ Account.propTypes = {
   handleRemoveRecipe: PropTypes.func.isRequired,
   handleEditRecipe: PropTypes.func.isRequired,
   handleUpdatePassword: PropTypes.func.isRequired,
-  infoMessage: PropTypes.string
+  infoMessage: PropTypes.string,
+  handleLoadMore: PropTypes.func.isRequired,
+  isLoadable: PropTypes.bool.isRequired
 };
 
 export default Account;
