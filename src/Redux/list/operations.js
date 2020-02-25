@@ -45,3 +45,19 @@ export const checkLoadMore = (listCycle, initialPage, recipePage) => {
     return initialPage !== recipePage + 1;
   }
 };
+
+// search recipes
+export const searchRecipes = async search => {
+  try {
+    const res = await fetch(`${API}/recipes/search?search=${search}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log('Error', err);
+  }
+};

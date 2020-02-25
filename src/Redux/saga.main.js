@@ -26,6 +26,7 @@ export default function* rootSaga() {
       fork(ListSagas.watchFetchInitRecipes),
       fork(ListSagas.watchLoadMoreRecipes),
       fork(ListSagas.watchSortRecipes),
+      fork(ListSagas.watchSearchRecipes),
       fork(RecipeSagas.watchFetchRecipeDetails),
       fork(RecipeSagas.watchIncrementLike),
       fork(RecipeSagas.watchIncrementBook),

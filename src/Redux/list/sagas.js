@@ -31,7 +31,11 @@ export function* watchSearchRecipes() {
 function* workerSearchRecipes({ payload }) {
   yield put({ type: Types.SEARCH_BEGIN, payload });
   try {
-    yield console.log('hello');
+    const response = yield call(Operations.searchRecipes, payload);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+    console.log(response);
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.LIST_ERROR, payload: err.message });
