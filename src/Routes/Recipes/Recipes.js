@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
 // components
-import { Button } from '@material-ui/core';
+import { Button, Chip } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import SearchInput from '../../Common/Inputs/SearchInput';
 import SortMenuDial from '../../Common/RecipeSort/SortMenuDial';
 import RecipeCard from '../../Common/RecipeCard/RecipeCard';
@@ -21,6 +22,7 @@ import { handleScroll } from '../../Common/LoadMore/LoadMore';
 
 const Recipes = props => {
   const {
+    search,
     handleSearch,
     searchInput,
     setSearchInput,
@@ -32,7 +34,8 @@ const Recipes = props => {
     handleSortRecipes,
     loadMoreLoading,
     isLoadable,
-    getCurrentSortOption
+    getCurrentSortOption,
+    resetSearch
   } = props;
   const classes = useStyles();
 
@@ -56,6 +59,15 @@ const Recipes = props => {
           Search
         </Button>
       </form>
+      <div>
+        <Chip
+          label={search}
+          variant='outlined'
+          color='primary'
+          onDelete={resetSearch}
+          icon={<Search />}
+        />
+      </div>
       {/* display array of recipes */}
       <div className={classes.recipeBodyRoot}>
         <div className={classes.recipeBodyColumn}>
@@ -123,7 +135,9 @@ Recipes.propTypes = {
   getCurrentSortOption: PropTypes.func.isRequired,
   searchInput: PropTypes.string.isRequired,
   setSearchInput: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired
+  handleSearch: PropTypes.func.isRequired,
+  resetSearch: PropTypes.func.isRequired,
+  search: PropTypes.string.isRequired
 };
 
 export default Recipes;

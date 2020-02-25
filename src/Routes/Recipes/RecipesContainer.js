@@ -20,6 +20,7 @@ import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
 
 const RecipesContainer = props => {
   const {
+    search,
     history,
     cleanUp,
     fetchInitialRecipes,
@@ -93,8 +94,8 @@ const RecipesContainer = props => {
       setShowDial(false);
     } else if (typeNum === 4) {
       cleanUp();
-      if (searchInput) {
-        searchRecipes(searchInput);
+      if (search) {
+        searchRecipes(search);
       } else {
         fetchInitialRecipes();
       }
@@ -117,7 +118,17 @@ const RecipesContainer = props => {
 
   const handleSearch = e => {
     e.preventDefault();
-    searchRecipes(searchInput);
+    if (!searchInput) {
+      fetchInitialRecipes();
+    } else {
+      searchRecipes(searchInput);
+    }
+    setSearchInput('');
+  };
+
+  const resetSearch = () => {
+    setSearchInput('');
+    fetchInitialRecipes();
   };
 
   return (
@@ -125,6 +136,8 @@ const RecipesContainer = props => {
       <PageSpinner loading={loading} />
       <ErrorSnack handleClose={clearError} error={error} />
       <Recipes
+        search={search}
+        resetSearch={resetSearch}
         handleSearch={handleSearch}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -149,7 +162,8 @@ const mapStateToProps = state => {
     recipePage: state.List.recipePage,
     recipeSortOption: state.List.recipeSortOption,
     sorted: state.List.sorted,
-    loadMoreLoading: state.List.loadMoreLoading
+    loadMoreLoading: state.List.loadMoreLoading,
+    search: state.List.search
   };
 };
 

@@ -52,6 +52,7 @@ const ListReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
+        search: '',
         initialPage: action.payload.page,
         totalPages: action.payload.totalPages,
         recipeList: [...action.payload.response],
