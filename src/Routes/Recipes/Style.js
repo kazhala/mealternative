@@ -15,12 +15,14 @@ const useStyles = makeStyles(theme => ({
   },
   recipeSearchRoot: {
     width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: theme.spacing(1)
+    display: 'grid',
+    alignItems: 'center',
+    gridTemplateColumns: '8fr 3fr',
+    marginBottom: theme.spacing(1),
+    gridGap: theme.spacing(0.5)
   },
   recipeSearchField: {
-    width: '80%',
+    width: '100%',
     marginRight: theme.spacing(1)
   },
 

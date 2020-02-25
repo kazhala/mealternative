@@ -58,16 +58,18 @@ const Recipes = props => {
         <Button type='submit' variant='contained' color='primary'>
           Search
         </Button>
+        {search && (
+          <div>
+            <Chip
+              label={search}
+              variant='outlined'
+              color='primary'
+              onDelete={resetSearch}
+              icon={<Search />}
+            />
+          </div>
+        )}
       </form>
-      <div>
-        <Chip
-          label={search}
-          variant='outlined'
-          color='primary'
-          onDelete={resetSearch}
-          icon={<Search />}
-        />
-      </div>
       {/* display array of recipes */}
       <div className={classes.recipeBodyRoot}>
         <div className={classes.recipeBodyColumn}>
