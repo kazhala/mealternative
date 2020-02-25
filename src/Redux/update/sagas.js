@@ -146,7 +146,7 @@ function* workerUpdateRecipe({ payload }) {
         type: Types.UPDATE_LOADING_TEXT,
         payload: 'Success! Redirecting..'
       });
-      yield delay(2000);
+      yield delay(1000);
       yield put({ type: Types.UPDATE_SUCCESS });
     }
   } catch (err) {
