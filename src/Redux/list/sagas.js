@@ -32,6 +32,7 @@ function* workerSearchRecipes({ payload }) {
   yield put({ type: Types.SEARCH_BEGIN, payload });
   try {
     const response = yield call(Operations.searchRecipes, payload);
+    console.log('response', response);
     if (response.error) {
       throw new Error(response.error);
     }
@@ -44,10 +45,16 @@ function* workerSearchRecipes({ payload }) {
 
 // sort recipes
 function* workerSortRecipes({ payload }) {
+  const { search } = yield select(Operations.getListState);
   yield put({ type: Types.SORT_BEGIN });
   try {
     // get the first page and pass in the sortOption
-    const response = yield call(Operations.loadMoreRecipes, 1, payload);
+    let response;
+    if (search) {
+      response = yield call(Operations.searchLoadMore, 1, payload, search);
+    } else {
+      response = yield call(Operations.loadMoreRecipes, 1, payload);
+    }
     console.log(response);
     if (response.error) {
       throw new Error(response.error);
