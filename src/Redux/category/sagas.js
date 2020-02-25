@@ -12,8 +12,8 @@ export function* watchGetCategoryRecipes() {
   yield takeLatest(Types.CATEGORY_GET_RECIPES, workerGetCategoryRecipes);
 }
 
-export function* watchLoadMoreRecipe() {
-  yield takeLatest(Types.CATEGORY_LOADMORE, workerLoadMoreRecipe);
+export function* watchLoadMoreRecipes() {
+  yield takeLatest(Types.CATEGORY_LOADMORE, workerLoadMoreRecipes);
 }
 
 /*
@@ -38,7 +38,7 @@ function* workerGetCategoryRecipes({ payload }) {
   }
 }
 
-function* workerLoadMoreRecipe() {
+function* workerLoadMoreRecipes() {
   const { page, totalPages, category, sortOption } = yield select(
     Operations.getCategoryState
   );

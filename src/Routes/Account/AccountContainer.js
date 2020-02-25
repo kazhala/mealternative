@@ -35,7 +35,8 @@ const AccountContainer = props => {
     history,
     getProfileRecipes,
     removeRecipe,
-    location
+    location,
+    loadMoreRecipes
   } = props;
 
   // current tab
@@ -154,7 +155,17 @@ const AccountContainer = props => {
   };
 
   const handleLoadMore = () => {
-    console.log('hello');
+    switch (activeTab) {
+      case 1:
+        if (otherUserId) {
+          loadMoreRecipes(otherUserId);
+        } else {
+          loadMoreRecipes(userDetails._id);
+        }
+        break;
+      default:
+        return;
+    }
   };
 
   return (
@@ -206,7 +217,8 @@ const mapDispatchToProps = dispatch => {
       getProfileBookmarks: ProfileActions.getProfileBookmarks,
       getProfileRecipes: ProfileActions.getProfileRecipes,
       removeRecipe: ProfileActions.removeRecipe,
-      updatePassword: ProfileActions.updatePassword
+      updatePassword: ProfileActions.updatePassword,
+      loadMoreRecipes: ProfileActions.loadMoreRecipes
     },
     dispatch
   );

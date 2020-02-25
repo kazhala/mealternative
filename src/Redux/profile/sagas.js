@@ -32,9 +32,34 @@ export function* watchUpdatePassword() {
   yield takeLatest(Types.PROFILE_UPDATE_PASSWORD, workerUpdatePassword);
 }
 
+export function* watchLoadMoreRecipes() {
+  yield takeLatest(Types.PROFILE_LOADMORE_RECIPES, workerLoadMoreRecipes);
+}
+
 /*
   worker sagas
 */
+function* workerLoadMoreRecipes({ payload }) {
+  const { recipePage, totalRecipePage } = yield select(
+    Operations.getProfileState
+  );
+  try {
+    if (recipePage !== totalRecipePage) {
+      const response = yield call(
+        Operations.getProfileRecipes,
+        payload,
+        recipePage + 1
+      );
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      yield put({ type: Types.PROFILE_LOADMORE_SUCCESS, payload: response });
+    }
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.PROFILE_ERROR, payload: err.message });
+  }
+}
 
 // update password
 function* workerUpdatePassword({ payload }) {

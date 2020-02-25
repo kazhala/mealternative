@@ -56,3 +56,10 @@ export const updatePassword = payload => {
     payload
   };
 };
+
+export const loadMoreRecipes = userId => {
+  return {
+    type: Types.PROFILE_LOADMORE_RECIPES,
+    payload: userId
+  };
+};
