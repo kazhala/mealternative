@@ -35,7 +35,7 @@ function* workerSearchRecipes({ payload }) {
     if (response.error) {
       throw new Error(response.error);
     }
-    console.log(response);
+    yield put({ type: Types.SEARCH_SUCCESS, payload: response });
   } catch (err) {
     console.log('Error', err);
     yield put({ type: Types.LIST_ERROR, payload: err.message });

@@ -85,6 +85,18 @@ const ListReducer = (state = initialState, action) => {
       };
     case Types.SEARCH_BEGIN:
       return { ...state, loading: true, search: action.payload };
+    case Types.SEARCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        initialPage: action.payload.page,
+        recipePage: action.payload.page,
+        totalPages: action.payload.totalPages,
+        recipeList: [...action.payload.response],
+        recipeSortOption: action.payload.sortOption,
+        sorted: true
+      };
     default:
       return state;
   }

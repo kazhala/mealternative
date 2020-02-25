@@ -28,3 +28,4 @@ export const SORT_BEGIN = 'SORT_BEGIN';
 // search
 export const SEARCH_RECIPES = 'SEARCH_RECIPES';
 export const SEARCH_BEGIN = 'SEARCH_BEGIN';
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
