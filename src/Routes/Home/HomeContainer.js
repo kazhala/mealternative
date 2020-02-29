@@ -12,15 +12,26 @@ import { HomeActions } from '../../Redux/home';
 
 // components
 import Home from './Home';
+import PageSpinner from '../../Common/Spinner/PageSpinner';
+import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const HomeContainer = props => {
-  const { getCategories } = props;
+  const { getCategories, loading, error, cleanUp } = props;
 
   useEffect(() => {
     getCategories();
-  }, [getCategories]);
+    return () => {
+      cleanUp();
+    };
+  }, [getCategories, cleanUp]);
 
-  return <Home {...props} />;
+  return (
+    <>
+      <PageSpinner loading={loading} />
+      <ErrorSnack error={error} handleClose={cleanUp} />
+      <Home {...props} />
+    </>
+  );
 };
 
 const mapStateToProps = state => {
@@ -34,7 +45,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      getCategories: HomeActions.getCategories
+      getCategories: HomeActions.getCategories,
+      cleanUp: HomeActions.cleanUp
     },
     dispatch
   );

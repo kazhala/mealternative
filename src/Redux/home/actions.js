@@ -8,3 +8,9 @@ export const getCategories = () => {
     type: Types.HOME_GET_CATEGORY
   };
 };
+
+export const cleanUp = () => {
+  return {
+    type: Types.HOME_CLEAN
+  };
+};
