@@ -15,7 +15,7 @@ import Home from './Home';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const HomeContainer = props => {
-  const { getCategories, error, cleanUp } = props;
+  const { getCategories, error, cleanUp, history } = props;
 
   useEffect(() => {
     getCategories();
@@ -24,10 +24,14 @@ const HomeContainer = props => {
     };
   }, [getCategories, cleanUp]);
 
+  const handleClick = url => {
+    history.push(url);
+  };
+
   return (
     <>
       <ErrorSnack error={error} handleClose={cleanUp} />
-      <Home {...props} />
+      <Home handleClick={handleClick} {...props} />
     </>
   );
 };

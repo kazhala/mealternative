@@ -13,7 +13,7 @@ import TopCard from './_components/TopCard';
 import useStyles from './Style';
 
 const Home = props => {
-  const { categories, loading } = props;
+  const { handleClick, categories, loading } = props;
 
   const classes = useStyles();
 
@@ -21,12 +21,14 @@ const Home = props => {
     <div className={classes.homeRoot}>
       <div className={classes.homeTop}>
         <TopCard
+          onClick={() => handleClick('/map')}
           classes={classes}
           title='Map'
           description='Checkout restaurants near you'
           imgUrl='https://images.pexels.com/photos/408503/pexels-photo-408503.jpeg?cs=srgb&dl=blur-cartography-close-up-concept-408503.jpg&fm=jpg'
         />
         <TopCard
+          onClick={() => handleClick('/recipes')}
           classes={classes}
           title='Recipes'
           description='Feel like cooking?'
@@ -34,6 +36,7 @@ const Home = props => {
         />
         <TopCard
           classes={classes}
+          disable
           title='Meals'
           description='Coming soon..'
           imgUrl='https://images.pexels.com/photos/5876/food-salad-healthy-vegetables.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
@@ -46,7 +49,8 @@ const Home = props => {
 
 Home.propTypes = {
   categories: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired
 };
 
 export default Home;

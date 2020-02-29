@@ -10,13 +10,16 @@ import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 
 const TopCard = props => {
-  const { classes, title, imgUrl, description } = props;
+  const { onClick, classes, title, imgUrl, description, disable } = props;
 
   return (
     <div
+      onClick={onClick}
       className={classes.topCard}
       style={{
-        backgroundImage: `url(${imgUrl})`
+        backgroundImage: `url(${imgUrl})`,
+        pointerEvents: disable ? 'none' : 'auto',
+        opacity: disable ? '0.7' : '1'
       }}
     >
       <Typography variant='h4' className={classes.topCardTitle}>
@@ -33,7 +36,9 @@ TopCard.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired
+  imgUrl: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  disable: PropTypes.any
 };
 
 export default TopCard;
