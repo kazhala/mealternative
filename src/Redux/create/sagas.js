@@ -49,7 +49,8 @@ function* workerSubmitRecipe({ payload }) {
     title: recipeDetail.title,
     description: recipeDetail.description,
     ingredients: [...recipeDetail.ingredients],
-    categories: [...selCategoryIds]
+    categories: [...selCategoryIds],
+    thumbImageUrl: recipeDetail.thumbnailImage.url
   };
   console.log(uploadParams);
   // start loading state
