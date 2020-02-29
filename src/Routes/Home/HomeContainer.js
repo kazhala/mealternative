@@ -1,9 +1,19 @@
+/*
+  Container for the homepage
+*/
+
+// react
 import React from 'react';
-import useStyles from './Style';
+
+// redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// components
+import Home from './Home';
 
 const HomeContainer = props => {
-  const classes = useStyles();
-  return <div className={classes.root}>HomeContainer</div>;
+  return <Home {...props} />;
 };
 
 export default HomeContainer;
