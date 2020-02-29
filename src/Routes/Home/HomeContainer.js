@@ -12,11 +12,10 @@ import { HomeActions } from '../../Redux/home';
 
 // components
 import Home from './Home';
-import PageSpinner from '../../Common/Spinner/PageSpinner';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const HomeContainer = props => {
-  const { getCategories, loading, error, cleanUp } = props;
+  const { getCategories, error, cleanUp } = props;
 
   useEffect(() => {
     getCategories();
@@ -27,7 +26,6 @@ const HomeContainer = props => {
 
   return (
     <>
-      <PageSpinner loading={loading} />
       <ErrorSnack error={error} handleClose={cleanUp} />
       <Home {...props} />
     </>
