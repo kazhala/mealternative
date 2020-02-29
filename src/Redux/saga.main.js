@@ -10,6 +10,7 @@ import { RecipeSagas } from './recipe';
 import { ProfileSagas } from './profile';
 import { UpdateSagas } from './update';
 import { CategorySagas } from './category';
+import { HomeSagas } from './home';
 
 // running all sagas parallel(all) without blocking(fork)
 export default function* rootSaga() {
@@ -42,7 +43,8 @@ export default function* rootSaga() {
       fork(UpdateSagas.watchGetRecipeDetails),
       fork(UpdateSagas.watchUpdateRecipe),
       fork(CategorySagas.watchGetCategoryRecipes),
-      fork(CategorySagas.watchLoadMoreRecipes)
+      fork(CategorySagas.watchLoadMoreRecipes),
+      fork(HomeSagas.watchGetCategories)
     ]);
   } catch (err) {
     console.log(err);

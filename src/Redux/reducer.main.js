@@ -11,6 +11,7 @@ import RecipeReducer from './recipe';
 import ProfileReducer from './profile';
 import UpdateReducer from './update';
 import CategoryReducer from './category';
+import HomeReducer from './home';
 
 const MainReducer = combineReducers({
   Auth: AuthReducer,
@@ -20,7 +21,8 @@ const MainReducer = combineReducers({
   Recipe: RecipeReducer,
   Profile: ProfileReducer,
   Update: UpdateReducer,
-  Category: CategoryReducer
+  Category: CategoryReducer,
+  Home: HomeReducer
 });
 
 export default MainReducer;
