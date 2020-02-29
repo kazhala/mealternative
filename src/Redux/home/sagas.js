@@ -16,5 +16,15 @@ export function* watchGetCategories() {
   worker sagas
 */
 function* workerGetCategories() {
-  yield console.log('hello');
+  yield put({ type: Types.HOME_BEGIN });
+  try {
+    const response = yield call(Operations.getCategories);
+    if (response.error) {
+      throw new Error(response.error);
+    }
+    yield put({ type: Types.HOME_STORE_CATEGORY, payload: response });
+  } catch (err) {
+    console.log('Error', err);
+    yield put({ type: Types.HOME_ERROR, payload: err.message });
+  }
 }
