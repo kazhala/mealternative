@@ -25,7 +25,7 @@ const UpdateReducer = (state = initialState, action) => {
       };
     case Types.UPDATE_LOADING_TEXT:
       return { ...state, loadingText: action.payload };
-    case Types.UPDATE_CLEAN:
+    case Types.UPDATE_CLEAR:
       return {
         ...state,
         loading: false,
@@ -45,7 +45,7 @@ const UpdateReducer = (state = initialState, action) => {
       return { ...state, loading: false, success: true, initLoading: false };
     case Types.UPDATE_INIT:
       return { ...state, initLoading: true, error: '', loading: false };
-    case Types.UPDATE_CLEAR:
+    case Types.UPDATE_CLEAN:
       return {
         ...state,
         loading: false,

@@ -26,7 +26,7 @@ function* workerGetCategories() {
     const response = yield call(Operations.getCategories);
     if (response.error) {
       yield put({
-        type: Types.CREAT_ERROR,
+        type: Types.CREATE_ERROR,
         payload: 'Categories faild to fetch, try refresh..'
       });
     } else {
@@ -155,6 +155,6 @@ function* workerSubmitRecipe({ payload }) {
     }
   } catch (err) {
     console.log(err);
-    yield put({ type: Types.CREAT_ERROR, payload: err.message });
+    yield put({ type: Types.CREATE_ERROR, payload: err.message });
   }
 }

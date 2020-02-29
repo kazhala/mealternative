@@ -52,8 +52,8 @@ const RecipeRoute = props => {
   */
 
   /*
-    updateClear is for reset update all state to initial state
-    updateClean is for cleaning up all errors and loading
+    updateClean is for reset update all state to initial state
+    updateClear is for cleaning up all errors and loading
   */
 
   // states for the recipe
@@ -349,9 +349,9 @@ const RecipeRoute = props => {
     return () => {
       // cleanup on unmount
       cleanUp();
-      updateClear();
+      updateClean();
     };
-  }, [getCategories, cleanUp, updateClear]);
+  }, [getCategories, cleanUp, updateClean]);
 
   // if did not find the udpate recipe, redirect
   const handleClearError = () => {
@@ -359,7 +359,7 @@ const RecipeRoute = props => {
       handleUpdateGoBack();
     } else {
       cleanUp();
-      updateClean();
+      updateClear();
     }
   };
 
