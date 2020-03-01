@@ -8,12 +8,13 @@ import PropTypes from 'prop-types';
 
 // components
 import TopCard from './_components/TopCard';
+import { Typography } from '@material-ui/core';
 
 // misc
 import useStyles from './Style';
 
 const Home = props => {
-  const { handleClick, categories, loading } = props;
+  const { handleCategoryClick, handleClick, categories } = props;
 
   const classes = useStyles();
 
@@ -42,15 +43,37 @@ const Home = props => {
           imgUrl='https://images.pexels.com/photos/5876/food-salad-healthy-vegetables.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
         />
       </div>
-      <div>categories</div>
+      <div className={classes.homeBottom}>
+        <Typography
+          className={classes.homeBottomTitle}
+          components='div'
+          variant='h5'
+        >
+          Categories
+        </Typography>
+        {categories.map((category, index) => (
+          <div
+            className={classes.categoryCard}
+            style={{
+              backgroundImage: `url(${category.imageUrl})`
+            }}
+            key={index}
+            onClick={() => handleCategoryClick(category._id)}
+          >
+            <Typography variant='h6' className={classes.topCardTitle}>
+              {category.name}
+            </Typography>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 Home.propTypes = {
   categories: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  handleCategoryClick: PropTypes.func.isRequired
 };
 
 export default Home;

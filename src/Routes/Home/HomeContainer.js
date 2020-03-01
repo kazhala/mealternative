@@ -13,9 +13,10 @@ import { HomeActions } from '../../Redux/home';
 // components
 import Home from './Home';
 import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
+import PageSpinner from '../../Common/Spinner/PageSpinner';
 
 const HomeContainer = props => {
-  const { getCategories, error, cleanUp, history } = props;
+  const { loading, getCategories, error, cleanUp, history } = props;
 
   useEffect(() => {
     getCategories();
@@ -28,10 +29,19 @@ const HomeContainer = props => {
     history.push(url);
   };
 
+  const handleCategoryClick = id => {
+    history.push(`/category?id=${id}`);
+  };
+
   return (
     <>
       <ErrorSnack error={error} handleClose={cleanUp} />
-      <Home handleClick={handleClick} {...props} />
+      <PageSpinner loading={loading} />
+      <Home
+        handleCategoryClick={handleCategoryClick}
+        handleClick={handleClick}
+        {...props}
+      />
     </>
   );
 };
