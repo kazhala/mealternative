@@ -29,9 +29,10 @@ export function* watchSearchRecipes() {
 */
 // search recipes
 function* workerSearchRecipes({ payload }) {
-  yield put({ type: Types.SEARCH_BEGIN, payload });
+  const { search, size } = payload;
+  yield put({ type: Types.SEARCH_BEGIN, payload: search });
   try {
-    const response = yield call(Operations.searchRecipes, payload);
+    const response = yield call(Operations.searchRecipes, search, size);
     console.log('response', response);
     if (response.error) {
       throw new Error(response.error);
@@ -97,7 +98,8 @@ function* workerLoadMoreRecipes() {
           Operations.searchLoadMore,
           recipePage + 1,
           recipeSortOption,
-          search
+          search,
+          size
         );
       } else {
         response = yield call(

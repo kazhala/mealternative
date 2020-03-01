@@ -131,9 +131,13 @@ const RecipesContainer = props => {
   const handleSearch = e => {
     e.preventDefault();
     if (!searchInput) {
-      fetchInitialRecipes();
+      fetchInitialRecipes(10);
     } else {
-      searchRecipes(searchInput);
+      if (bigScreen) {
+        searchRecipes(searchInput, 20);
+      } else {
+        searchRecipes(searchInput, 10);
+      }
     }
     setSearchInput('');
   };

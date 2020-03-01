@@ -29,10 +29,10 @@ export const sortRecipes = sortOption => {
   };
 };
 
-export const searchRecipes = search => {
+export const searchRecipes = (search, size) => {
   return {
     type: Types.SEARCH_RECIPES,
-    payload: search
+    payload: { search, size }
   };
 };
 

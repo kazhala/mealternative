@@ -98,7 +98,8 @@ const ListReducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
         recipeList: [...action.payload.response],
         recipeSortOption: action.payload.sortOption,
-        sorted: true
+        sorted: true,
+        size: action.payload.size
       };
     default:
       return state;
