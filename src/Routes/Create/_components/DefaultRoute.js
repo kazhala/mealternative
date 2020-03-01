@@ -54,9 +54,13 @@ const DefaultRoute = props => {
         onClick={() => handleRouteClick('/create/meal')}
         className={classes.createPaper}
         elevation={3}
+        style={{
+          pointerEvents: 'none',
+          opacity: '0.5'
+        }}
       >
         <RestaurantMenu fontSize='inherit' color='primary' />
-        <Typography variant='h6'>New Combination</Typography>
+        <Typography variant='h6'>Comming soon</Typography>
       </Paper>
     </div>
   );
