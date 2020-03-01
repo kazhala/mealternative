@@ -76,7 +76,8 @@ function* workerLoadMoreRecipes() {
     recipeSortOption,
     totalPages,
     listCycle,
-    search
+    search,
+    size
   } = yield select(Operations.getListState);
 
   try {
@@ -102,7 +103,8 @@ function* workerLoadMoreRecipes() {
         response = yield call(
           Operations.loadMoreRecipes,
           recipePage + 1,
-          recipeSortOption
+          recipeSortOption,
+          size
         );
       }
       console.log(response);
@@ -125,7 +127,8 @@ function* workerLoadMoreRecipes() {
       const response = yield call(
         Operations.loadMoreRecipes,
         1,
-        recipeSortOption
+        recipeSortOption,
+        size
       );
       console.log(response);
       if (response.error) {

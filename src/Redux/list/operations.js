@@ -18,10 +18,10 @@ export const fetchInitialRecipes = async size => {
 export const getListState = state => state.List;
 
 // backend get request require params in query
-export const loadMoreRecipes = async (page, orderBy) => {
+export const loadMoreRecipes = async (page, orderBy, size) => {
   try {
     const res = await fetch(
-      `${API}/recipes/list?page=${page}&orderBy=${orderBy}`,
+      `${API}/recipes/list?page=${page}&orderBy=${orderBy}&size=${size}`,
       {
         method: 'GET',
         headers: {
