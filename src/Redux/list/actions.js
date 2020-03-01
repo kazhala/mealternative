@@ -22,10 +22,10 @@ export const loadMoreRecipes = () => {
   };
 };
 
-export const sortRecipes = sortOption => {
+export const sortRecipes = (sortOption, size) => {
   return {
     type: Types.FETCH_SORT_RECIPES,
-    payload: sortOption
+    payload: { sortOption, size }
   };
 };
 

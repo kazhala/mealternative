@@ -46,15 +46,22 @@ function* workerSearchRecipes({ payload }) {
 
 // sort recipes
 function* workerSortRecipes({ payload }) {
+  const { sortOption, size } = payload;
   const { search } = yield select(Operations.getListState);
   yield put({ type: Types.SORT_BEGIN });
   try {
     // get the first page and pass in the sortOption
     let response;
     if (search) {
-      response = yield call(Operations.searchLoadMore, 1, payload, search);
+      response = yield call(
+        Operations.searchLoadMore,
+        1,
+        sortOption,
+        search,
+        size
+      );
     } else {
-      response = yield call(Operations.loadMoreRecipes, 1, payload);
+      response = yield call(Operations.loadMoreRecipes, 1, sortOption, size);
     }
     console.log(response);
     if (response.error) {

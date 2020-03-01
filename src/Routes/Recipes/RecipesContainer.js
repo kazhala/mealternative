@@ -44,6 +44,19 @@ const RecipesContainer = props => {
   // state for search field
   const [searchInput, setSearchInput] = useState('');
 
+  // get current view port size and determine how many recipes to query
+  const theme = useTheme();
+  const bigScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  const [querySize, setQuerySize] = useState(10);
+
+  useEffect(() => {
+    if (bigScreen) {
+      setQuerySize(20);
+    } else {
+      setQuerySize(10);
+    }
+  }, [bigScreen]);
+
   useEffect(() => {
     if (location.pathname === '/recipes') {
       setIsLoadable(true);
@@ -80,18 +93,10 @@ const RecipesContainer = props => {
     }
   }, [recipeList]);
 
-  // get current view port size and determine how many recipes to query
-  const theme = useTheme();
-  const bigScreen = useMediaQuery(theme.breakpoints.up('lg'));
-
   // onmount, fetch recipe, unmount cleanup
   useEffect(() => {
-    if (bigScreen) {
-      fetchInitialRecipes(20);
-    } else {
-      fetchInitialRecipes(10);
-    }
-  }, [fetchInitialRecipes, bigScreen]);
+    fetchInitialRecipes(querySize);
+  }, [fetchInitialRecipes, querySize]);
 
   useEffect(() => {
     return () => {
@@ -107,12 +112,12 @@ const RecipesContainer = props => {
     } else if (typeNum === 4) {
       cleanUp();
       if (search) {
-        searchRecipes(search);
+        searchRecipes(search, querySize);
       } else {
-        fetchInitialRecipes();
+        fetchInitialRecipes(querySize);
       }
     } else {
-      sortRecipes(orderBy);
+      sortRecipes(orderBy, querySize);
     }
   };
 
@@ -131,13 +136,9 @@ const RecipesContainer = props => {
   const handleSearch = e => {
     e.preventDefault();
     if (!searchInput) {
-      fetchInitialRecipes(10);
+      fetchInitialRecipes(querySize);
     } else {
-      if (bigScreen) {
-        searchRecipes(searchInput, 20);
-      } else {
-        searchRecipes(searchInput, 10);
-      }
+      searchRecipes(searchInput, querySize);
     }
     setSearchInput('');
   };
