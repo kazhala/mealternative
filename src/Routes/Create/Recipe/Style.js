@@ -8,11 +8,22 @@ const useStyles = makeStyles(theme => ({
   routeRoot: {
     padding: theme.spacing(1),
     width: '100%',
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     position: 'relative'
+  },
+  root: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '90%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '70%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '60%'
+    }
   },
   updateGoBack: {
     position: 'absolute',
@@ -50,7 +61,16 @@ const useStyles = makeStyles(theme => ({
   },
   stepPreview: {
     width: '100%',
-    height: theme.spacing(10)
+    height: theme.spacing(10),
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(15)
+    },
+    [theme.breakpoints.up('md')]: {
+      height: theme.spacing(20)
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: theme.spacing(25)
+    }
   },
 
   // upload button
@@ -63,7 +83,16 @@ const useStyles = makeStyles(theme => ({
     height: 'auto',
     maxHeight: theme.spacing(15),
     width: '100%',
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    [theme.breakpoints.up('md')]: {
+      maxHeight: theme.spacing(20)
+    },
+    [theme.breakpoints.up('lg')]: {
+      maxHeight: theme.spacing(25)
+    },
+    [theme.breakpoints.up('xl')]: {
+      maxHeight: theme.spacing(30)
+    }
   },
   imageOption: {
     width: '100%',

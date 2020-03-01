@@ -47,107 +47,109 @@ const Recipe = props => {
 
   return (
     <div className={classes.routeRoot}>
-      {isUpdate && (
-        <Fab
-          color='primary'
-          className={classes.updateGoBack}
-          onClick={handleUpdateGoBack}
-          variant='extended'
-        >
-          <ArrowBack />
-          Back
-        </Fab>
-      )}
-      {/* title */}
-      <Typography className={classes.routeTitle} component='div' variant='h6'>
-        {isUpdate ? 'Update recipe' : 'Create new recipe'}
-      </Typography>
-      {/* thumbnailImage preview using material ui avatar */}
-      {thumbnailImage.previewUrl && (
-        <Avatar
-          variant='square'
-          className={classes.thumbPreview}
-          src={thumbnailImage.previewUrl}
-          alt='thumbnail preview'
+      <div className={classes.root}>
+        {isUpdate && (
+          <Fab
+            color='primary'
+            className={classes.updateGoBack}
+            onClick={handleUpdateGoBack}
+            variant='extended'
+          >
+            <ArrowBack />
+            Back
+          </Fab>
+        )}
+        {/* title */}
+        <Typography className={classes.routeTitle} component='div' variant='h6'>
+          {isUpdate ? 'Update recipe' : 'Create new recipe'}
+        </Typography>
+        {/* thumbnailImage preview using material ui avatar */}
+        {thumbnailImage.previewUrl && (
+          <Avatar
+            variant='square'
+            className={classes.thumbPreview}
+            src={thumbnailImage.previewUrl}
+            alt='thumbnail preview'
+          />
+        )}
+        {/* allow user to choose between url or upload file */}
+        <ImageOption
+          urlText='Thumbnail Url'
+          fileText='Thumbnail'
+          classes={classes}
+          handleDetailChange={handleDetailChange}
+          thumbnailImage={thumbnailImage}
         />
-      )}
-      {/* allow user to choose between url or upload file */}
-      <ImageOption
-        urlText='Thumbnail Url'
-        fileText='Thumbnail'
-        classes={classes}
-        handleDetailChange={handleDetailChange}
-        thumbnailImage={thumbnailImage}
-      />
 
-      {/* title input */}
-      <TextField
-        size='small'
-        placeholder='Title of your recipe'
-        variant='outlined'
-        label='Title'
-        value={title}
-        onChange={e => handleDetailChange('title', e.target.value)}
-        className={classes.titleInput}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position='start'>
-              <Title />
-            </InputAdornment>
-          )
-        }}
-      />
-      {/* description input */}
-      <TextField
-        size='small'
-        placeholder='Description of your recipe'
-        variant='outlined'
-        label='Description'
-        multiline
-        rows={3}
-        value={description}
-        onChange={e => handleDetailChange('description', e.target.value)}
-        className={classes.titleInput}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position='start'>
-              <Description />
-            </InputAdornment>
-          )
-        }}
-      />
+        {/* title input */}
+        <TextField
+          size='small'
+          placeholder='Title of your recipe'
+          variant='outlined'
+          label='Title'
+          value={title}
+          onChange={e => handleDetailChange('title', e.target.value)}
+          className={classes.titleInput}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position='start'>
+                <Title />
+              </InputAdornment>
+            )
+          }}
+        />
+        {/* description input */}
+        <TextField
+          size='small'
+          placeholder='Description of your recipe'
+          variant='outlined'
+          label='Description'
+          multiline
+          rows={3}
+          value={description}
+          onChange={e => handleDetailChange('description', e.target.value)}
+          className={classes.titleInput}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position='start'>
+                <Description />
+              </InputAdornment>
+            )
+          }}
+        />
 
-      {/* ingredients auto complete */}
-      <Ingredients
-        classes={classes}
-        ingredients={ingredients}
-        handleDetailChange={handleDetailChange}
-      />
-      {/* categories auto complete */}
-      <Categories
-        classes={classes}
-        categories={categories}
-        handleDetailChange={handleDetailChange}
-        categoryList={categoryList}
-        categoryLoading={categoryLoading}
-      />
-      {/* steps */}
-      <Steps
-        handleDetailChange={handleDetailChange}
-        steps={steps}
-        classes={classes}
-      />
+        {/* ingredients auto complete */}
+        <Ingredients
+          classes={classes}
+          ingredients={ingredients}
+          handleDetailChange={handleDetailChange}
+        />
+        {/* categories auto complete */}
+        <Categories
+          classes={classes}
+          categories={categories}
+          handleDetailChange={handleDetailChange}
+          categoryList={categoryList}
+          categoryLoading={categoryLoading}
+        />
+        {/* steps */}
+        <Steps
+          handleDetailChange={handleDetailChange}
+          steps={steps}
+          classes={classes}
+        />
 
-      <Button
-        color='primary'
-        variant='contained'
-        fullWidth
-        className={classes.recipeSubmit}
-        endIcon={<Send />}
-        onClick={handleRecipeSubmit}
-      >
-        {isUpdate ? 'Update' : 'Upload'}
-      </Button>
+        <Button
+          color='primary'
+          variant='contained'
+          fullWidth
+          className={classes.recipeSubmit}
+          endIcon={<Send />}
+          onClick={handleRecipeSubmit}
+        >
+          {isUpdate ? 'Update' : 'Upload'}
+        </Button>
+      </div>
     </div>
   );
 };
