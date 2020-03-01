@@ -10,6 +10,7 @@ const initialState = {
   recipeList: [],
   recipePage: 1,
   totalPages: 1,
+  size: 10,
   listCycle: false,
   recipeSortOption: '',
   loadMoreLoading: false,
@@ -57,7 +58,8 @@ const ListReducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
         recipeList: [...action.payload.response],
         recipePage: action.payload.page,
-        recipeSortOption: action.payload.sortOption
+        recipeSortOption: action.payload.sortOption,
+        size: action.payload.size
       };
     case Types.LOAD_MORE_BEGIN:
       return { ...state, loadMoreLoading: true };

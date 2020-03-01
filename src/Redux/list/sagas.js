@@ -144,10 +144,11 @@ function* workerLoadMoreRecipes() {
 }
 
 // get initial random recipes
-function* workerFetchInitRecipes() {
+// payload should be the size
+function* workerFetchInitRecipes({ payload }) {
   yield put({ type: Types.LIST_BEGIN });
   try {
-    const response = yield call(Operations.fetchInitialRecipes);
+    const response = yield call(Operations.fetchInitialRecipes, payload);
     if (response.error) {
       throw new Error(response.error);
     } else {

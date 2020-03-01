@@ -1,8 +1,8 @@
 import { API } from '../../config';
 
-export const fetchInitialRecipes = async () => {
+export const fetchInitialRecipes = async size => {
   try {
-    const res = await fetch(`${API}/recipes/list`, {
+    const res = await fetch(`${API}/recipes/list?size=${size}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

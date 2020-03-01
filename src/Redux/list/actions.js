@@ -3,9 +3,10 @@
 */
 import * as Types from './types';
 
-export const fetchInitialRecipes = () => {
+export const fetchInitialRecipes = payload => {
   return {
-    type: Types.FETCH_INITIAL_RECIPES
+    type: Types.FETCH_INITIAL_RECIPES,
+    payload
   };
 };
 

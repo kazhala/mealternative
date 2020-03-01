@@ -17,6 +17,7 @@ import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 // misc
 import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
+import { useTheme, useMediaQuery } from '@material-ui/core';
 
 const RecipesContainer = props => {
   const {
@@ -79,13 +80,24 @@ const RecipesContainer = props => {
     }
   }, [recipeList]);
 
+  // get current view port size and determine how many recipes to query
+  const theme = useTheme();
+  const bigScreen = useMediaQuery(theme.breakpoints.up('lg'));
+
   // onmount, fetch recipe, unmount cleanup
   useEffect(() => {
-    fetchInitialRecipes();
+    if (bigScreen) {
+      fetchInitialRecipes(20);
+    } else {
+      fetchInitialRecipes(10);
+    }
+  }, [fetchInitialRecipes, bigScreen]);
+
+  useEffect(() => {
     return () => {
       cleanUp();
     };
-  }, [fetchInitialRecipes, cleanUp]);
+  }, [cleanUp]);
 
   // handle speedial click to sort recipe request
   const handleSortRecipes = typeNum => {
