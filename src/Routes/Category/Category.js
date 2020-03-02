@@ -92,6 +92,38 @@ const Category = props => {
             />
           ))}
         </div>
+        <div className={classes.categoryBodyColumn}>
+          {displayArray.mid.map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              title={recipe.title}
+              name={recipe.postedBy.username}
+              likes={recipe.likes}
+              thumbnailUrl={recipe.thumbImageUrl}
+              bookmarks={recipe.bookmarks}
+              rating={recipe.rating}
+              recipeId={recipe._id}
+              handleCardClick={handleCardClick}
+              photoUrl={recipe.postedBy.photoUrl}
+            />
+          ))}
+        </div>
+        <div className={classes.categoryBodyColumn}>
+          {displayArray.big.map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              title={recipe.title}
+              name={recipe.postedBy.username}
+              likes={recipe.likes}
+              thumbnailUrl={recipe.thumbImageUrl}
+              bookmarks={recipe.bookmarks}
+              rating={recipe.rating}
+              recipeId={recipe._id}
+              handleCardClick={handleCardClick}
+              photoUrl={recipe.postedBy.photoUrl}
+            />
+          ))}
+        </div>
       </div>
       {/* loadmore spinner */}
       <LoadMoreSpinner

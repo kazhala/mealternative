@@ -19,6 +19,9 @@ import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 // misc
 import queryString from 'query-string';
 import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
+import { useMediaQuery, useTheme } from '@material-ui/core';
+import useScreenSize from '../../Hooks/useScreenSize';
+import useBreakArrays from '../../Hooks/useBreakArrays';
 
 const CategoryContainer = props => {
   const {
@@ -56,11 +59,14 @@ const CategoryContainer = props => {
   // used to scroll to top
   const topElementRef = useRef(null);
 
-  // left side array and rightside array
-  const [displayArray, setDisplayArray] = useState({
-    left: [],
-    right: []
-  });
+  // get current view port size and determine how many recipes to query
+  const theme = useTheme();
+  const midScreen = useMediaQuery(theme.breakpoints.up('md'));
+  const bigScreen = useMediaQuery(theme.breakpoints.up('lg'));
+
+  const querySize = useScreenSize(bigScreen, midScreen);
+
+  const displayArray = useBreakArrays(recipes, querySize);
 
   // check if id changes or if its mounted
   // avoid un-wanted re-render
@@ -88,28 +94,6 @@ const CategoryContainer = props => {
   useEffect(() => {
     scrollToTop();
   }, [categoryId, scrollToTop]);
-
-  // split recipes into left and right array for better ui
-  useEffect(() => {
-    if (recipes.length > 0) {
-      const reducedRecipe = recipes.reduce(
-        (prev, curr, idx, self) => {
-          if (idx % 2 === 0) {
-            prev.left.push(curr);
-          } else {
-            prev.right.push(curr);
-          }
-          return prev;
-        },
-        { left: [], right: [] }
-      );
-      setDisplayArray(prevArray => ({
-        ...prevArray,
-        left: [...reducedRecipe.left],
-        right: [...reducedRecipe.right]
-      }));
-    }
-  }, [recipes]);
 
   const handleCardClick = id => {
     history.push(`/category/detail/${id}?id=${categoryId}`);

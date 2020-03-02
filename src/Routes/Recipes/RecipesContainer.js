@@ -19,6 +19,7 @@ import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
 import { useTheme, useMediaQuery } from '@material-ui/core';
 import useBreakArrays from '../../Hooks/useBreakArrays';
+import useScreenSize from '../../Hooks/useScreenSize';
 
 const RecipesContainer = props => {
   const {
@@ -51,17 +52,9 @@ const RecipesContainer = props => {
   const theme = useTheme();
   const midScreen = useMediaQuery(theme.breakpoints.up('md'));
   const bigScreen = useMediaQuery(theme.breakpoints.up('lg'));
-  const [querySize, setQuerySize] = useState(10);
 
-  useEffect(() => {
-    if (bigScreen) {
-      setQuerySize(20);
-    } else if (midScreen) {
-      setQuerySize(15);
-    } else {
-      setQuerySize(10);
-    }
-  }, [bigScreen, midScreen]);
+  // get query size
+  const querySize = useScreenSize(bigScreen, midScreen);
 
   useEffect(() => {
     if (location.pathname === '/recipes') {
