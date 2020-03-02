@@ -11,7 +11,8 @@ const initialState = {
   category: {},
   page: 1,
   totalPages: 1,
-  sortOption: '-likes'
+  sortOption: '-likes',
+  size: 10
 };
 
 const CategoryReducer = (state = initialState, action) => {
@@ -44,7 +45,8 @@ const CategoryReducer = (state = initialState, action) => {
         recipes: [...action.payload.recipes],
         page: action.payload.page,
         totalPages: action.payload.totalPages,
-        category: action.payload.category
+        category: action.payload.category,
+        size: action.payload.size
       };
     case Types.CATEGORY_LOADMORE_LOADING:
       return { ...state, loadMoreLoading: true, error: '' };

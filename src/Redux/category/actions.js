@@ -3,10 +3,10 @@
 */
 import * as Types from './types';
 
-export const getCategoryRecipes = payload => {
+export const getCategoryRecipes = (id, size) => {
   return {
     type: Types.CATEGORY_GET_RECIPES,
-    payload
+    payload: { id, size }
   };
 };
 

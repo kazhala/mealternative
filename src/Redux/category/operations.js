@@ -3,10 +3,10 @@
 */
 import { API } from '../../config';
 
-export const getCategoryRecipes = async (id, sortOption) => {
+export const getCategoryRecipes = async (id, sortOption, size) => {
   try {
     const res = await fetch(
-      `${API}/recipes/category?id=${id}&sort=${sortOption}`,
+      `${API}/recipes/category?id=${id}&sort=${sortOption}&size=${size}`,
       {
         method: 'GET',
         headers: {

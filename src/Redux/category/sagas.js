@@ -21,12 +21,14 @@ export function* watchLoadMoreRecipes() {
 */
 function* workerGetCategoryRecipes({ payload }) {
   const { sortOption } = yield select(Operations.getCategoryState);
+  const { id, size } = payload;
   yield put({ type: Types.CATEGORY_BEGIN });
   try {
     const response = yield call(
       Operations.getCategoryRecipes,
-      payload,
-      sortOption
+      id,
+      sortOption,
+      size
     );
     if (response.error) {
       throw new Error(response.error);

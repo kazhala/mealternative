@@ -72,7 +72,7 @@ const CategoryContainer = props => {
   // avoid un-wanted re-render
   useEffect(() => {
     const queryParams = queryString.parse(location.search);
-    if (!mounted || queryParams.id !== categoryId) {
+    if (!mounted || queryParams.id !== categoryId || querySize !== 10) {
       // if no id found, redirect
       if (!queryParams.id) {
         history.replace('/');
@@ -81,10 +81,10 @@ const CategoryContainer = props => {
         setMounted(true);
         setCategoryId(queryParams.id);
         // get data through redux
-        getCategoryRecipes(queryParams.id);
+        getCategoryRecipes(queryParams.id, querySize);
       }
     }
-  }, [location, history, getCategoryRecipes, mounted, categoryId]);
+  }, [location, history, getCategoryRecipes, mounted, categoryId, querySize]);
 
   const scrollToTop = useCallback(() => {
     topElementRef.current.scrollTo(0, 0);
@@ -111,11 +111,11 @@ const CategoryContainer = props => {
     } else if (typeNum === 4) {
       clearError();
       resetSort();
-      getCategoryRecipes(categoryId);
+      getCategoryRecipes(categoryId, querySize);
       scrollToTop();
     } else {
       sortRecipes(orderBy);
-      getCategoryRecipes(categoryId);
+      getCategoryRecipes(categoryId, querySize);
       scrollToTop();
     }
   };
