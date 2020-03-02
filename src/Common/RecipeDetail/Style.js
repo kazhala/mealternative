@@ -50,10 +50,12 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(10),
     minHeight: theme.spacing(10),
     [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(15)
+      height: theme.spacing(15),
+      minHeight: theme.spacing(15)
     },
     [theme.breakpoints.up('lg')]: {
-      height: theme.spacing(20)
+      height: theme.spacing(20),
+      minHeight: theme.spacing(20)
     }
   },
   detailTitleDes: {
@@ -99,10 +101,12 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(10),
     minHeight: theme.spacing(10),
     [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(15)
+      height: theme.spacing(15),
+      minHeight: theme.spacing(15)
     },
     [theme.breakpoints.up('md')]: {
-      height: theme.spacing(20)
+      height: theme.spacing(20),
+      minHeight: theme.spacing(20)
     }
   },
   stepLabel: {
