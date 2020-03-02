@@ -3,7 +3,7 @@
 */
 
 // react
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // redux
 import { connect } from 'react-redux';
@@ -35,14 +35,16 @@ const RecipesContainer = props => {
     clearError,
     searchRecipes
   } = props;
+
   // speedDial show state
   const [showDial, setShowDial] = useState(false);
-
   // handle check if should loadmore
   const [isLoadable, setIsLoadable] = useState(true);
-
   // state for search field
   const [searchInput, setSearchInput] = useState('');
+
+  // top element ref
+  const topElementRef = useRef(null);
 
   // get current view port size and determine how many recipes to query
   const theme = useTheme();
@@ -179,6 +181,7 @@ const RecipesContainer = props => {
     if (typeNum === -1) {
       setShowDial(false);
     } else if (typeNum === 4) {
+      scrollToTop();
       cleanUp();
       if (search) {
         searchRecipes(search, querySize);
@@ -186,6 +189,7 @@ const RecipesContainer = props => {
         fetchInitialRecipes(querySize);
       }
     } else {
+      scrollToTop();
       sortRecipes(orderBy, querySize);
     }
   };
@@ -220,6 +224,11 @@ const RecipesContainer = props => {
     fetchInitialRecipes();
   };
 
+  // scroll top when sort option changed
+  const scrollToTop = () => {
+    topElementRef.current.scrollTo(0, 0);
+  };
+
   return (
     <>
       <PageSpinner loading={loading} />
@@ -239,6 +248,7 @@ const RecipesContainer = props => {
         handleSortRecipes={handleSortRecipes}
         isLoadable={isLoadable}
         getCurrentSortOption={getCurrentSortOption}
+        topElementRef={topElementRef}
         {...props}
       />
     </>

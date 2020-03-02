@@ -37,7 +37,8 @@ const Recipes = props => {
     getCurrentSortOption,
     resetSearch,
     midScreen,
-    bigScreen
+    bigScreen,
+    topElementRef
   } = props;
   const classes = useStyles();
 
@@ -48,6 +49,7 @@ const Recipes = props => {
       }}
       onScroll={e => handleScroll(e, isLoadable, loadMoreRecipes)}
       className={classes.recipeRoot}
+      ref={topElementRef}
     >
       {/* search field */}
       <form onSubmit={handleSearch} className={classes.recipeSearchRoot}>
@@ -182,7 +184,8 @@ Recipes.propTypes = {
   resetSearch: PropTypes.func.isRequired,
   search: PropTypes.string.isRequired,
   midScreen: PropTypes.bool,
-  bigScreen: PropTypes.bool
+  bigScreen: PropTypes.bool,
+  topElementRef: PropTypes.any
 };
 
 export default Recipes;
