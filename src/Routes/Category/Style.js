@@ -15,7 +15,15 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     minHeight: theme.spacing(10),
     height: theme.spacing(10),
-    position: 'relative'
+    position: 'relative',
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(15),
+      minHeight: theme.spacing(15)
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: theme.spacing(20),
+      minHeight: theme.spacing(20)
+    }
   },
   categoryTitle: {
     position: 'absolute',
