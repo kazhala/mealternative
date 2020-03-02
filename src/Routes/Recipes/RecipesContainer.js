@@ -46,16 +46,19 @@ const RecipesContainer = props => {
 
   // get current view port size and determine how many recipes to query
   const theme = useTheme();
+  const midScreen = useMediaQuery(theme.breakpoints.up('md'));
   const bigScreen = useMediaQuery(theme.breakpoints.up('lg'));
   const [querySize, setQuerySize] = useState(10);
 
   useEffect(() => {
     if (bigScreen) {
       setQuerySize(20);
+    } else if (midScreen) {
+      setQuerySize(15);
     } else {
       setQuerySize(10);
     }
-  }, [bigScreen]);
+  }, [bigScreen, midScreen]);
 
   useEffect(() => {
     if (location.pathname === '/recipes') {
@@ -68,30 +71,95 @@ const RecipesContainer = props => {
   // left side array and rightside array
   const [displayArray, setDisplayArray] = useState({
     left: [],
-    right: []
+    right: [],
+    mid: [],
+    big: []
   });
+
+  console.log('displayArray', displayArray);
 
   // split recipeList into left and right array for better ui
   useEffect(() => {
     if (recipeList.length > 0) {
-      const reducedRecipe = recipeList.reduce(
-        (prev, curr, idx, self) => {
-          if (idx % 2 === 0) {
-            prev.left.push(curr);
-          } else {
-            prev.right.push(curr);
-          }
-          return prev;
-        },
-        { left: [], right: [] }
-      );
-      setDisplayArray(prevArray => ({
-        ...prevArray,
-        left: [...reducedRecipe.left],
-        right: [...reducedRecipe.right]
-      }));
+      if (querySize === 20) {
+        // split into 4 arrays for desktop screens
+        const reducedRecipe = recipeList.reduce(
+          (prev, curr, idx, self) => {
+            if (
+              prev.left.length === prev.right.length &&
+              prev.left.length === prev.mid.length &&
+              prev.left.length === prev.big.length
+            ) {
+              prev.left.push(curr);
+            } else if (
+              prev.right.length === prev.mid.length &&
+              prev.right.length === prev.big.length
+            ) {
+              prev.right.push(curr);
+            } else if (prev.mid.length === prev.big.length) {
+              prev.mid.push(curr);
+            } else {
+              prev.big.push(curr);
+            }
+            return prev;
+          },
+          { left: [], right: [], mid: [], big: [] }
+        );
+        setDisplayArray(prevArray => ({
+          ...prevArray,
+          left: [...reducedRecipe.left],
+          right: [...reducedRecipe.right],
+          mid: [...reducedRecipe.mid],
+          big: [...reducedRecipe.big]
+        }));
+      } else if (querySize === 15) {
+        // ipad screen split to three
+        const reducedRecipe = recipeList.reduce(
+          (prev, curr, idx, self) => {
+            if (
+              prev.left.length === prev.right.length &&
+              prev.left.length === prev.mid.length
+            ) {
+              prev.left.push(curr);
+            } else if (prev.right.length === prev.mid.length) {
+              prev.right.push(curr);
+            } else {
+              prev.mid.push(curr);
+            }
+            return prev;
+          },
+          { left: [], right: [], mid: [] }
+        );
+        setDisplayArray(prevArray => ({
+          ...prevArray,
+          left: [...reducedRecipe.left],
+          right: [...reducedRecipe.right],
+          mid: [...reducedRecipe.mid],
+          big: []
+        }));
+      } else {
+        // if mobile screen, split to 2 arrays
+        const reducedRecipe = recipeList.reduce(
+          (prev, curr, idx, self) => {
+            if (idx % 2 === 0) {
+              prev.left.push(curr);
+            } else {
+              prev.right.push(curr);
+            }
+            return prev;
+          },
+          { left: [], right: [] }
+        );
+        setDisplayArray(prevArray => ({
+          ...prevArray,
+          left: [...reducedRecipe.left],
+          right: [...reducedRecipe.right],
+          mid: [],
+          big: []
+        }));
+      }
     }
-  }, [recipeList]);
+  }, [recipeList, querySize]);
 
   // onmount, fetch recipe, unmount cleanup
   useEffect(() => {
@@ -153,6 +221,8 @@ const RecipesContainer = props => {
       <PageSpinner loading={loading} />
       <ErrorSnack handleClose={clearError} error={error} />
       <Recipes
+        midScreen={midScreen}
+        bigScreen={bigScreen}
         search={search}
         resetSearch={resetSearch}
         handleSearch={handleSearch}

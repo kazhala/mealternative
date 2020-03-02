@@ -35,7 +35,9 @@ const Recipes = props => {
     loadMoreLoading,
     isLoadable,
     getCurrentSortOption,
-    resetSearch
+    resetSearch,
+    midScreen,
+    bigScreen
   } = props;
   const classes = useStyles();
 
@@ -105,6 +107,42 @@ const Recipes = props => {
             />
           ))}
         </div>
+        {midScreen && (
+          <div className={classes.recipeBodyColumn}>
+            {displayArray.mid.map((recipe, index) => (
+              <RecipeCard
+                photoUrl={recipe.postedBy.photoUrl}
+                handleCardClick={handleCardClick}
+                recipeId={recipe._id}
+                bookmarks={recipe.bookmarks}
+                rating={recipe.rating}
+                thumbnailUrl={recipe.thumbImageUrl}
+                title={recipe.title}
+                name={recipe.postedBy.username}
+                likes={recipe.likes}
+                key={index}
+              />
+            ))}
+          </div>
+        )}
+        {bigScreen && (
+          <div className={classes.recipeBodyColumn}>
+            {displayArray.big.map((recipe, index) => (
+              <RecipeCard
+                photoUrl={recipe.postedBy.photoUrl}
+                handleCardClick={handleCardClick}
+                recipeId={recipe._id}
+                bookmarks={recipe.bookmarks}
+                rating={recipe.rating}
+                thumbnailUrl={recipe.thumbImageUrl}
+                title={recipe.title}
+                name={recipe.postedBy.username}
+                likes={recipe.likes}
+                key={index}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* loadmore spinner */}
@@ -139,7 +177,9 @@ Recipes.propTypes = {
   setSearchInput: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
   resetSearch: PropTypes.func.isRequired,
-  search: PropTypes.string.isRequired
+  search: PropTypes.string.isRequired,
+  midScreen: PropTypes.bool,
+  bigScreen: PropTypes.bool
 };
 
 export default Recipes;

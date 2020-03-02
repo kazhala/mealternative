@@ -21,13 +21,13 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1),
     gridGap: theme.spacing(0.5),
     [theme.breakpoints.up('sm')]: {
-      width: '80%'
+      width: '75%'
     },
     [theme.breakpoints.up('md')]: {
-      width: '60%'
+      width: '65%'
     },
     [theme.breakpoints.up('lg')]: {
-      width: '80%'
+      width: '70%'
     }
   },
   recipeSearchField: {
@@ -42,13 +42,15 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: '1fr 1fr',
     gridGap: theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
-      width: '80%'
+      width: '75%'
     },
     [theme.breakpoints.up('md')]: {
-      width: '60%'
+      width: '65%',
+      gridTemplateColumns: 'repeat(3, 1fr)'
     },
     [theme.breakpoints.up('lg')]: {
-      width: '80%'
+      width: '70%',
+      gridTemplateColumns: 'repeat(4, 1fr)'
     }
   },
   recipeBodyColumn: {
