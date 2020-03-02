@@ -18,6 +18,7 @@ import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 // misc
 import { orderByArr } from '../../Common/DefaultValues/RecipeOptions';
 import { useTheme, useMediaQuery } from '@material-ui/core';
+import useBreakArrays from '../../Hooks/useBreakArrays';
 
 const RecipesContainer = props => {
   const {
@@ -70,98 +71,7 @@ const RecipesContainer = props => {
     }
   }, [location]);
 
-  // left side array and rightside array
-  // mid for ipad screen size
-  // big for desktop screen size
-  const [displayArray, setDisplayArray] = useState({
-    left: [],
-    right: [],
-    mid: [],
-    big: []
-  });
-
-  // split recipeList into left and right array for better ui
-  useEffect(() => {
-    if (recipeList.length > 0) {
-      if (querySize === 20) {
-        // split into 4 arrays for desktop screens
-        const reducedRecipe = recipeList.reduce(
-          (prev, curr, idx, self) => {
-            if (
-              prev.left.length === prev.right.length &&
-              prev.left.length === prev.mid.length &&
-              prev.left.length === prev.big.length
-            ) {
-              prev.left.push(curr);
-            } else if (
-              prev.right.length === prev.mid.length &&
-              prev.right.length === prev.big.length
-            ) {
-              prev.right.push(curr);
-            } else if (prev.mid.length === prev.big.length) {
-              prev.mid.push(curr);
-            } else {
-              prev.big.push(curr);
-            }
-            return prev;
-          },
-          { left: [], right: [], mid: [], big: [] }
-        );
-        setDisplayArray(prevArray => ({
-          ...prevArray,
-          left: [...reducedRecipe.left],
-          right: [...reducedRecipe.right],
-          mid: [...reducedRecipe.mid],
-          big: [...reducedRecipe.big]
-        }));
-      } else if (querySize === 15) {
-        // ipad screen split to three
-        const reducedRecipe = recipeList.reduce(
-          (prev, curr, idx, self) => {
-            if (
-              prev.left.length === prev.right.length &&
-              prev.left.length === prev.mid.length
-            ) {
-              prev.left.push(curr);
-            } else if (prev.right.length === prev.mid.length) {
-              prev.right.push(curr);
-            } else {
-              prev.mid.push(curr);
-            }
-            return prev;
-          },
-          { left: [], right: [], mid: [] }
-        );
-        setDisplayArray(prevArray => ({
-          ...prevArray,
-          left: [...reducedRecipe.left],
-          right: [...reducedRecipe.right],
-          mid: [...reducedRecipe.mid],
-          big: []
-        }));
-      } else {
-        // if mobile screen, split to 2 arrays
-        const reducedRecipe = recipeList.reduce(
-          (prev, curr, idx, self) => {
-            if (idx % 2 === 0) {
-              prev.left.push(curr);
-            } else {
-              prev.right.push(curr);
-            }
-            return prev;
-          },
-          { left: [], right: [] }
-        );
-        setDisplayArray(prevArray => ({
-          ...prevArray,
-          left: [...reducedRecipe.left],
-          right: [...reducedRecipe.right],
-          mid: [],
-          big: []
-        }));
-      }
-    }
-  }, [recipeList, querySize]);
+  const displayArray = useBreakArrays(recipeList, querySize);
 
   // onmount, fetch recipe based on screen size
   useEffect(() => {

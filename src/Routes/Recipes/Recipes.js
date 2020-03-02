@@ -18,7 +18,7 @@ import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContain
 
 // misc
 import useStyles from './Style';
-import { handleScroll } from '../../Common/LoadMore/LoadMore';
+import useScroll from '../../Hooks/useScroll';
 
 const Recipes = props => {
   const {
@@ -41,6 +41,7 @@ const Recipes = props => {
     topElementRef
   } = props;
   const classes = useStyles();
+  const handleScroll = useScroll();
 
   return (
     <div

@@ -25,7 +25,7 @@ import PasswordTab from './_components/PasswordTab';
 
 // misc
 import useStyles from './Style';
-import { handleScroll } from '../../Common/LoadMore/LoadMore';
+import useScroll from '../../Hooks/useScroll';
 
 const Account = props => {
   const {
@@ -50,6 +50,7 @@ const Account = props => {
     tabTopEleRef
   } = props;
   const classes = useStyles();
+  const handleScroll = useScroll();
 
   return (
     <div className={classes.accountRoot}>
