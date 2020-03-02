@@ -90,33 +90,35 @@ const RecipeDetail = props => {
               />
             </Tooltip>
             <ThumbNail imgUrl={thumbImageUrl} classes={classes} />
-            <TitleDes
-              title={title}
-              description={description}
-              classes={classes}
-            />
+            <div className={classes.detailBody}>
+              <TitleDes
+                title={title}
+                description={description}
+                classes={classes}
+              />
 
-            {/* like bookmark rating etc */}
-            <MiscActions
-              handleRateAction={handleRateAction}
-              handleLikeAction={handleLikeAction}
-              handleBookAction={handleBookAction}
-              likes={likes}
-              bookmarks={bookmarks}
-              rating={rating}
-              classes={classes}
-              liked={liked}
-              booked={booked}
-            />
-            <ListsCatIng
-              handleCategoryClick={handleCategoryClick}
-              ingredients={ingredients}
-              categories={categories}
-              classes={classes}
-            />
+              {/* like bookmark rating etc */}
+              <MiscActions
+                handleRateAction={handleRateAction}
+                handleLikeAction={handleLikeAction}
+                handleBookAction={handleBookAction}
+                likes={likes}
+                bookmarks={bookmarks}
+                rating={rating}
+                classes={classes}
+                liked={liked}
+                booked={booked}
+              />
+              <ListsCatIng
+                handleCategoryClick={handleCategoryClick}
+                ingredients={ingredients}
+                categories={categories}
+                classes={classes}
+              />
 
-            {/* recipe steps */}
-            <Steps steps={steps} classes={classes} />
+              {/* recipe steps */}
+              <Steps steps={steps} classes={classes} />
+            </div>
           </>
         )}
       </Paper>

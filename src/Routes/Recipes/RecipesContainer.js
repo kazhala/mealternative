@@ -69,14 +69,14 @@ const RecipesContainer = props => {
   }, [location]);
 
   // left side array and rightside array
+  // mid for ipad screen size
+  // big for desktop screen size
   const [displayArray, setDisplayArray] = useState({
     left: [],
     right: [],
     mid: [],
     big: []
   });
-
-  console.log('displayArray', displayArray);
 
   // split recipeList into left and right array for better ui
   useEffect(() => {
@@ -161,11 +161,12 @@ const RecipesContainer = props => {
     }
   }, [recipeList, querySize]);
 
-  // onmount, fetch recipe, unmount cleanup
+  // onmount, fetch recipe based on screen size
   useEffect(() => {
     fetchInitialRecipes(querySize);
   }, [fetchInitialRecipes, querySize]);
 
+  // clean up on unmount
   useEffect(() => {
     return () => {
       cleanUp();
@@ -189,10 +190,12 @@ const RecipesContainer = props => {
     }
   };
 
+  // push to card details
   const handleCardClick = recipeId => {
     history.push(`/recipes/detail/${recipeId}`);
   };
 
+  // used to display a selected indicator
   const getCurrentSortOption = () => {
     if (sorted) {
       return recipeSortOption;
@@ -211,6 +214,7 @@ const RecipesContainer = props => {
     setSearchInput('');
   };
 
+  // clear the search
   const resetSearch = () => {
     setSearchInput('');
     fetchInitialRecipes();

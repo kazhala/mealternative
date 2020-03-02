@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1111,
     display: 'flex',
     flexDirection: 'column',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    alignItems: 'center'
   },
   detailCloseBtn: {
     position: 'absolute',
@@ -28,12 +29,32 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(3),
     cursor: 'pointer'
   },
+  detailBody: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '85%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '70%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '60%'
+    }
+  },
 
   // top part
   detailThumbRoot: {
     width: '100%',
     height: theme.spacing(10),
-    minHeight: theme.spacing(10)
+    minHeight: theme.spacing(10),
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(15)
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: theme.spacing(20)
+    }
   },
   detailTitleDes: {
     width: '100%',
@@ -48,8 +69,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'flex',
     padding: theme.spacing(0, 0.5),
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   detailContainer: {
     display: 'flex',
@@ -76,7 +97,13 @@ const useStyles = makeStyles(theme => ({
   stepImage: {
     width: '100%',
     height: theme.spacing(10),
-    minHeight: theme.spacing(10)
+    minHeight: theme.spacing(10),
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(15)
+    },
+    [theme.breakpoints.up('md')]: {
+      height: theme.spacing(20)
+    }
   },
   stepLabel: {
     cursor: 'pointer'

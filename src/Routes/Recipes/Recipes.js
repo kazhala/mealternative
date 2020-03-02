@@ -107,6 +107,8 @@ const Recipes = props => {
             />
           ))}
         </div>
+
+        {/* display third row for ipad screen size */}
         {midScreen && (
           <div className={classes.recipeBodyColumn}>
             {displayArray.mid.map((recipe, index) => (
@@ -125,6 +127,7 @@ const Recipes = props => {
             ))}
           </div>
         )}
+        {/* display fourth row for desktop screen size */}
         {bigScreen && (
           <div className={classes.recipeBodyColumn}>
             {displayArray.big.map((recipe, index) => (
