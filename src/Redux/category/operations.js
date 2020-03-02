@@ -23,10 +23,10 @@ export const getCategoryRecipes = async (id, sortOption, size) => {
 
 export const getCategoryState = state => state.Category;
 
-export const loadMoreRecipes = async (id, sortOption, page) => {
+export const loadMoreRecipes = async (id, sortOption, page, size) => {
   try {
     const res = await fetch(
-      `${API}/recipes/category?id=${id}&page=${page}&sort=${sortOption}`,
+      `${API}/recipes/category?id=${id}&page=${page}&sort=${sortOption}&size=${size}`,
       {
         method: 'GET',
         headers: {

@@ -41,7 +41,7 @@ function* workerGetCategoryRecipes({ payload }) {
 }
 
 function* workerLoadMoreRecipes() {
-  const { page, totalPages, category, sortOption } = yield select(
+  const { page, totalPages, category, sortOption, size } = yield select(
     Operations.getCategoryState
   );
   if (page < totalPages) {
@@ -51,7 +51,8 @@ function* workerLoadMoreRecipes() {
         Operations.loadMoreRecipes,
         category._id,
         sortOption,
-        page + 1
+        page + 1,
+        size
       );
       if (response.error) {
         throw new Error(response.error);

@@ -56,7 +56,8 @@ const CategoryReducer = (state = initialState, action) => {
         error: '',
         loadMoreLoading: false,
         page: action.payload.page,
-        recipes: [...state.recipes, ...action.payload.recipes]
+        recipes: [...state.recipes, ...action.payload.recipes],
+        size: action.payload.size
       };
     case Types.CATEGORY_CLEAR_ERROR:
       return { ...state, error: '', loading: false, loadMoreLoading: false };
