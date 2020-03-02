@@ -113,7 +113,7 @@ const DetailsTab = props => {
       <div className={classes.tabRoot}>
         {/* onec everything is loaded, display */}
         {displayProfile && displayProfile._id && !otherUserId && (
-          <>
+          <div className={classes.tabWidthControl}>
             {/* profile avatar */}
             <Avatar
               className={classes.avatarDisplay}
@@ -231,12 +231,12 @@ const DetailsTab = props => {
                 Update
               </Button>
             </div>
-          </>
+          </div>
         )}
         {displayProfile && displayProfile._id && otherUserId && (
           <List
             component='div'
-            style={{ width: '100%' }}
+            className={classes.tabWidthControl}
             aria-label='user information'
           >
             <ListItem divider>

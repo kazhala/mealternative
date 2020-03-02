@@ -76,6 +76,19 @@ const useStyles = makeStyles(theme => ({
       content: '""'
     }
   },
+  tabWidthControl: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '80%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '65%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '50%'
+    }
+  },
+
   tabCard: {
     width: '100%',
     display: 'grid',
@@ -85,6 +98,15 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       cursor: 'pointer',
       boxShadow: '2px 2px 2px #ccc'
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '80%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '60%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '50%'
     }
   },
   cardThumb: {

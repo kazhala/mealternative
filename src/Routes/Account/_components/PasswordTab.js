@@ -52,39 +52,41 @@ const PasswordTab = props => {
         onSubmit={e => handleUpdatePassword(e, password)}
         className={classes.tabRoot}
       >
-        <Typography variant='h6' className={classes.passwordTitle}>
-          Update your password
-        </Typography>
-        <PasswordInput
-          value={oldPassword}
-          label='Old Password'
-          className={classes.passwordInput}
-          name='oldPassword'
-          onChange={handleChange}
-        />
-        <PasswordInput
-          value={newPassword}
-          label='New Password'
-          className={classes.passwordInput}
-          name='newPassword'
-          onChange={handleChange}
-        />
-        <PasswordInput
-          value={confirmPassword}
-          repeat
-          className={classes.passwordInput}
-          name='confirmPassword'
-          onChange={handleChange}
-        />
-        <Button
-          type='submit'
-          variant='contained'
-          endIcon={<Check />}
-          className={classes.passwordInput}
-          color='primary'
-        >
-          Update
-        </Button>
+        <div className={classes.tabWidthControl}>
+          <Typography variant='h6' className={classes.passwordTitle}>
+            Update your password
+          </Typography>
+          <PasswordInput
+            value={oldPassword}
+            label='Old Password'
+            className={classes.passwordInput}
+            name='oldPassword'
+            onChange={handleChange}
+          />
+          <PasswordInput
+            value={newPassword}
+            label='New Password'
+            className={classes.passwordInput}
+            name='newPassword'
+            onChange={handleChange}
+          />
+          <PasswordInput
+            value={confirmPassword}
+            repeat
+            className={classes.passwordInput}
+            name='confirmPassword'
+            onChange={handleChange}
+          />
+          <Button
+            type='submit'
+            variant='contained'
+            endIcon={<Check />}
+            className={classes.passwordInput}
+            color='primary'
+          >
+            Update
+          </Button>
+        </div>
       </form>
     )
   );
