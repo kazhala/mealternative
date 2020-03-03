@@ -46,7 +46,11 @@ const Header = props => {
   const [sideBar, setSideBar] = useState(false);
 
   const handleRouteChange = path => {
-    history.push(path);
+    if (path === '/meals') {
+      console.log('Coming soon');
+    } else {
+      history.push(path);
+    }
   };
 
   const handleClick = e => {
@@ -146,6 +150,9 @@ const Header = props => {
                     <IconButton
                       color='inherit'
                       onClick={() => handleRouteChange(menuItem.path)}
+                      style={{
+                        opacity: menuItem.disable ? '0.5' : '1'
+                      }}
                     >
                       {menuItem.icon}
                     </IconButton>

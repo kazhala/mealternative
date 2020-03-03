@@ -50,8 +50,9 @@ export const toolTipIcons = [
   },
   {
     path: '/meals',
-    title: 'Checkout meal combinations!',
-    icon: <RestaurantMenuRounded />
+    title: 'Coming soon',
+    icon: <RestaurantMenuRounded />,
+    disable: true
   },
   {
     path: '/recipes',
