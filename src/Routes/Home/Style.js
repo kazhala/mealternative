@@ -62,8 +62,10 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridGap: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)'
+    },
     [theme.breakpoints.up('md')]: {
-      gridTemplateRows: '1fr 5fr',
       gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))'
     }
   },
