@@ -60,7 +60,12 @@ const Header = props => {
   // close the menu when item click in menu
   const handleMenuClick = path => {
     handleClose();
-    handleRouteChange(path);
+    if (path === '/account') {
+      handleRouteChange(path);
+      window.location.reload();
+    } else {
+      handleRouteChange(path);
+    }
   };
 
   // close the menu on signout
@@ -77,8 +82,9 @@ const Header = props => {
       if (path === '/account') {
         handleRouteChange(path);
         window.location.reload();
+      } else {
+        handleRouteChange(path);
       }
-      handleRouteChange(path);
     }
     // close the sidebar
     setSideBar(false);
