@@ -16,7 +16,7 @@ import SortMenuDial from '../../Common/RecipeSort/SortMenuDial';
 
 // misc
 import useStyles from './Style';
-import useScroll from '../../Hooks/useScroll';
+import useInfiniteLoad from '../../Hooks/useInfiniteLoad';
 
 const Category = props => {
   const {
@@ -33,7 +33,7 @@ const Category = props => {
     setShowDial
   } = props;
   const classes = useStyles();
-  const handleScroll = useScroll();
+  const handleScroll = useInfiniteLoad();
 
   return (
     <div

@@ -38,8 +38,6 @@ const CategoryContainer = props => {
     resetSort
   } = props;
 
-  // determine if the component has mounted
-  const [mounted, setMounted] = useState(false);
   // used to detect changes in category id in the query string
   const [categoryId, setCategoryId] = useState(null);
   // check if the page should be able to load more
@@ -68,23 +66,22 @@ const CategoryContainer = props => {
 
   const displayArray = useBreakArrays(recipes, querySize);
 
-  // check if id changes or if its mounted
-  // avoid un-wanted re-render
+  // set the category id, only re-render if category id changes in the querystring
   useEffect(() => {
     const queryParams = queryString.parse(location.search);
-    if (!mounted || queryParams.id !== categoryId || querySize !== 10) {
-      // if no id found, redirect
-      if (!queryParams.id) {
-        history.replace('/');
-      } else {
-        // stop re-rendering
-        setMounted(true);
-        setCategoryId(queryParams.id);
-        // get data through redux
-        getCategoryRecipes(queryParams.id, querySize);
-      }
+    if (!queryParams.id) {
+      history.replace('/');
+    } else if (queryParams.id !== categoryId) {
+      setCategoryId(queryParams.id);
     }
-  }, [location, history, getCategoryRecipes, mounted, categoryId, querySize]);
+  }, [location, history, categoryId]);
+
+  // once categoryId is set, fetch data
+  useEffect(() => {
+    if (categoryId) {
+      getCategoryRecipes(categoryId, querySize);
+    }
+  }, [categoryId, getCategoryRecipes, querySize]);
 
   const scrollToTop = useCallback(() => {
     topElementRef.current.scrollTo(0, 0);

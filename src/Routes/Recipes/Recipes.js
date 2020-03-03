@@ -18,7 +18,7 @@ import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContain
 
 // misc
 import useStyles from './Style';
-import useScroll from '../../Hooks/useScroll';
+import useInfiniteLoad from '../../Hooks/useInfiniteLoad';
 
 const Recipes = props => {
   const {
@@ -41,7 +41,7 @@ const Recipes = props => {
     topElementRef
   } = props;
   const classes = useStyles();
-  const handleScroll = useScroll();
+  const handleScroll = useInfiniteLoad();
 
   return (
     <div

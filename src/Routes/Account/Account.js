@@ -25,7 +25,7 @@ import PasswordTab from './_components/PasswordTab';
 
 // misc
 import useStyles from './Style';
-import useScroll from '../../Hooks/useScroll';
+import useInfiniteLoad from '../../Hooks/useInfiniteLoad';
 
 const Account = props => {
   const {
@@ -50,7 +50,7 @@ const Account = props => {
     tabTopEleRef
   } = props;
   const classes = useStyles();
-  const handleScroll = useScroll();
+  const handleScroll = useInfiniteLoad();
 
   return (
     <div className={classes.accountRoot}>

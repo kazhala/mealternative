@@ -2,7 +2,7 @@
   custom hooks to check scroll behavior
 */
 
-const useScroll = () => {
+const useInfiniteLoad = () => {
   const handleScroll = (event, isLoadable, loadMore) => {
     if (isLoadable) {
       const totalHeight =
@@ -18,4 +18,4 @@ const useScroll = () => {
   return handleScroll;
 };
 
-export default useScroll;
+export default useInfiniteLoad;
