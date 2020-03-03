@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
       gridTemplateRows: 'auto 1fr'
     },
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: '50% 50%',
+      gridTemplateColumns: '4fr 6fr',
       gridGap: theme.spacing(1)
     }
   },
@@ -170,7 +170,7 @@ const useStyles = makeStyles(theme => ({
   detailModalDial: {
     position: 'sticky',
     bottom: theme.spacing(1),
-    marginLeft: '75%',
+    marginLeft: '80%',
     zIndex: 1
   },
   detailModalCard: {
