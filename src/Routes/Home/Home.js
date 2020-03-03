@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 // components
 import TopCard from './_components/TopCard';
-import { Typography } from '@material-ui/core';
+import { Typography, useTheme, useMediaQuery } from '@material-ui/core';
 
 // misc
 import useStyles from './Style';
@@ -17,10 +17,21 @@ const Home = props => {
   const { handleCategoryClick, handleClick, categories } = props;
 
   const classes = useStyles();
+  const theme = useTheme();
+  const midScreen = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <div className={classes.homeRoot}>
       <div className={classes.homeTop}>
+        {midScreen && (
+          <Typography
+            className={classes.homeBottomTitle}
+            component='div'
+            variant='h5'
+          >
+            Discover
+          </Typography>
+        )}
         <TopCard
           onClick={() => handleClick('/map')}
           classes={classes}
@@ -35,13 +46,15 @@ const Home = props => {
           description='Feel like cooking?'
           imgUrl='https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
         />
-        <TopCard
-          classes={classes}
-          disable
-          title='Meals'
-          description='Coming soon..'
-          imgUrl='https://images.pexels.com/photos/5876/food-salad-healthy-vegetables.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-        />
+        {!midScreen && (
+          <TopCard
+            classes={classes}
+            disable
+            title='Meals'
+            description='Coming soon..'
+            imgUrl='https://images.pexels.com/photos/5876/food-salad-healthy-vegetables.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+          />
+        )}
       </div>
       <div className={classes.homeBottom}>
         <Typography

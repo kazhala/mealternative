@@ -4,14 +4,22 @@ const useStyles = makeStyles(theme => ({
   homeRoot: {
     width: '100%',
     overflowY: 'auto',
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    [theme.breakpoints.up('lg')]: {
+      height: '100%'
+    }
   },
 
   // top part of the homepage
   homeTop: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    [theme.breakpoints.up('lg')]: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gridGap: theme.spacing(1)
+    }
   },
   topCard: {
     width: '100%',
@@ -27,6 +35,9 @@ const useStyles = makeStyles(theme => ({
       boxShadow: theme.shadows[8],
       backgroundSize: '110%',
       cursor: 'pointer'
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: theme.spacing(27)
     }
   },
   topCardTitle: {
@@ -47,7 +58,11 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
-    gridGap: theme.spacing(1)
+    gridGap: theme.spacing(1),
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateRows: '1fr 5fr',
+      gridTemplateColumns: 'repeat(auto-fill, 200px)'
+    }
   },
   homeBottomTitle: {
     gridColumn: '1/-1'
