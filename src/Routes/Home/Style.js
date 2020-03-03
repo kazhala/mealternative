@@ -4,10 +4,7 @@ const useStyles = makeStyles(theme => ({
   homeRoot: {
     width: '100%',
     overflowY: 'auto',
-    padding: theme.spacing(1),
-    [theme.breakpoints.up('lg')]: {
-      height: '100%'
-    }
+    padding: theme.spacing(1)
   },
 
   // top part of the homepage
@@ -15,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
       gridGap: theme.spacing(1)
@@ -36,8 +33,14 @@ const useStyles = makeStyles(theme => ({
       backgroundSize: '110%',
       cursor: 'pointer'
     },
+    [theme.breakpoints.up('md')]: {
+      height: theme.spacing(20)
+    },
     [theme.breakpoints.up('lg')]: {
-      height: theme.spacing(27)
+      height: theme.spacing(25)
+    },
+    [theme.breakpoints.up('xl')]: {
+      height: theme.spacing(30)
     }
   },
   topCardTitle: {
@@ -59,9 +62,9 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridGap: theme.spacing(1),
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('md')]: {
       gridTemplateRows: '1fr 5fr',
-      gridTemplateColumns: 'repeat(auto-fill, 200px)'
+      gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))'
     }
   },
   homeBottomTitle: {
