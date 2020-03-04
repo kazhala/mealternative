@@ -35,6 +35,7 @@ import {
   noAuthMenus,
   toolTipIcons
 } from '../Common/DefaultValues/iconButtonArrays';
+import HeaderLogo from '../Assets/HeaderLogo.png';
 
 const Header = props => {
   const { userDetails, classes, isAuthenticated, history, signOut } = props;
@@ -123,6 +124,14 @@ const Header = props => {
             <IconButton color='inherit' onClick={() => handleRouteChange('/')}>
               <HomeRounded />
             </IconButton>
+            {showMenuIcons && (
+              <Avatar
+                style={{ marginLeft: '-0.5rem' }}
+                variant='square'
+                src={HeaderLogo}
+                className={classes.headerLogo}
+              />
+            )}
           </div>
 
           {/* rightside of the menu bar, contains most icons */}
@@ -143,7 +152,7 @@ const Header = props => {
             {/* </div> */}
 
             {/* if big device, display */}
-            {showMenuIcons && (
+            {showMenuIcons ? (
               <>
                 {toolTipIcons.map((menuItem, index) => (
                   <Tooltip key={index} title={menuItem.title}>
@@ -204,6 +213,13 @@ const Header = props => {
                       ))}
                 </Menu>
               </>
+            ) : (
+              <Avatar
+                variant='square'
+                src={HeaderLogo}
+                style={{ marginRight: '-0.5rem' }}
+                className={classes.headerLogo}
+              />
             )}
           </div>
         </Toolbar>

@@ -29,7 +29,12 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   menuBarLeft: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'center'
+  },
+  headerLogo: {
+    width: theme.spacing(8),
+    height: theme.spacing(1.6)
   },
   search: {
     display: 'none',
