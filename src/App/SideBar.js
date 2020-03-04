@@ -52,6 +52,10 @@ const SideBar = props => {
               onClick={() => handleSideBarSelect(menuItem.path)}
               button
               className={classes.sideBarListItem}
+              style={{
+                pointerEvents: menuItem.disable ? 'none' : 'auto',
+                opacity: menuItem.disable ? '0.5' : '1'
+              }}
             >
               <ListItemIcon>{menuItem.icon}</ListItemIcon>
               <ListItemText

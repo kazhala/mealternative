@@ -87,6 +87,8 @@ const Header = props => {
       if (path === '/account') {
         handleRouteChange(path);
         window.location.reload();
+      } else if (path === '/meals') {
+        console.log('Coming soon');
       } else {
         handleRouteChange(path);
       }

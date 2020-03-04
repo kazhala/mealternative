@@ -19,7 +19,12 @@ export const sideBarArrays = [
   { path: '/create', text: 'Create', icon: <Create /> },
   { path: '/map', text: 'Map', icon: <ExploreRounded /> },
   { path: '/recipes', text: 'Recipes', icon: <MenuBookRounded /> },
-  { path: '/Meals', text: 'Meals', icon: <RestaurantMenuRounded /> }
+  {
+    path: '/Meals',
+    text: 'Coming..',
+    icon: <RestaurantMenuRounded />,
+    disable: true
+  }
 ];
 
 export const authArrays = [
