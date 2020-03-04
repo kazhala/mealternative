@@ -37,8 +37,8 @@ const Recipes = props => {
     getCurrentSortOption,
     resetSearch,
     midScreen,
-    bigScreen,
-    topElementRef
+    topElementRef,
+    recipeList
   } = props;
   const classes = useStyles();
   const handleScroll = useInfiniteLoad();
@@ -77,44 +77,45 @@ const Recipes = props => {
       </form>
       {/* display array of recipes */}
       <div className={classes.recipeBodyRoot}>
-        <div className={classes.recipeBodyColumn}>
-          {displayArray.left.map((recipe, index) => (
-            <RecipeCard
-              handleCardClick={handleCardClick}
-              recipeId={recipe._id}
-              bookmarks={recipe.bookmarks}
-              rating={recipe.rating}
-              thumbnailUrl={recipe.thumbImageUrl}
-              title={recipe.title}
-              name={recipe.postedBy.username}
-              photoUrl={recipe.postedBy.photoUrl}
-              likes={recipe.likes}
-              key={index}
-              classes={classes}
-            />
-          ))}
-        </div>
-        <div className={classes.recipeBodyColumn}>
-          {displayArray.right.map((recipe, index) => (
-            <RecipeCard
-              photoUrl={recipe.postedBy.photoUrl}
-              handleCardClick={handleCardClick}
-              recipeId={recipe._id}
-              bookmarks={recipe.bookmarks}
-              rating={recipe.rating}
-              thumbnailUrl={recipe.thumbImageUrl}
-              title={recipe.title}
-              name={recipe.postedBy.username}
-              likes={recipe.likes}
-              key={index}
-            />
-          ))}
-        </div>
-
-        {/* display third row for ipad screen size */}
-        {midScreen && (
-          <div className={classes.recipeBodyColumn}>
-            {displayArray.mid.map((recipe, index) => (
+        {!midScreen ? (
+          <>
+            <div className={classes.recipeBodyColumn}>
+              {displayArray.left.map((recipe, index) => (
+                <RecipeCard
+                  handleCardClick={handleCardClick}
+                  recipeId={recipe._id}
+                  bookmarks={recipe.bookmarks}
+                  rating={recipe.rating}
+                  thumbnailUrl={recipe.thumbImageUrl}
+                  title={recipe.title}
+                  name={recipe.postedBy.username}
+                  photoUrl={recipe.postedBy.photoUrl}
+                  likes={recipe.likes}
+                  key={index}
+                  classes={classes}
+                />
+              ))}
+            </div>
+            <div className={classes.recipeBodyColumn}>
+              {displayArray.right.map((recipe, index) => (
+                <RecipeCard
+                  photoUrl={recipe.postedBy.photoUrl}
+                  handleCardClick={handleCardClick}
+                  recipeId={recipe._id}
+                  bookmarks={recipe.bookmarks}
+                  rating={recipe.rating}
+                  thumbnailUrl={recipe.thumbImageUrl}
+                  title={recipe.title}
+                  name={recipe.postedBy.username}
+                  likes={recipe.likes}
+                  key={index}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            {recipeList.map((recipe, index) => (
               <RecipeCard
                 photoUrl={recipe.postedBy.photoUrl}
                 handleCardClick={handleCardClick}
@@ -128,26 +129,7 @@ const Recipes = props => {
                 key={index}
               />
             ))}
-          </div>
-        )}
-        {/* display fourth row for desktop screen size */}
-        {bigScreen && (
-          <div className={classes.recipeBodyColumn}>
-            {displayArray.big.map((recipe, index) => (
-              <RecipeCard
-                photoUrl={recipe.postedBy.photoUrl}
-                handleCardClick={handleCardClick}
-                recipeId={recipe._id}
-                bookmarks={recipe.bookmarks}
-                rating={recipe.rating}
-                thumbnailUrl={recipe.thumbImageUrl}
-                title={recipe.title}
-                name={recipe.postedBy.username}
-                likes={recipe.likes}
-                key={index}
-              />
-            ))}
-          </div>
+          </>
         )}
       </div>
 
@@ -185,7 +167,6 @@ Recipes.propTypes = {
   resetSearch: PropTypes.func.isRequired,
   search: PropTypes.string.isRequired,
   midScreen: PropTypes.bool,
-  bigScreen: PropTypes.bool,
   topElementRef: PropTypes.any
 };
 

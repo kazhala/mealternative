@@ -30,7 +30,9 @@ const Category = props => {
     handleCardClick,
     loadMoreLoading,
     showDial,
-    setShowDial
+    setShowDial,
+    recipes,
+    midScreen
   } = props;
   const classes = useStyles();
   const handleScroll = useInfiniteLoad();
@@ -60,70 +62,59 @@ const Category = props => {
 
       {/* main body of the category, display all recipes */}
       <div className={classes.categoryBody}>
-        <div className={classes.categoryBodyColumn}>
-          {displayArray.left.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              title={recipe.title}
-              name={recipe.postedBy.username}
-              likes={recipe.likes}
-              thumbnailUrl={recipe.thumbImageUrl}
-              bookmarks={recipe.bookmarks}
-              rating={recipe.rating}
-              recipeId={recipe._id}
-              handleCardClick={handleCardClick}
-              photoUrl={recipe.postedBy.photoUrl}
-            />
-          ))}
-        </div>
-        <div className={classes.categoryBodyColumn}>
-          {displayArray.right.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              title={recipe.title}
-              name={recipe.postedBy.username}
-              likes={recipe.likes}
-              thumbnailUrl={recipe.thumbImageUrl}
-              bookmarks={recipe.bookmarks}
-              rating={recipe.rating}
-              recipeId={recipe._id}
-              handleCardClick={handleCardClick}
-              photoUrl={recipe.postedBy.photoUrl}
-            />
-          ))}
-        </div>
-        <div className={classes.categoryBodyColumn}>
-          {displayArray.mid.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              title={recipe.title}
-              name={recipe.postedBy.username}
-              likes={recipe.likes}
-              thumbnailUrl={recipe.thumbImageUrl}
-              bookmarks={recipe.bookmarks}
-              rating={recipe.rating}
-              recipeId={recipe._id}
-              handleCardClick={handleCardClick}
-              photoUrl={recipe.postedBy.photoUrl}
-            />
-          ))}
-        </div>
-        <div className={classes.categoryBodyColumn}>
-          {displayArray.big.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              title={recipe.title}
-              name={recipe.postedBy.username}
-              likes={recipe.likes}
-              thumbnailUrl={recipe.thumbImageUrl}
-              bookmarks={recipe.bookmarks}
-              rating={recipe.rating}
-              recipeId={recipe._id}
-              handleCardClick={handleCardClick}
-              photoUrl={recipe.postedBy.photoUrl}
-            />
-          ))}
-        </div>
+        {!midScreen ? (
+          <>
+            <div className={classes.categoryBodyColumn}>
+              {displayArray.left.map((recipe, index) => (
+                <RecipeCard
+                  key={index}
+                  title={recipe.title}
+                  name={recipe.postedBy.username}
+                  likes={recipe.likes}
+                  thumbnailUrl={recipe.thumbImageUrl}
+                  bookmarks={recipe.bookmarks}
+                  rating={recipe.rating}
+                  recipeId={recipe._id}
+                  handleCardClick={handleCardClick}
+                  photoUrl={recipe.postedBy.photoUrl}
+                />
+              ))}
+            </div>
+            <div className={classes.categoryBodyColumn}>
+              {displayArray.right.map((recipe, index) => (
+                <RecipeCard
+                  key={index}
+                  title={recipe.title}
+                  name={recipe.postedBy.username}
+                  likes={recipe.likes}
+                  thumbnailUrl={recipe.thumbImageUrl}
+                  bookmarks={recipe.bookmarks}
+                  rating={recipe.rating}
+                  recipeId={recipe._id}
+                  handleCardClick={handleCardClick}
+                  photoUrl={recipe.postedBy.photoUrl}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            {recipes.map((recipe, index) => (
+              <RecipeCard
+                key={index}
+                title={recipe.title}
+                name={recipe.postedBy.username}
+                likes={recipe.likes}
+                thumbnailUrl={recipe.thumbImageUrl}
+                bookmarks={recipe.bookmarks}
+                rating={recipe.rating}
+                recipeId={recipe._id}
+                handleCardClick={handleCardClick}
+                photoUrl={recipe.postedBy.photoUrl}
+              />
+            ))}
+          </>
+        )}
       </div>
       {/* loadmore spinner */}
       <LoadMoreSpinner
@@ -156,7 +147,8 @@ Category.propTypes = {
   isLoadable: PropTypes.bool.isRequired,
   showDial: PropTypes.bool.isRequired,
   setShowDial: PropTypes.func.isRequired,
-  handleSortRecipes: PropTypes.func.isRequired
+  handleSortRecipes: PropTypes.func.isRequired,
+  midScreen: PropTypes.bool.isRequired
 };
 
 export default Category;

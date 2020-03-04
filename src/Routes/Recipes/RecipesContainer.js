@@ -52,9 +52,10 @@ const RecipesContainer = props => {
   const theme = useTheme();
   const midScreen = useMediaQuery(theme.breakpoints.up('md'));
   const bigScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  const hugScreen = useMediaQuery(theme.breakpoints.up('xl'));
 
   // get query size
-  const querySize = useScreenSize(bigScreen, midScreen);
+  const querySize = useScreenSize(hugScreen, bigScreen, midScreen);
 
   useEffect(() => {
     if (location.pathname === '/recipes') {
@@ -138,7 +139,6 @@ const RecipesContainer = props => {
       <ErrorSnack handleClose={clearError} error={error} />
       <Recipes
         midScreen={midScreen}
-        bigScreen={bigScreen}
         search={search}
         resetSearch={resetSearch}
         handleSearch={handleSearch}

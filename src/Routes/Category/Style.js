@@ -43,11 +43,10 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('md')]: {
       width: '65%',
-      gridTemplateColumns: 'repeat(3, 1fr)'
+      gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))'
     },
     [theme.breakpoints.up('lg')]: {
-      width: '70%',
-      gridTemplateColumns: 'repeat(4, 1fr)'
+      gridTemplateColumns: 'repeat(auto-fill, minman(222px, 1fr))'
     }
   },
   categoryBodyColumn: {

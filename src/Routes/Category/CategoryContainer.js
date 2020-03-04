@@ -61,8 +61,9 @@ const CategoryContainer = props => {
   const theme = useTheme();
   const midScreen = useMediaQuery(theme.breakpoints.up('md'));
   const bigScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  const hugScreen = useMediaQuery(theme.breakpoints.up('xl'));
 
-  const querySize = useScreenSize(bigScreen, midScreen);
+  const querySize = useScreenSize(hugScreen, bigScreen, midScreen);
 
   const displayArray = useBreakArrays(recipes, querySize);
 
@@ -128,6 +129,7 @@ const CategoryContainer = props => {
       <PageSpinner loading={loading} />
       <ErrorSnack error={error} handleClose={clearError} />
       <Category
+        midScreen={midScreen}
         isLoadable={isLoadable}
         handleLoadMore={handleLoadMore}
         handleCardClick={handleCardClick}

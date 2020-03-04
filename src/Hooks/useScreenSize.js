@@ -3,18 +3,20 @@
 */
 import { useEffect, useState } from 'react';
 
-const useScreenSize = (bigScreen, midScreen) => {
+const useScreenSize = (hugScreen, bigScreen, midScreen) => {
   const [querySize, setQuerySize] = useState(10);
 
   useEffect(() => {
-    if (bigScreen) {
+    if (hugScreen) {
+      setQuerySize(25);
+    } else if (bigScreen) {
       setQuerySize(20);
     } else if (midScreen) {
       setQuerySize(15);
     } else {
       setQuerySize(10);
     }
-  }, [bigScreen, midScreen]);
+  }, [hugScreen, bigScreen, midScreen]);
 
   return querySize;
 };
