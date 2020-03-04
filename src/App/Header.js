@@ -17,14 +17,14 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  InputBase,
+  // InputBase,
   Tooltip,
   Avatar
 } from '@material-ui/core';
 import {
   HomeRounded,
   AccountCircle,
-  Search,
+  // Search,
   MenuRounded
 } from '@material-ui/icons';
 import SideBar from './SideBar';
@@ -128,19 +128,19 @@ const Header = props => {
           {/* rightside of the menu bar, contains most icons */}
           <div className={classes.menuBarRight}>
             {/* search bar, copied style from material ui */}
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <Search />
-              </div>
-              <InputBase
-                placeholder='Search…'
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
+            {/* <div className={classes.search}> */}
+            {/*   <div className={classes.searchIcon}> */}
+            {/*     <Search /> */}
+            {/*   </div> */}
+            {/*   <InputBase */}
+            {/*     placeholder='Search…' */}
+            {/*     classes={{ */}
+            {/*       root: classes.inputRoot, */}
+            {/*       input: classes.inputInput */}
+            {/*     }} */}
+            {/*     inputProps={{ 'aria-label': 'search' }} */}
+            {/*   /> */}
+            {/* </div> */}
 
             {/* if big device, display */}
             {showMenuIcons && (
