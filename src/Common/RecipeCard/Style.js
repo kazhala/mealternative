@@ -19,7 +19,10 @@ const useStyles = makeStyles(theme => ({
     lineClamp: 2,
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    boxOrient: 'vertical'
+    boxOrient: 'vertical',
+    [theme.breakpoints.up('md')]: {
+      lineClamp: 1
+    }
   },
   recipeCardWithIcon: {
     display: 'grid',
