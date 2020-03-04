@@ -47,6 +47,9 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       gridTemplateColumns: 'repeat(auto-fill, minman(222px, 1fr))'
+    },
+    [theme.breakpoints.up('xl')]: {
+      gridTemplateColumns: 'repeat(auto-fill, minman(256px, 1fr))'
     }
   },
   categoryBodyColumn: {

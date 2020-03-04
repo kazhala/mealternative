@@ -8,7 +8,7 @@ const useScreenSize = (hugScreen, bigScreen, midScreen) => {
 
   useEffect(() => {
     if (hugScreen) {
-      setQuerySize(25);
+      setQuerySize(40);
     } else if (bigScreen) {
       setQuerySize(20);
     } else if (midScreen) {

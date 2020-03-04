@@ -43,10 +43,13 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('md')]: {
       width: '65%',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))'
+      gridTemplateColumns: 'repeat(auto-fill, minmax(192px, 1fr))'
     },
     [theme.breakpoints.up('lg')]: {
-      gridTemplateColumns: 'repeat(auto-fill, minman(222px, 1fr))'
+      gridTemplateColumns: 'repeat(auto-fill, minman(224px, 1fr))'
+    },
+    [theme.breakpoints.up('xl')]: {
+      gridTemplateColumns: 'repeat(auto-fill, minman(256px, 1fr))'
     }
   },
   recipeBodyColumn: {
