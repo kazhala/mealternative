@@ -220,7 +220,7 @@ const MapContainer = props => {
     // display no photo image if no photo
     resDetail.photoUrl = restaurant.photos
       ? restaurant.photos[0].getUrl()
-      : '/img/noimage.png';
+      : 'https://res.cloudinary.com/kazhala/image/upload/c_scale,h_1000,w_1500/v1583356356/mealternative/noimage_wclxmf.png';
     resDetail.name = restaurant.name;
     resDetail.rating = restaurant.rating ? restaurant.rating : 0;
     resDetail.price_level = restaurant.price_level;
