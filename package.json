@@ -26,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync build/ s3://mealternative.com",
+    "clean": "aws cloudfront create-invalidation --distribution-id ELTHB9HBFQAEK --paths '/*' && rm -rf build"
   },
   "eslintConfig": {
     "extends": "react-app"
