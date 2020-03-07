@@ -31,7 +31,7 @@ const RestaurantMarker = props => {
   } = getBasicResDetails(restaurant);
 
   return (
-    <div>
+    <div onClick={() => getDetailedResDetail(restaurant)}>
       <div className={classes.centerMarker}>
         {checkSelectedMarker(restaurant.place_id) ? (
           <PinDrop color='primary' fontSize='large' />
@@ -44,7 +44,6 @@ const RestaurantMarker = props => {
           className={classes.markerDetail}
           component='div'
           variant='caption'
-          onClick={() => getDetailedResDetail(restaurant)}
         >
           <Box className={classes.markerName} fontSize='1.3em'>
             {name}
