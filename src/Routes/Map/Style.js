@@ -11,8 +11,11 @@ const useStyles = makeStyles(theme => ({
       gridTemplateRows: 'auto 1fr'
     },
     [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: '4fr 6fr',
+      gridTemplateColumns: '6fr 5fr',
       gridGap: theme.spacing(1)
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: '4fr 6fr'
     }
   },
   // left side on big device

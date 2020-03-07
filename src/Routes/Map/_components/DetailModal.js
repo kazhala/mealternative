@@ -189,6 +189,7 @@ const DetailModal = props => {
   // inline animation require responsive
   const theme = useTheme();
   const shiftDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const hide = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
     <>
@@ -272,7 +273,7 @@ const DetailModal = props => {
                         }
                       />
                     </ListItem>
-                    {!shiftDown && (
+                    {!hide && (
                       <>
                         <ListItem>
                           <ListItemIcon>
