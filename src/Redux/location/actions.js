@@ -7,14 +7,14 @@ export const getLocation = payload => {
   };
 };
 
-export const locationError = payload => {
+export const setLocationError = payload => {
   return {
     type: Types.LOCATION_ERROR,
     payload
   };
 };
 
-export const CLEAR_ERROR = () => {
+export const clearError = () => {
   return {
     type: Types.CLEAR_ERROR
   };

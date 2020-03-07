@@ -18,7 +18,15 @@ import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const MapContainer = props => {
   // lat, lng info from redux
-  const { lat, lng, locationOptions, getLocation } = props;
+  const {
+    setLocationError,
+    locationError,
+    clearLocationError,
+    lat,
+    lng,
+    locationOptions,
+    getLocation
+  } = props;
 
   // google map services
   const [googleMap, setGoogleMap] = useState({
@@ -69,23 +77,33 @@ const MapContainer = props => {
       getLocation({ lat: crd.latitude, lng: crd.longitude });
     };
     // error call back
-    const locationError = err => console.log(err);
+    const locationError = () =>
+      setLocationError('Please turn on location services in your phone');
 
-    navigator.geolocation.getCurrentPosition(
-      locationSuccess,
-      locationError,
-      locationOptions
-    );
-  }, [getLocation, locationOptions]);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        locationSuccess,
+        locationError,
+        locationOptions
+      );
+    } else {
+      setLocationError('Sorry, your browser does not support geolocation');
+    }
+  }, [getLocation, locationOptions, setLocationError]);
 
   // get the center marker after lat and lng is set in redux
   useEffect(() => {
-    setCenterMarker({ lat, lng });
-  }, [lat, lng]);
+    if (locationError && !lat && !lng) {
+      getLocation({ lat: -33.8568, lng: 151.2153 });
+    } else {
+      setCenterMarker({ lat, lng });
+    }
+  }, [lat, lng, locationError, getLocation]);
 
   // clear all errors
   const handleClearError = () => {
     setError('');
+    clearLocationError();
   };
 
   // check active selected marker
@@ -319,7 +337,10 @@ const MapContainer = props => {
 
   return (
     <>
-      <ErrorSnack error={error} handleClose={handleClearError} />
+      <ErrorSnack
+        error={error || locationError}
+        handleClose={handleClearError}
+      />
       <Map
         {...props}
         handleMapApiLoaded={handleMapApiLoaded}
@@ -350,6 +371,7 @@ const MapContainer = props => {
 // connect to redux
 const mapStateToProps = state => {
   return {
+    locationError: state.Location.error,
     lat: state.Location.latitude,
     lng: state.Location.longitude,
     locationOptions: state.Location.options
@@ -359,7 +381,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      getLocation: LocationActions.getLocation
+      getLocation: LocationActions.getLocation,
+      setLocationError: LocationActions.setLocationError,
+      clearLocationError: LocationActions.clearError
     },
     dispatch
   );
