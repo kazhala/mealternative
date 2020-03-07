@@ -272,31 +272,37 @@ const DetailModal = props => {
                         }
                       />
                     </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <Directions fontSize='small' />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Typography variant='caption'>
-                            {(distance / 1000).toFixed(2)} km away
-                          </Typography>
-                        }
-                      />
-                    </ListItem>
-                    <ListItem
-                      button
-                      onClick={() => markSelectMarker(restaurant.place_id)}
-                    >
-                      <ListItemIcon>
-                        <LocationOn fontSize='small' />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Typography variant='caption'>{address}</Typography>
-                        }
-                      />
-                    </ListItem>
+                    {!shiftDown && (
+                      <>
+                        <ListItem>
+                          <ListItemIcon>
+                            <Directions fontSize='small' />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={
+                              <Typography variant='caption'>
+                                {(distance / 1000).toFixed(2)} km away
+                              </Typography>
+                            }
+                          />
+                        </ListItem>
+                        <ListItem
+                          button
+                          onClick={() => markSelectMarker(restaurant.place_id)}
+                        >
+                          <ListItemIcon>
+                            <LocationOn fontSize='small' />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={
+                              <Typography variant='caption'>
+                                {address}
+                              </Typography>
+                            }
+                          />
+                        </ListItem>
+                      </>
+                    )}
                     <ListItem
                       onClick={() => getDetailedResDetail(restaurant)}
                       button
