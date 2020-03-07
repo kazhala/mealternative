@@ -32,9 +32,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center'
   },
+  // if no !important, for some reason, overide by material ui?
   headerLogo: {
-    width: theme.spacing(8),
-    height: theme.spacing(1.6)
+    width: '7rem !important'
   },
   search: {
     display: 'none',

@@ -128,7 +128,6 @@ const Header = props => {
             </IconButton>
             {showMenuIcons && (
               <Avatar
-                style={{ marginLeft: '-0.5rem' }}
                 variant='square'
                 src={HeaderLogo}
                 className={classes.headerLogo}
@@ -219,7 +218,6 @@ const Header = props => {
               <Avatar
                 variant='square'
                 src={HeaderLogo}
-                style={{ marginRight: '-0.5rem' }}
                 className={classes.headerLogo}
               />
             )}
