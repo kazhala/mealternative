@@ -24,7 +24,8 @@ const LocationInputForm = props => {
     lng,
     classes,
     handleAutoCompleteUpdate,
-    updateCenterMarker
+    updateCenterMarker,
+    setSelectedMarker
   } = props;
 
   // value of the textField
@@ -60,19 +61,18 @@ const LocationInputForm = props => {
     return centerMarker.lat === lat && centerMarker.lng === lng;
   };
 
+  const handleClick = type => {
+    updateCenterMarker(type, value);
+    setSelectedMarker({});
+  };
+
   return (
     <div className={classes.locationSelection}>
       <div className={classes.locationBtnGroup}>
-        <IconButton
-          onClick={() => updateCenterMarker(0, value)}
-          color='primary'
-        >
+        <IconButton onClick={() => handleClick(0)} color='primary'>
           {checkOutline() ? <Home /> : <HomeOutlined />}
         </IconButton>
-        <IconButton
-          onClick={() => updateCenterMarker(1, value)}
-          color='primary'
-        >
+        <IconButton onClick={() => handleClick(1)} color='primary'>
           {!checkOutline() ? <LocationOn /> : <AddLocationOutlined />}
         </IconButton>
       </div>
@@ -110,7 +110,8 @@ LocationInputForm.propTypes = {
   lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   classes: PropTypes.object.isRequired,
   handleAutoCompleteUpdate: PropTypes.func.isRequired,
-  updateCenterMarker: PropTypes.func.isRequired
+  updateCenterMarker: PropTypes.func.isRequired,
+  setSelectedMarker: PropTypes.func.isRequired
 };
 
 export default LocationInputForm;

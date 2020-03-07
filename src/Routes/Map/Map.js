@@ -61,6 +61,7 @@ const Map = props => {
       {/* the main details components */}
       <div className={classes.locationSettings}>
         <LocationInputForm
+          setSelectedMarker={setSelectedMarker}
           centerMarker={centerMarker}
           lat={lat}
           lng={lng}

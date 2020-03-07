@@ -289,7 +289,7 @@ const DetailModal = props => {
                         </ListItem>
                         <ListItem
                           button
-                          onClick={() => markSelectMarker(restaurant.place_id)}
+                          onClick={() => markSelectMarker(restaurant)}
                         >
                           <ListItemIcon>
                             <LocationOn fontSize='small' />
