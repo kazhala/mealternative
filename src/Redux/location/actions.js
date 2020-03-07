@@ -6,3 +6,16 @@ export const getLocation = payload => {
     payload
   };
 };
+
+export const locationError = payload => {
+  return {
+    type: Types.LOCATION_ERROR,
+    payload
+  };
+};
+
+export const CLEAR_ERROR = () => {
+  return {
+    type: Types.CLEAR_ERROR
+  };
+};

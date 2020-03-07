@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { LocationActions } from '../../Redux/location';
 
 // Components
 import Map from './Map';
@@ -16,7 +18,7 @@ import ErrorSnack from '../../Common/ErrorModal/ErrorSnack';
 
 const MapContainer = props => {
   // lat, lng info from redux
-  const { lat, lng } = props;
+  const { lat, lng, locationOptions, getLocation } = props;
 
   // google map services
   const [googleMap, setGoogleMap] = useState({
@@ -57,6 +59,24 @@ const MapContainer = props => {
     mapLoaded,
     directionService
   } = googleMap;
+
+  // get user location on page mounts
+  useEffect(() => {
+    // success call back when getting location
+    const locationSuccess = pos => {
+      const crd = pos.coords;
+      // store the lat lng to redux
+      getLocation({ lat: crd.latitude, lng: crd.longitude });
+    };
+    // error call back
+    const locationError = err => console.log(err);
+
+    navigator.geolocation.getCurrentPosition(
+      locationSuccess,
+      locationError,
+      locationOptions
+    );
+  }, [getLocation, locationOptions]);
 
   // get the center marker after lat and lng is set in redux
   useEffect(() => {
@@ -331,8 +351,18 @@ const MapContainer = props => {
 const mapStateToProps = state => {
   return {
     lat: state.Location.latitude,
-    lng: state.Location.longitude
+    lng: state.Location.longitude,
+    locationOptions: state.Location.options
   };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      getLocation: LocationActions.getLocation
+    },
+    dispatch
+  );
 };
 
 MapContainer.propTypes = {
@@ -340,4 +370,4 @@ MapContainer.propTypes = {
   lng: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
 };
 
-export default connect(mapStateToProps, null)(MapContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer);

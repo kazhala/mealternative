@@ -11,7 +11,8 @@ const initialState = {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0
-  }
+  },
+  error: ''
 };
 
 const LocationReducer = (state = initialState, action) => {
@@ -22,6 +23,10 @@ const LocationReducer = (state = initialState, action) => {
         longitude: action.payload.lng,
         latitude: action.payload.lat
       };
+    case Types.LOCATION_ERROR:
+      return { ...state, error: action.payload };
+    case Types.CLEAR_ERROR:
+      return { ...state, error: '' };
     default:
       return state;
   }
