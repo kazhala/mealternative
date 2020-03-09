@@ -26,7 +26,7 @@ import {
 } from '@material-ui/core';
 import {
   ThumbsUpDown,
-  DirectionsWalk,
+  // DirectionsWalk,
   GpsFixed,
   LocationOn,
   Phone,
@@ -53,7 +53,7 @@ const IndividualDetail = props => {
     rating,
     distance,
     address,
-    minutes,
+    // minutes,
     phone,
     opening_hours,
     photos,

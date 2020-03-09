@@ -64,8 +64,8 @@ const MapContainer = props => {
     autoCompleteService,
     placesServices,
     geoCoderService,
-    mapLoaded,
-    directionService
+    mapLoaded
+    // directionService
   } = googleMap;
 
   // get user location on page mounts
