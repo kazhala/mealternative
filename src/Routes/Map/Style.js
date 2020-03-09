@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
       display: 'grid',
       gridTemplateRows: 'auto auto 1fr',
       height: '100%',
-      overflowY: 'scroll',
       overflowX: 'hidden',
       padding: '0 0.3rem'
     }
