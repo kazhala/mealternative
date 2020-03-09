@@ -10,10 +10,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     width: '100%',
     height: '100%',
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    gridTemplateRows: '5fr 1fr 5fr',
+    display: 'flex',
+    flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
+      display: 'grid',
       gridTemplateColumns: '5fr 1fr 5fr',
       gridTemplateRows: '1fr 2fr',
       paddingBottom: theme.spacing(15)
@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   createPaper: {
     fontSize: theme.spacing(7),
+    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
