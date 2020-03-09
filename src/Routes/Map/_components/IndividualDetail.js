@@ -160,12 +160,12 @@ const IndividualDetail = props => {
                   </ListItemIcon>
                   <ListItemText primary={`${totalRatings} ratings`} />
                 </ListItem>
-                <ListItem divider>
-                  <ListItemIcon>
-                    <DirectionsWalk />
-                  </ListItemIcon>
-                  <ListItemText primary={`${minutes && minutes.text}`} />
-                </ListItem>
+                {/* <ListItem divider> */}
+                {/*   <ListItemIcon> */}
+                {/*     <DirectionsWalk /> */}
+                {/*   </ListItemIcon> */}
+                {/*   <ListItemText primary={`${minutes && minutes.text}`} /> */}
+                {/* </ListItem> */}
                 <ListItem divider>
                   <ListItemIcon>
                     <GpsFixed />
@@ -221,9 +221,8 @@ const IndividualDetail = props => {
                     <Http />
                   </ListItemIcon>
                   <ListItemText
-                    primary={
-                      <div style={{ overflow: 'hidden' }}>{website}</div>
-                    }
+                    className={classes.listDetails}
+                    primary={website}
                   />
                 </ListItem>
 
@@ -238,7 +237,10 @@ const IndividualDetail = props => {
                   <ListItemIcon>
                     <LocationOn />
                   </ListItemIcon>
-                  <ListItemText primary={address} />
+                  <ListItemText
+                    className={classes.listDetails}
+                    primary={address}
+                  />
                 </ListItem>
 
                 {/* displays top5 reviews */}

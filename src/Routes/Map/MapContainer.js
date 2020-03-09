@@ -293,39 +293,56 @@ const MapContainer = props => {
         console.error('Something went wrong...', detailStatus);
         setError(`Something went wrong, try again later...(${detailStatus})`);
       } else {
-        // if no error, proceed to get the route details for minutes calculation
-        const directionRequest = {
-          origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
-          destination: restaurant.formatted_address, // To
-          travelMode: 'WALKING'
-        };
-        directionService.route(directionRequest, (routeResult, routeStatus) => {
-          if (routeStatus !== 'OK') {
-            clearDetailResDetail();
-            console.error('Something went wrong...', detailStatus);
-            setError(
-              `Something went wrong, try again later...(${detailStatus})`
-            );
+        // store all relative information in the state
+        setInividualModal(prevState => ({
+          ...prevState,
+          loading: false,
+          details: {
+            ...getBasicResDetails(restaurant),
+            phone: detailRes.formatted_phone_number
+              ? detailRes.formatted_phone_number
+              : 'N/A',
+            opening_hours: detailRes.opening_hours,
+            photos: detailRes.photos,
+            reviews: detailRes.reviews,
+            url: detailRes.url,
+            website: detailRes.website ? detailRes.website : 'N/A'
           }
+        }));
+        // TODO: maybe add back later
+        // if no error, proceed to get the route details for minutes calculation
+        // const directionRequest = {
+        //   origin: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+        //   destination: restaurant.formatted_address, // To
+        //   travelMode: 'WALKING'
+        // };
+        // directionService.route(directionRequest, (routeResult, routeStatus) => {
+        //   if (routeStatus !== 'OK') {
+        //     clearDetailResDetail();
+        //     console.error('Something went wrong...', detailStatus);
+        //     setError(
+        //       `Something went wrong, try again later...(${detailStatus})`
+        //     );
+        //   }
 
-          // store all relative information in the state
-          setInividualModal(prevState => ({
-            ...prevState,
-            loading: false,
-            details: {
-              ...getBasicResDetails(restaurant),
-              phone: detailRes.formatted_phone_number
-                ? detailRes.formatted_phone_number
-                : 'N/A',
-              opening_hours: detailRes.opening_hours,
-              photos: detailRes.photos,
-              reviews: detailRes.reviews,
-              url: detailRes.url,
-              website: detailRes.website ? detailRes.website : 'N/A',
-              minutes: routeResult.routes[0].legs[0].duration
-            }
-          }));
-        });
+        //   // store all relative information in the state
+        //   setInividualModal(prevState => ({
+        //     ...prevState,
+        //     loading: false,
+        //     details: {
+        //       ...getBasicResDetails(restaurant),
+        //       phone: detailRes.formatted_phone_number
+        //         ? detailRes.formatted_phone_number
+        //         : 'N/A',
+        //       opening_hours: detailRes.opening_hours,
+        //       photos: detailRes.photos,
+        //       reviews: detailRes.reviews,
+        //       url: detailRes.url,
+        //       website: detailRes.website ? detailRes.website : 'N/A',
+        //       minutes: routeResult.routes[0].legs[0].duration
+        //     }
+        //   }));
+        // });
       }
     });
   };

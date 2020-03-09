@@ -194,7 +194,9 @@ const useStyles = makeStyles(theme => ({
 
   //individualModal
   indModalRoot: {
-    height: '70%',
+    marginTop: theme.spacing(3),
+    height: '80%',
+    width: '80%',
     background: theme.palette.background.paper,
     display: 'flex',
     justifyContent: 'center',
@@ -203,13 +205,11 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '5px',
     overflowY: 'auto',
     position: 'relative',
-    maxWidth: '30rem',
-    [theme.breakpoints.down('sm')]: {
-      minHeight: '40rem',
-      width: '90%'
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '40%'
+    maxWidth: '25rem',
+    [theme.breakpoints.up('sm')]: {
+      width: '50%',
+      maxHeight: theme.spacing(40),
+      marginTop: theme.spacing(0)
     }
   },
   indModalCloseBtn: {
@@ -240,10 +240,25 @@ const useStyles = makeStyles(theme => ({
   },
   // title
   indTitle: {
-    paddingTop: theme.spacing(1)
+    marginBottom: theme.spacing(-1)
   },
   indName: {
-    textAlign: 'center'
+    textAlign: 'center',
+    display: '-webkit-box',
+    lineClamp: 1,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    boxOrient: 'vertical'
+  },
+  listDetails: {
+    display: '-webkit-box',
+    lineClamp: 1,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    boxOrient: 'vertical',
+    [theme.breakpoints.up('sm')]: {
+      lineClamp: 2
+    }
   }
 }));
 
