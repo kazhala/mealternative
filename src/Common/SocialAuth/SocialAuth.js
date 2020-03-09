@@ -4,6 +4,7 @@
 
 // react
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // components
 import { Typography } from '@material-ui/core';
@@ -16,6 +17,7 @@ import GoogleIcon from '../../Assets/google-icon.png';
 import useStyles from './Style';
 
 const SocialSignUp = props => {
+  const { isLogin } = props;
   const classes = useStyles();
 
   return (
@@ -26,11 +28,19 @@ const SocialSignUp = props => {
           src={GoogleIcon}
           className={classes.socialIcon}
         />
-        <Typography>SIGN UP WITH GOOGLE</Typography>
+        {!isLogin ? (
+          <Typography>SIGN UP WITH GOOGLE</Typography>
+        ) : (
+          <Typography>SIGN IN WITH GOOGLE</Typography>
+        )}
       </div>
       <div className={classes.authFacebook}>
         <Facebook className={classes.socialIcon} />
-        <Typography>SIGN UP WITH FACEBOOK</Typography>
+        {!isLogin ? (
+          <Typography>SIGN UP WITH FACEBOOK</Typography>
+        ) : (
+          <Typography>SIGN IN WITH FACEBOOK</Typography>
+        )}
       </div>
       {/* <GoogleLogin */}
       {/*   buttonText='SIGN UP WITH GOOGLE' */}
@@ -53,6 +63,10 @@ const SocialSignUp = props => {
       {/* /> */}
     </div>
   );
+};
+
+SocialSignUp.propTypes = {
+  isLogin: PropTypes.bool
 };
 
 export default SocialSignUp;

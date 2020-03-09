@@ -36,7 +36,7 @@ const SignIn = props => {
         handleFormSubmit={handleFormSubmit}
       />
       <OrDivider />
-      <SocialAuth />
+      <SocialAuth isLogin />
     </FormRoot>
   );
 };
