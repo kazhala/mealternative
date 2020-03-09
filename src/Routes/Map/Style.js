@@ -195,7 +195,7 @@ const useStyles = makeStyles(theme => ({
   //individualModal
   indModalRoot: {
     marginTop: theme.spacing(3),
-    height: '80%',
+    height: '85%',
     width: '80%',
     background: theme.palette.background.paper,
     display: 'flex',
