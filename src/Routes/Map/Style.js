@@ -33,7 +33,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    overflowY: 'hidden'
   },
 
   // location auto complete
