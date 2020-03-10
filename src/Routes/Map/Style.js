@@ -42,7 +42,10 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     gridTemplateColumns: '30% 70%',
     alignItems: 'center',
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(0.5),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(1)
+    }
   },
   locationBtnGroup: {
     display: 'flex',
@@ -50,7 +53,9 @@ const useStyles = makeStyles(theme => ({
     paddingRight: theme.spacing(0.5)
   },
   locationFilterAutoComplete: {
-    marginBottom: theme.spacing(0.5)
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(0.5)
+    }
   },
 
   // location filter section
@@ -59,7 +64,11 @@ const useStyles = makeStyles(theme => ({
     paddingRight: theme.spacing(0.3)
   },
   sliderTitle: {
-    display: 'flex'
+    display: 'flex',
+    marginBottom: theme.spacing(-0.5),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(0)
+    }
   },
   sliderTitleCaption: {
     paddingLeft: theme.spacing(0.5)
@@ -67,8 +76,13 @@ const useStyles = makeStyles(theme => ({
   sliderSearchOptions: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: theme.spacing(1),
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: theme.spacing(0.5),
+    marginTop: theme.spacing(-1),
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(0),
+      marginBottom: theme.spacing(1)
+    }
   },
 
   // map markers
