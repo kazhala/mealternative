@@ -28,19 +28,21 @@
     -->
     <title>React App</title>
     <style>
-      html {
-        overflow: hidden;
-        width: 100%;
-      }
+      @media (max-width: 800px) {
+        html {
+          overflow: hidden;
+          width: 100%;
+        }
 
-      body {
-        height: 100%;
-        position: fixed;
-        /* prevent overscroll bounce*/
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        /* iOS velocity scrolling */
-        width: 100%;
+        body {
+          height: 100%;
+          position: fixed;
+          /* prevent overscroll bounce*/
+          overflow-y: scroll;
+          -webkit-overflow-scrolling: touch;
+          /* iOS velocity scrolling */
+          width: 100%;
+        }
       }
     </style>
 
