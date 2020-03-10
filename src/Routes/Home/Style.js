@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   homeRoot: {
     width: '100%',
-    overflowY: 'auto',
     padding: theme.spacing(1)
   },
 

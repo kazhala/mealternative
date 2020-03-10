@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     overflowY: 'scroll',
     overflowX: 'hidden',
-    position: 'relative'
+    position: 'relative',
+    WebkitOverflowScrolling: 'touch'
   },
   recipeSearchRoot: {
     width: '100%',
