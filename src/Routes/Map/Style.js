@@ -273,6 +273,15 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       lineClamp: 2
     }
+  },
+  nameClamp: {
+    [theme.breakpoints.down('sm')]: {
+      display: '-webkit-box',
+      lineClamp: 3,
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      boxOrient: 'vertical'
+    }
   }
 }));
 

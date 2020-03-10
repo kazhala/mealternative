@@ -250,8 +250,10 @@ const DetailModal = props => {
                         <Restaurant fontSize='small' />
                       </ListItemIcon>
                       <ListItemText
+                        className={classes.nameClamp}
+                        style={{ lineClamp: 3 }}
                         primary={
-                          <Typography variant='button'>{name}</Typography>
+                          <Typography variant='caption'>{name}</Typography>
                         }
                       />
                     </ListItem>
