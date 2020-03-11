@@ -41,9 +41,8 @@ const RecipesTab = props => {
             className={classes.tabCard}
             key={index}
           >
-            <img
-              src={recipe.thumbImageUrl}
-              alt={recipe.title}
+            <div
+              style={{ backgroundImage: `url(${recipe.thumbImageUrl})` }}
               className={classes.cardThumb}
             />
             <div className={classes.cardRight}>

@@ -110,9 +110,12 @@ const useStyles = makeStyles(theme => ({
     }
   },
   cardThumb: {
-    height: '100%',
+    height: 'auto',
     width: '100%',
-    borderRadius: theme.shape.borderRadius
+    borderRadius: theme.shape.borderRadius,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover'
   },
   cardRight: {
     display: 'flex',
