@@ -22,7 +22,13 @@ const LoadMoreSpinner = props => {
         <CircularProgress color='primary' disableShrink size='2rem' />
       )}
       {!isDesktop && !loading && (
-        <Button onClick={handleLoadMore}>Load More</Button>
+        <Button
+          variant='outlined'
+          className={classes.loadMoreButton}
+          onClick={handleLoadMore}
+        >
+          Load More
+        </Button>
       )}
       {isDesktop && !loading && (
         <Typography style={{ opacity: 0.5 }} variant='body2'>
@@ -37,7 +43,6 @@ LoadMoreSpinner.propTypes = {
   loading: PropTypes.bool.isRequired,
   textAlt: PropTypes.string,
   handleLoadMore: PropTypes.func.isRequired,
-  hasNextPage: PropTypes.bool.isRequired,
   isDesktop: PropTypes.bool.isRequired
 };
 

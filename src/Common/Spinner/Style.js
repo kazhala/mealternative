@@ -19,6 +19,15 @@ const useStyles = makeStyles(theme => ({
     minHeight: theme.spacing(3),
     maxHeight: theme.spacing(3),
     height: theme.spacing(3)
+  },
+  loadMoreButton: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '75%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '65%'
+    }
   }
 }));
 
