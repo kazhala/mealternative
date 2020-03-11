@@ -12,13 +12,14 @@ const initialState = {
   page: 1,
   totalPages: 1,
   sortOption: '-likes',
-  size: 10
+  size: 10,
+  hasNextPage: true
 };
 
 const CategoryReducer = (state = initialState, action) => {
   switch (action.type) {
     case Types.CATEGORY_BEGIN:
-      return { ...state, loading: true, error: '' };
+      return { ...state, hasNextPage: true, loading: true, error: '' };
     case Types.CATEGOR_ERROR:
       return {
         ...state,
@@ -65,6 +66,8 @@ const CategoryReducer = (state = initialState, action) => {
       return { ...state, sortOption: '-rating' };
     case Types.CATEGORY_SORT:
       return { ...state, sortOption: action.payload };
+    case Types.CATEGORY_END:
+      return { ...state, hasNextPage: false };
     default:
       return state;
   }

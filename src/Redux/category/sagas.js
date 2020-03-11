@@ -62,5 +62,7 @@ function* workerLoadMoreRecipes() {
       console.log('Error', err);
       yield put({ type: Types.CATEGOR_ERROR, payload: err.message });
     }
+  } else {
+    yield put({ type: Types.CATEGORY_END });
   }
 }

@@ -46,7 +46,7 @@ const ListReducer = (state = initialState, action) => {
         search: ''
       };
     case Types.LIST_BEGIN:
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: '', hasNextPage: true };
     case Types.NEXT_LIST_CYCLE:
       return { ...state, listCycle: true };
     case Types.SUCESS_INITIAL_RECIPES:

@@ -35,7 +35,8 @@ const CategoryContainer = props => {
     clearError,
     recipes,
     loadMore,
-    resetSort
+    resetSort,
+    hasNextPage
   } = props;
 
   // used to detect changes in category id in the query string
@@ -129,6 +130,7 @@ const CategoryContainer = props => {
       <PageSpinner loading={loading} />
       <ErrorSnack error={error} handleClose={clearError} />
       <Category
+        hasNextPage={hasNextPage}
         midScreen={midScreen}
         isLoadable={isLoadable}
         handleLoadMore={handleLoadMore}
@@ -151,7 +153,8 @@ const mapStateToProps = state => {
     recipes: state.Category.recipes,
     category: state.Category.category,
     loadMoreLoading: state.Category.loadMoreLoading,
-    sortOption: state.Category.sortOption
+    sortOption: state.Category.sortOption,
+    hasNextPage: state.Category.hasNextPage
   };
 };
 

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
 // components
-import { Typography } from '@material-ui/core';
+import { Typography, useTheme, useMediaQuery } from '@material-ui/core';
 import RecipeCard from '../../Common/RecipeCard/RecipeCard';
 import RecipeDetailContainer from '../../Common/RecipeDetail/RecipeDetailContainer';
 import LoadMoreSpinner from '../../Common/Spinner/LoadMoreSpinner';
@@ -20,6 +20,7 @@ import useInfiniteLoad from '../../Hooks/useInfiniteLoad';
 
 const Category = props => {
   const {
+    hasNextPage,
     sortOption,
     handleSortRecipes,
     isLoadable,
@@ -37,12 +38,15 @@ const Category = props => {
   const classes = useStyles();
   const handleScroll = useInfiniteLoad();
 
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+
   return (
     <div
       style={{
         overflowY: isLoadable ? 'scroll' : 'hidden'
       }}
-      onScroll={e => handleScroll(e, isLoadable, handleLoadMore)}
+      onScroll={e => handleScroll(e, isLoadable, handleLoadMore, isDesktop)}
       ref={topElementRef}
       className={classes.categoryRoot}
     >
@@ -120,6 +124,9 @@ const Category = props => {
       <LoadMoreSpinner
         textAlt="You've reached the bottom"
         loading={loadMoreLoading}
+        isDesktop={isDesktop}
+        hasNextPage={hasNextPage}
+        handleLoadMore={handleLoadMore}
       />
 
       <SortMenuDial
@@ -148,7 +155,8 @@ Category.propTypes = {
   showDial: PropTypes.bool.isRequired,
   setShowDial: PropTypes.func.isRequired,
   handleSortRecipes: PropTypes.func.isRequired,
-  midScreen: PropTypes.bool.isRequired
+  midScreen: PropTypes.bool.isRequired,
+  hasNextPage: PropTypes.bool.isRequired
 };
 
 export default Category;
