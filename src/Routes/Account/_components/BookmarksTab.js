@@ -34,9 +34,10 @@ const BookmarksTab = props => {
             key={index}
           >
             {/* thumbnail of the recipe */}
-            <img
-              src={bookmark.recipe.thumbImageUrl}
-              alt={bookmark.recipe.title}
+            <div
+              style={{
+                backgroundImage: `url(${bookmark.recipe.thumbImageUrl})`
+              }}
               className={classes.cardThumb}
             />
             <div className={classes.cardRight}>
