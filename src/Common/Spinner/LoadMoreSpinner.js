@@ -13,7 +13,7 @@ import { CircularProgress, Typography, Button } from '@material-ui/core';
 import useStyles from './Style';
 
 const LoadMoreSpinner = props => {
-  const { loading, textAlt, handleLoadMore, isDesktop } = props;
+  const { hasNextPage, loading, textAlt, handleLoadMore, isDesktop } = props;
   const classes = useStyles();
 
   return (
@@ -21,7 +21,7 @@ const LoadMoreSpinner = props => {
       {loading && (
         <CircularProgress color='primary' disableShrink size='2rem' />
       )}
-      {!isDesktop && !loading && (
+      {hasNextPage && !isDesktop && !loading && (
         <Button
           variant='outlined'
           className={classes.loadMoreButton}
@@ -30,7 +30,7 @@ const LoadMoreSpinner = props => {
           Load More
         </Button>
       )}
-      {isDesktop && !loading && (
+      {!hasNextPage && !loading && (
         <Typography style={{ opacity: 0.5 }} variant='body2'>
           {textAlt}
         </Typography>
@@ -43,7 +43,8 @@ LoadMoreSpinner.propTypes = {
   loading: PropTypes.bool.isRequired,
   textAlt: PropTypes.string,
   handleLoadMore: PropTypes.func.isRequired,
-  isDesktop: PropTypes.bool.isRequired
+  isDesktop: PropTypes.bool.isRequired,
+  hasNextPage: PropTypes.bool.isRequired
 };
 
 export default LoadMoreSpinner;

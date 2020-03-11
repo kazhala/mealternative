@@ -38,7 +38,8 @@ const Recipes = props => {
     resetSearch,
     midScreen,
     topElementRef,
-    recipeList
+    recipeList,
+    hasNextPage
   } = props;
   const classes = useStyles();
   const handleScroll = useInfiniteLoad();
@@ -138,6 +139,7 @@ const Recipes = props => {
 
       {/* loadmore spinner */}
       <LoadMoreSpinner
+        hasNextPage={hasNextPage}
         textAlt="You've reached the bottom"
         loading={loadMoreLoading}
         isDesktop={isDesktop}
@@ -172,7 +174,8 @@ Recipes.propTypes = {
   resetSearch: PropTypes.func.isRequired,
   search: PropTypes.string.isRequired,
   midScreen: PropTypes.bool,
-  topElementRef: PropTypes.any
+  topElementRef: PropTypes.any,
+  hasNextPage: PropTypes.bool.isRequired
 };
 
 export default Recipes;

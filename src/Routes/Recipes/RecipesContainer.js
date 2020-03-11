@@ -35,7 +35,8 @@ const RecipesContainer = props => {
     sorted,
     location,
     clearError,
-    searchRecipes
+    searchRecipes,
+    hasNextPage
   } = props;
 
   // speedDial show state
@@ -152,6 +153,7 @@ const RecipesContainer = props => {
         isLoadable={isLoadable}
         getCurrentSortOption={getCurrentSortOption}
         topElementRef={topElementRef}
+        hasNextPage={hasNextPage}
         {...props}
       />
     </>
@@ -166,7 +168,8 @@ const mapStateToProps = state => {
     recipeSortOption: state.List.recipeSortOption,
     sorted: state.List.sorted,
     loadMoreLoading: state.List.loadMoreLoading,
-    search: state.List.search
+    search: state.List.search,
+    hasNextPage: state.List.hasNextPage
   };
 };
 
