@@ -17,7 +17,6 @@ const useStyles = makeStyles(theme => ({
   accountTop: {
     display: 'flex',
     width: '100%',
-    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column'
@@ -30,14 +29,12 @@ const useStyles = makeStyles(theme => ({
   // tab part
   accountBottom: {
     width: '100%',
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     overflowY: 'hidden'
   },
   tabPanel: {
-    height: '100%',
     width: '100%',
     overflowY: 'auto'
   },
@@ -115,7 +112,13 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.shape.borderRadius,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    [theme.breakpoints.up('sm')]: {
+      minHeight: theme.spacing(10)
+    },
+    [theme.breakpoints.up('lg')]: {
+      minHeight: theme.spacing(15)
+    }
   },
   cardRight: {
     display: 'flex',
