@@ -68,11 +68,7 @@ const Account = props => {
       {/* tabs to different contents */}
       <div className={classes.accountBottom}>
         {/* app bar for tabs */}
-        <AppBar
-          style={{ overflow: 'hidden' }}
-          position='relative'
-          color='default'
-        >
+        <AppBar position='relative' color='default'>
           <Tabs
             value={activeTab}
             onChange={handleTabChange}

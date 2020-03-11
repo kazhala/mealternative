@@ -6,20 +6,18 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     padding: theme.spacing(1),
-    display: 'grid',
-    gridTemplateRows: '1fr 5fr',
-    gridTemplateColumns: '1fr',
-    gridGap: theme.spacing(1),
-    overflowX: 'hidden',
-    overflowY: 'scroll',
-    position: 'relative'
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative',
+    overflow: 'hidden'
   },
   accountTop: {
     display: 'flex',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginBottom: theme.spacing(1)
   },
   accountAvatar: {
     height: theme.spacing(5.5),
