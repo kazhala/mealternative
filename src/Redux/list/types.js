@@ -7,6 +7,7 @@ export const LIST_BEGIN = 'LIST_BEGIN';
 export const LIST_ERROR = 'LIST_ERROR';
 export const LIST_CLEAN = 'LIST_CLEAN';
 export const LIST_CLEAR_ERROR = 'LIST_CLEAR_ERROR';
+export const LIST_END = 'LIST_END';
 
 // initial fetch
 export const FETCH_INITIAL_RECIPES = 'FETCH_INITIAL_RECIPES';

@@ -125,9 +125,15 @@ function* workerLoadMoreRecipes() {
       }
     } else {
       // if stating page is 1, stop loading more, end
-      if (initialPage === 1) return;
+      if (initialPage === 1) {
+        yield put({ type: Types.LIST_END });
+        return;
+      }
       // if already cylcled, stop loading more, end
-      if (listCycle) return;
+      if (listCycle) {
+        yield put({ type: Types.LIST_END });
+        return;
+      }
 
       yield put({ type: Types.NEXT_LIST_CYCLE });
       yield put({ type: Types.LOAD_MORE_BEGIN });

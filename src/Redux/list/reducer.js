@@ -15,7 +15,8 @@ const initialState = {
   recipeSortOption: '',
   loadMoreLoading: false,
   sorted: false,
-  search: ''
+  search: '',
+  hasNextPage: true
 };
 
 const ListReducer = (state = initialState, action) => {
@@ -101,6 +102,8 @@ const ListReducer = (state = initialState, action) => {
         sorted: true,
         size: action.payload.size
       };
+    case Types.LIST_END:
+      return { ...state, hasNextPage: false };
     default:
       return state;
   }
