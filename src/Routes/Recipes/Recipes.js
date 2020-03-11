@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
 // components
-import { Button, Chip } from '@material-ui/core';
+import { Button, Chip, useTheme, useMediaQuery } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import SearchInput from '../../Common/Inputs/SearchInput';
 import SortMenuDial from '../../Common/RecipeSort/SortMenuDial';
@@ -43,12 +43,15 @@ const Recipes = props => {
   const classes = useStyles();
   const handleScroll = useInfiniteLoad();
 
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+
   return (
     <div
       style={{
         overflowY: isLoadable ? 'scroll' : 'hidden'
       }}
-      onScroll={e => handleScroll(e, isLoadable, loadMoreRecipes)}
+      onScroll={e => handleScroll(e, isLoadable, loadMoreRecipes, isDesktop)}
       className={classes.recipeRoot}
       ref={topElementRef}
     >
@@ -137,6 +140,8 @@ const Recipes = props => {
       <LoadMoreSpinner
         textAlt="You've reached the bottom"
         loading={loadMoreLoading}
+        isDesktop={isDesktop}
+        handleLoadMore={loadMoreRecipes}
       />
       <Route
         path='/recipes/detail/:recipeid'

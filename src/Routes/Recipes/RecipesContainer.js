@@ -163,7 +163,6 @@ const mapStateToProps = state => {
     error: state.List.error,
     loading: state.List.loading,
     recipeList: state.List.recipeList,
-    recipePage: state.List.recipePage,
     recipeSortOption: state.List.recipeSortOption,
     sorted: state.List.sorted,
     loadMoreLoading: state.List.loadMoreLoading,

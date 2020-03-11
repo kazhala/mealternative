@@ -3,7 +3,10 @@
 */
 
 const useInfiniteLoad = () => {
-  const handleScroll = (event, isLoadable, loadMore) => {
+  const handleScroll = (event, isLoadable, loadMore, isDesktop) => {
+    if (!isDesktop) {
+      return;
+    }
     if (isLoadable) {
       const totalHeight =
         event.target.scrollHeight - Math.ceil(event.target.scrollTop);
