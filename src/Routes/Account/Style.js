@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
-    overflow: 'hidden'
+    overflowY: 'auto'
   },
   accountTop: {
     display: 'flex',
@@ -29,12 +29,10 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    overflowY: 'hidden'
+    alignItems: 'center'
   },
   tabPanel: {
-    width: '100%',
-    overflowY: 'auto'
+    width: '100%'
   },
 
   // profile update
