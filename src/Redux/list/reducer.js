@@ -75,7 +75,7 @@ const ListReducer = (state = initialState, action) => {
         recipeSortOption: action.payload.sortOption
       };
     case Types.SORT_BEGIN:
-      return { ...state, loading: true, sorted: true };
+      return { ...state, hasNextPage: true, loading: true, sorted: true };
     case Types.SUCCESS_SORT_RECIPES:
       return {
         ...state,
@@ -88,7 +88,12 @@ const ListReducer = (state = initialState, action) => {
         recipeSortOption: action.payload.sortOption
       };
     case Types.SEARCH_BEGIN:
-      return { ...state, loading: true, search: action.payload };
+      return {
+        ...state,
+        hasNextPage: true,
+        loading: true,
+        search: action.payload
+      };
     case Types.SEARCH_SUCCESS:
       return {
         ...state,
