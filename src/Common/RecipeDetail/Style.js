@@ -8,13 +8,14 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     right: 0,
     //put on top of the speedDial
-    zIndex: '2000 !important',
+    zIndex: '1111',
     display: 'flex',
     flexDirection: 'column',
     overflowY: 'scroll',
     alignItems: 'center',
     [theme.breakpoints.down('md')]: {
-      top: theme.spacing(3.5)
+      top: theme.spacing(5),
+      zIndex: '1051'
     }
   },
   detailCloseBtn: {

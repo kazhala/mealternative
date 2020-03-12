@@ -50,7 +50,8 @@ const Recipes = props => {
   return (
     <div
       style={{
-        overflowY: isLoadable ? 'scroll' : 'hidden'
+        overflow: !isLoadable && 'hidden',
+        height: !isLoadable && '100%'
       }}
       onScroll={e => handleScroll(e, isLoadable, loadMoreRecipes, isDesktop)}
       className={classes.recipeRoot}
