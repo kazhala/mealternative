@@ -80,12 +80,7 @@ const RecipeDetail = props => {
 
         {/* if loading finish and data is fetched */}
         {!loading && postedBy && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-          >
+          <>
             <Avatar
               onClick={() => history.push(`/account?id=${postedBy._id}`)}
               src={postedBy.photoUrl}
@@ -121,7 +116,7 @@ const RecipeDetail = props => {
               {/* recipe steps */}
               <Steps steps={steps} classes={classes} />
             </div>
-          </div>
+          </>
         )}
       </Paper>
     </Slide>

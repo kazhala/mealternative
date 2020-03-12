@@ -12,7 +12,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     overflowY: 'scroll',
-    alignItems: 'center'
+    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+      top: theme.spacing(3.5)
+    }
   },
   detailCloseBtn: {
     position: 'absolute',
