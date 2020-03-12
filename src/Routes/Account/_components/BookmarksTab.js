@@ -11,6 +11,7 @@ import PageSpinner from '../../../Common/Spinner/PageSpinner';
 import { Typography, Avatar, Paper } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { ThumbUpOutlined, BookmarkBorder } from '@material-ui/icons';
+import LoadMoreSpinner from '../../../Common/Spinner/LoadMoreSpinner';
 
 const BookmarksTab = props => {
   const {
@@ -19,7 +20,10 @@ const BookmarksTab = props => {
     classes,
     bookmarksLoading,
     activeTab,
-    tabIndex
+    tabIndex,
+    hasNextPage,
+    isDesktop,
+    handleLoadMore
   } = props;
 
   return (
@@ -76,6 +80,14 @@ const BookmarksTab = props => {
             </div>
           </Paper>
         ))}
+        <LoadMoreSpinner
+          isDesktop={isDesktop}
+          loading={false}
+          account
+          handleLoadMore={handleLoadMore}
+          hasNextPage={hasNextPage}
+          textAlt="You've reached the bottom"
+        />
       </div>
     )
   );
@@ -87,7 +99,10 @@ BookmarksTab.propTypes = {
   activeTab: PropTypes.number.isRequired,
   tabIndex: PropTypes.number.isRequired,
   bookmarksLoading: PropTypes.bool.isRequired,
-  handleCardClick: PropTypes.func.isRequired
+  handleCardClick: PropTypes.func.isRequired,
+  hasNextPage: PropTypes.bool.isRequired,
+  isDesktop: PropTypes.bool.isRequired,
+  handleLoadMore: PropTypes.func.isRequired
 };
 
 export default BookmarksTab;

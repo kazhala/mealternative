@@ -61,6 +61,8 @@ function* workerLoadMoreBookmarks({ payload }) {
         type: Types.PROFILE_LOADMORE_BOOKMARKS_SUCCESS,
         payload: response
       });
+    } else {
+      yield put({ type: Types.PROFILE_END });
     }
   } catch (err) {
     console.log('Error', err);

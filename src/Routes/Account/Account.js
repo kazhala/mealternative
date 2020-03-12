@@ -124,6 +124,9 @@ const Account = props => {
             handleRemoveRecipe={handleRemoveRecipe}
           />
           <BookmarksTab
+            isDesktop={isDesktop}
+            handleLoadMore={handleLoadMore}
+            hasNextPage={hasNextPage}
             classes={classes}
             tabIndex={2}
             activeTab={activeTab}
