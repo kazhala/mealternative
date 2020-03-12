@@ -15,7 +15,7 @@ const TitleDes = props => {
   return (
     <div className={classes.detailTitleDes}>
       <Typography variant='h4'>{title}</Typography>
-      {description && <Typography variant='caption'>{description}</Typography>}
+      <Typography variant='caption'>{description}</Typography>
     </div>
   );
 };

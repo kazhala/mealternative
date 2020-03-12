@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     right: 0,
     //put on top of the speedDial
-    zIndex: 1111,
+    zIndex: '2000 !important',
     display: 'flex',
     flexDirection: 'column',
     overflowY: 'scroll',

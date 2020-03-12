@@ -64,7 +64,6 @@ const RecipeDetail = props => {
     >
       <Paper className={classes.detailRecipeRoot}>
         {/* put loading and error inside the slider */}
-        <PageSpinner loading={loading} />
         <ErrorSnack error={error} handleClose={cleanUp} />
         <SuccessSnack message={message} handleClose={cleanUp} />
 
@@ -81,14 +80,17 @@ const RecipeDetail = props => {
 
         {/* if loading finish and data is fetched */}
         {!loading && postedBy && (
-          <>
-            <Tooltip title={postedBy.username} alt={postedBy.username}>
-              <Avatar
-                onClick={() => history.push(`/account?id=${postedBy._id}`)}
-                src={postedBy.photoUrl}
-                className={classes.detailAvatar}
-              />
-            </Tooltip>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            <Avatar
+              onClick={() => history.push(`/account?id=${postedBy._id}`)}
+              src={postedBy.photoUrl}
+              className={classes.detailAvatar}
+            />
             <ThumbNail imgUrl={thumbImageUrl} classes={classes} />
             <div className={classes.detailBody}>
               <TitleDes
@@ -119,7 +121,7 @@ const RecipeDetail = props => {
               {/* recipe steps */}
               <Steps steps={steps} classes={classes} />
             </div>
-          </>
+          </div>
         )}
       </Paper>
     </Slide>
