@@ -7,14 +7,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import { Paper, Slide, Fab, Avatar, Tooltip } from '@material-ui/core';
+import { Paper, Slide, Fab, Avatar } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 import ThumbNail from './_components/ThumbNail';
 import TitleDes from './_components/TitleDes';
 import MiscActions from './_components/MiscActions';
 import ListsCatIng from './_components/ListsCatIng';
 import Steps from './_components/Steps';
-import PageSpinner from '../Spinner/PageSpinner';
 import ErrorSnack from '../ErrorModal/ErrorSnack';
 import SuccessSnack from '../InfoModal/SuccessSnack';
 
@@ -80,12 +79,7 @@ const RecipeDetail = props => {
 
         {/* if loading finish and data is fetched */}
         {!loading && postedBy && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-          >
+          <>
             <Avatar
               onClick={() => history.push(`/account?id=${postedBy._id}`)}
               src={postedBy.photoUrl}
@@ -121,7 +115,7 @@ const RecipeDetail = props => {
               {/* recipe steps */}
               <Steps steps={steps} classes={classes} />
             </div>
-          </div>
+          </>
         )}
       </Paper>
     </Slide>
