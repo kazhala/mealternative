@@ -26,7 +26,8 @@ const initialState = {
   recipePage: 1,
   totalRecipePage: 1,
   bookmarkPage: 1,
-  totalBookmarkPage: 1
+  totalBookmarkPage: 1,
+  hasNextPage: true
 };
 
 // PROFILE_CLEAN: clear everything on unmount
@@ -94,7 +95,8 @@ const ProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         error: '',
-        bookmarksLoading: true
+        bookmarksLoading: true,
+        hasNextPage: true
       };
     case Types.PROFILE_STORE_BOOKMARKS:
       return {
@@ -108,7 +110,8 @@ const ProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         error: '',
-        recipesLoading: true
+        recipesLoading: true,
+        hasNextPage: true
       };
     case Types.PROFILE_STORE_RECIPES:
       return {
@@ -134,6 +137,8 @@ const ProfileReducer = (state = initialState, action) => {
         bookmarkPage: action.payload.page,
         totalBookmarkPage: action.payload.totalPages
       };
+    case Types.PROFILE_END:
+      return { ...state, hasNextPage: false };
     default:
       return state;
   }

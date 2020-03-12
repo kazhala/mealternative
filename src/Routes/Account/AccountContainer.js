@@ -37,7 +37,8 @@ const AccountContainer = props => {
     removeRecipe,
     location,
     loadMoreRecipes,
-    loadMoreBookmarks
+    loadMoreBookmarks,
+    hasNextPage
   } = props;
 
   // current tab
@@ -188,6 +189,7 @@ const AccountContainer = props => {
       <ErrorSnack error={error} handleClose={clearError} />
       <SuccessSnack message={infoMessage} handleClose={clearError} />
       <Account
+        hasNextPage={hasNextPage}
         tabTopEleRef={tabTopEleRef}
         isLoadable={isLoadable}
         handleLoadMore={handleLoadMore}
@@ -218,7 +220,8 @@ const mapStateToProps = state => {
     bookmarksLoading: state.Profile.bookmarksLoading,
     recipesLoading: state.Profile.recipesLoading,
     recipes: state.Profile.recipes,
-    infoMessage: state.Profile.info
+    infoMessage: state.Profile.info,
+    hasNextPage: state.Profile.hasNextPage
   };
 };
 

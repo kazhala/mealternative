@@ -28,6 +28,18 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       width: '65%'
     }
+  },
+  accountLoadMore: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '80%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '60%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '50%'
+    }
   }
 }));
 

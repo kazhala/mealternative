@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 // components
 import PageSpinner from '../../../Common/Spinner/PageSpinner';
+import LoadMoreSpinner from '../../../Common/Spinner/LoadMoreSpinner';
 import { IconButton, Paper, Typography } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import {
@@ -27,7 +28,10 @@ const RecipesTab = props => {
     tabIndex,
     handleRemoveRecipe,
     handleCardClick,
-    handleEditRecipe
+    handleEditRecipe,
+    handleLoadMore,
+    hasNextPage,
+    isDesktop
   } = props;
 
   return (
@@ -83,6 +87,14 @@ const RecipesTab = props => {
             </div>
           </Paper>
         ))}
+        <LoadMoreSpinner
+          hasNextPage={hasNextPage}
+          handleLoadMore={handleLoadMore}
+          textAlt="You've reached the bottom"
+          loading={false}
+          isDesktop={isDesktop}
+          account
+        />
       </div>
     )
   );
@@ -97,7 +109,10 @@ RecipesTab.propTypes = {
   tabIndex: PropTypes.number.isRequired,
   handleRemoveRecipe: PropTypes.func.isRequired,
   handleCardClick: PropTypes.func.isRequired,
-  handleEditRecipe: PropTypes.func.isRequired
+  handleEditRecipe: PropTypes.func.isRequired,
+  hasNextPage: PropTypes.bool.isRequired,
+  handleLoadMore: PropTypes.func.isRequired,
+  isDesktop: PropTypes.bool.isRequired
 };
 
 export default RecipesTab;

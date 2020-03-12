@@ -14,7 +14,9 @@ import {
   Tabs,
   Tab,
   Avatar,
-  Typography
+  Typography,
+  useTheme,
+  useMediaQuery
 } from '@material-ui/core';
 import { Details, Settings, Book, MenuBook, VpnKey } from '@material-ui/icons';
 import DetailsTab from './_components/DetailsTab';
@@ -29,6 +31,7 @@ import useInfiniteLoad from '../../Hooks/useInfiniteLoad';
 
 const Account = props => {
   const {
+    hasNextPage,
     activeTab,
     handleTabChange,
     profileUser,
@@ -51,6 +54,9 @@ const Account = props => {
   } = props;
   const classes = useStyles();
   const handleScroll = useInfiniteLoad();
+
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   return (
     <div className={classes.accountRoot}>
@@ -90,7 +96,7 @@ const Account = props => {
         {/* tab panel to display information */}
         <Paper
           ref={tabTopEleRef}
-          onScroll={e => handleScroll(e, isLoadable, handleLoadMore)}
+          onScroll={e => handleScroll(e, isLoadable, handleLoadMore, isDesktop)}
           className={classes.tabPanel}
           elevation={1}
         >
@@ -104,6 +110,9 @@ const Account = props => {
             detailLoading={detailLoading}
           />
           <RecipesTab
+            isDesktop={isDesktop}
+            handleLoadMore={handleLoadMore}
+            hasNextPage={hasNextPage}
             handleEditRecipe={handleEditRecipe}
             handleCardClick={handleCardClick}
             classes={classes}
@@ -150,7 +159,8 @@ Account.propTypes = {
   handleUpdatePassword: PropTypes.func.isRequired,
   infoMessage: PropTypes.string,
   handleLoadMore: PropTypes.func.isRequired,
-  isLoadable: PropTypes.bool.isRequired
+  isLoadable: PropTypes.bool.isRequired,
+  hasNextPage: PropTypes.bool.isRequired
 };
 
 export default Account;

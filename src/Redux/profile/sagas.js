@@ -86,6 +86,8 @@ function* workerLoadMoreRecipes({ payload }) {
         type: Types.PROFILE_LOADMORE_RECIPES_SUCCESS,
         payload: response
       });
+    } else {
+      yield put({ type: Types.PROFILE_END });
     }
   } catch (err) {
     console.log('Error', err);
