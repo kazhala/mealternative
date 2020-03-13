@@ -22,7 +22,8 @@ const RecipeDetailContainer = props => {
     cleanUp,
     incrementLike,
     incrementBook,
-    updateRecipeRating
+    updateRecipeRating,
+    location
   } = props;
 
   // make useEffect simulates componentDidMount (only exe once)
@@ -46,7 +47,11 @@ const RecipeDetailContainer = props => {
   const handleBack = () => {
     setShowModal(false);
     setTimeout(() => {
-      history.goBack();
+      if (location.state && location.state.url) {
+        history.goBack();
+      } else {
+        history.push('/recipes');
+      }
     }, 200);
   };
 

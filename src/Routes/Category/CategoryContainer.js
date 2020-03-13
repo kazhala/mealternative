@@ -95,7 +95,11 @@ const CategoryContainer = props => {
   }, [categoryId, scrollToTop]);
 
   const handleCardClick = id => {
-    history.push(`/category/detail/${id}?id=${categoryId}`);
+    history.push({
+      pathname: `/category/detail/${id}`,
+      search: `?id=${categoryId}`,
+      state: { url: '/category' }
+    });
   };
 
   const handleLoadMore = () => {

@@ -101,7 +101,10 @@ const RecipesContainer = props => {
 
   // push to card details
   const handleCardClick = recipeId => {
-    history.push(`/recipes/detail/${recipeId}`);
+    history.push({
+      pathname: `/recipes/detail/${recipeId}`,
+      state: { url: '/recipes' }
+    });
   };
 
   // used to display a selected indicator
