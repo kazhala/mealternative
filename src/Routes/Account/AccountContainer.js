@@ -143,7 +143,15 @@ const AccountContainer = props => {
 
   // handle card click to get the recipe modal in (see common/DetailRecipe)
   const handleCardClick = url => {
-    history.push({ pathname: url, state: { url: '/account' } });
+    if (otherUserId) {
+      history.push({
+        pathname: url,
+        search: `?id=${otherUserId}`,
+        state: { url: '/account' }
+      });
+    } else {
+      history.push({ pathname: url, state: { url: '/account' } });
+    }
   };
 
   // confirm if user wants to remove the recipe
