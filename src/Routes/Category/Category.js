@@ -43,11 +43,6 @@ const Category = props => {
 
   return (
     <div
-      style={{
-        overflow: !isLoadable && 'hidden',
-        height: !isLoadable && '100%',
-        position: !isLoadable && 'fixed'
-      }}
       onScroll={e => handleScroll(e, isLoadable, handleLoadMore, isDesktop)}
       ref={topElementRef}
       className={classes.categoryRoot}

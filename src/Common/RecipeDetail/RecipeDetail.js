@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import { Paper, Slide, Fab, Avatar } from '@material-ui/core';
+import { Slide, Fab, Avatar, Dialog } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 import ThumbNail from './_components/ThumbNail';
 import TitleDes from './_components/TitleDes';
@@ -19,6 +19,10 @@ import SuccessSnack from '../InfoModal/SuccessSnack';
 
 // misc
 import useStyles from './Style';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide timeout={200} direction='left' ref={ref} {...props} />;
+});
 
 const RecipeDetail = props => {
   const {
@@ -53,15 +57,13 @@ const RecipeDetail = props => {
   } = recipeDetails;
 
   return (
-    // everything in slide animation
-    <Slide
-      timeout={200}
-      direction='left'
-      in={showModal}
-      mountOnEnter
-      unmountOnExit
+    <Dialog
+      fullScreen
+      open={showModal}
+      onClose={handleBack}
+      TransitionComponent={Transition}
     >
-      <Paper className={classes.detailRecipeRoot}>
+      <div className={classes.detailRecipeRoot}>
         {/* put loading and error inside the slider */}
         <ErrorSnack error={error} handleClose={cleanUp} />
         <SuccessSnack message={message} handleClose={cleanUp} />
@@ -117,8 +119,8 @@ const RecipeDetail = props => {
             </div>
           </>
         )}
-      </Paper>
-    </Slide>
+      </div>
+    </Dialog>
   );
 };
 

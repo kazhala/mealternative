@@ -59,14 +59,7 @@ const Account = props => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   return (
-    <div
-      style={{
-        overflow: !isLoadable && 'hidden',
-        height: !isLoadable && '100%',
-        position: !isLoadable && 'fixed'
-      }}
-      className={classes.accountRoot}
-    >
+    <div className={classes.accountRoot}>
       {/* profile avatar */}
       <div className={classes.accountTop}>
         <Avatar

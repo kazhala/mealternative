@@ -46,8 +46,6 @@ const RecipesContainer = props => {
   // state for search field
   const [searchInput, setSearchInput] = useState('');
 
-  const [scrollPosition, setScrollPosition] = useState(null);
-
   // top element ref
   const topElementRef = useRef(null);
 
@@ -62,12 +60,11 @@ const RecipesContainer = props => {
 
   useEffect(() => {
     if (location.pathname === '/recipes') {
-      window.scrollTo(0, scrollPosition);
       setIsLoadable(true);
     } else {
       setIsLoadable(false);
     }
-  }, [location, scrollPosition]);
+  }, [location]);
 
   const displayArray = useBreakArrays(recipeList, querySize);
 
@@ -104,7 +101,6 @@ const RecipesContainer = props => {
 
   // push to card details
   const handleCardClick = recipeId => {
-    setScrollPosition(window.pageYOffset);
     history.push(`/recipes/detail/${recipeId}`);
   };
 

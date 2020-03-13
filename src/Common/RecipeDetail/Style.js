@@ -2,20 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   detailRecipeRoot: {
-    position: 'fixed',
-    top: theme.spacing(3.5),
-    bottom: 0,
-    left: 0,
-    right: 0,
-    //put on top of the speedDial
-    zIndex: '2000',
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     overflowY: 'scroll',
     alignItems: 'center',
-    [theme.breakpoints.up('lg')]: {
-      top: theme.spacing(4)
-    }
+    minHeight: '100%'
   },
   detailCloseBtn: {
     position: 'absolute',
