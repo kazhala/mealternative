@@ -12,6 +12,7 @@ import { RecipeActions } from '../../Redux/recipe';
 
 // components
 import RecipeDetail from './RecipeDetail';
+import useRootPath from '../../Hooks/useRootPath';
 
 const RecipeDetailContainer = props => {
   const {
@@ -42,6 +43,9 @@ const RecipeDetailContainer = props => {
     }
   }, [match, mounted, getRecipeDetails]);
 
+  // get the root path of the current url
+  const rootPath = useRootPath(location.pathname);
+
   // history go back
   // timeout 200 for animation finish
   const handleBack = () => {
@@ -50,7 +54,12 @@ const RecipeDetailContainer = props => {
       if (location.state && location.state.url) {
         history.goBack();
       } else {
-        history.push('/recipes');
+        // if no state detected, user entered this page through url
+        // push to the root path
+        history.push({
+          pathname: rootPath,
+          search: location.search
+        });
       }
     }, 200);
   };
