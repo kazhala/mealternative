@@ -7,10 +7,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import { Slide, Fab, Avatar, Dialog } from '@material-ui/core';
+import { Typography, Slide, Fab, Avatar, Dialog } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 import ThumbNail from './_components/ThumbNail';
-import TitleDes from './_components/TitleDes';
 import MiscActions from './_components/MiscActions';
 import ListsCatIng from './_components/ListsCatIng';
 import Steps from './_components/Steps';
@@ -89,11 +88,20 @@ const RecipeDetail = props => {
             />
             <ThumbNail imgUrl={thumbImageUrl} classes={classes} />
             <div className={classes.detailBody}>
-              <TitleDes
-                title={title}
-                description={description}
-                classes={classes}
-              />
+              <Typography
+                className={classes.detailTitle}
+                variant='h4'
+                component='div'
+              >
+                {title}
+              </Typography>
+              <Typography
+                variant='caption'
+                component='div'
+                className={classes.detailTitle}
+              >
+                {description}
+              </Typography>
 
               {/* like bookmark rating etc */}
               <MiscActions

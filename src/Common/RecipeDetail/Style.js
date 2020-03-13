@@ -53,18 +53,17 @@ const useStyles = makeStyles(theme => ({
       minHeight: theme.spacing(20)
     }
   },
-  detailTitleDes: {
+  detailTitle: {
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
     textAlign: 'center',
-    padding: theme.spacing(0.5)
+    padding: theme.spacing(0, 0.5)
   },
 
   // misc actions
   detailMiscRoot: {
     width: '100%',
     display: 'flex',
+    marginTop: theme.spacing(1.5),
     padding: theme.spacing(0, 0.5),
     justifyContent: 'space-between',
     alignItems: 'center'

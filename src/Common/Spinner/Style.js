@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(3)
   },
   loadMoreButton: {
-    width: '100%',
+    width: '95%',
     [theme.breakpoints.up('sm')]: {
       width: '75%'
     },
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   accountLoadMore: {
-    width: '100%',
+    width: '95%',
     [theme.breakpoints.up('sm')]: {
       width: '80%'
     },
