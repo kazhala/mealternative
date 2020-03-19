@@ -11,7 +11,9 @@ const ComboRating = props => {
 
   return (
     <Box className={classes.comboRatingRoot}>
-      <Typography variant='caption'>({rating})</Typography>
+      <Typography className={classes.comboRatingText} variant='caption'>
+        ({rating})
+      </Typography>
       <Rating
         className={classes.rating}
         name='restaurant rating'
@@ -19,7 +21,9 @@ const ComboRating = props => {
         precision={0.1}
         readOnly
       />
-      <Typography variant='caption'>({price})</Typography>
+      <Typography className={classes.comboRatingText} variant='caption'>
+        ({price})
+      </Typography>
     </Box>
   );
 };

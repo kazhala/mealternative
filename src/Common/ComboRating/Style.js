@@ -8,6 +8,9 @@ const useStyles = makeStyles(theme => ({
   },
   rating: {
     fontSize: '1rem'
+  },
+  comboRatingText: {
+    fontSize: theme.spacing(0.7)
   }
 }));
 
