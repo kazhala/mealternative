@@ -97,7 +97,7 @@ export const signIn = async payload => {
 // store user infor
 export const authenticate = data => {
   if (navigator.cookieEnabled) {
-    Cookies.set('token', data.token);
+    Cookies.set('token', data.token, { expires: 7 });
     if (window.localStorage) {
       localStorage.setItem('user', JSON.stringify(data.user));
     } else {

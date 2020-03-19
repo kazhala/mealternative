@@ -12,7 +12,6 @@ export const searchOptions = [
   'Fast food',
   'Hotpot',
   'British',
-  'American',
   'Jamaican',
   'Bistro',
   'Café',
@@ -48,5 +47,11 @@ export const searchOptions = [
   'Australian',
   "Macdonald's",
   'Hungry Jack',
+  'Lebanese',
+  'Moroccan',
+  'Turkish',
+  'Caribbean',
+  'Healthy',
+  'Vegan',
   ''
 ];
