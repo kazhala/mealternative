@@ -3,7 +3,7 @@
 */
 
 // React
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -64,6 +64,8 @@ const DetailModal = props => {
   const [sortedResultList, setSortedResultList] = useState([]);
   // offset the height of sticky dial
   const [height, setHeight] = useState(0);
+
+  const topElementRef = useRef(null);
 
   // desctruct values
   const { optionNum, optionOpen, reversed } = sortOption;
@@ -138,6 +140,7 @@ const DetailModal = props => {
   // sort the result list when resultRestaurantList or sorting option changed
   useEffect(() => {
     if (resultRestaurantList.length > 0) {
+      topElementRef && topElementRef.current.scrollTo(0, 0);
       let newList = [...resultRestaurantList];
       switch (optionNum) {
         case 0:
@@ -207,6 +210,7 @@ const DetailModal = props => {
               : 'translateY(100vh)'
             : null
         }}
+        ref={topElementRef}
         className={classes.detailModalRoot}
       >
         <div
