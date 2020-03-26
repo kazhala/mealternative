@@ -38,7 +38,7 @@ REACT_APP_CLOUDINARY_URL=https://api.cloudinary.com/v1_1/kazhala/image/upload
 EOF
 ```
 
-     If you also followed the backend set up, you could change the `REACT_APP_BACKEND_URL` to
+If you also followed the backend set up, you could change the `REACT_APP_BACKEND_URL` to
 
 ```
 REACT_APP_BACKEND_URL=http://localhost:8000/api
