@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Mealternative
 
-## Available Scripts
+A fully responsive MERN stack web app for finding nearby restaurants as well as a platform for finding and sharing recipes.
 
-In the project directory, you can run:
+Project URL: https://mealternative.com/
 
-### `npm start`
+- Find restaurants using [google-map-react](https://github.com/google-map-react/google-map-react)
+- Styled with [MaterialUi](https://material-ui.com/)
+- State managed by [Redux](https://redux.js.org/introduction/getting-started/) and [Redux-Saga](https://redux-saga.js.org/)
+- For backend related information you could find it in backend [repo](https://github.com/kazhala/mealternative-backend)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Introduction
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This project was bootstrapped with [CRA](https://github.com/facebook/create-react-app). It's not built for production usage, I've built this website mainly to refresh my knowledge on the MERN stack as well as finding some restaurants from time to time. I hope you could steal and find something useful from this repo and website. I also do share some random Chinese recipes on it :)
 
-### `npm test`
+Big credits to this blog [post](https://medium.com/javascript-in-plain-english/building-a-react-ice-cream-finder-app-with-the-google-maps-api-7e39339e0261) which helps me understand how to use the google map API.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+To play around the app locally, please follow the steps below
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository
+2. Go into the directory where the package.json resides
+3. Install dependencies
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Create the required .env file with below three variables inside it.
+   Note: at the minimum, you will need to create your own google map api key (detailed steps and explanations are [here](https://github.com/kazhala/mealternative#setup).
 
-### `npm run eject`
+```
+cat << EOF > .env
+REACT_APP_GOOGLE_MAP_API_KEY=<Your api key>
+REACT_APP_BACKEND_URL=https://api.mealternative.com
+REACT_APP_CLOUDINARY_URL=https://api.cloudinary.com/v1_1/kazhala/image/upload
+EOF
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+If you also followed the backend set up, you could change the `REACT_APP_BACKEND_URL` to
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+REACT_APP_BACKEND_URL=http://localhost:8000/api
+```
