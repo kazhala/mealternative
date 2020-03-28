@@ -11,7 +11,7 @@ import ComboRating from '../../../Common/ComboRating/ComboRating';
 import { PinDrop } from '@material-ui/icons';
 import { Typography, Box } from '@material-ui/core';
 
-const RestaurantMarker = props => {
+const RestaurantMarker = (props) => {
   // $hover props determine if the marker is hovered
   const {
     classes,
@@ -19,7 +19,7 @@ const RestaurantMarker = props => {
     restaurant,
     getBasicResDetails,
     getDetailedResDetail,
-    checkSelectedMarker
+    checkSelectedMarker,
   } = props;
 
   const {
@@ -27,7 +27,7 @@ const RestaurantMarker = props => {
     rating,
     price_level,
     distance,
-    totalRatings
+    totalRatings,
   } = getBasicResDetails(restaurant);
 
   return (
@@ -39,7 +39,7 @@ const RestaurantMarker = props => {
           <PinDrop color='secondary' fontSize='small' />
         )}
       </div>
-      {$hover && (
+      {($hover || checkSelectedMarker(restaurant.place_id)) && (
         <Typography
           className={classes.markerDetail}
           component='div'
@@ -64,7 +64,7 @@ RestaurantMarker.propTypes = {
   restaurant: PropTypes.object.isRequired,
   getBasicResDetails: PropTypes.func.isRequired,
   getDetailedResDetail: PropTypes.func.isRequired,
-  checkSelectedMarker: PropTypes.func.isRequired
+  checkSelectedMarker: PropTypes.func.isRequired,
 };
 
 export default RestaurantMarker;
