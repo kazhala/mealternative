@@ -54,6 +54,25 @@ npm start
 
 6. Break Everything:)
 
+## Google Map
+
+> You will get \$400 free credit for one year when you first create a google cloud account
+
+### Steps to set up Google Map Token
+
+1. Go to google app engine and create a new project. (Alternatively, you could use an existing one if you wish)
+2. Go to the google map service
+   ![](https://user-images.githubusercontent.com/43941510/77834703-a4ae2580-719a-11ea-9ee8-8d199698cb91.png)
+3. Enable 4 APIs. (Places, Map Javascript, Geocoding and Directions API)
+   ![](https://user-images.githubusercontent.com/43941510/77834791-5ea59180-719b-11ea-932e-3844ac34a966.png)
+4. Navigate to the API & Service console (Credentials tab)
+   ![](https://user-images.githubusercontent.com/43941510/77834996-4cc4ee00-719d-11ea-92e1-60a91dff2fbe.png)
+5. At the top, click + Create Credentials and then click the API key
+6. Copy the api key and navigate back to the Google map service page
+7. Make sure all of the services are using the same API key (They should pick up the API key automatically). Under Google Map -> APIs
+   ![](https://user-images.githubusercontent.com/43941510/77835168-526f0380-719e-11ea-8bae-6ffd7ed9ec9e.png)
+8. Done! Now paste the copied API key to .env file mentioned in Usage -> Step4.
+
 ## Structure
 
 ![](https://user-images.githubusercontent.com/43941510/77801667-672f9680-70cd-11ea-9921-5ecb0eaf089f.png)
