@@ -73,6 +73,120 @@ npm start
    ![](https://user-images.githubusercontent.com/43941510/77835168-526f0380-719e-11ea-8bae-6ffd7ed9ec9e.png)
 8. Done! Now paste the copied API key to .env file mentioned in Usage -> Step4.
 
+### How it works
+
+#### Load the google map
+
+- You will need to import the GoogleMapAPIKey from env or just put in your api key
+- For center, you could use the browser api to get user current location, this will be the center of your map
+
+`navigator.geolocation.getCurrentPosition(success, error, options);`
+
+```javascript
+<GoogleMapReact
+  bootstrapURLKeys={{
+    key: GoogleMapAPIKey,
+    libraries: ['places', 'directions'],
+  }}
+  center={{ lat: centerMarker.lat, lng: centerMarker.lng }}
+  defaultZoom={16}
+  yesIWantToUseGoogleMapApiInternals={true}
+  onGoogleApiLoaded={({ map, maps }) => handleMapApiLoaded(map, maps)}
+/>
+```
+
+- You will need to create a call back for `onGoogleApiLoaded` to init apis
+
+```javascript
+const [googleMap, setGoogleMap] = useState({
+  mapsApi: null,
+  autoCompleteService: null,
+  placesServices: null,
+  directionService: null,
+  geoCoderService: null,
+  mapLoaded: false,
+});
+
+const handleMapApiLoaded = (map, maps) => {
+  setGoogleMap({
+    ...googleMap,
+    autoCompleteService: new maps.places.AutocompleteService(),
+    placesServices: new maps.places.PlacesService(map),
+    directionService: new maps.DirectionsService(),
+    geoCoderService: new maps.Geocoder(),
+    mapLoaded: true,
+  });
+};
+```
+
+#### Address auto completion
+
+- Import an autocompletion component from any package, I've used materialUi
+- use the autoCompleteService initialised in previouse step
+
+```javascript
+const handleAutoCompleteUpdate = (searchValue, callBack) => {
+  const searchQuery = {
+    input: searchValue,
+    location: new mapsApi.LatLng(lat, lng), // You will need to give the lat lng you found through navigator api
+    radius: 100000, // in Meters. 100km
+  };
+  // if there is input, perform google autoCompleteService request
+  searchQuery.input &&
+    autoCompleteService.getQueryPredictions(searchQuery, (response) => {
+      // The name of each GoogleMaps place suggestion is in the "description" field
+      if (response) {
+        const dataSource = response.map((resp) => resp.description);
+        // set the autoCompletion's options
+        callBack(dataSource);
+      }
+    });
+};
+
+// This is the autocompletion src that will be presented in the dropdown
+const [autoSrc, setAutoSrc] = useState([]);
+
+// the onChange handler for the autocompletion component
+const handleChange = (e) => {
+  handleAutoCompleteUpdate(e.target.value, (dataSource) =>
+    setAutoSrc(dataSource)
+  );
+};
+```
+
+- The autocompletion component for reference
+
+```javascript
+import { Autocomplete } from '@material-ui/lab';
+...
+<Autocomplete
+  options={autoSrc}
+  loading={determineLoading()}
+  onOpen={() => setOpen(true)}
+  onClose={() => setOpen(false)}
+  open={open}
+  disableOpenOnFocus
+  onChange={handleSelect} // This is the value when user select an item in the dropdown
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label='Location center'
+      variant='outlined'
+      fullWidth
+      placeholder='Add address'
+      value={value} // This value is set through handleSelect, not handleChange
+      onChange={handleChange} // This is the value when user type in the textfiled, it only updates the autoSrc
+      size='small'
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
+  )}
+/>;
+```
+
+#### Demo
+
 ## Structure
 
 ![](https://user-images.githubusercontent.com/43941510/77801667-672f9680-70cd-11ea-9921-5ecb0eaf089f.png)
