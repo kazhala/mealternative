@@ -370,6 +370,8 @@ const handleRestaurantSearch = (searchQuery, queryRadius) => {
 
 ##### Check out full example [here](https://github.com/kazhala/mealternative/blob/master/src/Routes/Map/MapContainer.js)
 
+> Include sorting, fetch restaurant details and much more
+
 ##### Demo
 
 ![](../assets/search-demo.gif?raw=true)
