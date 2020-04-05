@@ -77,15 +77,44 @@ npm start
 
 #### Load the google map
 
-- You will need to import the GoogleMapAPIKey from env or just put in your api key
 - For center, you could use the browser api to get user current location, this will be the center of your map
 
-`navigator.geolocation.getCurrentPosition(success, error, options);`
+```javascript
+const [centerMarker, setCenterMarker] = useState({});
+
+useEffect(() => {
+  // I stored it in redux, obviously you could create a state and store the lat and lng
+  const locationSuccess = (pos) => {
+    const crd = pos.coords;
+    setCenterMarker({ lat: crd.latitude, lng: crd.longitude });
+  };
+  const locationError = () =>
+    console.log('Please turn on location services in your phone');
+
+  const locationOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      locationSuccess,
+      locationError,
+      locationOptions
+    );
+  } else {
+    console.log('Sorry, your browser does not support geolocation');
+  }
+}, [setCenterMarker]);
+```
+
+- GoogleMap component
 
 ```javascript
 <GoogleMapReact
   bootstrapURLKeys={{
-    key: GoogleMapAPIKey,
+    key: YourGoogleMapAPIKey,
     libraries: ['places', 'directions'],
   }}
   center={{ lat: centerMarker.lat, lng: centerMarker.lng }}
@@ -110,6 +139,7 @@ const [googleMap, setGoogleMap] = useState({
 const handleMapApiLoaded = (map, maps) => {
   setGoogleMap({
     ...googleMap,
+    mapsApi: maps,
     autoCompleteService: new maps.places.AutocompleteService(),
     placesServices: new maps.places.PlacesService(map),
     directionService: new maps.DirectionsService(),
@@ -128,7 +158,7 @@ const handleMapApiLoaded = (map, maps) => {
 const handleAutoCompleteUpdate = (searchValue, callBack) => {
   const searchQuery = {
     input: searchValue,
-    location: new mapsApi.LatLng(lat, lng), // You will need to give the lat lng you found through navigator api
+    location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng), // mapsApi is from the previous step
     radius: 100000, // in Meters. 100km
   };
   // if there is input, perform google autoCompleteService request
@@ -185,9 +215,162 @@ import { Autocomplete } from '@material-ui/lab';
 />;
 ```
 
-#### Demo
+- Updating the center location in the map
+
+```javascript
+const updateCenterMarker = (address) => {
+  // decode the address to latlng
+  geoCoderService.geocode({ address }, (response) => {
+    if (!response[0]) {
+      console.error("Can't find the address");
+      setError("Can't find the address");
+      // if empty, set to original location
+      setCenterMarker({ lat, lng });
+      return;
+    }
+    const { location } = response[0].geometry;
+    setCenterMarker({ lat: location.lat(), lng: location.lng() });
+  });
+};
+```
+
+##### Demo
 
 ![](../assets/address-demo.gif?raw=true)
+
+#### Finding restaurants
+
+- Basic search using google api
+
+```javascript
+const [resultRestaurantList, setResultRestaurantList] = useState([]);
+
+const handleRestaurantSearch = (searchQuery) => {
+  // 1. Create places request (if no search query, just search all restaurant)
+  // rankBy cannot be used with radius at the same time
+  // rankBy and radius doesn't seem to work with textSearch, keep it for future reference
+  const placesRequest = {
+    location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng), // mapsApi from previous step initialising google map
+    type: ['restaurant', 'cafe'],
+    query: searchQuery ? searchQuery : 'restaurant',
+    // radius: '500',
+    // rankBy: mapsApi.places.RankBy.DISTANCE
+  };
+
+  // perform textSearch based on query passed in ('chinese', 'thai', etc)
+  placesServices.textSearch(
+    placesRequest,
+    (locationResults, status, paginationInfo) => {
+      if (status !== 'OK') {
+        console.error('No results found', status);
+      } else {
+        setResultRestaurantList([...locationResults]);
+      }
+    }
+  );
+};
+```
+
+- Add pagination to the result
+  > By default, google would return 20 results, with extra 2 page pagination up to 60 results
+
+```javascript
+const [nextPage, setNextPage] = useState(null);
+const [resultRestaurantList, setResultRestaurantList] = useState([]);
+
+const handleRestaurantSearch = (searchQuery) => {
+  const placesRequest = {
+    location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+    type: ['restaurant', 'cafe'],
+    query: searchQuery ? searchQuery : 'restaurant',
+  };
+
+  placesServices.textSearch(
+    placesRequest,
+    (locationResults, status, paginationInfo) => {
+      if (status !== 'OK') {
+        console.error('No results found', status);
+      } else {
+        // store nextPage information to state
+        setNextPage(paginationInfo);
+        // update state results, without clearing the result when paginating
+        setResultRestaurantList((prevList) => {
+          const newList = [...prevList, ...tempResultList];
+          return newList;
+        });
+      }
+    }
+  );
+};
+
+const getNextPage = () => {
+  if (nextPage.hasNextPage) {
+    nextPage.nextPage();
+  }
+};
+```
+
+- Add distance restriction to our search and sorting capability
+  > radius and rankBy setting doesn't work well with textSearch api, we could implement something our own
+
+```javascript
+const [nextPage, setNextPage] = useState(null);
+const [resultRestaurantList, setResultRestaurantList] = useState([]);
+// format the distance for sorting later
+const calculateDistance = (restaurantLocation, centerLocation) => {
+  return mapsApi.geometry.spherical.computeDistanceBetween(
+    restaurantLocation,
+    centerLocation
+  );
+};
+
+// Note: add the queryRadius to parameter (in km)
+const handleRestaurantSearch = (searchQuery, queryRadius) => {
+  const placesRequest = {
+    location: new mapsApi.LatLng(centerMarker.lat, centerMarker.lng),
+    type: ['restaurant', 'cafe'],
+    query: searchQuery ? searchQuery : 'restaurant',
+  };
+
+  placesServices.textSearch(
+    placesRequest,
+    (locationResults, status, paginationInfo) => {
+      if (status !== 'OK') {
+        console.error('No results found', status);
+      } else {
+        // temp list to keep current result, only update state once
+        let tempResultList = [];
+        for (let i = 0; i < locationResults.length; i++) {
+          // distance check, see if it's in range
+          if (
+            calculateDistance(
+              locationResults[i].geometry.location,
+              placesRequest.location
+            ) <
+            queryRadius * 1000
+          ) {
+            // add an attribute for sorting
+            locationResults[i].distance = calculateDistance(
+              locationResults[i].geometry.location,
+              placesRequest.location
+            );
+            tempResultList.push(locationResults[i]);
+          }
+        }
+        setNextPage(paginationInfo);
+        setResultRestaurantList((prevList) => {
+          const newList = [...prevList, ...tempResultList];
+          return newList;
+        });
+      }
+    }
+  );
+};
+```
+
+##### Check out full example [here](https://github.com/kazhala/mealternative/blob/master/src/Routes/Map/MapContainer.js)
+
+##### Demo
 
 ## Structure
 
