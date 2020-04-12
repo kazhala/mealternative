@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  userAvatar: {
+  wtfAvatar: {
     height: '1em',
     width: '1em',
   },
