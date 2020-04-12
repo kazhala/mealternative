@@ -19,13 +19,13 @@ import {
   MenuItem,
   // InputBase,
   Tooltip,
-  Avatar
+  Avatar,
 } from '@material-ui/core';
 import {
   HomeRounded,
   AccountCircle,
   // Search,
-  MenuRounded
+  MenuRounded,
 } from '@material-ui/icons';
 import SideBar from './SideBar';
 
@@ -33,11 +33,11 @@ import SideBar from './SideBar';
 import {
   authMenus,
   noAuthMenus,
-  toolTipIcons
+  toolTipIcons,
 } from '../Common/DefaultValues/iconButtonArrays';
 import HeaderLogo from '../Assets/HeaderLogo.png';
 
-const Header = props => {
+const Header = (props) => {
   const { userDetails, classes, isAuthenticated, history, signOut } = props;
 
   // account icon menu anchor element
@@ -46,7 +46,7 @@ const Header = props => {
   // side bar open state
   const [sideBar, setSideBar] = useState(false);
 
-  const handleRouteChange = path => {
+  const handleRouteChange = (path) => {
     if (path === '/meals') {
       console.log('Coming soon');
     } else {
@@ -54,7 +54,7 @@ const Header = props => {
     }
   };
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
 
@@ -63,7 +63,7 @@ const Header = props => {
   };
 
   // close the menu when item click in menu
-  const handleMenuClick = path => {
+  const handleMenuClick = (path) => {
     handleClose();
     if (path === '/account') {
       handleRouteChange(path);
@@ -80,7 +80,7 @@ const Header = props => {
   };
 
   // sign out in array doesn't provide path
-  const handleSideBarSelect = path => {
+  const handleSideBarSelect = (path) => {
     if (!path) {
       signOut();
     } else {
@@ -161,7 +161,7 @@ const Header = props => {
                       color='inherit'
                       onClick={() => handleRouteChange(menuItem.path)}
                       style={{
-                        opacity: menuItem.disable ? '0.5' : '1'
+                        opacity: menuItem.disable ? '0.5' : '1',
                       }}
                     >
                       {menuItem.icon}
@@ -232,7 +232,7 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   signOut: PropTypes.func.isRequired,
-  userDetails: PropTypes.object.isRequired
+  userDetails: PropTypes.object.isRequired,
 };
 
 export default withRouter(Header);
