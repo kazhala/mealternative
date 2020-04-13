@@ -27,7 +27,7 @@ function* workerGetCategories() {
     if (response.error) {
       yield put({
         type: Types.CREATE_ERROR,
-        payload: 'Categories faild to fetch, try refresh..'
+        payload: 'Categories faild to fetch, try refresh..',
       });
     } else {
       yield put({ type: Types.SUCCESS_CATEGORIES, payload: response });
@@ -50,7 +50,7 @@ function* workerSubmitRecipe({ payload }) {
     description: recipeDetail.description,
     ingredients: [...recipeDetail.ingredients],
     categories: [...selCategoryIds],
-    thumbImageUrl: recipeDetail.thumbnailImage.url
+    thumbImageUrl: recipeDetail.thumbnailImage.url,
   };
   console.log(uploadParams);
   // start loading state
@@ -58,11 +58,8 @@ function* workerSubmitRecipe({ payload }) {
 
   try {
     // client side validation, don't waste usage in cloudinary
-    if (uploadParams.title.length < 3 || uploadParams.title.length > 60) {
-      throw new Error('Recipe title should be between 3-60 characters long');
-    }
-    if (uploadParams.description.length > 1000) {
-      throw new Error("Description can't be longer 1000");
+    if (uploadParams.title.length < 3) {
+      throw new Error('Recipe title should be at least 3 characters long');
     }
     if (uploadParams.ingredients.length < 1) {
       throw new Error('Please enter some required ingredients');
@@ -71,12 +68,9 @@ function* workerSubmitRecipe({ payload }) {
       throw new Error('Please select at least one category');
     }
 
-    recipeDetail.steps.forEach(step => {
-      if ((step.stepTitle.length < 3) | (step.stepTitle.length > 60)) {
-        throw new Error('Each step require a title between 3-60');
-      }
-      if (step.stepDescriptions.length > 1000) {
-        throw new Error("Description can't exceed 1000 in lenght");
+    recipeDetail.steps.forEach((step) => {
+      if (step.stepTitle.length < 3) {
+        throw new Error('Each step require a title at least 3 characters long');
       }
     });
 
@@ -85,7 +79,7 @@ function* workerSubmitRecipe({ payload }) {
       console.log('Uploading thumbnail');
       yield put({
         type: Types.CREATE_LOADING_TEXT,
-        payload: 'Uploading thumbnail..'
+        payload: 'Uploading thumbnail..',
       });
       const thumbResponse = yield call(
         Operations.uploadRecipeThumb,
@@ -114,7 +108,7 @@ function* workerSubmitRecipe({ payload }) {
         console.log(`Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`);
         yield put({
           type: Types.CREATE_LOADING_TEXT,
-          payload: `Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`
+          payload: `Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`,
         });
         let stepResponse = yield call(
           Operations.uploadStepImage,
@@ -139,7 +133,7 @@ function* workerSubmitRecipe({ payload }) {
     console.log(uploadParams);
     yield put({
       type: Types.CREATE_LOADING_TEXT,
-      payload: 'Uploading recipe..'
+      payload: 'Uploading recipe..',
     });
     // call backend and store it in db
     const response = yield call(Operations.uploadRecipe, uploadParams);
@@ -148,7 +142,7 @@ function* workerSubmitRecipe({ payload }) {
     } else {
       yield put({
         type: Types.CREATE_LOADING_TEXT,
-        payload: 'Success! Redirecting..'
+        payload: 'Success! Redirecting..',
       });
       // show success message for extra 1 second before redirecting
       yield delay(1000);

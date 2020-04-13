@@ -48,18 +48,15 @@ function* workerUpdateRecipe({ payload }) {
     description: recipeDetail.description,
     ingredients: [...recipeDetail.ingredients],
     categories: [...selCategoryIds],
-    thumbImageUrl: recipeDetail.thumbnailImage.url
+    thumbImageUrl: recipeDetail.thumbnailImage.url,
   };
   yield console.log(updateParams);
 
   yield put({ type: Types.UPDATE_BEGIN });
   try {
     // client side validation, don't waste usage in cloudinary
-    if (updateParams.title.length < 3 || updateParams.title.length > 60) {
-      throw new Error('Recipe title should be between 3-60 characters long');
-    }
-    if (updateParams.description.length > 1000) {
-      throw new Error("Description can't be longer 1000");
+    if (updateParams.title.length < 3) {
+      throw new Error('Recipe title should be at least 3 characters long');
     }
     if (updateParams.ingredients.length < 1) {
       throw new Error('Please enter some required ingredients');
@@ -68,12 +65,9 @@ function* workerUpdateRecipe({ payload }) {
       throw new Error('Please select at least one category');
     }
 
-    recipeDetail.steps.forEach(step => {
-      if ((step.stepTitle.length < 3) | (step.stepTitle.length > 60)) {
-        throw new Error('Each step require a title between 3-60');
-      }
-      if (step.stepDescriptions.length > 1000) {
-        throw new Error("Description can't exceed 1000 in lenght");
+    recipeDetail.steps.forEach((step) => {
+      if (step.stepTitle.length < 3) {
+        throw new Error('Each step require a title at least 3 characters');
       }
     });
 
@@ -82,7 +76,7 @@ function* workerUpdateRecipe({ payload }) {
       console.log('Uploading thumbnail');
       yield put({
         type: Types.UPDATE_LOADING_TEXT,
-        payload: 'Uploading thumbnail..'
+        payload: 'Uploading thumbnail..',
       });
       const thumbResponse = yield call(
         CreateOperations.uploadRecipeThumb,
@@ -111,7 +105,7 @@ function* workerUpdateRecipe({ payload }) {
         console.log(`Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`);
         yield put({
           type: Types.UPDATE_LOADING_TEXT,
-          payload: `Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`
+          payload: `Uploading ${recipeDetail.steps[i].stepTitle}'s image..'`,
         });
         let stepResponse = yield call(
           CreateOperations.uploadStepImage,
@@ -136,7 +130,7 @@ function* workerUpdateRecipe({ payload }) {
     console.log(updateParams);
     yield put({
       type: Types.UPDATE_LOADING_TEXT,
-      payload: 'Uploading recipe..'
+      payload: 'Uploading recipe..',
     });
     const response = yield call(Operations.updateRecipe, updateParams);
     if (response.error) {
@@ -144,7 +138,7 @@ function* workerUpdateRecipe({ payload }) {
     } else {
       yield put({
         type: Types.UPDATE_LOADING_TEXT,
-        payload: 'Success! Redirecting..'
+        payload: 'Success! Redirecting..',
       });
       yield delay(1000);
       yield put({ type: Types.UPDATE_SUCCESS });
