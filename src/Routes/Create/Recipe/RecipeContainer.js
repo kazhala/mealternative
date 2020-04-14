@@ -20,7 +20,7 @@ import Recipe from './Recipe';
 // misc
 import queryString from 'query-string';
 
-const RecipeRoute = props => {
+const RecipeRoute = (props) => {
   const {
     history,
     error,
@@ -42,7 +42,7 @@ const RecipeRoute = props => {
     submitUpdateRecipe,
     updateLoadingText,
     updateSuccess,
-    updateClear
+    updateClear,
   } = props;
 
   /*
@@ -63,17 +63,17 @@ const RecipeRoute = props => {
     thumbnailImage: {
       url: '',
       file: '',
-      previewUrl: ''
+      previewUrl: '',
     },
     ingredients: [],
     categories: [],
     steps: [
       {
-        stepTitle: 'Step1',
+        stepTitle: '',
         stepDescriptions: '',
-        stepImage: { url: '', file: '', previewUrl: '' }
-      }
-    ]
+        stepImage: { url: '', file: '', previewUrl: '' },
+      },
+    ],
   });
 
   // determine if is update or create new
@@ -98,28 +98,30 @@ const RecipeRoute = props => {
   useEffect(() => {
     if (isUpdate && !updateInitLoading && updateRecipe._id) {
       console.log('check re-render');
-      setRecipeDetail(prevDetails => ({
+      setRecipeDetail((prevDetails) => ({
         ...prevDetails,
         title: updateRecipe.title,
         description: updateRecipe.description,
         thumbnailImage: {
           ...prevDetails.thumbnailImage,
           url: updateRecipe.thumbImageUrl,
-          previewUrl: updateRecipe.thumbImageUrl
+          previewUrl: updateRecipe.thumbImageUrl,
         },
         ingredients: updateRecipe.ingredients,
-        categories: [...updateRecipe.categories.map(category => category.name)],
+        categories: [
+          ...updateRecipe.categories.map((category) => category.name),
+        ],
         steps: [
-          ...updateRecipe.steps.map(step => ({
+          ...updateRecipe.steps.map((step) => ({
             stepTitle: step.stepTitle,
             stepDescriptions: step.stepDescriptions,
             stepImage: {
               url: step.stepImageUrl,
               file: '',
-              previewUrl: step.stepImageUrl
-            }
-          }))
-        ]
+              previewUrl: step.stepImageUrl,
+            },
+          })),
+        ],
       }));
     }
   }, [updateInitLoading, updateRecipe, isUpdate]);
@@ -151,42 +153,42 @@ const RecipeRoute = props => {
   const handleDetailChange = (name, newValue) => {
     switch (name) {
       case 'thumbFile':
-        setRecipeDetail(prevDetails => ({
+        setRecipeDetail((prevDetails) => ({
           ...prevDetails,
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
             file: newValue,
             // create a new previewUrl
             previewUrl: newValue ? window.URL.createObjectURL(newValue) : '',
-            url: ''
-          }
+            url: '',
+          },
         }));
         break;
       case 'thumbUrl':
-        setRecipeDetail(prevDetails => ({
+        setRecipeDetail((prevDetails) => ({
           ...prevDetails,
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
             url: newValue,
             // clears the file image information
             file: '',
-            previewUrl: ''
-          }
+            previewUrl: '',
+          },
         }));
         break;
       case 'thumbUrlPreview':
-        setRecipeDetail(prevDetails => ({
+        setRecipeDetail((prevDetails) => ({
           ...prevDetails,
           thumbnailImage: {
             ...prevDetails.thumbnailImage,
-            previewUrl: prevDetails.thumbnailImage.url
-          }
+            previewUrl: prevDetails.thumbnailImage.url,
+          },
         }));
         break;
 
       // add a step into the recipe
       case 'addStep':
-        setRecipeDetail(prevDetails => ({
+        setRecipeDetail((prevDetails) => ({
           ...prevDetails,
           steps: [
             // make a copy of the original step array
@@ -195,20 +197,20 @@ const RecipeRoute = props => {
             {
               stepTitle: '',
               stepDescriptions: '',
-              stepImage: { url: '', file: '', previewUrl: '' }
+              stepImage: { url: '', file: '', previewUrl: '' },
             },
-            ...prevDetails.steps.slice(newValue + 1)
-          ]
+            ...prevDetails.steps.slice(newValue + 1),
+          ],
         }));
         break;
       // remove a step from the step array
       case 'removeStep':
-        setRecipeDetail(prevDetails => {
+        setRecipeDetail((prevDetails) => {
           const newSteps = [...prevDetails.steps];
           newSteps.splice(newValue, 1);
           return {
             ...prevDetails,
-            steps: [...newSteps]
+            steps: [...newSteps],
           };
         });
         break;
@@ -219,19 +221,27 @@ const RecipeRoute = props => {
       case 'reOrderStep':
         const { reOrderIndex, reOrderType } = newValue;
         if (reOrderType === 0) {
-          setRecipeDetail(prevDetails => ({
+          setRecipeDetail((prevDetails) => ({
             ...prevDetails,
             steps: [
               // using the helper function to reorder
-              ...reOrderArray(prevDetails.steps, reOrderIndex, reOrderIndex - 1)
-            ]
+              ...reOrderArray(
+                prevDetails.steps,
+                reOrderIndex,
+                reOrderIndex - 1
+              ),
+            ],
           }));
         } else if (reOrderType === 1) {
-          setRecipeDetail(prevDetails => ({
+          setRecipeDetail((prevDetails) => ({
             ...prevDetails,
             steps: [
-              ...reOrderArray(prevDetails.steps, reOrderIndex, reOrderIndex + 1)
-            ]
+              ...reOrderArray(
+                prevDetails.steps,
+                reOrderIndex,
+                reOrderIndex + 1
+              ),
+            ],
           }));
         }
         break;
@@ -241,7 +251,7 @@ const RecipeRoute = props => {
         const { index, updateAttribute, newAttributeValue } = newValue;
         // handle image upload
         if (updateAttribute === 'stepImageFile') {
-          setRecipeDetail(prevDetails => ({
+          setRecipeDetail((prevDetails) => ({
             ...prevDetails,
             steps: [
               // edit the according step object inside the step array
@@ -255,16 +265,16 @@ const RecipeRoute = props => {
                   previewUrl: newAttributeValue
                     ? window.URL.createObjectURL(newAttributeValue)
                     : '',
-                  url: newAttributeValue ? newAttributeValue.name : ''
-                }
+                  url: newAttributeValue ? newAttributeValue.name : '',
+                },
               },
-              ...prevDetails.steps.slice(index + 1)
-            ]
+              ...prevDetails.steps.slice(index + 1),
+            ],
           }));
         } else if (updateAttribute === 'stepImageUrl') {
           // clears the file information
           // edit the according step object
-          setRecipeDetail(prevDetails => ({
+          setRecipeDetail((prevDetails) => ({
             ...prevDetails,
             steps: [
               ...prevDetails.steps.slice(0, index),
@@ -274,16 +284,16 @@ const RecipeRoute = props => {
                   ...prevDetails.steps[index].stepImage,
                   url: newAttributeValue,
                   previewUrl: newAttributeValue,
-                  file: ''
-                }
+                  file: '',
+                },
               },
-              ...prevDetails.steps.slice(index + 1)
-            ]
+              ...prevDetails.steps.slice(index + 1),
+            ],
           }));
         } else if (updateAttribute === 'clearFile') {
           // clears the file and url
           // edit the according step object
-          setRecipeDetail(prevDetails => ({
+          setRecipeDetail((prevDetails) => ({
             ...prevDetails,
             steps: [
               ...prevDetails.steps.slice(0, index),
@@ -293,33 +303,33 @@ const RecipeRoute = props => {
                   ...prevDetails.steps[index].stepImage,
                   file: '',
                   previewUrl: '',
-                  url: ''
-                }
+                  url: '',
+                },
               },
-              ...prevDetails.steps.slice(index + 1)
-            ]
+              ...prevDetails.steps.slice(index + 1),
+            ],
           }));
         } else {
           // if it's not image related, update the according step object attribute
-          setRecipeDetail(prevDetails => ({
+          setRecipeDetail((prevDetails) => ({
             ...prevDetails,
             steps: [
               ...prevDetails.steps.slice(0, index),
               {
                 ...prevDetails.steps[index],
-                [updateAttribute]: newAttributeValue
+                [updateAttribute]: newAttributeValue,
               },
-              ...prevDetails.steps.slice(index + 1)
-            ]
+              ...prevDetails.steps.slice(index + 1),
+            ],
           }));
         }
         break;
 
       // default state update
       default:
-        setRecipeDetail(prevDetails => ({
+        setRecipeDetail((prevDetails) => ({
           ...prevDetails,
-          [name]: newValue
+          [name]: newValue,
         }));
         break;
     }
@@ -329,7 +339,7 @@ const RecipeRoute = props => {
   // check if it is updating
   const handleRecipeSubmit = () => {
     const selCategoryIds = categoryList.reduce((prev, curr, idx, self) => {
-      recipeDetail.categories.forEach(category => {
+      recipeDetail.categories.forEach((category) => {
         if (category === curr.name) {
           prev.push(curr._id);
         }
@@ -403,7 +413,7 @@ const RecipeRoute = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     categoryList: state.Create.categories,
     categoryLoading: state.Create.categoryLoading,
@@ -416,11 +426,11 @@ const mapStateToProps = state => {
     updateRecipe: state.Update.recipeDetails,
     updateLoadingText: state.Update.loadingText,
     updateInitLoading: state.Update.initLoading,
-    updateSuccess: state.Update.success
+    updateSuccess: state.Update.success,
   };
 };
 
-const mapDispatchTopProps = dispatch => {
+const mapDispatchTopProps = (dispatch) => {
   return bindActionCreators(
     {
       getCategories: CreateActions.getCategories,
@@ -429,7 +439,7 @@ const mapDispatchTopProps = dispatch => {
       getRecipeDetails: UpdateActions.getRecipeDetails,
       updateClean: UpdateActions.cleanUp,
       updateClear: UpdateActions.clearUpdate,
-      submitUpdateRecipe: UpdateActions.updateRecipe
+      submitUpdateRecipe: UpdateActions.updateRecipe,
     },
     dispatch
   );

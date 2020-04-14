@@ -14,10 +14,10 @@ import {
   ArrowUpward,
   ArrowDownward,
   Add,
-  Remove
+  Remove,
 } from '@material-ui/icons';
 
-const StepBody = props => {
+const StepBody = (props) => {
   const {
     step,
     classes,
@@ -27,7 +27,7 @@ const StepBody = props => {
     handleAddStep,
     handleRemoveStep,
     checkDisableRemove,
-    handleReOrder
+    handleReOrder,
   } = props;
 
   return (
@@ -51,7 +51,7 @@ const StepBody = props => {
           size='small'
           variant='outlined'
           value={step.stepImage.url}
-          onChange={e => handleStepChange('stepImageUrl', e.target.value)}
+          onChange={(e) => handleStepChange('stepImageUrl', e.target.value)}
         />
         <input
           accept='image/*'
@@ -59,7 +59,7 @@ const StepBody = props => {
           id='step-image'
           className={classes.fileInput}
           name='media'
-          onChange={e => handleStepChange('stepImageFile', e.target.files[0])}
+          onChange={(e) => handleStepChange('stepImageFile', e.target.files[0])}
         />
         <label htmlFor='step-image'>
           <IconButton color='primary' component='span'>
@@ -67,7 +67,7 @@ const StepBody = props => {
           </IconButton>
         </label>
         <IconButton
-          onClick={e => handleStepChange('clearFile', '')}
+          onClick={(e) => handleStepChange('clearFile', '')}
           size='small'
         >
           <Clear />
@@ -78,11 +78,10 @@ const StepBody = props => {
       <TextField
         className={classes.stepDescriptions}
         value={step.stepDescriptions}
-        onChange={e => handleStepChange('stepDescriptions', e.target.value)}
-        placeholder='Enter description of the step'
-        rows={4}
+        onChange={(e) => handleStepChange('stepDescriptions', e.target.value)}
+        placeholder='Extra tips'
         multiline
-        rowsMax={4}
+        rowsMax={2}
         fullWidth
         variant='outlined'
         size='small'
@@ -129,7 +128,7 @@ StepBody.propTypes = {
   handleAddStep: PropTypes.func.isRequired,
   handleRemoveStep: PropTypes.func.isRequired,
   checkDisableRemove: PropTypes.func.isRequired,
-  handleReOrder: PropTypes.func.isRequired
+  handleReOrder: PropTypes.func.isRequired,
 };
 
 export default StepBody;

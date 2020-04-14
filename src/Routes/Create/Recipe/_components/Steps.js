@@ -12,11 +12,11 @@ import {
   Stepper,
   Step,
   StepLabel,
-  TextField
+  TextField,
 } from '@material-ui/core';
 import StepBody from './StepBody';
 
-const Steps = props => {
+const Steps = (props) => {
   const { classes, steps, handleDetailChange } = props;
 
   // current active step
@@ -25,7 +25,7 @@ const Steps = props => {
 
   // check if re-order button should be disabled
   // btnNum[0, 1]
-  const checkDisableReOrder = btnNum => {
+  const checkDisableReOrder = (btnNum) => {
     if (btnNum === 0) {
       return activeStep === btnNum;
     } else {
@@ -43,39 +43,39 @@ const Steps = props => {
     const updateParams = {
       index: activeStep,
       updateAttribute: name,
-      newAttributeValue: value
+      newAttributeValue: value,
     };
     handleDetailChange('step', updateParams);
   };
 
   // check if the url input should be disabled
-  const checkUrlShouldDisable = stepDetail => {
+  const checkUrlShouldDisable = (stepDetail) => {
     return Boolean(stepDetail.stepImage.file);
   };
 
   // add a new step
   const handleAddStep = () => {
     handleDetailChange('addStep', activeStep);
-    setActiveStep(prevActive => prevActive + 1);
+    setActiveStep((prevActive) => prevActive + 1);
   };
 
   // remove step
   const handleRemoveStep = () => {
     handleDetailChange('removeStep', activeStep);
-    setActiveStep(prevActive => prevActive - 1);
+    setActiveStep((prevActive) => prevActive - 1);
   };
 
   // [0, 1] 0 = move up, 1 = move down
   // handle re order
-  const handleReOrder = type => {
+  const handleReOrder = (type) => {
     const updateParams = {
       reOrderIndex: activeStep,
-      reOrderType: type
+      reOrderType: type,
     };
     handleDetailChange('reOrderStep', updateParams);
     type === 0
-      ? setActiveStep(prevActive => prevActive - 1)
-      : setActiveStep(prevActive => prevActive + 1);
+      ? setActiveStep((prevActive) => prevActive - 1)
+      : setActiveStep((prevActive) => prevActive + 1);
   };
 
   return (
@@ -85,12 +85,15 @@ const Steps = props => {
           <Step completed={false} key={index}>
             <StepLabel>
               <TextField
+                fullWidth
                 onClick={() => setActiveStep(index)}
                 value={step.stepTitle}
-                placeholder='Title of the step'
+                placeholder='Instructions'
                 variant='outlined'
                 size='small'
-                onChange={e => handleStepChange('stepTitle', e.target.value)}
+                multiline
+                rowsMax={5}
+                onChange={(e) => handleStepChange('stepTitle', e.target.value)}
               />
             </StepLabel>
 
@@ -117,7 +120,7 @@ const Steps = props => {
 Steps.propTypes = {
   classes: PropTypes.object.isRequired,
   steps: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleDetailChange: PropTypes.func.isRequired
+  handleDetailChange: PropTypes.func.isRequired,
 };
 
 export default Steps;
