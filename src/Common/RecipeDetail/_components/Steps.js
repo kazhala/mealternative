@@ -8,10 +8,10 @@ import {
   Step,
   StepLabel,
   StepContent,
-  Typography
+  Typography,
 } from '@material-ui/core';
 
-const Steps = props => {
+const Steps = (props) => {
   const { classes, steps } = props;
 
   // current active step
@@ -37,7 +37,7 @@ const Steps = props => {
                   backgroundImage: `url(${step.stepImageUrl})`,
                   backgroundSize: '100%',
                   backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center'
+                  backgroundPosition: 'center',
                 }}
               />
             )}
@@ -51,7 +51,7 @@ const Steps = props => {
 
 Steps.propTypes = {
   classes: PropTypes.object.isRequired,
-  steps: PropTypes.array.isRequired
+  steps: PropTypes.array.isRequired,
 };
 
 export default Steps;
