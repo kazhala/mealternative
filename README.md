@@ -13,7 +13,7 @@ Project URL: https://mealternative.com/
 
 ## Introduction
 
-This project was bootstrapped with [CRA](https://github.com/facebook/create-react-app). It's not built for production usage, I've built this website mainly to refresh my knowledge on the MERN stack as well as finding some restaurants from time to time. I hope you could steal and find something useful from this repo and website. I also do share some random Chinese recipes on it :)
+This project was bootstrapped with [CRA](https://github.com/facebook/create-react-app). It's not built for production usage, I've built this website mainly to refresh my knowledge on the MERN stack as well as finding some restaurants from time to time. I hope you could steal and find something useful from this repo and website.
 
 Big credits to this blog [post](https://medium.com/javascript-in-plain-english/building-a-react-ice-cream-finder-app-with-the-google-maps-api-7e39339e0261) which helps me understand how to use the google map API.
 
@@ -25,14 +25,14 @@ To play around the app locally, please follow the steps below
 2. Go into the directory where the package.json resides
 3. Install dependencies
 
-```
+```bash
 npm install
 ```
 
 4. Create the required .env file with below three variables inside it.
-   Note: at the minimum, you will need to create your own google map api key (detailed steps and explanations are [here](https://github.com/kazhala/mealternative#setup)).
+   Note: at the minimum, you will need to create your own google map api key (detailed steps and explanations are [here](#google-map)).
 
-```
+```bash
 cat << EOF > .env
 REACT_APP_GOOGLE_MAP_API_KEY=<Your api key>
 REACT_APP_BACKEND_URL=https://api.mealternative.com
@@ -42,13 +42,13 @@ EOF
 
 If you also followed the backend set up, you could change the `REACT_APP_BACKEND_URL` to
 
-```
+```bash
 REACT_APP_BACKEND_URL=http://localhost:8000/api
 ```
 
 5. Start the server
 
-```
+```bash
 npm start
 ```
 
@@ -423,11 +423,11 @@ Custom hooks folder. [useInfiniteLoad.js](https://github.com/kazhala/mealternati
 
 ### Frontend
 
-The frontend of this project is hosted on an AWS s3 bucket and distributed through CloudFront. [Here](https://github.com/kazhala/AWSCloudFormationStacks/blob/master/Hosting_frontend_S3.yaml) is the custom frontend deployment template.
+The frontend of this project is hosted on an AWS s3 bucket and distributed through CloudFront. [Here](https://github.com/kazhala/AWSCloudFormationStacks/blob/master/Hosting_frontend_S3.yaml) is the custom frontend deployment cloudformation template.
 
 ### Backend
 
-The backend of this project is hosted on AWS ec2 instance through elastic beanstalk and distributed through CloudFront. [Here](https://github.com/kazhala/AWSCloudFormationStacks/blob/master/Hosting_backend_nodejs.yaml) is the custom backend deployment template.
+The backend of this project is hosted on AWS ec2 instance through elastic beanstalk and distributed through CloudFront. [Here](https://github.com/kazhala/AWSCloudFormationStacks/blob/master/Hosting_backend_nodejs.yaml) is the custom backend deployment cloudformation template.
 
 ### Using the template
 
