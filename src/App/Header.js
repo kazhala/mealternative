@@ -17,16 +17,10 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  // InputBase,
   Tooltip,
   Avatar,
 } from '@material-ui/core';
-import {
-  HomeRounded,
-  AccountCircle,
-  // Search,
-  MenuRounded,
-} from '@material-ui/icons';
+import { HomeRounded, AccountCircle, MenuRounded } from '@material-ui/icons';
 import SideBar from './SideBar';
 
 // misc
@@ -47,8 +41,8 @@ const Header = (props) => {
   const [sideBar, setSideBar] = useState(false);
 
   const handleRouteChange = (path) => {
-    if (path === '/meals') {
-      console.log('Coming soon');
+    if (path === 'https://github.com/kazhala/mealternative') {
+      window.location.replace(path);
     } else {
       history.push(path);
     }

@@ -6,12 +6,12 @@ import {
   HomeRounded,
   ExploreRounded,
   MenuBookRounded,
-  RestaurantMenuRounded,
   VerifiedUserRounded,
   GroupAddRounded,
   AccountCircle,
   ExitToAppRounded,
-  Create
+  Create,
+  GitHub,
 } from '@material-ui/icons';
 
 export const sideBarArrays = [
@@ -20,53 +20,51 @@ export const sideBarArrays = [
   { path: '/map', text: 'Map', icon: <ExploreRounded /> },
   { path: '/recipes', text: 'Recipes', icon: <MenuBookRounded /> },
   {
-    path: '/Meals',
-    text: 'Coming..',
-    icon: <RestaurantMenuRounded />,
-    disable: true
-  }
+    path: 'https://github.com/kazhala/mealternative',
+    text: 'Code',
+    icon: <GitHub />,
+  },
 ];
 
 export const authArrays = [
   { path: '/account', text: 'Account', icon: <AccountCircle /> },
-  { path: null, text: 'Sign Out', icon: <ExitToAppRounded /> }
+  { path: null, text: 'Sign Out', icon: <ExitToAppRounded /> },
 ];
 
 export const noAuthArrays = [
   { path: '/signin', text: 'Sign In', icon: <VerifiedUserRounded /> },
-  { path: '/signup', text: 'Sign Up', icon: <GroupAddRounded /> }
+  { path: '/signup', text: 'Sign Up', icon: <GroupAddRounded /> },
 ];
 
 export const authMenus = [
   { text: 'Account', path: '/account' },
-  { text: 'SignOut' }
+  { text: 'SignOut' },
 ];
 
 export const noAuthMenus = [
   { path: '/signin', text: 'Sign In' },
-  { path: '/signup', text: 'Sign Up' }
+  { path: '/signup', text: 'Sign Up' },
 ];
 
 export const toolTipIcons = [
   {
     path: '/create',
     title: 'Create something new for the community!',
-    icon: <Create />
-  },
-  {
-    path: '/meals',
-    title: 'Coming soon',
-    icon: <RestaurantMenuRounded />,
-    disable: true
+    icon: <Create />,
   },
   {
     path: '/recipes',
     title: 'Feel like cooking? Checkout recipes',
-    icon: <MenuBookRounded />
+    icon: <MenuBookRounded />,
   },
   {
     path: '/map',
     title: 'Explorer around on the map',
-    icon: <ExploreRounded />
-  }
+    icon: <ExploreRounded />,
+  },
+  {
+    path: 'https://github.com/kazhala/mealternative',
+    title: 'Checkout source code in github',
+    icon: <GitHub />,
+  },
 ];
