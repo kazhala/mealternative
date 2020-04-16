@@ -20,7 +20,7 @@ import IndividualDetail from './_components/IndividualDetail';
 import { GoogleMapAPIKey } from '../../config';
 import useStyles from './Style';
 
-const Map = props => {
+const Map = (props) => {
   const {
     lat,
     lng,
@@ -43,7 +43,7 @@ const Map = props => {
     individualModal,
     getDetailedResDetail,
     clearDetailResDetail,
-    selectedMarker
+    selectedMarker,
   } = props;
   const classes = useStyles();
 
@@ -79,15 +79,17 @@ const Map = props => {
           setDetailOpen={setDetailOpen}
           mapLoaded={mapLoaded}
         />
-        <DetailModal
-          detailOpen={detailOpen}
-          setDetailOpen={setDetailOpen}
-          resultRestaurantList={resultRestaurantList}
-          classes={classes}
-          getBasicResDetails={getBasicResDetails}
-          getDetailedResDetail={getDetailedResDetail}
-          setSelectedMarker={setSelectedMarker}
-        />
+        <div className={classes.detailModalWrapper}>
+          <DetailModal
+            detailOpen={detailOpen}
+            setDetailOpen={setDetailOpen}
+            resultRestaurantList={resultRestaurantList}
+            classes={classes}
+            getBasicResDetails={getBasicResDetails}
+            getDetailedResDetail={getDetailedResDetail}
+            setSelectedMarker={setSelectedMarker}
+          />
+        </div>
       </div>
 
       {/* google map */}
@@ -97,13 +99,13 @@ const Map = props => {
           <GoogleMapReact
             bootstrapURLKeys={{
               key: GoogleMapAPIKey,
-              libraries: ['places', 'directions']
+              libraries: ['places', 'directions'],
             }}
             center={
               selectedMarker.geometry
                 ? {
                     lat: selectedMarker.geometry.location.lat(),
-                    lng: selectedMarker.geometry.location.lng()
+                    lng: selectedMarker.geometry.location.lng(),
                   }
                 : { lat: centerMarker.lat, lng: centerMarker.lng }
             }
@@ -156,7 +158,7 @@ Map.propTypes = {
   getBasicResDetails: PropTypes.func.isRequired,
   individualModal: PropTypes.object.isRequired,
   getDetailedResDetail: PropTypes.func.isRequired,
-  clearDetailResDetail: PropTypes.func.isRequired
+  clearDetailResDetail: PropTypes.func.isRequired,
 };
 
 export default Map;
