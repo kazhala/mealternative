@@ -8,7 +8,7 @@ export const searchOptions = [
   'Italian',
   'Pizza',
   'Ice cream',
-  'Maxican',
+  'Mexican',
   'Fast food',
   'Hotpot',
   'British',
@@ -53,5 +53,5 @@ export const searchOptions = [
   'Caribbean',
   'Healthy',
   'Vegan',
-  ''
+  '',
 ];
